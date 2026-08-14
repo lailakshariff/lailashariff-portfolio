@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f0ede6}
+a{color:#22201d}a:hover{color:#a8544a}
+.frow:hover .fring{background:#fbfaf7;border-color:#fbfaf7;color:#22201d}
+.opt:hover .fpost{transform:rotate(-0.4deg) translateY(-4px)}
+.fdot{animation:fpulse 2.4s ease-in-out infinite}
+@keyframes fpulse{0%,100%{opacity:1}50%{opacity:.35}}
+.stampedge{--s:11px;-webkit-mask:radial-gradient(circle 5.5px at 50% 0,#0000 97%,#000) 0 0/var(--s) 100%,radial-gradient(circle 5.5px at 50% 100%,#0000 97%,#000) 0 100%/var(--s) 100%,radial-gradient(circle 5.5px at 0 50%,#0000 97%,#000) 0 0/100% var(--s),radial-gradient(circle 5.5px at 100% 50%,#0000 97%,#000) 100% 0/100% var(--s),linear-gradient(#000,#000) 50% 50%/calc(100% - 11px) calc(100% - 11px) no-repeat;-webkit-mask-composite:source-in;mask-composite:intersect}
+.seal:hover{transform:scale(1.06) rotate(-4deg)}
+@media (max-width:900px){.fcard{grid-template-columns:minmax(0,1fr) !important}.fcard > div:last-child{order:-1}.env-grid{grid-template-columns:minmax(0,1fr) !important}}
+@media (prefers-reduced-motion:reduce){.fdot{animation:none}}
+</style>
+</helmet>
+
+<section style="display:flex;flex-direction:column;gap:26px;padding:44px 40px 80px;font-family:Newsreader,Georgia,serif">
+
+<div style="display:flex;align-items:baseline;gap:14px">
+<span style="font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8a847c">Turn 1 · Footer directions</span>
+<span style="font:300 15px/1.4 Newsreader,serif;color:#6f6a5f">Tell me an id — <a href="#1a">1a</a> is what's live on Home now.</span>
+</div>
+
+<div id="1a" style="background:#fff;border:1px solid rgba(34,32,29,.1)">
+<div style="display:flex;align-items:baseline;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(34,32,29,.08)">
+<span style="font:700 12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#a8544a">1A</span>
+<span style="font:400 15px/1.3 Newsreader,serif">Ink card + postcard — currently live</span>
+</div>
+<div class="opt" style="padding:40px">
+<div class="fcard" style="border-radius:22px;background:#22201d;color:#fbfaf7;padding:44px;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center">
+<div>
+<h2 style="margin:0;font:400 38px/1.1 Newsreader,Georgia,serif;letter-spacing:-.02em">Thanks for visiting :-)</h2>
+<p style="margin:16px 0 0;max-width:34ch;font:300 17px/1.6 Newsreader,serif;color:#a8a29a">Feel free to reach out about design, research, or a new idea.</p>
+<div style="display:flex;flex-direction:column;gap:14px;margin-top:36px">
+<a class="frow" href="mailto:hello@lailashariff.co" style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+<span class="fring" style="display:grid;place-items:center;flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:1px solid rgba(251,250,247,.3);transition:background .3s,border-color .3s"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3.5 7.5 12 13.5 20.5 7.5"></path></svg></span>
+<span><span style="display:block;font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8a847c">Email</span><span style="display:block;margin-top:7px;font:300 17px/1.2 Newsreader,serif">hello@lailashariff.co</span></span>
+</a>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:18px">
+<div class="fpost" style="width:100%;max-width:380px;background:#fbfaf7;border-radius:6px;padding:9px;box-shadow:0 26px 50px rgba(0,0,0,.4);transform:rotate(-1.6deg);transition:transform .5s cubic-bezier(.2,.7,.2,1)">
+<div style="border:1px dashed rgba(34,32,29,.28);padding:11px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<div style="border-radius:2px;overflow:hidden;background:#efece6;aspect-ratio:4/5"><img src="assets/pile/p3-lg.jpg" alt="" style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid rgba(34,32,29,.16);padding-left:14px">
+<div style="align-self:flex-end;width:46px;height:54px;border:1px dashed rgba(34,32,29,.35);display:grid;place-items:center"><span style="font:400 8px/1.3 'Space Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:#a8544a;text-align:center">New<br>York</span></div>
+<div style="display:flex;flex-direction:column;gap:9px;padding-bottom:4px"><span style="height:1px;background:rgba(34,32,29,.2)"></span><span style="height:1px;background:rgba(34,32,29,.2)"></span><span style="height:1px;background:rgba(34,32,29,.2)"></span><span style="height:1px;width:62%;background:rgba(34,32,29,.2)"></span></div>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:9px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a847c"><span class="fdot" style="width:5px;height:5px;border-radius:50%;background:#a8544a"></span><span>New York, {{ clock }}</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="1b" style="background:#fff;border:1px solid rgba(34,32,29,.1)">
+<div style="display:flex;align-items:baseline;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(34,32,29,.08)">
+<span style="font:700 12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#a8544a">1B</span>
+<span style="font:400 15px/1.3 Newsreader,serif">Stamp strip — light, no card, the photos become postage</span>
+</div>
+<div class="opt" style="padding:56px 40px 44px;background:#fbfaf7">
+<div style="max-width:900px;margin:0 auto">
+<h2 style="margin:0;font:400 clamp(34px,4.6vw,58px)/1.06 Newsreader,Georgia,serif;letter-spacing:-.028em">Thanks for visiting :-)</h2>
+<p style="margin:18px 0 0;max-width:40ch;font:300 18px/1.6 Newsreader,serif;color:#6f6a5f">Feel free to reach out about design, research, or a new idea.</p>
+<div style="display:flex;gap:12px;margin-top:40px;flex-wrap:wrap">
+<sc-for list="{{ stamps }}" as="s" hint-placeholder-count="4">
+<div class="stampedge" style="width:104px;background:#fff;padding:7px 7px 22px;box-shadow:0 8px 18px rgba(34,32,29,.14)">
+<div style="overflow:hidden;background:#efece6;aspect-ratio:4/5"><img src="{{ s.img }}" alt="" style="display:block;width:100%;height:100%;object-fit:cover"></div>
+<div style="margin-top:6px;text-align:center;font:400 7.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a8544a">{{ s.label }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-top:44px;padding-top:26px;border-top:1px solid rgba(34,32,29,.14)">
+<a href="mailto:hello@lailashariff.co" style="font:400 clamp(22px,2.6vw,32px)/1.1 Newsreader,serif;letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid rgba(34,32,29,.3);padding-bottom:4px">hello@lailashariff.co</a>
+<div style="display:flex;align-items:center;gap:9px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a847c"><span class="fdot" style="width:5px;height:5px;border-radius:50%;background:#a8544a"></span><span>New York, {{ clock }}</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="1c" style="background:#fff;border:1px solid rgba(34,32,29,.1)">
+<div style="display:flex;align-items:baseline;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(34,32,29,.08)">
+<span style="font:700 12px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#a8544a">1C</span>
+<span style="font:400 15px/1.3 Newsreader,serif">Envelope — the footer is the letter, sealed with wax</span>
+</div>
+<div class="opt" style="padding:52px 40px;background:#22201d">
+<div style="max-width:820px;margin:0 auto">
+<div style="position:relative;background:#fbfaf7;box-shadow:0 34px 64px rgba(0,0,0,.42)">
+<div style="height:78px;background:linear-gradient(#f4f1e9,#fbfaf7);clip-path:polygon(0 0,100% 0,50% 100%);border-bottom:1px solid rgba(34,32,29,.1)"></div>
+<div class="seal" style="position:absolute;left:50%;top:56px;width:52px;height:52px;margin-left:-26px;border-radius:50%;background:#a8544a;display:grid;place-items:center;box-shadow:0 8px 18px rgba(120,40,32,.4);transition:transform .4s cubic-bezier(.2,.7,.2,1)">
+<span style="font:400 13px/1 Newsreader,serif;color:#fbfaf7;letter-spacing:.06em">LS</span>
+</div>
+<div class="env-grid" style="display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:end;padding:44px 44px 40px">
+<div>
+<h2 style="margin:0;font:400 34px/1.1 Newsreader,Georgia,serif;letter-spacing:-.022em">Thanks for visiting :-)</h2>
+<p style="margin:14px 0 0;max-width:34ch;font:300 17px/1.6 Newsreader,serif;color:#6f6a5f">Feel free to reach out about design, research, or a new idea.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ lines }}" as="l" hint-placeholder-count="3">
+<a href="{{ l.href }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;text-decoration:none;padding-bottom:9px;border-bottom:1px solid rgba(34,32,29,.18)">
+<span style="font:400 9.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#a29b8f">{{ l.k }}</span>
+<span style="font:300 16px/1.2 Newsreader,serif;color:#22201d">{{ l.v }}</span>
+</a>
+</sc-for>
+<div style="display:flex;align-items:center;gap:9px;margin-top:6px;font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#a29b8f"><span class="fdot" style="width:5px;height:5px;border-radius:50%;background:#a8544a"></span><span>New York, {{ clock }}</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { clock: '—' };
+  componentDidMount() {
+    const tick = () => {
+      let v;
+      try {
+        v = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', second: '2-digit' });
+      } catch (e) { v = new Date().toLocaleTimeString(); }
+      this.setState({ clock: v });
+    };
+    tick();
+    this.t = setInterval(tick, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.t); }
+  renderVals() {
+    return {
+      clock: this.state.clock,
+      stamps: [
+        { img: 'assets/pile/p3-lg.jpg', label: 'New York' },
+        { img: 'assets/pile/p7-lg.jpg', label: 'Cleveland' },
+        { img: 'assets/pile/p11-lg.jpg', label: 'Say hello' },
+        { img: 'assets/pile/p15-lg.jpg', label: '2026' }
+      ],
+      lines: [
+        { k: 'Email', v: 'hello@lailashariff.co', href: 'mailto:hello@lailashariff.co' },
+        { k: 'LinkedIn', v: 'in/lailashariff', href: 'https://linkedin.com' },
+        { k: 'Resume', v: 'Download PDF', href: '#' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

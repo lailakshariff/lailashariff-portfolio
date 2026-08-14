@@ -1,0 +1,77 @@
+/* Shared responsive layer — loaded after each page's own styles. */
+
+img, video, svg, canvas { max-width: 100%; }
+
+@media (max-width: 900px) {
+  /* --- page gutters --------------------------------------------------- */
+  [style*="padding:22px 72px"], [style*="padding: 22px 72px"],
+  [style*="padding:104px 72px 0"], [style*="padding: 104px 72px 0"],
+  [style*="padding:120px 72px 0"], [style*="padding: 120px 72px 0"],
+  [style*="padding:64px 72px"], [style*="padding: 64px 72px"],
+  [style*="padding:0 72px 60px"], [style*="padding: 0px 72px 60px"],
+  [style*="padding:18px 56px"], [style*="padding: 18px 56px"],
+  [style*="padding:22px 64px"], [style*="padding: 22px 64px"],
+  [style*="padding:64px 64px 0"], [style*="padding: 64px 64px 0px"],
+  [style*="padding:80px 64px 96px"], [style*="padding: 80px 64px 96px"],
+  [style*="padding:0 64px"], [style*="padding: 0px 64px"],
+  [style*="padding:88px 64px"], [style*="padding: 88px 64px"],
+  [style*="padding:40px 64px 0"], [style*="padding: 40px 64px 0px"],
+  [style*="padding:44px 64px"], [style*="padding: 44px 64px"],
+  [style*="padding:0 64px 40px"], [style*="padding: 0px 64px 40px"],
+  [style*="padding:20px 64px"], [style*="padding: 20px 64px"],
+  [style*="padding:88px 64px 0"], [style*="padding: 88px 64px 0px"],
+  [style*="padding:56px 64px"], [style*="padding: 56px 64px"],
+  [style*="padding:0 64px 44px"], [style*="padding: 0px 64px 44px"],
+  .sect, .wrap, .rule, .reelwrap {
+    padding-left: clamp(20px, 5.5vw, 30px) !important;
+    padding-right: clamp(20px, 5.5vw, 30px) !important;
+  }
+  .rule { margin-left: clamp(20px, 5.5vw, 30px) !important; margin-right: clamp(20px, 5.5vw, 30px) !important; padding: 0 !important; }
+
+  /* --- vertical rhythm ------------------------------------------------ */
+  [style*="padding:104px 72px 0"], [style*="padding: 104px 72px 0"],
+  [style*="padding:120px 72px 0"], [style*="padding: 120px 72px 0"] { padding-top: 56px !important; }
+  [style*="padding:80px 64px 96px"], [style*="padding: 80px 64px 96px"] { padding-top: 40px !important; padding-bottom: 56px !important; }
+  [style*="min-height:82vh"], [style*="min-height: 82vh"],
+  [style*="min-height:78vh"], [style*="min-height: 78vh"] { min-height: auto !important; }
+
+  /* --- grids: collapse the wide ones ---------------------------------- */
+  [style*="grid-template-columns"] { grid-template-columns: minmax(0, 1fr) !important; }
+  [style*="grid-template-columns"] > * { min-width: 0 !important; }
+
+  /* ...but keep label/icon pairs side by side */
+  [style*="grid-template-columns:4px 1fr"], [style*="grid-template-columns: 4px 1fr"] {
+    grid-template-columns: 4px minmax(0, 1fr) !important;
+  }
+  [style*="grid-template-columns:56px 1fr"], [style*="grid-template-columns: 56px 1fr"],
+  [style*="grid-template-columns:56px minmax(0,1fr)"], [style*="grid-template-columns: 56px minmax(0, 1fr)"],
+  [style*="grid-template-columns:auto minmax(0,1fr)"], [style*="grid-template-columns: auto minmax(0, 1fr)"],
+  [style*="grid-template-columns:92px 1fr"], [style*="grid-template-columns: 92px 1fr"] {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+  /* ...and keep stat/meta rows two-up rather than a long stack */
+  [style*="grid-template-columns:repeat(4,1fr)"], [style*="grid-template-columns: repeat(4, 1fr)"],
+  [style*="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* --- type ----------------------------------------------------------- */
+  h1 { font-size: clamp(30px, 8.4vw, 42px) !important; line-height: 1.14 !important; }
+  h2 { font-size: clamp(24px, 6.4vw, 32px) !important; line-height: 1.2 !important; }
+  h3 { font-size: clamp(18px, 4.8vw, 22px) !important; }
+
+  /* --- touch targets -------------------------------------------------- */
+  a[href], button { -webkit-tap-highlight-color: rgba(168, 84, 74, .12); }
+  .mnav-sheet a { min-height: 48px; display: flex !important; align-items: center; }
+
+  /* --- misc ----------------------------------------------------------- */
+  [style*="position:sticky"][style*="top:92px"], [style*="position: sticky"][style*="top: 92px"] { position: static !important; }
+  [style*="white-space:nowrap"] { white-space: normal !important; }
+}
+
+@media (max-width: 560px) {
+  [style*="grid-template-columns:repeat(4,1fr)"], [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  [style*="display:flex"][style*="gap:64px"], [style*="display: flex"][style*="gap: 64px"] { gap: 32px !important; }
+}
