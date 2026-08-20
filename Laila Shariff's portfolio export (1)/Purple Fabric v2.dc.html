@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./responsive.css">
+<style>
+body{margin:0;background:#fff}
+html{scroll-behavior:smooth}
+a{color:#1c1b1f}a:hover{color:#4b1d7a}
+::selection{background:#e6d8f5}
+@keyframes pfUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pfInR{from{opacity:0;transform:translate(38px,22px) rotate(2.2deg)}to{opacity:1;transform:rotate(2.2deg)}}
+.pfw2{animation:pfInR 1.6s cubic-bezier(.18,.8,.22,1) .18s both}
+
+.pfbrowser{width:min(100%,660px);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 40px 76px rgba(52,20,90,.32),0 5px 14px rgba(52,20,90,.18)}
+.pfbar{display:flex;align-items:center;gap:6px;padding:0 14px;height:34px;background:#f4f0f9;border-bottom:1px solid rgba(40,20,70,.07)}
+.pfdot{width:7px;height:7px;border-radius:50%;background:#ddd4e8}
+.pfurl{margin-left:14px;padding:4px 14px;border-radius:99px;background:#fff;border:1px solid rgba(40,20,70,.08);font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.1em;color:#a9a4b5}
+.pfpage{position:relative;height:clamp(248px,28vw,330px);box-sizing:border-box}
+.pfband{position:absolute;left:16px;right:16px;top:3.6%;height:13%;display:flex;align-items:center;gap:12px;padding:0 16px;box-sizing:border-box;border-radius:9px;background:#f6f3fa;border:1px solid rgba(28,27,31,.07);color:#4a4750;will-change:transform}
+.pbdot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#c3bcd2}
+.pbl{font:500 clamp(12px,1.35vw,14.5px)/1 Outfit,sans-serif;white-space:nowrap}
+.pbk{font:400 clamp(9px,1vw,10.5px)/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a9a4b5;white-space:nowrap}
+.pbskel{margin-left:auto;display:flex;flex-direction:column;gap:5px;width:24%;min-width:60px}
+.pbskel i{display:block;height:4px;border-radius:99px;background:rgba(28,27,31,.1)}
+.pbskel i:last-child{width:62%}
+.pb1{animation:pbB1 13s cubic-bezier(.65,0,.2,1) infinite}
+.pb2{animation:pbB2 13s cubic-bezier(.65,0,.2,1) infinite}
+.pb3{animation:pbB3 13s cubic-bezier(.65,0,.2,1) infinite}
+.pb4{animation:pbB4 13s cubic-bezier(.65,0,.2,1) infinite}
+.pb5{animation:pbB5 13s cubic-bezier(.65,0,.2,1) infinite}
+.pb6{animation:pbB6 13s cubic-bezier(.65,0,.2,1) infinite}
+@keyframes pbB1{0%,32%{transform:translateY(0%);background:#f6f3fa;border-color:rgba(28,27,31,.07);color:#4a4750}44%,88%{transform:translateY(0%);background:#4b1d7a;border-color:#4b1d7a;color:#fff}100%{transform:translateY(0%);background:#f6f3fa;border-color:rgba(28,27,31,.07);color:#4a4750}}
+@keyframes pbB2{0%,32%{transform:translateY(123.1%)}44%,88%{transform:translateY(246.2%)}100%{transform:translateY(123.1%)}}
+@keyframes pbB3{0%,32%{transform:translateY(246.2%)}44%,88%{transform:translateY(369.2%)}100%{transform:translateY(246.2%)}}
+@keyframes pbB4{0%,32%{transform:translateY(369.2%);background:#f6f3fa;border-color:rgba(28,27,31,.07)}44%,88%{transform:translateY(123.1%);background:#efe4fb;border-color:rgba(75,29,122,.28)}100%{transform:translateY(369.2%);background:#f6f3fa;border-color:rgba(28,27,31,.07)}}
+@keyframes pbB5{0%,32%{transform:translateY(492.3%)}44%,88%{transform:translateY(492.3%)}100%{transform:translateY(492.3%)}}
+@keyframes pbB6{0%,32%{transform:translateY(615.4%)}44%,88%{transform:translateY(615.4%)}100%{transform:translateY(615.4%)}}
+.pfphase{position:relative;height:20px;width:100%;display:flex;justify-content:center}
+.pfph{position:absolute;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.pfpha{color:#6b5b84;animation:pbPhA 13s linear infinite}
+.pfphb{color:#3b1466;animation:pbPhB 13s linear infinite}
+@keyframes pbPhA{0%,32%{opacity:1}40%,92%{opacity:0}100%{opacity:1}}
+@keyframes pbPhB{0%,34%{opacity:0}46%,88%{opacity:1}96%,100%{opacity:0}}
+@media (max-width:900px){.pfpage{height:clamp(210px,44vw,260px)}.pbk,.pbskel{display:none}}
+@media (prefers-reduced-motion:reduce){.pfband,.pfph{animation:none}.pfphb{opacity:0}}
+.pfsb{scrollbar-width:none}.pfsb::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){.pfw2{animation:none;transform:rotate(2.2deg)}}
+.pfmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(28,27,31,.1)}
+.pfmeta > div:first-child{border-left:0;padding-left:0}
+@media (max-width:900px){.pfrail{display:none !important}}
+/*mobm*/
+@media (max-width:1150px){
+[style*="grid-template-columns:180px minmax(0,1fr)"],[style*="grid-template-columns:230px minmax(0,1fr)"]{grid-template-columns:minmax(0,1fr) !important;gap:10px !important}
+}
+@media (max-width:900px){
+#top{padding-left:24px !important;padding-right:24px !important;padding-top:56px !important}
+h1{font-size:clamp(38px,11vw,52px) !important}
+.pfmeta{margin-top:36px !important}
+[data-sec]{padding-top:72px !important}
+[data-sec] h2{font-size:clamp(25px,6.6vw,32px) !important;line-height:1.18 !important}
+[data-sec] h3,[data-sec] h4{font-size:clamp(19px,5vw,25px) !important}
+.pfnav{padding-left:24px !important;padding-right:24px !important}
+}
+
+@media (max-width:760px){
+.pfmeta > div{padding:20px 0 22px;border-left:0;border-top:1px solid rgba(28,27,31,.1)}
+.pfmeta > div:first-child,.pfmeta > div:nth-child(2){border-top:0}
+.pfmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(28,27,31,.1)}
+}
+@media (max-width:560px){
+.pfnav{font-size:10px !important;letter-spacing:.1em !important;padding-top:16px !important;padding-bottom:16px !important}
+.pfnav > div{gap:16px !important}
+}
+/*navtap*/@media (max-width:900px){.pfnav a{display:inline-flex;align-items:center;min-height:44px}.pfnav{padding-top:4px !important;padding-bottom:4px !important}}
+</style>
+<script src="./dot-cursor.js"></script></helmet>
+
+<div style="background:#fff;color:#1c1b1f;font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+
+<div class="pfnav" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase">
+<a href="Home.dc.html" style="text-decoration:none;color:#1c1b1f">Laila Shariff</a>
+<div style="display:flex;gap:26px">
+<a href="Home.dc.html#work" style="text-decoration:none;color:#1c1b1f">Work</a>
+<a href="Playground.dc.html" style="text-decoration:none;color:#1c1b1f">Playground</a>
+<a href="About.dc.html" style="text-decoration:none;color:#1c1b1f">About</a>
+</div>
+</div>
+
+<div id="top" style="max-width:1240px;margin:0 auto;padding:88px 64px 0;animation:pfUp .9s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
+<img src="assets/inline/purple-fabric-1.png" alt="Purple Fabric logo" style="display:block;width:40px;height:40px;border-radius:9px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">Case study · 2026</div>
+</div>
+<h1 style="margin:0;max-width:16ch;font:500 clamp(46px,7vw,88px)/1.02 Newsreader,Georgia,serif;letter-spacing:-.035em">Purple Fabric</h1>
+<p style="margin:26px 0 0;max-width:720px;font:300 clamp(19px,2vw,23px)/1.55 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">Redesigning the homepage of an enterprise AI platform for financial institutions — so a first-time visitor understands what it does, who it serves, and why to trust it in under 30 seconds.</p>
+
+<div class="pfmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(28,27,31,.1);border-bottom:1px solid rgba(28,27,31,.1)">
+<sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">{{ m.k }}</div>
+<div style="margin-top:14px;font:400 15px/1.5 Outfit,sans-serif;color:#1c1b1f;text-wrap:pretty">{{ m.v }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top:56px;border-radius:20px;overflow:hidden;background:linear-gradient(150deg,#f6f2fb 0%,#e9dff7 32%,#cdb6ea 64%,#a97fd6 87%,#8a55c4 100%);padding:clamp(38px,5vw,68px) clamp(32px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:clamp(18px,2.4vw,26px)">
+
+<div class="pfbrowser">
+<div class="pfbar"><span class="pfdot"></span><span class="pfdot"></span><span class="pfdot"></span><span class="pfurl">purplefabric.com</span></div>
+<div class="pfpage">
+<div class="pfband pb1"><span class="pbdot"></span><span class="pbl">Hero</span><span class="pbk">The pitch</span><span class="pbskel"><i></i><i></i></span></div>
+<div class="pfband pb2"><span class="pbdot"></span><span class="pbl">Four tech stacks</span><span class="pbk">Architecture</span><span class="pbskel"><i></i><i></i></span></div>
+<div class="pfband pb3"><span class="pbdot"></span><span class="pbl">Who we serve</span><span class="pbk">Audience</span><span class="pbskel"><i></i><i></i></span></div>
+<div class="pfband pb4"><span class="pbdot"></span><span class="pbl">Business impact</span><span class="pbk">Outcomes</span><span class="pbskel"><i></i><i></i></span></div>
+<div class="pfband pb5"><span class="pbdot"></span><span class="pbl">Awards</span><span class="pbk">Credibility</span><span class="pbskel"><i></i><i></i></span></div>
+<div class="pfband pb6"><span class="pbdot"></span><span class="pbl">Calls to action</span><span class="pbk">The ask</span><span class="pbskel"><i></i><i></i></span></div>
+</div>
+</div>
+
+<div class="pfphase">
+<span class="pfph pfpha">Before — architecture first</span>
+<span class="pfph pfphb">After — outcomes first</span>
+</div>
+
+</div>
+
+<div style="max-width:1240px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 72px;align-items:start">
+
+<div class="pfrail" style="position:sticky;top:92px;padding-top:112px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#b3b0ba;margin-bottom:18px">Contents</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ toc }}" as="t" hint-placeholder-count="11">
+<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:9px 0;text-decoration:none;font:400 14px/1.4 Outfit,sans-serif;color:#b0aeb6;transition:color .28s">
+{{ t.label }}
+</a>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;min-width:0">
+
+<div id="overview" data-sec="overview" style="scroll-margin-top:110px;padding-top:112px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Overview</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">I rebuilt an enterprise AI homepage around the buyer's questions instead of the platform's architecture</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">Purple Fabric is Intellect Design Arena's enterprise AI platform. Its homepage led with internal vocabulary — Enterprise OS, Knowledge Garden, Digital Experts, Business Impact AI — which meant a first-time visitor had to learn the company's language before learning what the product does. I audited the page, benchmarked five competitors, restructured the information architecture around a buyer's decision path, and designed a new homepage.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+<div style="background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:24px">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;color:#4b1d7a">{{ s.n }}</span><span style="font:500 15px/1 Outfit,sans-serif;color:#1c1b1f">{{ s.t }}</span></div>
+<p style="margin:14px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:#6a6672">{{ s.b }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="problem" data-sec="problem" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Problem</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The homepage explained the platform's components before its value</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">I came to the product as a newcomer, which turned out to be useful. Even after completing a certification course, the platform only started making sense to me once I'd been walked through its concepts over several days. A first-time visitor gets seconds, not days.</p>
+
+<div style="margin-top:44px;background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:28px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">Terms a first-time viewer has to decode</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
+<sc-for list="{{ jargon }}" as="j" hint-placeholder-count="6">
+<span style="display:inline-block;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid rgba(75,29,122,.18);font:400 13.5px/1 Outfit,sans-serif;color:#4b1d7a">{{ j }}</span>
+</sc-for>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px">
+<sc-for list="{{ frictions }}" as="f" hint-placeholder-count="4">
+<div style="border:1px solid rgba(28,27,31,.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:#1c1b1f">{{ f }}</div>
+</sc-for>
+</div>
+<p style="margin:16px 0 0;font:400 13.5px/1.6 Outfit,sans-serif;color:#8b8894">The four friction points the platform actually resolves — none of which the homepage named.</p>
+
+<h3 style="margin:64px 0 0;font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">The audit, section by section</h3>
+<div style="margin-top:22px;border-top:1px solid rgba(28,27,31,.1)">
+<sc-for list="{{ audit }}" as="a" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;padding:22px 0;border-bottom:1px solid rgba(28,27,31,.1)">
+<div style="font:500 15px/1.4 Outfit,sans-serif;color:#1c1b1f">{{ a.k }}</div>
+<p style="margin:0;font:300 15.5px/1.7 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">{{ a.v }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="findings" data-sec="findings" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Findings</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Every platform I benchmarked led with outcomes, not architecture — ours led with vocabulary</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">I studied seven enterprise AI platforms — how they position themselves, what vocabulary they use, how they build trust, and how their homepages are structured.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px">
+<sc-for list="{{ competitors }}" as="c" hint-placeholder-count="6">
+<div style="background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+<div style="font:500 15.5px/1 Outfit,sans-serif;color:#1c1b1f">{{ c.name }}</div>
+<p style="margin:0;font:300 14.5px/1.65 Outfit,sans-serif;color:#6a6672;flex:1;text-wrap:pretty">{{ c.body }}</p>
+<p style="margin:0;font:400 14px/1.5 Outfit,sans-serif;color:#4b1d7a">{{ c.note }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="hmw" data-sec="hmw" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">How might we</div>
+<div style="margin-top:22px;border-left:3px solid #4b1d7a;padding:6px 0 6px 32px">
+<p style="margin:0;max-width:900px;font:400 clamp(28px,3.4vw,42px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:#1c1b1f;text-wrap:pretty">How do we make a first-time visitor understand what Purple Fabric does, who it's built for, and why to trust it — without asking them to learn our internal vocabulary first?</p>
+</div>
+</div>
+
+<div id="principles" data-sec="principles" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Design principles</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">What the audit and the benchmark agreed on</h2>
+<div style="margin-top:40px;border-top:1px solid rgba(28,27,31,.1)">
+<sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;padding:26px 0;border-bottom:1px solid rgba(28,27,31,.1)">
+<div style="font:400 26px/1 Newsreader,Georgia,serif;color:#c9bfd8">{{ p.n }}</div>
+<div>
+<h3 style="margin:0;font:500 19px/1.35 Outfit,sans-serif;color:#1c1b1f">{{ p.t }}</h3>
+<p style="margin:10px 0 0;max-width:620px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6a6672;text-wrap:pretty">{{ p.b }}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="kpis" data-sec="kpis" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">What success looks like</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The four questions the new page has to answer</h2>
+<div style="margin-top:40px;border-top:1px solid rgba(28,27,31,.1)">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(28,27,31,.1)">
+<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#8b8894">{{ k.cat }}</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ k.items }}" as="it" hint-placeholder-count="2">
+<div style="font:400 16px/1.55 Outfit,sans-serif;color:#1c1b1f">{{ it }}</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="process" data-sec="process" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Design process</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Before laying out sections, I wrote the questions the page has to answer in order</h2>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px">
+<sc-for list="{{ spine }}" as="s" hint-placeholder-count="6">
+<div style="background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:12px;padding:20px">
+<div style="font:400 16px/1.35 Newsreader,Georgia,serif;color:#1c1b1f">{{ s.q }}</div>
+<div style="margin-top:12px;font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#4b1d7a">{{ s.sec }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top:20px;background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:28px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">Why Purple Fabric — the four claims every section reinforces</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin-top:18px">
+<sc-for list="{{ claims }}" as="c" hint-placeholder-count="4">
+<div style="font:300 15.5px/1.6 Outfit,sans-serif;color:#4a4750"><strong style="font-weight:500;color:#1c1b1f">{{ c.s }}</strong>{{ c.r }}</div>
+</sc-for>
+</div>
+</div>
+
+<h3 style="margin:72px 0 0;font:500 clamp(24px,2.6vw,32px)/1.2 Newsreader,Georgia,serif;letter-spacing:-.024em">Nine sections in, nine sections out — reordered around the buyer</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">
+<div style="border:1px solid rgba(28,27,31,.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">Current</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+<sc-for list="{{ iaBefore }}" as="i" hint-placeholder-count="9">
+<div style="font:300 14.5px/1.5 Outfit,sans-serif;color:#8b8894">{{ i }}</div>
+</sc-for>
+</div>
+</div>
+<div style="border:1px solid rgba(75,29,122,.22);background:#faf7fd;border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#4b1d7a">Proposed</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+<sc-for list="{{ iaAfter }}" as="i" hint-placeholder-count="9">
+<div style="font:400 14.5px/1.5 Outfit,sans-serif;color:#1c1b1f">{{ i }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<h3 style="margin:72px 0 0;font:500 clamp(24px,2.6vw,32px)/1.2 Newsreader,Georgia,serif;letter-spacing:-.024em">The homepage, rebuilt</h3>
+<div style="display:flex;flex-direction:column;gap:56px;margin-top:36px">
+<sc-for list="{{ redesign }}" as="r">
+<div>
+<div style="display:flex;align-items:baseline;gap:12px">
+<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#4b1d7a">{{ r.n }}</span>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#8b8894">{{ r.kicker }}</span>
+</div>
+<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:#1c1b1f">{{ r.t }}</h4>
+<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6a6672;text-wrap:pretty">{{ r.b }}</p>
+<div style="margin-top:24px;background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px">
+<img src="{{ r.img }}" alt="{{ r.alt }}" style="display:block;width:100%;border-radius:8px">
+<sc-if value="{{ r.img2 }}">
+<img src="{{ r.img2 }}" alt="{{ r.alt2 }}" style="display:block;width:100%;border-radius:8px">
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="sandbox" data-sec="sandbox" style="scroll-margin-top:110px;padding-top:128px">
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+<div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Design sandbox</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Finding the balance between illustrative and technical</h2>
+</div>
+<div style="display:flex;gap:8px">
+<button onClick="{{ slidePrev }}" aria-label="Previous exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(28,27,31,.18);background:#fff;color:#1c1b1f;font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:#f1eaf9;border-color:#4b1d7a">‹</button>
+<button onClick="{{ slideNext }}" aria-label="Next exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(28,27,31,.18);background:#fff;color:#1c1b1f;font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:#f1eaf9;border-color:#4b1d7a">›</button>
+</div>
+</div>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">The eight disciplines were the hardest part of the page to design. They needed to feel like one connected system rather than a list of capabilities, and the visual language had to read as credible to a bank without becoming another grid of grey boxes.</p>
+<p style="margin:16px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">The fabric metaphor drove most of it — separate threads woven into one material — so the early explorations took that literally. The imagery was beautiful, but on its own it said very little about what the platform does. Pulling the other way, a purely functional card grid was easy to scan and lost every trace of the brand. Both extremes failed for opposite reasons.</p>
+
+<div id="pf-sandbox-track" class="pfsb" style="display:flex;gap:16px;margin-top:36px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px">
+<sc-for list="{{ sandbox }}" as="s">
+<figure style="margin:0;flex:0 0 clamp(280px,64%,520px);scroll-snap-align:start">
+<div style="background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:16px">
+<img src="{{ s.img }}" alt="{{ s.alt }}" style="display:block;width:100%;border-radius:8px">
+</div>
+<figcaption style="margin-top:12px;font:300 13.5px/1.6 Outfit,sans-serif;color:#8b8894;text-wrap:pretty">{{ s.cap }}</figcaption>
+</figure>
+</sc-for>
+</div>
+
+<p style="margin:34px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">What shipped keeps the weave in the language rather than the layout. The disciplines sit in a calm eight-card grid that scans in one pass, each carrying an isometric illustration in the brand purples on a warm apricot ground. The illustration work is where the personality lives now — credible enough for a bank, warm enough not to read as another enterprise feature grid.</p>
+</div>
+
+<div id="final" data-sec="final" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Final design</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Eight disciplines, one governed fabric</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#4a4750;text-wrap:pretty">Scrolling through the rebuilt homepage — how each section hands off to the next, and how the platform reveals its depth on demand rather than all at once.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
+<sc-for list="{{ prototypes }}" as="p">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#8b8894">{{ p.n }}</div>
+<p style="margin:12px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:#6a6672">{{ p.b }}</p>
+<div style="margin-top:16px;background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:16px;padding:16px">
+<video src="{{ p.src }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="display:block;width:100%;border-radius:8px"></video>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="outcome" data-sec="outcome" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">Outcome</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Where it stands</h2>
+<div style="margin-top:40px;border-top:1px solid rgba(28,27,31,.1)">
+<sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(28,27,31,.1)">
+<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#8b8894">{{ o.cat }}</div>
+<div style="font:400 16px/1.6 Outfit,sans-serif;color:#1c1b1f">{{ o.v }}</div>
+</div>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px">
+<sc-for list="{{ reflections }}" as="r" hint-placeholder-count="4">
+<div style="background:#f8f6fb;border:1px solid rgba(28,27,31,.07);border-radius:14px;padding:24px">
+<h3 style="margin:0;font:500 17px/1.35 Outfit,sans-serif;color:#1c1b1f">{{ r.t }}</h3>
+<p style="margin:12px 0 0;font:300 15px/1.65 Outfit,sans-serif;color:#6a6672;text-wrap:pretty">{{ r.b }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="next" data-sec="next" style="scroll-margin-top:110px;padding-top:128px;padding-bottom:120px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#8b8894">What's next</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The homepage is the entry point, not the whole job</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px">
+<sc-for list="{{ next }}" as="n" hint-placeholder-count="4">
+<div style="display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(28,27,31,.1);border-radius:12px;padding:20px">
+<span style="display:block;width:7px;height:7px;border-radius:50%;background:#4b1d7a;margin-top:7px"></span>
+<span style="font:400 15.5px/1.55 Outfit,sans-serif;color:#1c1b1f">{{ n }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+</div>
+</div>
+
+<div style="border-top:1px solid rgba(28,27,31,.1)">
+<div style="max-width:1240px;margin:0 auto;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8b8894">Next project</div>
+<a href="SayPlay%20v2.dc.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:#1c1b1f;transition:color .25s" style-hover="color:#4b1d7a">SayPlay →</a>
+</div>
+<a href="Home.dc.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(28,27,31,.2);text-decoration:none;color:#1c1b1f;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .25s" style-hover="background:#f1eaf9">All work</a>
+</div>
+<div style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    let queued = false;
+    this._spy = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const secs = Array.from(document.querySelectorAll('[data-sec]'));
+        const links = Array.from(document.querySelectorAll('[data-toc]'));
+        if (!secs.length || !links.length) return;
+        const line = window.innerHeight * 0.32;
+        let active = secs[0].getAttribute('data-sec');
+        secs.forEach(s => {
+          if (s.getBoundingClientRect().top <= line) active = s.getAttribute('data-sec');
+        });
+        links.forEach(a => {
+          const id = a.getAttribute('data-toc');
+          const on = id === active;
+          a.style.color = on ? '#1c1b1f' : '#b0aeb6';
+        });
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spyTimer = setInterval(this._spy, 400);
+    this._spy();
+    this._vids = () => {
+      document.querySelectorAll('video').forEach(v => {
+        v.muted = true;
+        if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      });
+    };
+    this._vidTimer = setInterval(this._vids, 900);
+    this._vids();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._spy);
+    window.removeEventListener('resize', this._spy);
+    clearInterval(this._spyTimer);
+    clearInterval(this._vidTimer);
+  }
+
+  _slide(dir) {
+    const el = document.querySelector('#pf-sandbox-track');
+    if (!el) return;
+    const card = el.firstElementChild;
+    const w = card ? card.getBoundingClientRect().width + 16 : el.clientWidth * 0.7;
+    el.scrollBy({ left: dir * w, behavior: 'smooth' });
+  }
+
+  renderVals() {
+    return {
+      slidePrev: () => this._slide(-1),
+      slideNext: () => this._slide(1),
+
+      meta: [
+        { k: 'Role', v: 'UX & Product Designer' },
+        { k: 'Company', v: 'Intellect Design Arena' },
+        { k: 'Focus', v: 'IA, messaging, visual design' },
+        { k: 'Tools', v: 'Figma, Miro' }
+      ],
+
+      toc: [
+        { id: 'overview', href: '#overview', label: 'Overview' },
+        { id: 'problem', href: '#problem', label: 'Problem' },
+        { id: 'findings', href: '#findings', label: 'Findings' },
+        { id: 'hmw', href: '#hmw', label: 'How might we' },
+        { id: 'principles', href: '#principles', label: 'Design principles' },
+        { id: 'kpis', href: '#kpis', label: 'What success looks like' },
+        { id: 'process', href: '#process', label: 'Design process' },
+        { id: 'sandbox', href: '#sandbox', label: 'Design sandbox' },
+        { id: 'final', href: '#final', label: 'Final design' },
+        { id: 'outcome', href: '#outcome', label: 'Outcome' },
+        { id: 'next', href: '#next', label: "What's next" }
+      ],
+
+      steps: [
+        { n: '01', t: 'Diagnose', b: 'Audited the live homepage section by section and named five specific failures — from generic positioning to an over-complex nav.' },
+        { n: '02', t: 'Benchmark', b: 'Analysed Kore.ai, ServiceNow, C3.ai, Glean, Palantir, Domino and Dataiku for messaging, IA and trust-building.' },
+        { n: '03', t: 'Rebuild', b: 'Wrote a new IA and copy deck, then designed the homepage: hero, impact, operating model, how it works, solutions, awards, CTA.' }
+      ],
+
+      jargon: ['Enterprise OS', 'Knowledge Garden', 'Digital Experts', 'Agentic AI', 'Business Impact AI', 'Solution suites'],
+      frictions: ['Knowledge scattered across systems', 'Manual workflow', "AI tools that don't work together", 'Slow deployment'],
+
+      audit: [
+        { k: 'Hero', v: 'The messaging could be applied to any enterprise AI platform — there was no mention that this is a financial services AI platform. The call-to-action buttons were the one thing already working.' },
+        { k: 'Navigation', v: 'Extremely complex compared to every other site I looked at. Sticking to standard, already-known layouts helps users navigate more easily and reduces cognitive effort.' },
+        { k: 'Four tech stacks', v: 'Very text heavy. Easier to digest as a Build AI → Scale AI → Govern AI progression with a visual, so a viewer grasps the platform\u2019s function in 15 to 30 seconds.' },
+        { k: 'Business impact', v: 'Great use of quantified outcomes already — 40% faster documenting, 60% less manual work, 3× faster deployment, 100% enterprise governance. But stated rather than shown, and not visual or interactive.' },
+        { k: 'Who we serve', v: 'No mention of it anywhere on the page. There was also no problem section, so nothing told a visitor where Purple Fabric comes in.' },
+        { k: 'Calls to action', v: 'One in the top-right corner and few elsewhere. Adding See a demo, Explore agents and Talk to an expert brings a visitor closer to a decision.' }
+      ],
+
+      competitors: [
+        { name: 'Kore.ai', body: 'Core messaging revolves around accelerating time to value. No mention of LLMs or model names — business outcomes come first. Governs with certainty: evaluate, trace, audit, 100% observability.', note: 'Clear messaging, fewer buzzwords, strong trust.' },
+        { name: 'ServiceNow', body: 'The AI platform for business transformation. AI is presented as the engine, not the product. Heavy emphasis on one platform — arguing the biggest barrier to AI adoption is fragmented systems.', note: 'A viewer understands: this helps my business run better.' },
+        { name: 'Glean', body: 'Find, create, accelerate, automate anything. Emphasis on what employees accomplish, not the technology underneath. Their visual breakdown of enterprise agents explains the concept in one diagram.', note: 'Homepage clarity is exceptionally strong.' },
+        { name: 'Domino', body: 'Transform work that matters the most. Emphasis on AI outcomes rather than AI trends, with hard numbers: 50% reduction in lifecycle time, 6× faster development, 40% lower infrastructure cost.', note: 'Relentless ROI emphasis and a dedicated governance centre.' },
+        { name: 'C3.ai', body: 'A repeatable page structure aimed squarely at decision-makers: positioning statement, three anchor KPIs, a problem–solution framework, a case study teaser, a free demo CTA, then resource links.', note: 'A buyer journey you can lift wholesale.' },
+        { name: 'Dataiku & Palantir', body: 'Dataiku dedicates an entire page to running enterprise AI as one platform. Both reinforce the single-platform argument rather than listing capabilities in isolation.', note: 'One platform is the category\u2019s central promise.' }
+      ],
+
+      principles: [
+        { n: '1', t: 'Lead with financial services positioning', b: 'Without it, users might perceive Purple Fabric as just another generic enterprise AI platform.' },
+        { n: '2', t: 'Simplify the navigation bar', b: 'A simpler IA reduces cognitive load. Sticking to standard layouts helps users identify and navigate the site with ease.' },
+        { n: '3', t: 'Introduce a problem–solution section', b: 'It helps users identify where Purple Fabric comes in to help enterprises, and create impact in areas they may currently be lacking. People buy solutions to their problems.' },
+        { n: '4', t: 'Highlight measurable business outcomes', b: 'The numbers existed but could be made far more visual and interactive — ROI, cost savings, time reductions, productivity gains, customer stories.' },
+        { n: '5', t: 'Showcase platform capabilities through interactive visuals', b: 'Engaging, interactive visuals instead of a static screenshot build more credibility with users.' }
+      ],
+
+      kpis: [
+        { cat: 'Comprehension', items: ['Can a first-time visitor say what Purple Fabric does, and who it is for, without leaving the page?', 'Is the platform\u2019s function graspable in 15–30 seconds?'] },
+        { cat: 'Navigation', items: ['Does the nav match the five-item pattern every benchmarked competitor uses?', 'Can a visitor reach a solution page without working backwards from the technology?'] },
+        { cat: 'Trust', items: ['Is governance shown as a section rather than claimed in a sentence?', 'Is third-party validation visible before the final ask?'] },
+        { cat: 'Conversion', items: ['Is there a clear call to action in every decision moment, not one button in the corner?'] }
+      ],
+
+      spine: [
+        { q: 'Is this for me?', sec: 'Hero' },
+        { q: 'Can it solve my problem?', sec: 'Problem' },
+        { q: 'How does it solve it?', sec: 'Platform' },
+        { q: 'Can I trust it?', sec: 'Governance' },
+        { q: 'Does it work?', sec: 'Results' },
+        { q: "What's next?", sec: 'Demo' }
+      ],
+
+      claims: [
+        { s: 'One platform', r: ' — no fragmented AI stack' },
+        { s: 'Enterprise governance', r: ' — built-in compliance from day one' },
+        { s: 'Industry expertise', r: ' — designed for financial institutions' },
+        { s: 'Enterprise knowledge', r: ' — AI grounded in your trusted data' }
+      ],
+
+      iaBefore: ['1  Navigation + Talk to us CTA + Intellect logo', '2  AI Agents. True Business Impact.', '3  What is Purple Fabric', '4  Four tech stacks', '5  What is Business Impact AI', '6  Open model', '7  What sets us apart', '8  Partners', '9  Footer'],
+      iaAfter: ['1  Enterprise AI for financial institutions', '2  See it in action + Explore real results', '3  Impact numbers', '4  Platform', '5  Tech stacks', '6  Agents', '7  Testimonials', '8  Awards and recognition', '9  Footer'],
+
+      redesign: [
+        { n: '01', kicker: 'Hero & impact', t: 'Enterprise AI for Financial Institutions', b: 'The headline now says who it\u2019s for in five words. A live diagram shows the systems Purple Fabric connects to — core banking, CRM, policy docs, market data, emails and claims — and three outcome metrics sit immediately below the fold, followed by client logos.', img: 'assets/b/10eebd1b-1ba7-471a-841a-cf25aed21491.jpg', alt: 'Redesigned hero with connected-systems diagram, three impact metrics and client logos' },
+        { n: '02', kicker: 'Operating model', t: 'One platform, eight disciplines', b: 'This is the single-platform argument the whole category makes, stated plainly and carried by an isometric visual instead of a paragraph.', img: 'assets/b/a124ed6c-2301-4ba3-8a2d-5abe7687d5f4.jpg', alt: 'One Platform. Eight Enterprise AI Disciplines. section with isometric illustration' },
+        { n: '03', kicker: 'Progressive disclosure', t: 'Click and explore each discipline', b: 'The text-heavy tech stack section becomes eight expandable cards. A visitor sees the shape of the platform at a glance and opens only what\u2019s relevant to them — the depth is there without the wall of copy.', img: 'assets/b/4b1c0284-781d-4f85-8315-3e96ee2f56d3.jpg', alt: 'Eight expandable discipline cards, numbered, each with an isometric icon' },
+        { n: '04', kicker: 'Trust', t: 'AI built to scale, with governance shown not claimed', b: 'Six lifecycle stages on the left, an agent blueprint on the right, and a governance checkpoint that makes the compliance story concrete: roles defined, failure modes documented, data boundaries approved.', img: 'assets/b/fa7147a7-8869-4e3c-994e-7f33312eaeac.jpg', alt: 'Six lifecycle stages beside an agent blueprint with a governance checkpoint' },
+        { n: '05', kicker: 'Solutions', t: 'An entry point by financial function', b: 'PF Credit, PF Wealth and PF Trade give visitors looking for a specific solution a faster route in, rather than making them work backwards from the technology.', img: 'assets/b/61cff4f2-e907-4e6d-8d4f-9f0f287b27f0.png', alt: 'PF Credit, PF Wealth and PF Trade solution cards' },
+        { n: '06', kicker: 'Credibility', t: 'Awards answer “does it work?”', b: 'Third-party validation sits between the solutions and the close, so the claim comes from outside the company rather than from the page itself.', img: 'assets/b/28be4993-72ab-4561-8bd3-e6f977d8ca39.jpg', alt: 'Awards and recognition cards' },
+        { n: '07', kicker: 'The close', t: 'One unmistakable ask, and a footer that holds the rest', b: 'The page ends on a single call to action instead of a lone button in the corner, with the restructured footer carrying the depth a visitor might want next.', img: 'assets/b/8549b1c0-f1e9-442a-b547-52b7129a09b4.jpg', alt: 'Final call to action: One operating model. Infinite enterprise possibility. Book a demo.', img2: 'assets/b/5f4452e2-b454-44ea-b077-e9ca8a363e39.jpg', alt2: 'Restructured footer with AI Platform, AI Solutions, Partners, Resources and Explore columns' }
+      ],
+
+      sandbox: [
+        { img: 'assets/pf-it-2.jpg', alt: 'Braided purple strands beside the One Platform headline', cap: 'Direction one: literal woven strands. Strong brand presence, no information.' },
+        { img: 'assets/pf-it-1.jpg', alt: 'Woven lattice with eight discipline nodes around the edge', cap: 'Direction two: a lattice with the disciplines orbiting it. The metaphor carried structure, but the nodes were hard to scan.' },
+        { img: 'assets/pf-it-3.jpg', alt: 'Eight discipline cards in a grid with a detail panel below', cap: 'Direction three: a functional card grid. Highly scannable, visually anonymous.' },
+        { img: 'assets/pf-it-4.jpg', alt: 'The same grid with the second discipline selected', cap: 'The selected state carried the detail well, but nothing about it felt like Purple Fabric.' },
+        { img: 'assets/pf-it-5.jpg', alt: 'Eight tiles on the diagonals of a woven diamond', cap: 'Direction four: the weave as information architecture — eight tiles on the diagonals of a woven diamond, the platform mark at the centre.' },
+        { img: 'assets/pf-it-final.jpg', alt: 'Eight disciplines. One governed fabric.', cap: 'The direction that shipped — scannable structure, with the fabric metaphor carried by illustration and copy.' }
+      ],
+
+      prototypes: [
+        { n: '01 · The scroll', b: 'From the hero through the impact numbers, the operating model, and into the eight disciplines.', src: 'assets/pf-proto-1.mp4' },
+        { n: '02 · Progressive disclosure', b: 'Opening a discipline card, and the lifecycle and governance sections that follow it.', src: 'assets/pf-proto-2.mp4' }
+      ],
+
+      outcomes: [
+        { cat: 'Delivered', v: 'A new information architecture, a copy deck, and a full homepage design across six sections — hero, operating model, disciplines, governance, solutions and close.' },
+        { cat: 'Comprehension', v: 'The page now names the audience in the first five words and states the platform\u2019s function above the fold, where it previously named neither.' },
+        { cat: 'Navigation', v: 'A deep, custom nav with no equivalent on any competitor site, replaced with the five-item structure every benchmarked platform uses.' },
+        { cat: 'Measurement', v: 'Live metrics to be captured post-launch against the four success questions above.' }
+      ],
+
+      reflections: [
+        { t: 'Being new to the product was the research.', b: 'My own confusion mapped almost exactly onto the first-time visitor\u2019s. Documenting it early, before I learned the internal vocabulary, was the most valuable input I had.' },
+        { t: 'Information architecture is a messaging problem.', b: 'Reordering sections only worked once I\u2019d written the questions each one answers. The structure followed the story, not the other way round.' },
+        { t: 'In enterprise, trust is a design surface.', b: 'Governance, audit trails and compliance aren\u2019t fine print for this audience — they\u2019re a reason to buy, and they deserve their own section.' },
+        { t: 'Competitive analysis settles internal debates.', b: 'Showing that seven platforms all use the same five-item nav made the case for simplifying ours far better than an opinion could.' }
+      ],
+
+      next: [
+        'Industry sub-pages for lending, payments, risk and insurance',
+        'Interactive platform walkthrough',
+        'Customer success stories with named outcomes',
+        'Usability testing with banking teams'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EFE9DA}
+a{color:#31706B}a:hover{color:#E85B2A}
+
+.spmode,.sptile,.spchip,.sprow,.spage,.spperson{transition:transform .42s cubic-bezier(.2,.7,.2,1),box-shadow .42s ease,border-color .34s ease,background .34s ease}
+.spmm,.sptile img,.spage-pips i{transition:transform .46s cubic-bezier(.2,.7,.2,1)}
+.spmode:hover{transform:translateY(-5px);box-shadow:0 18px 32px -18px rgba(58,54,45,.5)}
+.spmode:hover .spmm{transform:rotate(-9deg) scale(1.09)}
+.sptile:hover{transform:translateY(-5px);border-color:#59C0B2;box-shadow:0 16px 28px -16px rgba(60,125,115,.6)}
+.sptile:hover img{transform:scale(1.08)}
+.sptile:active{transform:translateY(-1px) scale(.985)}
+.spchip:hover{background:#EAF6F2;border-color:#9AD0C6;color:#2A6660}
+.sprow:hover,.spperson:hover{transform:translateY(-3px);box-shadow:0 14px 26px -16px rgba(58,54,45,.45)}
+.spage:hover{transform:translateY(-4px);border-color:#9AD0C6;box-shadow:0 16px 28px -18px rgba(60,125,115,.5)}
+.spage:hover .spage-pips i{transform:scale(1.18)}
+.spmicbtn{position:relative}
+.spmicbtn::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid #59C0B2;opacity:0;transform:scale(.9);transition:opacity .4s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.spmicbtn:hover::after{opacity:.7;transform:scale(1)}
+
+@keyframes spbob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1.5deg)}}
+.spbig{animation:spbob 3.8s ease-in-out infinite;transform-origin:50% 100%}
+.spbubble{position:relative}
+.spbubble::after{content:"";position:absolute;left:-13px;top:38px;width:0;height:0;border:13px solid transparent;border-right-color:#fff;border-left:0}
+.sptile:active,.spage:active,.spmode:active{transform:translateY(1px) scale(.975)}
+.spstar{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.spstarrow:hover .spstar{transform:translateY(-4px) rotate(-8deg) scale(1.12)}
+@media (prefers-reduced-motion:reduce){.spbig{animation:none}}
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;gap:40px;padding:40px;background:#EFE9DA;font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+
+<div id="learning" style="width:1388px;height:959px;box-sizing:border-box;display:flex;background:#FFFDF5;overflow:hidden">
+<div style="flex:0 0 132px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 0;background:#F6F1E2;border-right:1px solid #EDE4CE">
+<span style="display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #EDE4CE;font:400 17px/1 Outfit,sans-serif;color:#6C6555;margin-bottom:12px">‹</span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:6px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Home</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:8px 8px 8px 2px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Let's Talk</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px;background:#BAD65D"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #39481A"></i><b style="font:600 12px/1 Outfit,sans-serif;color:#39481A">Learning</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:16px;border-radius:3px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Stories</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Profile</b></span>
+<span style="margin-top:auto;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#F6E2D6;border:3px solid #fff;overflow:hidden"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Angie's fox avatar" style="display:block;width:86%;height:86%;object-fit:contain"></span>
+</div>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;padding:28px 32px 26px;gap:20px">
+<div style="display:flex;align-items:center;gap:20px">
+<div style="min-width:0">
+<div style="font:600 32px/1.1 Outfit,sans-serif;color:#3A362D;letter-spacing:-.02em">Learning</div>
+<div style="margin-top:6px;font:400 16px/1 Outfit,sans-serif;color:#A79E8B">Grow, explore and learn every day.</div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;gap:9px;height:46px;padding:0 20px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555"><i style="display:block;width:9px;height:9px;border-radius:50%;background:#BAD65D"></i>Co-Play</span>
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;gap:10px;height:46px;padding:0 20px 0 8px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555"><i style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#F6E2D6;overflow:hidden;flex:0 0 auto"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="" style="display:block;width:88%;height:88%;object-fit:contain"></i>Angie</span>
+<span style="display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid #EDE4CE"><i style="display:block;width:15px;height:15px;border-radius:50%;border:2.5px solid #6C6555"></i></span>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:16px;height:82px;padding:0 20px 0 28px;box-sizing:border-box;border-radius:24px;background:#fff;border:1px solid #F1E6CC">
+<span style="font:400 22px/1 Outfit,sans-serif;color:#B4AB96;white-space:nowrap">I want to…</span>
+<span style="width:1px;height:34px;background:#EFE6D2;flex:0 0 auto"></span>
+<span style="display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden"><span class="spchip" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:99px;background:#FBF7EA;border:1px solid #EFE6D2;font:500 16px/1 Outfit,sans-serif;color:#8E8672;white-space:nowrap">eat</span><span class="spchip" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:99px;background:#FBF7EA;border:1px solid #EFE6D2;font:500 16px/1 Outfit,sans-serif;color:#8E8672;white-space:nowrap">play outside</span><span class="spchip" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:99px;background:#FBF7EA;border:1px solid #EFE6D2;font:500 16px/1 Outfit,sans-serif;color:#8E8672;white-space:nowrap">see Anna</span><span class="spchip" style="display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:99px;background:#FBF7EA;border:1px solid #EFE6D2;font:500 16px/1 Outfit,sans-serif;color:#8E8672;white-space:nowrap">feel better</span></span>
+<span style="flex:1;min-width:12px"></span>
+<span style="display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#31706B">
+<i style="position:relative;display:block;width:14px;height:23px">
+<s style="position:absolute;left:50%;top:0;width:9px;height:14px;margin-left:-4.5px;background:#FFFDF5;border-radius:99px"></s>
+<s style="position:absolute;left:0;top:8px;width:14px;height:8px;border:2.5px solid #FFFDF5;border-top:0;border-radius:0 0 99px 99px;box-sizing:border-box"></s>
+<s style="position:absolute;left:50%;top:16px;width:2.5px;height:6px;margin-left:-1.25px;background:#FFFDF5;border-radius:99px"></s>
+</i>
+</span>
+</div>
+
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:212px minmax(0,1fr);gap:20px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<span class="spmode" style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:18px 20px;box-sizing:border-box;border-radius:18px;background:#EAF6F2;border:1px solid #C7E5DC">
+<i class="spmm" style="display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 auto"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="font:600 19px/1.15 Outfit,sans-serif;color:#2A6660;letter-spacing:-.01em">Let's Talk</b>
+<b style="font:400 13px/1.45 Outfit,sans-serif;color:#5E9189;text-wrap:pretty">Take turns on one shared board</b>
+<b style="display:inline-flex;align-items:center;gap:7px;margin-top:2px;font:500 11px/1 Outfit,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#5E9189"><i style="display:block;width:7px;height:7px;border-radius:50%;background:#2A6660"></i>3 people</b>
+</span>
+</span>
+<span class="spmode" style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:18px 20px;box-sizing:border-box;border-radius:18px;background:#F2F1FA;border:1px solid #DAD8EE">
+<i class="spmm" style="display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 auto"><img src="assets/b/1cc9b918-0028-4fe3-9f39-4895ac874a5f.png" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="font:600 19px/1.15 Outfit,sans-serif;color:#524E86;letter-spacing:-.01em">Let's Play</b>
+<b style="font:400 13px/1.45 Outfit,sans-serif;color:#7C77A8;text-wrap:pretty">Guessing games built from her own tiles</b>
+<b style="display:inline-flex;align-items:center;gap:7px;margin-top:2px;font:500 11px/1 Outfit,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#7C77A8"><i style="display:block;width:7px;height:7px;border-radius:50%;background:#524E86"></i>6 games</b>
+</span>
+</span>
+<span class="spmode" style="flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:18px 20px;box-sizing:border-box;border-radius:18px;background:#FBF2E2;border:1px solid #F0E2BC">
+<i class="spmm" style="display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 auto"><img src="assets/b/a91dbc09-2e8a-43ef-accb-16af804a0e35.png" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="font:600 19px/1.15 Outfit,sans-serif;color:#8A6A22;letter-spacing:-.01em">Story Builder</b>
+<b style="font:400 13px/1.45 Outfit,sans-serif;color:#A98E4E;text-wrap:pretty">String tiles into a sentence to keep</b>
+<b style="display:inline-flex;align-items:center;gap:7px;margin-top:2px;font:500 11px/1 Outfit,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#A98E4E"><i style="display:block;width:7px;height:7px;border-radius:50%;background:#8A6A22"></i>2 saved</b>
+</span>
+</span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:14px">
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#EDF5E6;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-ic-lion.png" alt="Animals" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Animals</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#FDEFE2;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-apple.png" alt="Food" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Food</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#E7F3F1;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-swim.png" alt="Sports" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Sports</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#F1F0FB;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-clap.png" alt="Actions" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Actions</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#FBF3DE;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-good.png" alt="Feelings" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Feelings</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#EEF5E9;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-walk-dog.png" alt="Outside" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Outside</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#E7F1F5;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-drink.png" alt="Drinks" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Drinks</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#FBF1E4;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-medal.png" alt="Places" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Places</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#EFF2FA;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-sy-wash.png" alt="Getting ready" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Routines</b></span>
+<span class="sptile" style="display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;background:#FBF5E0;border:1.5px solid rgba(58,54,45,.07)"><img src="assets/sp-ic-duckling.png" alt="Favourites" style="display:block;width:70%;height:auto"><b style="font:600 15px/1 Outfit,sans-serif;color:#5C5646;padding-bottom:12px">Favourites</b></span>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+<span style="display:flex;align-items:center;gap:16px;height:84px;padding:0 24px;box-sizing:border-box;border-radius:24px;background:#fff;border:1px solid #F1E6CC">
+<b style="font:500 17px/1 Outfit,sans-serif;color:#6C6555;white-space:nowrap">Recently used</b>
+<span style="display:flex;align-items:center;gap:8px;margin-left:4px"><i style="display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#FBF7EA;border:1px solid #EFE6D2;overflow:hidden;flex:0 0 auto"><img src="assets/sp-ic-lion.png" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></i><i style="display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#FBF2E2;border:1px solid #EFE6D2;overflow:hidden;flex:0 0 auto"><img src="assets/sp-sy-apple.png" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></i><i style="display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#EAF6F2;border:1px solid #EFE6D2;overflow:hidden;flex:0 0 auto"><img src="assets/sp-sy-drink.png" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></i><i style="display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#EEF3E6;border:1px solid #EFE6D2;overflow:hidden;flex:0 0 auto"><img src="assets/sp-sy-good.png" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></i><i style="display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:#F6F1E2;border:1px solid #EFE6D2;overflow:hidden;flex:0 0 auto"><img src="assets/sp-ic-duckling.png" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></i></span>
+<span style="margin-left:auto;display:inline-flex;align-items:center;gap:9px;font:500 14px/1 Outfit,sans-serif;color:#31706B;white-space:nowrap">See all<i style="font:400 18px/1 Outfit,sans-serif">›</i></span>
+</span>
+<span style="display:flex;align-items:center;gap:16px;height:84px;padding:0 24px;box-sizing:border-box;border-radius:24px;background:#fff;border:1px solid #F1E6CC">
+<span class="spstarrow" style="display:flex;align-items:center;gap:16px;flex:1;min-width:0">
+<span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+<b style="font:700 17px/1 Outfit,sans-serif;color:#5C5646;white-space:nowrap">3 new words</b>
+<b style="font:400 13px/1 Outfit,sans-serif;color:#A79E8B;white-space:nowrap">Two more today</b>
+</span>
+<span style="margin-left:auto;display:flex;gap:7px"><i class="spstar" style="display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#BAD65D;font:700 17px/1 Outfit,sans-serif;color:#39481A">★</i><i class="spstar" style="display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#BAD65D;font:700 17px/1 Outfit,sans-serif;color:#39481A">★</i><i class="spstar" style="display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#BAD65D;font:700 17px/1 Outfit,sans-serif;color:#39481A">★</i><i class="spstar" style="display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#F3EEDF;font:700 17px/1 Outfit,sans-serif;color:#CFC6AF">★</i><i class="spstar" style="display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#F3EEDF;font:700 17px/1 Outfit,sans-serif;color:#CFC6AF">★</i></span>
+</span>
+</span>
+</div>
+</div>
+</div>
+
+<div id="lets-talk" style="width:1388px;height:959px;box-sizing:border-box;display:flex;background:#FFFDF5;overflow:hidden">
+<div style="flex:0 0 132px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 0;background:#F6F1E2;border-right:1px solid #EDE4CE">
+<span style="display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #EDE4CE;font:400 17px/1 Outfit,sans-serif;color:#6C6555;margin-bottom:12px">‹</span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:6px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Home</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px;background:#EAF6F2"><i style="display:block;width:22px;height:22px;border-radius:8px 8px 8px 2px;border:2px solid #2A6660"></i><b style="font:600 12px/1 Outfit,sans-serif;color:#2A6660">Let's Talk</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Learning</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:16px;border-radius:3px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Stories</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Profile</b></span>
+<span style="margin-top:auto;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#F6E2D6;border:3px solid #fff;overflow:hidden"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Angie's fox avatar" style="display:block;width:86%;height:86%;object-fit:contain"></span>
+</div>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;padding:28px 32px 26px;gap:20px">
+<div style="display:flex;align-items:center;gap:20px">
+<div style="min-width:0">
+<div style="font:600 32px/1.1 Outfit,sans-serif;color:#3A362D;letter-spacing:-.02em">Let's Talk</div>
+<div style="margin-top:6px;font:400 16px/1 Outfit,sans-serif;color:#A79E8B">Practise a conversation with someone you know.</div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;gap:9px;height:46px;padding:0 20px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555"><i style="display:block;width:9px;height:9px;border-radius:50%;background:#BAD65D"></i>Co-Play</span>
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;gap:10px;height:46px;padding:0 20px 0 8px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555"><i style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#F6E2D6;overflow:hidden;flex:0 0 auto"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="" style="display:block;width:88%;height:88%;object-fit:contain"></i>Angie</span>
+<span style="display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid #EDE4CE"><i style="display:block;width:15px;height:15px;border-radius:50%;border:2.5px solid #6C6555"></i></span>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px">
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:24px;box-sizing:border-box;border-radius:28px;background:#FBF7EA;border:1px solid #F3EBD8">
+<div style="font:500 11px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#B4AB96">Choose someone</div>
+<div style="display:flex;align-items:center;height:60px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2;font:400 17px/1 Outfit,sans-serif;color:#B4AB96">Search people…</div>
+
+<span style="display:flex;align-items:center;gap:18px;height:96px;padding:0 22px;box-sizing:border-box;border-radius:18px;background:#fff;border:2px solid #59C0B2;box-shadow:0 8px 20px rgba(60,125,115,.16)">
+<i style="display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#F6E2D6;overflow:hidden;flex:0 0 auto"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Fox avatar" style="display:block;width:88%;height:88%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:7px;min-width:0">
+<b style="font:600 20px/1 Outfit,sans-serif;color:#3A362D">Anna</b>
+<b style="display:flex;align-items:center;gap:8px;font:400 14px/1 Outfit,sans-serif;color:#7FA25A"><i style="display:block;width:8px;height:8px;border-radius:50%;background:#7FA25A"></i>Here now</b>
+</span>
+<span style="margin-left:auto;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#31706B;color:#FFFDF5;font:600 15px/1 Outfit,sans-serif">✓</span>
+</span>
+
+<span style="display:flex;align-items:center;gap:18px;height:96px;padding:0 22px;box-sizing:border-box;border-radius:18px;background:#fff;border:1px solid #EFE6D2">
+<i style="display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#F6EFD9;overflow:hidden;flex:0 0 auto"><img src="assets/b/1cc9b918-0028-4fe3-9f39-4895ac874a5f.png" alt="Bee avatar" style="display:block;width:88%;height:88%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:7px;min-width:0">
+<b style="font:600 20px/1 Outfit,sans-serif;color:#3A362D">Jacob</b>
+<b style="display:flex;align-items:center;gap:8px;font:400 14px/1 Outfit,sans-serif;color:#A79E8B"><i style="display:block;width:8px;height:8px;border-radius:50%;background:#C9C0AA"></i>Away</b>
+</span>
+<span style="margin-left:auto;display:block;width:34px;height:34px;border-radius:50%;border:2px solid #E2D9C4"></span>
+</span>
+
+<span style="display:flex;align-items:center;gap:18px;height:96px;padding:0 22px;box-sizing:border-box;border-radius:18px;background:#fff;border:1px solid #EFE6D2">
+<i style="display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#E8F1E4;overflow:hidden;flex:0 0 auto"><img src="assets/b/a91dbc09-2e8a-43ef-accb-16af804a0e35.png" alt="Snail avatar" style="display:block;width:88%;height:88%;object-fit:contain"></i>
+<span style="display:flex;flex-direction:column;gap:7px;min-width:0">
+<b style="font:600 20px/1 Outfit,sans-serif;color:#3A362D">Mia</b>
+<b style="display:flex;align-items:center;gap:8px;font:400 14px/1 Outfit,sans-serif;color:#A79E8B"><i style="display:block;width:8px;height:8px;border-radius:50%;background:#C9C0AA"></i>Away</b>
+</span>
+<span style="margin-left:auto;display:block;width:34px;height:34px;border-radius:50%;border:2px solid #E2D9C4"></span>
+</span>
+
+<span style="margin-top:auto;display:flex;align-items:center;justify-content:center;gap:12px;height:64px;border-radius:16px;border:1.5px dashed #DCD3BE;font:500 17px/1 Outfit,sans-serif;color:#8E8672">Add someone new</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:26px;box-sizing:border-box;border-radius:28px;background:#EAF6F2;border:1px solid #C7E5DC">
+<div style="flex:1;display:flex;align-items:center;justify-content:center;min-height:0">
+<span class="spbig" style="display:grid;place-items:center;width:112px;height:112px;border-radius:50%;background:#fff;border:4px solid #D4EAE3;box-shadow:0 14px 26px -14px rgba(42,102,96,.5);margin-right:-22px;z-index:2"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="" style="display:block;width:70px;height:auto"></span>
+<span style="display:grid;place-items:center;width:96px;height:96px;border-radius:50%;background:#fff;border:4px solid #D4EAE3;box-shadow:0 12px 22px -14px rgba(42,102,96,.45)"><img src="assets/b/152a50e9-063a-412d-a523-7251cfed07cc.png" alt="" style="display:block;width:60px;height:auto"></span>
+</div>
+<div style="font:500 11px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#78A8A0">Together</div>
+<div style="font:700 26px/1.24 Outfit,sans-serif;color:#2A6660;letter-spacing:-.02em;text-wrap:pretty">You and Anna share one board, so a turn is something you both can see.</div>
+</div>
+<div style="flex:0 0 auto;display:flex;align-items:center;gap:18px;height:120px;padding:0 26px;box-sizing:border-box;border-radius:28px;background:#31706B">
+<span style="display:flex;flex-direction:column;gap:8px;min-width:0">
+<b style="font:400 13px/1 Outfit,sans-serif;color:rgba(255,253,245,.62);letter-spacing:.02em">Ready when you are</b>
+<b style="font:600 26px/1 Outfit,sans-serif;color:#FFFDF5;letter-spacing:-.01em">Start with Anna</b>
+</span>
+<span style="margin-left:auto;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:rgba(255,253,245,.16);color:#FFFDF5;font:400 22px/1 Outfit,sans-serif">→</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="profile" style="width:1388px;height:959px;box-sizing:border-box;display:flex;background:#FFFDF5;overflow:hidden">
+<div style="flex:0 0 132px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 0;background:#F6F1E2;border-right:1px solid #EDE4CE">
+<span style="display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #EDE4CE;font:400 17px/1 Outfit,sans-serif;color:#6C6555;margin-bottom:12px">‹</span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:6px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Home</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:8px 8px 8px 2px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Let's Talk</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Learning</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:16px;border-radius:3px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Stories</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px;background:#FBF2E2"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #8A6A22"></i><b style="font:600 12px/1 Outfit,sans-serif;color:#8A6A22">Profile</b></span>
+<span style="margin-top:auto;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#F6E2D6;border:3px solid #fff;overflow:hidden"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Angie's fox avatar" style="display:block;width:86%;height:86%;object-fit:contain"></span>
+</div>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;padding:28px 32px 26px;gap:20px">
+<div style="display:flex;align-items:center;gap:20px">
+<div style="min-width:0">
+<div style="font:600 32px/1.1 Outfit,sans-serif;color:#3A362D;letter-spacing:-.02em">Profile</div>
+<div style="margin-top:6px;font:400 16px/1 Outfit,sans-serif;color:#A79E8B">Set up SayPlay for Angie.</div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;gap:10px;height:46px;padding:0 20px 0 8px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555"><i style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#F6E2D6;overflow:hidden;flex:0 0 auto"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="" style="display:block;width:88%;height:88%;object-fit:contain"></i>Angie</span>
+<span style="display:inline-flex;align-items:center;height:46px;padding:0 26px;border-radius:99px;background:#31706B;color:#FFFDF5;font:600 15px/1 Outfit,sans-serif">Save</span>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:236px minmax(0,1fr);gap:20px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<span style="display:flex;align-items:center;height:60px;padding:0 22px;border-radius:16px;background:#FBF2E2;border:1px solid #F0E2BC;font:600 17px/1 Outfit,sans-serif;color:#8A6A22">Basics</span>
+<span style="display:flex;align-items:center;height:60px;padding:0 22px;border-radius:16px;background:#fff;border:1px solid #EFE6D2;font:500 17px/1 Outfit,sans-serif;color:#6C6555">Communication</span>
+<span style="display:flex;align-items:center;height:60px;padding:0 22px;border-radius:16px;background:#fff;border:1px solid #EFE6D2;font:500 17px/1 Outfit,sans-serif;color:#6C6555">Interests</span>
+<span style="display:flex;align-items:center;height:60px;padding:0 22px;border-radius:16px;background:#fff;border:1px solid #EFE6D2;font:500 17px/1 Outfit,sans-serif;color:#6C6555">Appearance</span>
+<span style="display:flex;align-items:center;height:60px;padding:0 22px;border-radius:16px;background:#fff;border:1px solid #EFE6D2;font:500 17px/1 Outfit,sans-serif;color:#6C6555">Privacy</span>
+<span style="margin-top:auto;display:flex;flex-direction:column;gap:10px;padding:20px 22px;border-radius:16px;background:#FBF7EA;border:1px solid #F3EBD8">
+<b style="font:400 12px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#B4AB96">Step 1 of 5</b>
+<i style="display:block;height:7px;border-radius:99px;background:linear-gradient(90deg,#59C0B2 0 20%,#EDE5D2 20% 100%)"></i>
+</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:24px;padding:32px;box-sizing:border-box;border-radius:28px;background:#FBF7EA;border:1px solid #F3EBD8">
+<div style="display:flex;align-items:center;gap:26px">
+<span class="spbig" style="flex:0 0 auto;display:grid;place-items:center;width:132px;height:132px;border-radius:50%;background:#FDEFE2;border:4px solid #fff;box-shadow:0 14px 28px -14px rgba(160,110,60,.5)"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Rusty the fox" style="display:block;width:82px;height:auto;image-rendering:auto"></span>
+<span class="spbubble" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;padding:22px 26px;border-radius:26px;background:#fff;border:1.5px solid #F1E6CC;box-shadow:0 10px 24px -16px rgba(58,54,45,.45)">
+<b style="font:700 30px/1.14 Outfit,sans-serif;color:#3A362D;letter-spacing:-.02em">How old is Angie?</b>
+<b style="font:400 16px/1.55 Outfit,sans-serif;color:#A79E8B;text-wrap:pretty">I'll pick her first words and how many tiles fit on a board. You can change this any time.</b>
+</span>
+</div>
+
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px">
+<span class="spage" style="position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;box-sizing:border-box;border-radius:26px;background:#fff;border:1.5px solid rgba(58,54,45,.09)">
+
+<b style="font:700 30px/1 Outfit,sans-serif;color:#5C5646;letter-spacing:-.02em;white-space:nowrap">0–5</b>
+<span class="spage-pips" style="flex:1;display:flex;align-items:center;min-height:0"><span style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;width:100%"><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i></span></span>
+<b style="font:400 14px/1.45 Outfit,sans-serif;color:#A79E8B;text-wrap:pretty">Six big tiles, first words</b>
+</span>
+<span class="spage" style="position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;box-sizing:border-box;border-radius:26px;background:#EAF6F2;border:2.5px solid #59C0B2;box-shadow:0 14px 28px -16px rgba(60,125,115,.5)">
+<span style="position:absolute;top:-10px;right:-10px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#31706B;color:#FFFDF5;font:700 18px/1 Outfit,sans-serif;box-shadow:0 6px 14px -6px rgba(42,102,96,.8)">✓</span>
+<b style="font:700 30px/1 Outfit,sans-serif;color:#2A6660;letter-spacing:-.02em;white-space:nowrap">6–10</b>
+<span class="spage-pips" style="flex:1;display:flex;align-items:center;min-height:0"><span style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;width:100%"><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:#B6E0D7"></i></span></span>
+<b style="font:400 14px/1.45 Outfit,sans-serif;color:#5E9189;text-wrap:pretty">Fifteen tiles, short sentences</b>
+</span>
+<span class="spage" style="position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;box-sizing:border-box;border-radius:26px;background:#fff;border:1.5px solid rgba(58,54,45,.09)">
+
+<b style="font:700 30px/1 Outfit,sans-serif;color:#5C5646;letter-spacing:-.02em;white-space:nowrap">11–15</b>
+<span class="spage-pips" style="flex:1;display:flex;align-items:center;min-height:0"><span style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px;width:100%"><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i></span></span>
+<b style="font:400 14px/1.45 Outfit,sans-serif;color:#A79E8B;text-wrap:pretty">Twenty-four tiles, full boards</b>
+</span>
+<span class="spage" style="position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;box-sizing:border-box;border-radius:26px;background:#fff;border:1.5px solid rgba(58,54,45,.09)">
+
+<b style="font:700 30px/1 Outfit,sans-serif;color:#5C5646;letter-spacing:-.02em;white-space:nowrap">16–20</b>
+<span class="spage-pips" style="flex:1;display:flex;align-items:center;min-height:0"><span style="display:grid;grid-template-columns:repeat(6,1fr);gap:5px;width:100%"><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i><i style="display:block;aspect-ratio:1;border-radius:5px;background:rgba(58,54,45,.11)"></i></span></span>
+<b style="font:400 14px/1.45 Outfit,sans-serif;color:#A79E8B;text-wrap:pretty">Adult vocabulary, no cap</b>
+</span>
+</div>
+
+<div style="display:flex;align-items:center;gap:16px;padding-top:22px;border-top:1px solid #EDE4CE">
+<span style="font:400 15px/1.5 Outfit,sans-serif;color:#A79E8B">Next: how Angie communicates today.</span>
+<span style="margin-left:auto;display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 30px;border-radius:99px;background:#31706B;color:#FFFDF5;font:600 17px/1 Outfit,sans-serif">Continue →</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="accessibility" style="width:1388px;height:959px;box-sizing:border-box;display:flex;background:#FFFDF5;overflow:hidden">
+<div style="flex:0 0 132px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 0;background:#F6F1E2;border-right:1px solid #EDE4CE">
+<span style="display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid #EDE4CE;font:400 17px/1 Outfit,sans-serif;color:#6C6555;margin-bottom:12px">‹</span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:6px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Home</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:8px 8px 8px 2px;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Let's Talk</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Learning</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px;background:#EAF6F2"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #2A6660"></i><b style="font:600 12px/1 Outfit,sans-serif;color:#2A6660">Access</b></span>
+<span style="display:flex;flex-direction:column;align-items:center;gap:7px;width:96px;padding:13px 0;border-radius:16px"><i style="display:block;width:22px;height:22px;border-radius:50%;border:2px solid #A79E8B"></i><b style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">Profile</b></span>
+<span style="margin-top:auto;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#F6E2D6;border:3px solid #fff;overflow:hidden"><img src="assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png" alt="Angie's fox avatar" style="display:block;width:86%;height:86%;object-fit:contain"></span>
+</div>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column;padding:28px 32px 26px;gap:20px">
+<div style="display:flex;align-items:center;gap:20px">
+<div style="min-width:0">
+<div style="font:600 32px/1.1 Outfit,sans-serif;color:#3A362D;letter-spacing:-.02em">Accessibility</div>
+<div style="margin-top:6px;font:400 16px/1 Outfit,sans-serif;color:#A79E8B">Make SayPlay work the way Angie does.</div>
+</div>
+<div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;flex:0 0 auto;white-space:nowrap;align-items:center;height:46px;padding:0 22px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 15px/1 Outfit,sans-serif;color:#6C6555">Reset to default</span>
+<span style="display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid #EDE4CE"><i style="display:block;width:15px;height:15px;border-radius:50%;border:2.5px solid #6C6555"></i></span>
+</div>
+</div>
+
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr);gap:16px">
+
+<div style="grid-row:span 2;display:flex;flex-direction:column;gap:12px;padding:26px;box-sizing:border-box;border-radius:28px;background:#FBF7EA;border:1px solid #F3EBD8">
+<div style="font:500 11px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#B4AB96;padding-bottom:4px">Display</div>
+
+<span style="display:flex;align-items:center;gap:18px;height:82px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Text size</b>
+<span style="margin-left:auto;display:flex;gap:8px">
+<i style="display:grid;place-items:center;width:52px;height:44px;border-radius:11px;background:#F6F1E2;font:500 14px/1 Outfit,sans-serif;color:#8E8672">A</i>
+<i style="display:grid;place-items:center;width:52px;height:44px;border-radius:11px;background:#31706B;font:600 18px/1 Outfit,sans-serif;color:#FFFDF5">A</i>
+<i style="display:grid;place-items:center;width:52px;height:44px;border-radius:11px;background:#F6F1E2;font:600 22px/1 Outfit,sans-serif;color:#8E8672">A</i>
+</span>
+</span>
+
+<span style="display:flex;align-items:center;gap:18px;height:82px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">High contrast</b>
+<b style="font:400 13px/1 Outfit,sans-serif;color:#A79E8B">Stronger borders on every tile</b>
+</span>
+<i style="margin-left:auto;position:relative;display:block;width:64px;height:36px;border-radius:99px;background:#31706B"><s style="position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff"></s></i>
+</span>
+
+<span style="display:flex;align-items:center;gap:18px;height:82px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Reduce motion</b>
+<b style="font:400 13px/1 Outfit,sans-serif;color:#A79E8B">Removes transitions between boards</b>
+</span>
+<i style="margin-left:auto;position:relative;display:block;width:64px;height:36px;border-radius:99px;background:#E2D9C4"><s style="position:absolute;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff"></s></i>
+</span>
+
+<span style="display:flex;align-items:center;gap:18px;height:82px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Tiles per board</b>
+<span style="margin-left:auto;display:flex;gap:8px">
+<i style="display:grid;place-items:center;width:60px;height:44px;border-radius:11px;background:#F6F1E2;font:500 15px/1 Outfit,sans-serif;color:#8E8672">6</i>
+<i style="display:grid;place-items:center;width:60px;height:44px;border-radius:11px;background:#31706B;font:600 15px/1 Outfit,sans-serif;color:#FFFDF5">15</i>
+<i style="display:grid;place-items:center;width:60px;height:44px;border-radius:11px;background:#F6F1E2;font:500 15px/1 Outfit,sans-serif;color:#8E8672">24</i>
+</span>
+</span>
+
+<span style="margin-top:auto;display:flex;align-items:center;gap:18px;padding:20px 22px;border-radius:16px;background:#EAF6F2;border:1px solid #C7E5DC">
+<b style="font:400 14px/1.55 Outfit,sans-serif;color:#2A6660;text-wrap:pretty">Changes apply straight away on Angie's board, so a therapist can adjust mid-session.</b>
+</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px;padding:26px;box-sizing:border-box;border-radius:28px;background:#FBF7EA;border:1px solid #F3EBD8">
+<div style="font:500 11px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#B4AB96;padding-bottom:4px">Voice</div>
+<span style="display:flex;flex-direction:column;gap:16px;padding:22px;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<span style="display:flex;align-items:baseline;justify-content:space-between;gap:16px">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Speech rate</b>
+<b style="font:400 14px/1 Outfit,sans-serif;color:#A79E8B">Slower · Faster</b>
+</span>
+<i style="position:relative;display:block;height:8px;border-radius:99px;background:linear-gradient(90deg,#59C0B2 0 42%,#EDE5D2 42% 100%)"><s style="position:absolute;left:42%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:#fff;border:2.5px solid #31706B"></s></i>
+</span>
+<span style="display:flex;align-items:center;gap:18px;height:78px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Voice</b>
+<b style="margin-left:auto;white-space:nowrap;font:500 17px/1 Outfit,sans-serif;color:#31706B">Child · Warm</b>
+<span style="font:400 18px/1 Outfit,sans-serif;color:#A79E8B">›</span>
+</span>
+<span style="display:flex;align-items:center;gap:18px;height:78px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Speak each word as tapped</b>
+<i style="margin-left:auto;position:relative;display:block;width:64px;height:36px;border-radius:99px;background:#31706B"><s style="position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff"></s></i>
+</span>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px;padding:26px;box-sizing:border-box;border-radius:28px;background:#FBF7EA;border:1px solid #F3EBD8">
+<div style="font:500 11px/1 Outfit,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#B4AB96;padding-bottom:4px">Input</div>
+<span style="display:flex;align-items:center;gap:18px;height:78px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Scan and select</b>
+<b style="font:400 13px/1 Outfit,sans-serif;color:#A79E8B">For switch access</b>
+</span>
+<i style="margin-left:auto;position:relative;display:block;width:64px;height:36px;border-radius:99px;background:#E2D9C4"><s style="position:absolute;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff"></s></i>
+</span>
+<span style="display:flex;align-items:center;gap:18px;height:78px;padding:0 22px;box-sizing:border-box;border-radius:16px;background:#fff;border:1px solid #EFE6D2">
+<span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+<b style="flex:0 0 auto;white-space:nowrap;font:500 18px/1 Outfit,sans-serif;color:#3A362D">Hold to confirm</b>
+<b style="font:400 13px/1 Outfit,sans-serif;color:#A79E8B">Ignores accidental taps</b>
+</span>
+<i style="margin-left:auto;position:relative;display:block;width:64px;height:36px;border-radius:99px;background:#31706B"><s style="position:absolute;right:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff"></s></i>
+</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1468,&quot;height&quot;:1000}}"></script>
+</body>
+</html>

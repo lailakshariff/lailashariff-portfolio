@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./responsive.css">
+<style>
+body{margin:0;background:#fff}
+html{scroll-behavior:smooth}
+a{color:#3f3f42}a:hover{color:#648761}
+::selection{background:#d6e9d4}
+@keyframes nhUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes nhRise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+.nhp1{animation:nhRise 1.5s cubic-bezier(.18,.8,.22,1) .28s both}
+.nhp2{animation:nhRise 1.5s cubic-bezier(.18,.8,.22,1) .1s both}
+.nhp3{animation:nhRise 1.5s cubic-bezier(.18,.8,.22,1) .46s both}
+.nhsb{scrollbar-width:none}.nhsb::-webkit-scrollbar{display:none}
+.nhfeat:nth-of-type(even){grid-template-columns:minmax(0,1fr) 300px}
+.nhfeat:nth-of-type(even) > div:first-child{order:2}
+.nhfeat:nth-of-type(even) > div:last-child{order:1}
+@media (prefers-reduced-motion:reduce){.nhp1,.nhp2,.nhp3{animation:none}}
+.nhmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(63,63,66,.1)}
+.nhmeta > div:first-child{border-left:0;padding-left:0}
+@media (max-width:900px){.nhrail{display:none !important}}
+@media (max-width:760px){
+.nhmeta > div{padding:20px 0 22px;border-left:0;border-top:1px solid rgba(63,63,66,.1)}
+.nhmeta > div:first-child,.nhmeta > div:nth-child(2){border-top:0}
+.nhmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(63,63,66,.1)}
+}
+@media (max-width:900px){
+#top{padding-left:24px !important;padding-right:24px !important;padding-top:56px !important}
+#top > div:last-child{padding:26px 18px !important;border-radius:14px !important;min-height:0 !important;gap:3% !important}
+h1{font-size:clamp(38px,11vw,52px) !important}
+.nhmeta{margin-top:36px !important}
+[data-sec]{padding-top:72px !important}
+[data-sec] h2{font-size:clamp(25px,6.6vw,32px) !important;line-height:1.18 !important}
+[data-sec] h3,[data-sec] h4{font-size:clamp(20px,5.4vw,26px) !important}
+.nhnav{padding-left:24px !important;padding-right:24px !important}
+}
+@media (max-width:1150px){
+[style*="grid-template-columns:repeat(4,1fr)"][style*="gap:14px"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+.nhfeat{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
+.nhfeat > div:first-child{order:2 !important}
+.nhfeat > div:last-child{order:1 !important}
+.nhins{grid-template-columns:minmax(0,1fr) !important;gap:16px !important}
+}
+@media (max-width:560px){
+.nhnav{font-size:10px !important;letter-spacing:.1em !important;padding-top:16px !important;padding-bottom:16px !important}
+.nhnav > div{gap:16px !important}
+}
+/*navtap*/@media (max-width:900px){.nhnav a{display:inline-flex;align-items:center;min-height:44px}.nhnav{padding-top:4px !important;padding-bottom:4px !important}}
+</style>
+<script src="./dot-cursor.js"></script></helmet>
+
+<div style="background:#fff;color:#3f3f42;font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+
+<div class="nhnav" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase">
+<a href="index.html" style="text-decoration:none;color:#3f3f42">Laila Shariff</a>
+<div style="display:flex;gap:26px">
+<a href="index.html#work" style="text-decoration:none;color:#3f3f42">Work</a>
+<a href="playground.html" style="text-decoration:none;color:#3f3f42">Playground</a>
+<a href="about.html" style="text-decoration:none;color:#3f3f42">About</a>
+</div>
+</div>
+
+<div id="top" style="max-width:1240px;margin:0 auto;padding:88px 64px 0;animation:nhUp .9s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
+<img src="assets/inline/nutrihealth-1.png" alt="NutriHealth logo" style="display:block;width:40px;height:40px;border-radius:9px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Case study · 2025</div>
+</div>
+<h1 style="margin:0;max-width:16ch;font:500 clamp(46px,7vw,88px)/1.02 Newsreader,Georgia,serif;letter-spacing:-.035em">NutriHealth</h1>
+<p style="margin:26px 0 0;max-width:720px;font:300 clamp(19px,2vw,23px)/1.55 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">A nutrition app that helps college students build better eating habits through simple food logging, recipe organization, and supportive, approachable UX design.</p>
+
+<div class="nhmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(63,63,66,.1);border-bottom:1px solid rgba(63,63,66,.1)">
+<sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">{{ m.k }}</div>
+<div style="margin-top:14px;font:400 15px/1.5 Outfit,sans-serif;color:#3f3f42;text-wrap:pretty">{{ m.v }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top:56px;border-radius:20px;overflow:hidden;background:linear-gradient(155deg,#fdfaf0 0%,#e4f1de 28%,#bfdec6 58%,#8fc4a1 85%,#6fb188 100%);padding:clamp(28px,4.5vw,52px) clamp(28px,5vw,64px);display:flex;align-items:center;justify-content:center;gap:4%;min-height:clamp(260px,38vw,520px)">
+<img class="nhp1" src="assets/inline/index-12.png" alt="NutriHealth goals onboarding" style="display:block;width:25%;filter:drop-shadow(0 26px 44px rgba(28,62,42,.24))">
+<img class="nhp2" src="assets/inline/index-13.png" alt="NutriHealth home screen" style="display:block;width:28%;filter:drop-shadow(0 26px 44px rgba(28,62,42,.24))">
+<img class="nhp3" src="assets/inline/index-14.png" alt="NutriHealth recipe detail" style="display:block;width:25%;filter:drop-shadow(0 26px 44px rgba(28,62,42,.24))">
+</div>
+</div>
+
+<div style="max-width:1240px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 72px;align-items:start">
+
+<div class="nhrail" style="position:sticky;top:92px;padding-top:112px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#b3b0ba;margin-bottom:18px">Contents</div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ toc }}" as="t" hint-placeholder-count="12">
+<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:9px 0;text-decoration:none;font:400 14px/1.4 Outfit,sans-serif;color:#b0aeb6;transition:color .28s">
+{{ t.label }}
+</a>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;min-width:0">
+
+<div id="overview" data-sec="overview" style="scroll-margin-top:110px;padding-top:112px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Overview</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">A nutrition app for college students, built from the problem I was living</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Maintaining a healthy diet as a college student often feels overwhelming with a busy schedule. Many of my friends and I relied on fast food, skipped meals, or felt unmotivated to make healthier choices. I surveyed 50 students, interviewed 16 of my peers, and designed NutriHealth around the three things that actually stopped them.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+<div style="background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:24px">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;color:#648761">{{ s.n }}</span><span style="font:500 15px/1 Outfit,sans-serif;color:#3f3f42">{{ s.t }}</span></div>
+<p style="margin:14px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:#6b6b74">{{ s.b }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="problem" data-sec="problem" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Problem</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">College students struggle to maintain healthy eating habits</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Maintaining a healthy diet as a college student often feels overwhelming with a busy schedule. Many of my friends and I relied on fast food, skipped meals, or felt unmotivated to make healthier choices.</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px">
+<sc-for list="{{ frictions }}" as="f" hint-placeholder-count="3">
+<div style="border:1px solid rgba(63,63,66,.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:#3f3f42">{{ f }}</div>
+</sc-for>
+</div>
+<p style="margin:16px 0 0;font:400 13.5px/1.6 Outfit,sans-serif;color:#9a9aa2">The three challenges the design had to hold at once.</p>
+
+<div style="margin-top:44px;display:flex;align-items:center;justify-content:center">
+<img src="assets/nh-welcome.png" alt="NutriHealth welcome screen with the carrot and onion characters" style="display:block;width:54%;filter:drop-shadow(0 26px 44px rgba(28,62,42,.2))">
+</div>
+</div>
+
+<div id="hmw" data-sec="hmw" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">How might we</div>
+<div style="margin-top:22px;border-left:3px solid #648761;padding:6px 0 6px 32px">
+<p style="margin:0;max-width:900px;font:400 clamp(28px,3.4vw,42px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:#3f3f42;text-wrap:pretty">How can we simplify meal planning, encourage better eating habits, and create a community around food amongst busy college students?</p>
+</div>
+</div>
+
+<div id="market" data-sec="market" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Competitive analysis</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Existing apps fell short on affordability, time, and connection</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">After doing some preliminary white paper research, drawing from journals, articles and websites on some of the best ways to achieve a healthy and balanced diet with regards to college students in particular, I found an eye opening statistic.</p>
+
+<div style="margin-top:28px;background:#dff0dc;border-radius:14px;padding:26px 30px">
+<p style="margin:0;font:500 19px/1.5 Outfit,sans-serif;color:#33402f;text-wrap:pretty">Nearly 25% of college students experience food insecurity, leading to skipped meals and insufficient nutrition, which can adversely affect academic performance and overall well-being.</p>
+</div>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">According to a study by the Dominican University of California, “individuals who write down their goals and share progress updates with a supportive network have a <strong style="font-weight:500;color:#648761">65% higher success rate</strong> in achieving their goals”.</p>
+<p style="margin:16px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">I conducted a survey with 50 college students and reviewed existing food apps. While these apps provided valuable tools, they often fell short in areas critical to college students, such as affordability, time-efficiency, and social connection.</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px">
+<sc-for list="{{ competitors }}" as="c" hint-placeholder-count="3">
+<div style="background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+<img src="{{ c.img }}" alt="{{ c.alt }}" style="display:block;width:56px;height:56px">
+<div style="font:500 15.5px/1 Outfit,sans-serif;color:#3f3f42">{{ c.name }}</div>
+<p style="margin:0;font:300 14.5px/1.65 Outfit,sans-serif;color:#6b6b74;flex:1;text-wrap:pretty">{{ c.body }}</p>
+<p style="margin:0;font:400 14px/1.5 Outfit,sans-serif;color:#648761">{{ c.note }}</p>
+</div>
+</sc-for>
+</div>
+
+<h3 style="margin:64px 0 0;font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">From affinity mapping the survey responses, three key insights emerged</h3>
+<div style="margin-top:22px;border-top:1px solid rgba(63,63,66,.1)">
+<sc-for list="{{ surveyInsights }}" as="s" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;padding:22px 0;border-bottom:1px solid rgba(63,63,66,.1)">
+<div style="font:400 14px/1.5 'Space Mono',ui-monospace,monospace;color:#b9cfb6">{{ s.n }}</div>
+<div style="font:400 16px/1.55 Outfit,sans-serif;color:#3f3f42">{{ s.v }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="findings" data-sec="findings" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">User research</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">I interviewed 16 of my peers</h2>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">I conducted interviews and surveys amongst students who struggled with maintaining healthy eating habits. These users expressed frustration with meal planning, grocery shopping, and finding the motivation to cook regularly.</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px">
+<sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+<div style="background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:26px 28px">
+<div style="font:600 40px/1 Outfit,sans-serif;letter-spacing:-.035em;color:#3f3f42">{{ s.n }}</div>
+<div style="margin-top:10px;font:400 11px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#9a9aa2">{{ s.l }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px">
+<sc-for list="{{ struggles }}" as="f" hint-placeholder-count="4">
+<div style="border:1px solid rgba(63,63,66,.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:#3f3f42">{{ f }}</div>
+</sc-for>
+</div>
+<p style="margin:20px 0 0;max-width:660px;font:400 17.5px/1.6 Outfit,sans-serif;color:#3f3f42;text-wrap:pretty">Students need tools that make healthy eating feel <span style="color:#648761">simple, fast, and approachable.</span></p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Interview protocol</div>
+<div style="margin-top:14px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:18px">
+<img src="assets/inline/nutrihealth-5.jpg" alt="NutriHealth interview question protocol" style="display:block;width:100%;border-radius:8px">
+</div>
+</div>
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Empathy map</div>
+<div style="margin-top:14px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:18px">
+<img src="assets/b/b78ae9e3-a124-4819-b257-c3f8b3bb19e4.jpg" alt="Says, thinks, does, feels empathy map from the interviews" style="display:block;width:100%;border-radius:8px">
+</div>
+</div>
+</div>
+</div>
+
+<div id="insights" data-sec="insights" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Major insights</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Three themes, and the design challenge each one set</h2>
+<div style="margin-top:40px;border-top:1px solid rgba(63,63,66,.1)">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="3">
+<div class="nhins" style="display:grid;grid-template-columns:180px minmax(0,1fr) minmax(0,1fr);gap:28px;padding:26px 0;border-bottom:1px solid rgba(63,63,66,.1)">
+<div style="font:500 17px/1.3 Outfit,sans-serif;color:#3f3f42">{{ t.k }}</div>
+<div>
+<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">Observation</div>
+<p style="margin:10px 0 0;font:300 15.5px/1.7 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">{{ t.o }}</p>
+</div>
+<div>
+<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">Challenge</div>
+<p style="margin:10px 0 0;font:300 15.5px/1.7 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">{{ t.c }}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="kpis" data-sec="kpis" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">What success looks like</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The questions the app has to answer for a student mid-semester</h2>
+<div style="margin-top:40px;border-top:1px solid rgba(63,63,66,.1)">
+<sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(63,63,66,.1)">
+<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">{{ k.cat }}</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ k.items }}" as="it" hint-placeholder-count="2">
+<div style="font:400 16px/1.55 Outfit,sans-serif;color:#3f3f42">{{ it }}</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="process" data-sec="process" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Design process</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">From paper sketches to a full screen library</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Low-fi mockups</div>
+<div style="margin-top:14px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:18px">
+<img src="assets/b/84f6eb3e-a8da-4408-8762-30db971c42c6.jpg" alt="Hand-drawn and greyscale wireframes for onboarding, home, recipe, and food logging" style="display:block;width:100%;border-radius:8px">
+</div>
+</div>
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Hi-fi mockups</div>
+<div style="margin-top:14px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:18px">
+<img src="assets/b/3c500c09-04d5-4543-a81b-035f3754b8b2.jpg" alt="High fidelity NutriHealth screens and the full Figma screen library" style="display:block;width:100%;border-radius:8px">
+</div>
+</div>
+</div>
+
+<h3 style="margin:72px 0 0;font:500 clamp(24px,2.6vw,32px)/1.2 Newsreader,Georgia,serif;letter-spacing:-.024em">Three features that turn intention into routine</h3>
+<div style="display:flex;flex-direction:column;gap:56px;margin-top:36px">
+<sc-for list="{{ features }}" as="r">
+<div class="nhfeat" style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:44px;align-items:center">
+<div style="display:flex;justify-content:center">
+<div style="position:relative;width:280px;padding:11px;border-radius:46px;background:#1c1c1e;box-shadow:0 22px 48px rgba(30,55,35,.22),inset 0 0 0 2px #3a3a3d">
+<div style="position:absolute;left:50%;top:17px;transform:translateX(-50%);width:86px;height:22px;border-radius:999px;background:#1c1c1e;z-index:3"></div>
+<div style="position:relative;overflow:hidden;border-radius:36px;background:#000;aspect-ratio:9/19.5;line-height:0">
+<video src="{{ r.src }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="display:block;width:100%;height:100%;object-fit:cover"></video>
+</div>
+</div>
+</div>
+<div>
+<div style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#648761">{{ r.n }}</div>
+<h4 style="margin:14px 0 0;font:500 clamp(22px,2.4vw,28px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:#3f3f42">{{ r.t }}</h4>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+<sc-for list="{{ r.points }}" as="p" hint-placeholder-count="3">
+<div style="display:flex;gap:12px;align-items:flex-start">
+<span style="display:block;width:6px;height:6px;border-radius:50%;background:#a0ca9c;margin-top:8px"></span>
+<span style="font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74">{{ p }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="system" data-sec="system" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Design system</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Poppins, a soft green palette, and two vegetable companions</h2>
+<div style="margin-top:36px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:16px;padding:20px">
+<img src="assets/b/0477b19a-8169-44a4-80ea-ce2b041518c1.jpg" alt="NutriHealth design system: Poppins typography, green colour scheme, app icon, and characters" style="display:block;width:100%;border-radius:8px">
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px">
+<sc-for list="{{ palette }}" as="c" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px;border:1px solid rgba(63,63,66,.1);border-radius:12px;padding:18px 20px">
+<span style="display:block;width:26px;height:26px;border-radius:50%;flex:none;background:{{ c.hex }};border:1px solid rgba(63,63,66,.08)"></span>
+<span style="font:400 12.5px/1 'Space Mono',ui-monospace,monospace;color:#6b6b74">{{ c.hex }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="iterations" data-sec="iterations" style="scroll-margin-top:110px;padding-top:128px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Iterations</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Adding “Today's Progress” created a clearer path from intention to action</h2>
+<div style="margin-top:36px;background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:16px;padding:20px">
+<img src="assets/b/25239de4-dbe6-40b3-a48b-0532ef3ecc43.jpg" alt="Iteration one versus iteration two of the NutriHealth home screen" style="display:block;width:100%;border-radius:8px">
+</div>
+</div>
+
+<div id="outcome" data-sec="outcome" style="scroll-margin-top:110px;padding-top:128px;padding-bottom:120px">
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Reflection</div>
+<h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Key takeaways</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px">
+<sc-for list="{{ reflections }}" as="r" hint-placeholder-count="4">
+<div style="background:#eef6ee;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:26px">
+<p style="margin:0;font:400 16.5px/1.6 Outfit,sans-serif;color:#3f3f42;text-wrap:pretty">{{ r }}</p>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:40px;display:flex;align-items:center;justify-content:center">
+<img src="assets/nh-final.png" alt="Final NutriHealth screens: welcome, home, and recipe detail" style="display:block;width:100%;filter:drop-shadow(0 30px 50px rgba(28,62,42,.18))">
+</div>
+</div>
+
+</div>
+</div>
+
+<div style="border-top:1px solid rgba(63,63,66,.1)">
+<div style="max-width:1240px;margin:0 auto;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+<div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Next project</div>
+<a href="purple-fabric.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:#3f3f42;transition:color .25s" style-hover="color:#648761">Purple Fabric →</a>
+</div>
+<a href="index.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(63,63,66,.2);text-decoration:none;color:#3f3f42;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .25s" style-hover="background:#eef6ee">All work</a>
+</div>
+<div style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    let queued = false;
+    this._spy = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const secs = Array.from(document.querySelectorAll('[data-sec]'));
+        const links = Array.from(document.querySelectorAll('[data-toc]'));
+        if (!secs.length || !links.length) return;
+        const line = window.innerHeight * 0.32;
+        let active = secs[0].getAttribute('data-sec');
+        secs.forEach(s => {
+          if (s.getBoundingClientRect().top <= line) active = s.getAttribute('data-sec');
+        });
+        links.forEach(a => {
+          const id = a.getAttribute('data-toc');
+          const on = id === active;
+          a.style.color = on ? '#3f3f42' : '#b0aeb6';
+        });
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spyTimer = setInterval(this._spy, 400);
+    this._spy();
+    this._vids = () => {
+      document.querySelectorAll('video').forEach(v => {
+        v.muted = true;
+        if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      });
+    };
+    this._vidTimer = setInterval(this._vids, 900);
+    this._vids();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._spy);
+    window.removeEventListener('resize', this._spy);
+    clearInterval(this._spyTimer);
+    clearInterval(this._vidTimer);
+  }
+
+  renderVals() {
+    return {
+      meta: [
+        { k: 'Role', v: 'Project Lead' },
+        { k: 'Timeline', v: 'May – August 2025' },
+        { k: 'Team', v: '1 Project Lead, 2 Developers' },
+        { k: 'Tools', v: 'Figma, Miro, Procreate' }
+      ],
+
+      toc: [
+        { id: 'overview', href: '#overview', label: 'Overview' },
+        { id: 'problem', href: '#problem', label: 'Problem' },
+        { id: 'hmw', href: '#hmw', label: 'How might we' },
+        { id: 'market', href: '#market', label: 'Competitive analysis' },
+        { id: 'findings', href: '#findings', label: 'User research' },
+        { id: 'insights', href: '#insights', label: 'Major insights' },
+        { id: 'kpis', href: '#kpis', label: 'What success looks like' },
+        { id: 'process', href: '#process', label: 'Design process' },
+        { id: 'system', href: '#system', label: 'Design system' },
+        { id: 'iterations', href: '#iterations', label: 'Iterations' },
+        { id: 'outcome', href: '#outcome', label: 'Reflection' }
+      ],
+
+      steps: [
+        { n: '01', t: 'Research', b: 'White paper research, a survey of 50 college students, and interviews with 16 peers who struggled to eat well on a busy schedule.' },
+        { n: '02', t: 'Design', b: 'Owned the end-to-end product design — three feature areas, a full screen library, and the Poppins-and-green design system.' },
+        { n: '03', t: 'Leadership', b: 'Led two developers through the build, translating research insights into scope and iterating the home screen from feedback.' }
+      ],
+
+      frictions: ['Low motivation for consistent tracking', 'Balancing simplicity with functionality', 'Encouraging positive behavior without guilt'],
+
+      competitors: [
+        { img: 'assets/inline/nutrihealth-2.png', alt: 'MyFitnessPal app icon', name: 'MyFitnessPal', body: 'The most complete tracking database of the three, but built around calorie counting. That framing is precisely what makes logging feel like judgement rather than awareness.', note: 'Thorough, and easy to feel guilty in.' },
+        { img: 'assets/inline/nutrihealth-3.png', alt: 'Mealime app icon', name: 'Mealime', body: 'Strong meal plans and an automatic grocery list, which solves planning well. It assumes a stocked kitchen and a budget that a student mid-semester often does not have.', note: 'Best planning; weakest on affordability.' },
+        { img: 'assets/inline/nutrihealth-4.png', alt: 'Yummly app icon', name: 'Yummly', body: 'Excellent recipe discovery and the friendliest visual language here. Everything happens alone — there is no one to notice whether you followed through.', note: 'Great inspiration, no accountability.' }
+      ],
+
+      surveyInsights: [
+        { n: '01', v: 'Lack of inspiration for meals.' },
+        { n: '02', v: 'Poor grocery planning, leading to food waste.' },
+        { n: '03', v: 'Low engagement in meal tracking and healthy eating habits.' }
+      ],
+
+      stats: [
+        { n: '50', l: 'Survey responses' },
+        { n: '16', l: 'Peer interviews' },
+        { n: '3', l: 'Apps reviewed' }
+      ],
+
+      struggles: ['Limited time to cook', 'Difficulty planning meals', 'Lack of simple recipe inspiration', 'Disorganized grocery shopping'],
+
+      themes: [
+        { k: 'Awareness', o: 'Users often underestimate how much they eat out or rely on convenience foods.', c: 'Providing easy tools to log meals and visualize dietary trends to increase mindfulness.' },
+        { k: 'Accessability', o: 'Users struggle to find recipes that fit their budget, available ingredients, and time constraints.', c: 'Offering budget-friendly recipes and ingredient swaps to simplify healthy cooking.' },
+        { k: 'Habit Formation', o: 'Meal planning and grocery shopping are often done sporadically, leading to missed meals or unhealthy choices.', c: 'Designing features that encourage routine, such as weekly meal plans and reminders.' }
+      ],
+
+      kpis: [
+        { cat: 'Awareness', items: ['Can a student see the shape of their week without doing any maths?', 'Does logging a meal take less effort than skipping it?'] },
+        { cat: 'Accessibility', items: ['Can a student find something to cook from what is already in the kitchen?', 'Do the recipes respect a student budget and a 20-minute window?'] },
+        { cat: 'Habit formation', items: ['Does the app give a reason to come back tomorrow, not just today?', 'Is progress shown as encouragement rather than a deficit?'] },
+        { cat: 'Connection', items: ['Is there someone who notices when a goal is met?'] }
+      ],
+
+      features: [
+        { n: '01', t: 'Build a personalized meal planner', src: 'assets/nh-proto-1.mp4', points: ['Generates meal plans tailored to dietary preferences and goals.', 'Saves favourite recipes for quick access and inspiration.', 'Offers AI-powered suggestions based on available ingredients.'] },
+        { n: '02', t: 'Have accountability partners', src: 'assets/nh-proto-2.mp4', points: ['Increases chances of accomplishment up to 95%', 'Provides a source of intrinsic motivation', 'Avoid social consequences of not completing you goal'] },
+        { n: '03', t: 'Log daily eating habits', src: 'assets/nh-proto-3.mp4', points: ['Tracks meals and snacks to provide a clear overview of daily nutrition.', 'Identifies patterns to help users make healthier food choices.', 'Encourages consistency with reminders and motivational prompts.'] }
+      ],
+
+      palette: [
+        { hex: '#648761' }, { hex: '#A0CA9C' }, { hex: '#E1EBE0' }, { hex: '#FFF9F3' }
+      ],
+
+      reflections: [
+        'I learned the importance of designing for real constraints, like limited time, motivation, and decision fatigue',
+        'Translated user research into insights that helped shape my design direction and decisions',
+        'I improved my ability to simplify complex systems into clear, intuitive interfaces',
+        'I learned that small design decisions can significantly influence habit formation and consistency'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
