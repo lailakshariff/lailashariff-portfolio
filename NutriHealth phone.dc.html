@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.nhph{position:relative;width:100%;aspect-ratio:377/760;container-type:size;user-select:none;font-family:Outfit,system-ui,sans-serif}
+.nhbez{position:absolute;inset:0;border-radius:7.6cqh;background:linear-gradient(150deg,#3a3a3c,#101012 40%,#2c2c2e);padding:1.15cqh;box-sizing:border-box;box-shadow:0 3cqh 6cqh -2cqh rgba(20,44,30,.5)}
+.nhin{position:absolute;inset:1.15cqh;border-radius:6.5cqh;background:#FDF8EF;overflow:hidden;display:flex;flex-direction:column;color:#2F3A31}
+.nhnotch{position:absolute;left:50%;top:1.9cqh;transform:translateX(-50%);width:14cqh;height:2.4cqh;border-radius:99px;background:#0e0e10;z-index:6}
+.nhcur{position:absolute;width:2.9cqh;height:2.9cqh;margin:-1.45cqh 0 0 -1.45cqh;border-radius:50%;background:rgba(47,58,49,.24);border:.28cqh solid rgba(255,255,255,.9);box-shadow:0 .6cqh 1.6cqh rgba(20,44,30,.4);z-index:8;pointer-events:none;transition:left .62s cubic-bezier(.32,.72,.2,1),top .62s cubic-bezier(.32,.72,.2,1),transform .18s ease,opacity .3s}
+.nhcur.is-press{transform:scale(.62);background:rgba(47,58,49,.5)}
+.nhph:hover .nhcur{opacity:0}
+.nhhot{box-shadow:0 0 0 .3cqh rgba(110,141,107,.45)}
+
+.nhpad{flex:1;min-height:0;display:flex;flex-direction:column;padding:6.4cqh 3.6cqh 3.2cqh}
+.nhstepn{text-align:center;font:400 1.5cqh/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;color:#8C8A80}
+.nhtrack{margin-top:1.6cqh;height:1.05cqh;border-radius:99px;background:#E7E2D5;overflow:hidden}
+.nhtrack>i{display:block;height:100%;border-radius:99px;background:#6E8D6B;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.nhkick{margin-top:3.2cqh;text-align:center;font:600 2.15cqh/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#86A883}
+.nhq{margin:1.5cqh 0 0;text-align:center;font:500 3.05cqh/1.28 Outfit,sans-serif;color:#2F3A31;text-wrap:balance}
+.nhchips{margin-top:3cqh;display:grid;grid-template-columns:1fr 1fr;gap:1.7cqh}
+.nhchip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1cqh;text-align:center;min-height:12.2cqh;padding:1.2cqh .9cqh;border-radius:2.6cqh;background:#fff;border:.2cqh solid #A9C0A6;font:400 1.8cqh/1.25 Outfit,sans-serif;color:#3F4B41;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s,box-shadow .3s}
+.nhchip svg{display:block;width:3.5cqh;height:3.5cqh;fill:none;stroke:#5F8460;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.nhchip.is-on svg{stroke:#2C4A2E}
+.nhchip.is-on{background:#E9F2E7;border-color:#5F8460;color:#2C4A2E;font-weight:600;box-shadow:inset 0 0 0 .12cqh #5F8460}
+.nhchip.is-press{transform:scale(.955)}
+.nhnext{margin-top:auto;display:grid;place-items:center;height:6.2cqh;border-radius:1.7cqh;background:#6E8D6B;color:#FDF8EF;font:600 2.35cqh/1 Outfit,sans-serif;letter-spacing:.05em;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s}
+.nhnext.is-press{transform:scale(.965)}
+.nhnext.is-off{background:#C6CFC2;color:#F4F2EA}
+
+.nhhead{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:1.6cqh;padding:6.6cqh 3.6cqh 0}
+.nhhello{font:500 3.7cqh/1.1 Newsreader,Georgia,serif;letter-spacing:-.02em;color:#2F3A31}
+.nhsub{margin:.9cqh 0 0;font:300 1.85cqh/1.3 Outfit,sans-serif;color:#8C8A80}
+.nhav{width:6.2cqh;height:6.2cqh;border-radius:50%;object-fit:cover;flex:0 0 auto;border:.26cqh solid #DCE8D9}
+.nhtabs{flex:0 0 auto;display:flex;gap:1.3cqh;padding:2.8cqh 3.6cqh 0}
+.nhtab{display:grid;place-items:center;height:4.7cqh;padding:0 2.5cqh;border-radius:99px;background:#fff;border:.16cqh solid #A9C0A6;font:400 1.85cqh/1 Outfit,sans-serif;color:#3F4B41;cursor:pointer;white-space:nowrap;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.nhtab.is-on{background:#5F8460;border-color:#5F8460;color:#FDF8EF;font-weight:500}
+.nhtab.is-press{transform:scale(.955)}
+.nhsecrow{flex:0 0 auto;display:flex;align-items:baseline;justify-content:space-between;padding:2.6cqh 3.6cqh 0}
+.nhsec{font:600 2.6cqh/1 Outfit,sans-serif;color:#2F3A31}
+.nhsee{font:400 1.55cqh/1 Outfit,sans-serif;color:#7FA47C;cursor:pointer}
+.nhfeed{flex:1;min-height:0;overflow:hidden;padding:1.8cqh 3.6cqh 0;mask-image:linear-gradient(#000 78%,rgba(0,0,0,.06))}
+.nhgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.7cqh}
+.nhcard{position:relative;border-radius:2.5cqh;background:#5F8460;padding:1cqh 1cqh 1.4cqh;cursor:pointer;transition:transform .32s cubic-bezier(.2,.7,.2,1),box-shadow .32s}
+.nhcard.is-press{transform:scale(.965)}
+.nhshot{display:block;width:100%;height:9.9cqh;border-radius:1.9cqh;background:#E7EEE4 center center/cover no-repeat}
+.nhcard b{display:block;margin-top:1.2cqh;padding:0 .5cqh;font:600 1.9cqh/1.28 Outfit,sans-serif;color:#FDF8EF}
+.nhheart{position:absolute;right:1.9cqh;top:1.9cqh;display:grid;place-items:center;width:3.5cqh;height:3.5cqh;border-radius:50%;background:rgba(253,248,239,.9);cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s}
+.nhheart svg{width:1.9cqh;height:1.9cqh;fill:none;stroke:#5F8460;stroke-width:1.9}
+.nhheart.is-on{background:#FDF8EF}
+.nhheart.is-on svg{fill:#5F8460;stroke:#5F8460}
+.nhheart.is-press{transform:scale(.82)}
+.nhbar{position:relative;flex:0 0 auto;display:flex;align-items:center;justify-content:space-around;height:8.4cqh;background:#fff;border-top:.13cqh solid rgba(47,58,49,.07);padding:0 2.4cqh 1.2cqh;z-index:4}
+.nhbar span{display:grid;place-items:center;width:5.6cqh;height:5.6cqh;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhbar span svg{width:3cqh;height:3cqh;fill:none;stroke:#B7BDB2;stroke-width:1.7;stroke-linecap:round;transition:stroke .3s}
+.nhbar span.is-on svg{stroke:#5F8460}
+.nhbar span.is-press{transform:scale(.86)}
+.nhchef{position:absolute;left:50%;bottom:4.2cqh;transform:translateX(-50%);display:grid;place-items:center;width:7.4cqh;height:7.4cqh;border-radius:50%;background:#2E4A3A;box-shadow:0 1.4cqh 2.8cqh -1cqh rgba(20,44,30,.6);cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhchef svg{width:3.6cqh;height:3.6cqh;fill:none;stroke:#FDF8EF;stroke-width:1.6;stroke-linecap:round}
+.nhchef.is-press{transform:translateX(-50%) scale(.9)}
+
+.nhhero{position:relative;flex:0 0 auto;height:33cqh}
+.nhhero img{display:block;width:100%;height:100%;object-fit:cover}
+.nhtop{position:absolute;left:3.2cqh;right:3.2cqh;top:5.6cqh;display:flex;align-items:center;justify-content:space-between}
+.nhcirc{display:grid;place-items:center;width:5.2cqh;height:5.2cqh;border-radius:1.9cqh;background:rgba(253,248,239,.94);cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhcirc svg{width:2.2cqh;height:2.2cqh;fill:none;stroke:#2F3A31;stroke-width:2;stroke-linecap:round}
+.nhcirc.is-press{transform:scale(.88)}
+.nhcirc.is-on svg{fill:#5F8460;stroke:#5F8460}
+.nhsheet{position:relative;flex:1;min-height:0;margin-top:-3.4cqh;border-radius:4.2cqh 4.2cqh 0 0;background:#FDF8EF;padding:3cqh 3.4cqh 0;display:flex;flex-direction:column;z-index:2}
+.nhrtitle{display:flex;align-items:baseline;justify-content:space-between;gap:1.4cqh}
+.nhrtitle b{font:600 3.05cqh/1.15 Outfit,sans-serif;color:#2F3A31;letter-spacing:-.015em}
+.nhrtitle s{font:400 1.65cqh/1 Outfit,sans-serif;color:#9A988E;text-decoration:none;white-space:nowrap}
+.nhdesc{margin:1.3cqh 0 0;font:300 1.75cqh/1.5 Outfit,sans-serif;color:#8C8A80}
+.nhdesc u{text-decoration:none;font-weight:600;color:#2F3A31;cursor:pointer}
+.nhmac{margin-top:2.2cqh;display:grid;grid-template-columns:1fr 1fr;gap:1.4cqh 1cqh}
+.nhmac>div{display:flex;align-items:center;gap:1.3cqh;font:400 1.8cqh/1 Outfit,sans-serif;color:#3F4B41}
+.nhmac i{display:grid;place-items:center;width:4.8cqh;height:4.8cqh;border-radius:1.5cqh;background:#fff;flex:0 0 auto}
+.nhmac i svg{width:2.4cqh;height:2.4cqh;fill:none;stroke:#3F4B41;stroke-width:1.6;stroke-linecap:round}
+.nhseg{margin-top:2.4cqh;display:grid;grid-template-columns:1fr 1fr;gap:1.2cqh}
+.nhsegb{display:grid;place-items:center;height:5.5cqh;border-radius:2.1cqh;background:#fff;font:600 1.95cqh/1 Outfit,sans-serif;color:#3F4B41;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.nhsegb.is-on{background:#5F8460;color:#FDF8EF}
+.nhsegb.is-press{transform:scale(.965)}
+.nhlist{flex:1;min-height:0;overflow:hidden;margin-top:2.2cqh;display:flex;flex-direction:column;gap:1.3cqh;mask-image:linear-gradient(#000 82%,rgba(0,0,0,.05))}
+.nhlhead{display:flex;align-items:center;justify-content:space-between}
+.nhlhead b{font:600 2.35cqh/1 Outfit,sans-serif;color:#2F3A31}
+.nhlhead s{font:500 1.7cqh/1 Outfit,sans-serif;color:#4E8A54;text-decoration:none;cursor:pointer}
+.nhcount{font:400 1.5cqh/1 Outfit,sans-serif;color:#9A988E;margin-top:-.5cqh}
+.nhrow{display:flex;align-items:center;gap:1.6cqh;height:7cqh;padding:0 1.6cqh;border-radius:2.1cqh;background:#fff;flex:0 0 auto}
+.nhrow em{display:grid;place-items:center;width:4.6cqh;height:4.6cqh;border-radius:50%;flex:0 0 auto;font:600 1.9cqh/1 Outfit,sans-serif;font-style:normal;color:#4E7A4C}
+.nhrow b{font:600 1.95cqh/1 Outfit,sans-serif;color:#2F3A31;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nhstep{margin-left:auto;display:flex;align-items:center;gap:1.2cqh;flex:0 0 auto}
+.nhstep i{display:grid;place-items:center;width:3.4cqh;height:3.4cqh;border-radius:1cqh;border:.16cqh solid #8FAE8C;color:#4E7A4C;font:400 2cqh/1 Outfit,sans-serif;cursor:pointer;transition:transform .28s cubic-bezier(.2,.7,.2,1),background .28s}
+.nhstep i.is-press{transform:scale(.85);background:#E9F2E7}
+.nhstep i.is-off{border-color:#DCD8CC;color:#C3C0B6}
+.nhstep u{min-width:2.2cqh;text-align:center;font:600 1.95cqh/1 Outfit,sans-serif;color:#2F3A31;text-decoration:none}
+.nhinstr{display:flex;gap:1.6cqh;padding:1.6cqh;border-radius:2.1cqh;background:#fff;flex:0 0 auto}
+.nhinstr i{display:grid;place-items:center;width:3.6cqh;height:3.6cqh;border-radius:50%;background:#E9F2E7;color:#4E7A4C;font:700 1.7cqh/1 'Space Mono',ui-monospace,monospace;flex:0 0 auto}
+.nhinstr p{margin:.3cqh 0 0;font:300 1.75cqh/1.45 Outfit,sans-serif;color:#6B7268}
+@media (prefers-reduced-motion:reduce){.nhcur{transition:none}}
+.nhpl{flex:1;min-height:0;display:flex;flex-direction:column;padding:6.4cqh 3.4cqh 3.2cqh}
+.nhtop2{display:flex;align-items:baseline;justify-content:space-between;gap:1.4cqh}
+.nhtop2 b{font:500 3.4cqh/1.1 Newsreader,Georgia,serif;color:#2F3A31}
+.nhtop2 s{font:400 1.6cqh/1 Outfit,sans-serif;color:#9A988E;text-decoration:none;white-space:nowrap}
+.nhdays{margin-top:2.4cqh;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.85cqh}
+.nhday{display:flex;flex-direction:column;align-items:center;gap:.7cqh;padding:1.2cqh 0;border-radius:1.6cqh;background:#fff;border:.14cqh solid #EDE8DC;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s}
+.nhday em{font:400 1.35cqh/1 Outfit,sans-serif;font-style:normal;color:#A8A69C}
+.nhday b{font:600 1.85cqh/1 Outfit,sans-serif;color:#3F4B41}
+.nhday.is-on{background:#5F8460;border-color:#5F8460}
+.nhday.is-on em{color:rgba(253,248,239,.74)}
+.nhday.is-on b{color:#FDF8EF}
+.nhday.is-press{transform:scale(.93)}
+.nhslots{margin-top:2.6cqh;display:flex;flex-direction:column;gap:1.5cqh}
+.nhslot{display:flex;align-items:center;gap:1.5cqh;height:9.6cqh;padding:1.3cqh;border-radius:2.4cqh;background:#fff;border:.14cqh solid #EDE8DC;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,background .3s}
+.nhslot > span{display:block;width:7cqh;height:7cqh;border-radius:1.7cqh;background:#E7EEE4 center center/cover no-repeat;flex:0 0 auto}
+.nhslot u{display:flex;flex-direction:column;gap:.7cqh;min-width:0;text-decoration:none;flex:1}
+.nhslot u i{font:400 1.35cqh/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#A8A69C;font-style:normal}
+.nhslot u b{font:600 1.95cqh/1.2 Outfit,sans-serif;color:#2F3A31;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nhslot v{font:500 1.55cqh/1 Outfit,sans-serif;color:#7E9C7B;flex:0 0 auto}
+.nhslot.is-empty{border-style:dashed;border-color:#C9D6C6;background:rgba(255,255,255,.5)}
+.nhslot.is-empty u b{color:#A8A69C;font-weight:400}
+.nhslot.is-press{transform:scale(.975)}
+.nhgen{margin-top:auto;display:grid;place-items:center;height:6.2cqh;border-radius:99px;background:#6E8D6B;color:#FDF8EF;font:600 2.2cqh/1 Outfit,sans-serif;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhgen.is-press{transform:scale(.965)}
+
+.nhstreak{margin-top:2.4cqh;padding:2.4cqh;border-radius:2.6cqh;background:#5F8460;color:#FDF8EF}
+.nhstreak b{font:600 4.2cqh/1 Outfit,sans-serif;letter-spacing:-.025em}
+.nhstreak s{display:block;margin-top:.9cqh;font:300 1.7cqh/1.35 Outfit,sans-serif;color:rgba(253,248,239,.8);text-decoration:none}
+.nhdots{margin-top:2cqh;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.9cqh}
+.nhdots i{height:2.8cqh;border-radius:99px;background:rgba(253,248,239,.26);cursor:pointer;transition:background .3s,transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhdots i.is-on{background:#FDF8EF}
+.nhdots i.is-press{transform:scaleY(.66)}
+.nhprow{display:flex;align-items:center;gap:1.5cqh;padding:1.5cqh;border-radius:2.2cqh;background:#fff;border:.14cqh solid #EDE8DC}
+.nhprow em{display:grid;place-items:center;width:5.4cqh;height:5.4cqh;border-radius:50%;font:600 2.05cqh/1 Outfit,sans-serif;font-style:normal;color:#4E7A4C;flex:0 0 auto}
+.nhprow u{display:flex;flex-direction:column;gap:.6cqh;min-width:0;text-decoration:none;flex:1}
+.nhprow u b{font:600 1.9cqh/1 Outfit,sans-serif;color:#2F3A31}
+.nhprow u s{font:300 1.5cqh/1.3 Outfit,sans-serif;color:#9A988E;text-decoration:none}
+.nhcheer{flex:0 0 auto;display:grid;place-items:center;height:4.4cqh;padding:0 1.8cqh;border-radius:99px;background:#EDF3EB;font:600 1.55cqh/1 Outfit,sans-serif;color:#4E7A4C;cursor:pointer;white-space:nowrap;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,color .3s}
+.nhcheer.is-on{background:#5F8460;color:#FDF8EF}
+.nhcheer.is-press{transform:scale(.9)}
+.nhinvite{margin-top:auto;display:grid;place-items:center;height:6.2cqh;border-radius:99px;background:#6E8D6B;color:#FDF8EF;font:600 2.35cqh/1 Outfit,sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s}
+.nhinvite.is-press{transform:scale(.965)}
+
+.nhtot{margin-top:2.4cqh;padding:2.4cqh;border-radius:2.6cqh;background:#fff;border:.14cqh solid #EDE8DC}
+.nhtot b{font:600 4.4cqh/1 Outfit,sans-serif;color:#2F3A31;letter-spacing:-.03em}
+.nhtot b s{font:400 1.85cqh/1 Outfit,sans-serif;color:#9A988E;text-decoration:none;margin-left:.9cqh;letter-spacing:0}
+.nhbig{margin-top:1.7cqh;height:1.3cqh;border-radius:99px;background:#EDE8DC;overflow:hidden}
+.nhbig i{display:block;height:100%;border-radius:99px;background:#6E8D6B;transition:width .55s cubic-bezier(.2,.7,.2,1)}
+.nhmacs{margin-top:2cqh;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4cqh}
+.nhmacs > div{display:flex;flex-direction:column;gap:.9cqh}
+.nhmacs em{font:400 1.4cqh/1 Outfit,sans-serif;font-style:normal;color:#9A988E}
+.nhmacs u{display:block;height:.85cqh;border-radius:99px;background:#EDE8DC;text-decoration:none;overflow:hidden}
+.nhmacs u i{display:block;height:100%;border-radius:99px;background:#8FAE8C;transition:width .55s cubic-bezier(.2,.7,.2,1)}
+.nhmacs v{font:600 1.55cqh/1 Outfit,sans-serif;color:#3F4B41}
+.nhlrow{display:flex;align-items:center;gap:1.3cqh;padding:1.6cqh;border-radius:2.2cqh;background:#fff;border:.14cqh solid #EDE8DC}
+.nhlrow u{display:flex;flex-direction:column;gap:.6cqh;flex:1;min-width:0;text-decoration:none}
+.nhlrow u b{font:600 1.9cqh/1 Outfit,sans-serif;color:#2F3A31}
+.nhlrow u s{font:300 1.5cqh/1.3 Outfit,sans-serif;color:#9A988E;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nhkc{flex:0 0 auto;font:600 1.7cqh/1 Outfit,sans-serif;color:#7E9C7B}
+.nhadd{flex:0 0 auto;display:grid;place-items:center;width:4.2cqh;height:4.2cqh;border-radius:1.3cqh;border:.16cqh solid #8FAE8C;color:#4E7A4C;font:400 2.3cqh/1 Outfit,sans-serif;cursor:pointer;transition:transform .28s cubic-bezier(.2,.7,.2,1),background .28s}
+.nhadd.is-press{transform:scale(.86);background:#E9F2E7}
+.nhadd.is-off{border-color:#DCD8CC;color:#C3C0B6}
+.nhtp{flex:0 0 auto;margin:2.6cqh 3.6cqh 0;padding:2.4cqh;border-radius:3cqh;background:#fff;border:.14cqh solid #E8E3D6;box-shadow:0 1.6cqh 3.4cqh -1.8cqh rgba(28,62,42,.24)}
+.nhtphead{display:flex;align-items:baseline;justify-content:space-between;gap:1.4cqh}
+.nhtphead b{font:600 2.3cqh/1 Outfit,sans-serif;color:#2F3A31;letter-spacing:-.012em}
+.nhtphead s{font:400 1.5cqh/1 Outfit,sans-serif;color:#7FA47C;text-decoration:none;white-space:nowrap}
+.nhtpbody{margin-top:2.2cqh;display:flex;align-items:center;gap:2.6cqh}
+.nhring{position:relative;width:12.6cqh;height:12.6cqh;flex:0 0 auto;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.nhring.is-press{transform:scale(.94)}
+.nhring svg{display:block;width:100%;height:100%;transform:rotate(-90deg)}
+.nhring svg circle{fill:none;stroke-linecap:round}
+.nhring u{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4cqh;text-decoration:none}
+.nhring u b{font:600 3.1cqh/1 Outfit,sans-serif;color:#2F3A31;letter-spacing:-.035em}
+.nhring u em{font:400 1.15cqh/1 Outfit,sans-serif;font-style:normal;color:#9A988E;letter-spacing:.01em}
+.nhtpstats{flex:1;min-width:0;display:flex;flex-direction:column;gap:1.9cqh}
+.nhstat{display:block}
+.nhstat > span{display:flex;align-items:baseline;justify-content:space-between;gap:1cqh}
+.nhstat em{font:400 1.45cqh/1 Outfit,sans-serif;font-style:normal;color:#9A988E}
+.nhstat b{font:600 1.95cqh/1 Outfit,sans-serif;color:#2F3A31;letter-spacing:-.01em}
+.nhstat u{margin-top:1cqh;display:block;height:.8cqh;border-radius:99px;background:#EDE8DC;overflow:hidden;text-decoration:none}
+.nhstat u i{display:block;height:100%;border-radius:99px;background:#6E8D6B;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.nhstreak2{margin-top:1cqh;display:flex;gap:.65cqh}
+.nhstreak2 i{flex:1;height:.8cqh;border-radius:99px;background:#EDE8DC;transition:background .4s}
+.nhstreak2 i.is-on{background:#C79A52}
+.nhph.is-still,.nhph.is-still *{cursor:default}
+.nhph.is-still .nhcur{display:none}
+</style>
+</helmet>
+
+<div class="nhph {{ stillCls }}" ref="{{ stage }}" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}">
+<div class="nhbez">
+<div class="nhin">
+
+<sc-if value="{{ isGoals }}" hint-placeholder-val="{{ true }}">
+<div class="nhpad">
+<div class="nhstepn">{{ gCount }}</div>
+<div class="nhtrack"><i style="{{ gFill }}"></i></div>
+<div class="nhkick">{{ gKick }}</div>
+<p class="nhq">{{ gQuestion }}</p>
+<div class="nhchips">
+<sc-for list="{{ gChips }}" as="c" hint-placeholder-count="6">
+<div class="nhchip {{ c.cls }}" data-f="{{ c.d }}" onClick="{{ c.tap }}">
+<svg viewBox="0 0 24 24"><path d="{{ c.icon }}"></path></svg>
+<span>{{ c.label }}</span>
+</div>
+</sc-for>
+</div>
+<div class="nhnext {{ gNextCls }}" data-f="next" onClick="{{ gNext }}">{{ gNextLabel }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div class="nhhead">
+<div>
+<div class="nhhello">Hello, Jacky</div>
+<p class="nhsub">What you want to cook today?</p>
+</div>
+<img class="nhav" src="assets/nh/avatar.png" alt="">
+</div>
+<div class="nhtabs">
+<sc-for list="{{ hMeals }}" as="m" hint-placeholder-count="3">
+<div class="nhtab {{ m.cls }}" data-f="{{ m.d }}" onClick="{{ m.tap }}">{{ m.label }}</div>
+</sc-for>
+</div>
+<div class="nhsecrow">
+<div class="nhsec">My Favorites</div>
+<div class="nhsee">See All</div>
+</div>
+<div class="nhfeed">
+<div class="nhgrid">
+<sc-for list="{{ hCards }}" as="c" hint-placeholder-count="6">
+<div class="nhcard {{ c.cls }}" data-f="{{ c.d }}" onClick="{{ c.tap }}">
+<span class="nhshot" style="{{ c.bg }}" role="img" aria-label="{{ c.name }}"></span>
+<b>{{ c.name }}</b>
+<div class="nhheart {{ c.hcls }}" data-f="{{ c.hd }}" onClick="{{ c.heart }}"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.4A4 4 0 0 1 12 8a4 4 0 0 1 7 2.6C19 15.4 12 20 12 20z"></path></svg></div>
+</div>
+</sc-for>
+</div>
+</div>
+<div class="nhbar">
+<span class="{{ hNav0 }}" data-f="n0" onClick="{{ hNavTap0 }}"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg></span>
+<span class="{{ hNav1 }}" data-f="n1" onClick="{{ hNavTap1 }}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="M15.5 15.5L20 20"></path></svg></span>
+<span class="{{ hNav2 }}" data-f="n2" onClick="{{ hNavTap2 }}"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6zM10 20h4"></path></svg></span>
+<span class="{{ hNav3 }}" data-f="n3" onClick="{{ hNavTap3 }}"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"></circle><path d="M5 20c1-4 4-5.5 7-5.5s6 1.5 7 5.5"></path></svg></span>
+<div class="nhchef {{ hChefCls }}" data-f="chef" onClick="{{ hChef }}"><svg viewBox="0 0 24 24"><path d="M7 20h10M6.5 16h11a4.5 4.5 0 0 0 .5-8.9A4 4 0 0 0 12 4.6 4 4 0 0 0 6 7.1A4.5 4.5 0 0 0 6.5 16z"></path></svg></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRecipe }}" hint-placeholder-val="{{ true }}">
+<div class="nhhero">
+<img src="assets/nh/salad.png" alt="Healthy taco salad">
+<div class="nhtop">
+<div class="nhcirc {{ rCloseCls }}" data-f="close" onClick="{{ rClose }}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+<div class="nhcirc {{ rFavCls }}" data-f="fav" onClick="{{ rFav }}"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.4A4 4 0 0 1 12 8a4 4 0 0 1 7 2.6C19 15.4 12 20 12 20z"></path></svg></div>
+</div>
+</div>
+<div class="nhsheet">
+<div class="nhrtitle"><b>Healthy Taco Salad</b><s>15 Min</s></div>
+<p class="nhdesc">This Healthy Taco Salad is the universal delight of taco night <u>View More</u></p>
+<div class="nhmac">
+<div><i><svg viewBox="0 0 24 24"><path d="M4 14c6-1 10-5 11-11M6 18c1 1 3 1 4 0"></path></svg></i>65g carbs</div>
+<div><i><svg viewBox="0 0 24 24"><path d="M12 5c4 0 7 3 7 7s-3 7-7 7-7-3-7-7 3-7 7-7zm0 4a3 3 0 1 0 .1 6"></path></svg></i>27g proteins</div>
+<div><i><svg viewBox="0 0 24 24"><path d="M12 4c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z"></path></svg></i>120 Kcal</div>
+<div><i><svg viewBox="0 0 24 24"><path d="M4 8h16l-8 12z"></path></svg></i>91g fats</div>
+</div>
+<div class="nhseg">
+<div class="nhsegb {{ rIngCls }}" data-f="ing" onClick="{{ rIng }}">Ingredients</div>
+<div class="nhsegb {{ rInsCls }}" data-f="ins" onClick="{{ rIns }}">Instructions</div>
+</div>
+<div class="nhlist">
+<sc-if value="{{ rShowIng }}" hint-placeholder-val="{{ true }}">
+<div class="nhlhead"><b>Ingredients</b><s>Add All to Cart</s></div>
+<div class="nhcount">{{ rCount }}</div>
+<sc-for list="{{ rItems }}" as="it" hint-placeholder-count="4">
+<div class="nhrow">
+<em style="{{ it.tint }}">{{ it.initial }}</em>
+<b>{{ it.name }}</b>
+<span class="nhstep">
+<i class="{{ it.mcls }}" data-f="{{ it.md }}" onClick="{{ it.minus }}">–</i>
+<u>{{ it.n }}</u>
+<i class="{{ it.pcls }}" data-f="{{ it.pd }}" onClick="{{ it.plus }}">+</i>
+</span>
+</div>
+</sc-for>
+</sc-if>
+<sc-if value="{{ rShowIns }}" hint-placeholder-val="{{ false }}">
+<div class="nhlhead"><b>Instructions</b><s>4 Steps</s></div>
+<sc-for list="{{ rSteps }}" as="s" hint-placeholder-count="4">
+<div class="nhinstr"><i>{{ s.n }}</i><div><p>{{ s.t }}</p></div></div>
+</sc-for>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProgress }}" hint-placeholder-val="{{ false }}">
+<div class="nhhead">
+<div>
+<div class="nhhello">Hello, Jacky</div>
+<p class="nhsub">What you want to cook today?</p>
+</div>
+<img class="nhav" src="assets/nh/avatar.png" alt="">
+</div>
+<div class="nhtabs">
+<sc-for list="{{ hMeals }}" as="m" hint-placeholder-count="3">
+<div class="nhtab {{ m.cls }}" data-f="{{ m.d }}" onClick="{{ m.tap }}">{{ m.label }}</div>
+</sc-for>
+</div>
+<div class="nhtp">
+<div class="nhtphead"><b>Today's Progress</b><s>{{ gDate }}</s></div>
+<div class="nhtpbody">
+<div class="nhring {{ gRingCls }}" data-f="ring" onClick="{{ gRing }}">
+<svg viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="42" stroke="#EDE8DC" stroke-width="9"></circle>
+<circle cx="50" cy="50" r="42" stroke="#6E8D6B" stroke-width="9" stroke-dasharray="263.9" stroke-dashoffset="{{ gRingOff }}" style="transition:stroke-dashoffset .65s cubic-bezier(.2,.7,.2,1)"></circle>
+</svg>
+<u><b>{{ gMeals }}</b><em>MEALS</em></u>
+</div>
+<div class="nhtpstats">
+<div class="nhstat">
+<span><em>Protein</em><b>{{ gProtein }}</b></span>
+<u><i style="{{ gProteinFill }}"></i></u>
+</div>
+<div class="nhstat">
+<span><em>Streak</em><b>{{ gStreak }}</b></span>
+<div class="nhstreak2">
+<sc-for list="{{ gWeek }}" as="w" hint-placeholder-count="7">
+<i class="{{ w }}"></i>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="nhsecrow">
+<div class="nhsec">My Favorites</div>
+<div class="nhsee">See All</div>
+</div>
+<div class="nhfeed">
+<div class="nhgrid">
+<sc-for list="{{ hCards }}" as="c" hint-placeholder-count="4">
+<div class="nhcard {{ c.cls }}" data-f="{{ c.d }}" onClick="{{ c.tap }}">
+<span class="nhshot" style="{{ c.bg }}" role="img" aria-label="{{ c.name }}"></span>
+<b>{{ c.name }}</b>
+<div class="nhheart {{ c.hcls }}" data-f="{{ c.hd }}" onClick="{{ c.heart }}"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.4A4 4 0 0 1 12 8a4 4 0 0 1 7 2.6C19 15.4 12 20 12 20z"></path></svg></div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlanner }}" hint-placeholder-val="{{ false }}">
+<div class="nhpl">
+<div class="nhtop2"><b>This week</b><s>Aug 18 – 24</s></div>
+<div class="nhdays">
+<sc-for list="{{ pDays }}" as="d" hint-placeholder-count="7">
+<div class="nhday {{ d.cls }}" data-f="{{ d.d }}" onClick="{{ d.tap }}"><em>{{ d.k }}</em><b>{{ d.n }}</b></div>
+</sc-for>
+</div>
+<div class="nhslots">
+<sc-for list="{{ pSlots }}" as="s" hint-placeholder-count="3">
+<div class="nhslot {{ s.cls }}" data-f="{{ s.d }}" onClick="{{ s.tap }}">
+<span style="{{ s.bg }}"></span>
+<u><i>{{ s.meal }}</i><b>{{ s.name }}</b></u>
+<v>{{ s.kcal }}</v>
+</div>
+</sc-for>
+</div>
+<p style="margin:2cqh 0 0;font:300 1.6cqh/1.4 Outfit,sans-serif;color:#A8A69C">Tap any meal to swap it for another recipe that fits your budget.</p>
+<div class="nhgen {{ pGenCls }}" data-f="pgen" onClick="{{ pGen }}">{{ pGenLabel }}</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPartners }}" hint-placeholder-val="{{ false }}">
+<div class="nhpl">
+<div class="nhtop2"><b>Partners</b><s>{{ ptCount }}</s></div>
+<div class="nhstreak">
+<b>{{ ptStreak }}</b>
+<s>You and Maya have both logged every day this week.</s>
+<div class="nhdots">
+<sc-for list="{{ ptWeek }}" as="w" hint-placeholder-count="7">
+<i class="{{ w.cls }}" data-f="{{ w.d }}" onClick="{{ w.tap }}"></i>
+</sc-for>
+</div>
+</div>
+<div class="nhslots">
+<sc-for list="{{ ptRows }}" as="p" hint-placeholder-count="3">
+<div class="nhprow">
+<em style="{{ p.tint }}">{{ p.initial }}</em>
+<u><b>{{ p.name }}</b><s>{{ p.act }}</s></u>
+<span class="nhcheer {{ p.cls }}" data-f="{{ p.d }}" onClick="{{ p.tap }}">{{ p.label }}</span>
+</div>
+</sc-for>
+</div>
+<p style="margin:2cqh 0 0;font:300 1.6cqh/1.4 Outfit,sans-serif;color:#A8A69C">Partners see when you log a meal, never what you weigh.</p>
+<div class="nhinvite {{ ptInvCls }}" data-f="pinv" onClick="{{ ptInv }}">Invite a partner</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLog }}" hint-placeholder-val="{{ false }}">
+<div class="nhpl">
+<div class="nhtop2"><b>Today</b><s>Wednesday, Aug 20</s></div>
+<div class="nhtot">
+<b>{{ lgTotal }}<s>{{ lgGoal }}</s></b>
+<div class="nhbig"><i style="{{ lgFill }}"></i></div>
+<div class="nhmacs">
+<sc-for list="{{ lgMacs }}" as="m" hint-placeholder-count="3">
+<div><em>{{ m.k }}</em><u><i style="{{ m.fill }}"></i></u><v>{{ m.v }}</v></div>
+</sc-for>
+</div>
+</div>
+<div class="nhslots">
+<sc-for list="{{ lgRows }}" as="r" hint-placeholder-count="4">
+<div class="nhlrow">
+<u><b>{{ r.meal }}</b><s>{{ r.items }}</s></u>
+<span class="nhkc">{{ r.kcal }}</span>
+<span class="nhadd {{ r.mcls }}" data-f="{{ r.md }}" onClick="{{ r.remove }}">–</span>
+<span class="nhadd {{ r.pcls }}" data-f="{{ r.pd }}" onClick="{{ r.add }}">+</span>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+<div class="nhnotch"></div>
+<div class="nhcur {{ curCls }}" style="{{ curPos }}"></div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:650},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;goals&quot;,&quot;home&quot;,&quot;recipe&quot;,&quot;planner&quot;,&quot;partners&quot;,&quot;log&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;'goals'|'home'|'recipe'|'planner'|'partners'|'log'&quot;},&quot;still&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;delay&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:4000,&quot;step&quot;:200,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+const GOALS = [
+  { kick: 'Goals', q: 'What brought you to NutriHealth?', chips: ['Eat healthier', 'Budget Constraints', 'Manage weight', 'Reduce stress', 'Get fit', 'Other'] , icons: ['M12 8c0-2 1.6-3.6 3.6-3.6M8.6 8C6 8 4.6 10.2 4.6 13c0 3.7 3 7 7.4 7s7.4-3.3 7.4-7c0-2.8-1.6-5-4-5-1.2 0-2.2.5-3.4.5S9.8 8 8.6 8z', 'M3 7.5h18v9H3zM12 9.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4', 'M4.6 6.2h14.8v11.6H4.6zM9 10.2a3.6 3.6 0 0 1 6 0M12 10.2V13', 'M12 12.6C12 8 15 5 20 4c-.6 5-3.6 8-8 8.6zM12 12.6C12 8 9 5 4 4c.6 5 3.6 8 8 8.6zM4 17.2c1.6-1.1 3.2-1.1 4.8 0s3.2 1.1 4.8 0 3.2-1.1 4.8 0', 'M3 10v4M6 8v8M18 8v8M21 10v4M6 12h12', 'M7 12h.01M12 12h.01M17 12h.01'] },
+  { kick: 'Diet', q: 'Anything you avoid eating?', chips: ['Vegetarian', 'Vegan', 'Gluten free', 'Dairy free', 'Nut allergy', 'No restrictions'] , icons: ['M20 4.5c-9.5 0-14.5 4.6-14.5 11 0 1.9.6 3.5 1.5 4.9M6.5 19.5C6.5 12 12.5 8.5 20 8.5', 'M12 20.5c0-6 3-10 8-11-1 6-4 9.2-8 11zM12 20.5c0-6-3-10-8-11 1 6 4 9.2 8 11z', 'M12 21V8M8 8.4c0-2.6 1.8-4.4 4-4.4s4 1.8 4 4.4M8 14.4c0-2 1.8-3.4 4-3.4s4 1.4 4 3.4', 'M9.2 3.2h5.6v3l2 4.2v10.4H7.2V10.4l2-4.2zM7.2 13.6h9.6', 'M12 3.8l7.4 4.2v8L12 20.2 4.6 16V8z', 'M5 12.5l4.5 4.5L19 7.5'] },
+  { kick: 'Time', q: 'How long do you have to cook?', chips: ['Under 15 min', '15–30 min', '30–45 min', 'An hour +', 'Meal prep Sundays', 'Depends on the day'] , icons: ['M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6zM12 7.6V12l3.2 2', 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6zM12 7.6V12l3.2 2', 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6zM12 7.6V12l3.2 2', 'M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6zM12 7.6V12l3.2 2', 'M4 10h16v5.6a3.4 3.4 0 0 1-3.4 3.4H7.4A3.4 3.4 0 0 1 4 15.6zM7.6 10V6.8M16.4 10V6.8M2.2 10h19.6', 'M7 12h.01M12 12h.01M17 12h.01'] },
+  { kick: 'Budget', q: 'What does a week of food cost you?', chips: ['Under $40', '$40–60', '$60–80', '$80 +', 'Dining hall plan', 'Not sure yet'] , icons: ['M12 4.2c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4zM4 8.2v7.6c0 2.2 3.6 4 8 4s8-1.8 8-4V8.2', 'M12 4.2c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4zM4 8.2v7.6c0 2.2 3.6 4 8 4s8-1.8 8-4V8.2', 'M12 4.2c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4zM4 8.2v7.6c0 2.2 3.6 4 8 4s8-1.8 8-4V8.2', 'M12 4.2c4.4 0 8 1.8 8 4s-3.6 4-8 4-8-1.8-8-4 3.6-4 8-4zM4 8.2v7.6c0 2.2 3.6 4 8 4s8-1.8 8-4V8.2', 'M3 6.5h18v11H3zM3 10.5h18M6.5 14h3', 'M7 12h.01M12 12h.01M17 12h.01'] },
+  { kick: 'Support', q: 'Who keeps you accountable?', chips: ['A roommate', 'A friend', 'My family', 'A study group', 'Just me', 'Find me someone'] , icons: ['M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z', 'M12 4.2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zM4.8 20c1-4.4 3.9-6.4 7.2-6.4s6.2 2 7.2 6.4', 'M9 4.2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zM2.6 20c.9-4 3.4-5.8 6.4-5.8s5.5 1.8 6.4 5.8M16.6 5.4a3 3 0 0 1 0 6M18 14.8c2.2.5 3.4 2.2 3.9 5.2', 'M9 4.2a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zM2.6 20c.9-4 3.4-5.8 6.4-5.8s5.5 1.8 6.4 5.8M16.6 5.4a3 3 0 0 1 0 6M18 14.8c2.2.5 3.4 2.2 3.9 5.2', 'M12 4.2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zM4.8 20c1-4.4 3.9-6.4 7.2-6.4s6.2 2 7.2 6.4', 'M10.5 4.2a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8zM15.4 15.4L21 21'] }
+];
+
+const MEALS = {
+  Breakfast: [
+    { img: 'assets/nh/food-1.png', name: 'Sunny Egg & Toast Avocado' },
+    { img: 'assets/nh/food-5.png', name: 'Green shakshuka bowl' },
+    { img: 'assets/nh/food-4.png', name: 'Half boiled egg sandwich' },
+    { img: 'assets/nh/food-6.png', name: 'Strawberry ricotta toast' },
+    { img: 'assets/nh/food-2.png', name: 'Warm oat noodle bowl' },
+    { img: 'assets/nh/food-3.png', name: 'Breakfast hash skillet' }
+  ],
+  Lunch: [
+    { img: 'assets/nh/food-3.png', name: 'Easy homemade beef burger' },
+    { img: 'assets/nh/food-4.png', name: 'Half boiled egg sandwich' },
+    { img: 'assets/nh/food-1.png', name: 'Avocado toast plate' },
+    { img: 'assets/nh/food-2.png', name: 'Bowl of noodle with beef' },
+    { img: 'assets/nh/food-6.png', name: 'Berry & ricotta plate' },
+    { img: 'assets/nh/food-5.png', name: 'Herbed greens & egg' }
+  ],
+  Dinner: [
+    { img: 'assets/nh/food-2.png', name: 'Bowl of noodle with beef' },
+    { img: 'assets/nh/food-3.png', name: 'Skillet burger & fries' },
+    { img: 'assets/nh/food-5.png', name: 'Herbed greens & egg' },
+    { img: 'assets/nh/food-6.png', name: 'Berry brunch board' },
+    { img: 'assets/nh/food-1.png', name: 'Soft egg & greens' },
+    { img: 'assets/nh/food-4.png', name: 'Open sandwich supper' }
+  ]
+};
+
+const TINTS = ['#F6E6C8', '#E4EFD9', '#F3DFD6', '#E7E9F2', '#F5E9D2', '#DEECE4'];
+const ITEMS = [
+  { name: 'Tortilla Chips', n: 2 },
+  { name: 'Avocado', n: 1 },
+  { name: 'Black Beans', n: 1 },
+  { name: 'Cherry Tomatoes', n: 3 },
+  { name: 'Red Onion', n: 1 },
+  { name: 'Lime', n: 2 }
+];
+const STEPS = [
+  'Toast the tortilla chips for four minutes until they crisp at the edges.',
+  'Rinse the black beans, then toss with lime, onion and a pinch of salt.',
+  'Halve the tomatoes and fold everything through the greens.',
+  'Top with sliced avocado and crushed chips just before serving.'
+];
+
+const POOL = [
+  { img: 'assets/nh/food-1.png', name: 'Sunny egg & avocado toast', kcal: 410 },
+  { img: 'assets/nh/food-2.png', name: 'Bowl of noodle with beef', kcal: 620 },
+  { img: 'assets/nh/food-3.png', name: 'Homemade beef burger', kcal: 680 },
+  { img: 'assets/nh/food-4.png', name: 'Half boiled egg sandwich', kcal: 390 },
+  { img: 'assets/nh/food-5.png', name: 'Herbed greens & egg', kcal: 340 },
+  { img: 'assets/nh/food-6.png', name: 'Berry ricotta board', kcal: 290 }
+];
+const PLAN = { 0: [0, 3, null, 5], 1: [1, null, 4, null], 2: [2, 5, null, 5], 3: [null, 0, 1, null], 4: [3, 2, null, 5], 5: [4, null, 5, null], 6: [null, 1, 2, 5] };
+const DAYS = [['M', '18'], ['T', '19'], ['W', '20'], ['T', '21'], ['F', '22'], ['S', '23'], ['S', '24']];
+const SLOTS = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+const PARTNERS = [
+  { name: 'Maya R.', act: 'Logged lunch · 20 min ago', tint: '#F6E6C8' },
+  { name: 'Devon K.', act: 'Hit a 6 day streak', tint: '#E4EFD9' },
+  { name: 'Priya S.', act: 'Shared a recipe with you', tint: '#F3DFD6' },
+  { name: 'Sam T.', act: 'Logged dinner · yesterday', tint: '#E7E9F2' }
+];
+const LOGMEALS = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+
+class Component extends DCLogic {
+  state = {
+    gStep: 0, gPicked: {},
+    hMeal: 'Breakfast', hHearts: { '0-0': true, '0-1': true }, hNav: 0,
+    rTab: 'ing', rQty: ITEMS.map(i => i.n), rFav: false,
+    pDay: 2, pFill: {}, pGenOn: false,
+    ptCheer: {}, ptWeek: { 0: true, 1: true, 2: true },
+    lgEntries: { 0: [0], 1: [3], 2: [], 3: [] },
+    gLogged: 2,
+    cur: null, hot: null, press: null, auto: true
+  };
+
+  get screen() { return this.props.screen || 'home'; }
+  get still() { return !!this.props.still && this.props.still !== 'false'; }
+
+  _at(sel) {
+    const st = this._stage;
+    if (!st) return null;
+    const el = st.querySelector('[data-f="' + sel + '"]');
+    if (!el) return null;
+    const a = st.getBoundingClientRect(), b = el.getBoundingClientRect();
+    if (!a.width || !b.width) return null;
+    return { x: (b.left - a.left + b.width / 2) / a.width * 100, y: (b.top - a.top + b.height / 2) / a.height * 100 };
+  }
+
+  _wait(ms) { return new Promise(r => { const t = setTimeout(r, ms); this._ts.push(t); }); }
+
+  _script() {
+    if (this.screen === 'goals') {
+      const out = [];
+      for (let s = 0; s < 5; s++) { out.push({ sel: 'c' + (s % 3), do: () => this._pick(s % 3) }); out.push({ sel: 'c' + (3 + (s % 3)), do: () => this._pick(3 + (s % 3)) }); out.push({ sel: 'next', do: () => this._gNext() }); }
+      return out;
+    }
+    if (this.screen === 'home') {
+      return [
+        { sel: 'm1', do: () => this.setState({ hMeal: 'Lunch' }) },
+        { sel: 'h1', do: () => this._heart(1) },
+        { sel: 'm2', do: () => this.setState({ hMeal: 'Dinner' }) },
+        { sel: 'h0', do: () => this._heart(0) },
+        { sel: 'n1', do: () => this.setState({ hNav: 1 }) },
+        { sel: 'm0', do: () => this.setState({ hMeal: 'Breakfast' }) },
+        { sel: 'n0', do: () => this.setState({ hNav: 0 }) }
+      ];
+    }
+    if (this.screen === 'progress') {
+      return [
+        { sel: 'ring', do: () => this._gRing() },
+        { sel: 'm1', do: () => this.setState({ hMeal: 'Lunch' }) },
+        { sel: 'ring', do: () => this._gRing() },
+        { sel: 'h0', do: () => this._heart(0) },
+        { sel: 'm2', do: () => this.setState({ hMeal: 'Dinner' }) },
+        { sel: 'ring', do: () => this._gRing() },
+        { sel: 'm0', do: () => this.setState({ hMeal: 'Breakfast' }) }
+      ];
+    }
+    if (this.screen === 'planner') {
+      return [
+        { sel: 'ps2', do: () => this._pTapSlot(2) },
+        { sel: 'pd4', do: () => this.setState({ pDay: 4 }) },
+        { sel: 'pgen', do: () => this._pGen() },
+        { sel: 'ps0', do: () => this._pTapSlot(0) },
+        { sel: 'pd0', do: () => this.setState({ pDay: 0 }) },
+        { sel: 'ps1', do: () => this._pTapSlot(1) }
+      ];
+    }
+    if (this.screen === 'partners') {
+      return [
+        { sel: 'pc0', do: () => this._cheer(0) },
+        { sel: 'pw3', do: () => this._ptDay(3) },
+        { sel: 'pc1', do: () => this._cheer(1) },
+        { sel: 'pw4', do: () => this._ptDay(4) },
+        { sel: 'pc2', do: () => this._cheer(2) },
+        { sel: 'pc0', do: () => this._cheer(0) }
+      ];
+    }
+    if (this.screen === 'log') {
+      return [
+        { sel: 'la2', do: () => this._lgAdd(2) },
+        { sel: 'la3', do: () => this._lgAdd(3) },
+        { sel: 'la2', do: () => this._lgAdd(2) },
+        { sel: 'lm2', do: () => this._lgRemove(2) },
+        { sel: 'lm3', do: () => this._lgRemove(3) },
+        { sel: 'la0', do: () => this._lgAdd(0) },
+        { sel: 'lm0', do: () => this._lgRemove(0) },
+        { sel: 'lm2', do: () => this._lgRemove(2) }
+      ];
+    }
+    return [
+      { sel: 'p0', do: () => this._qty(0, 1) },
+      { sel: 'p2', do: () => this._qty(2, 1) },
+      { sel: 'ins', do: () => this.setState({ rTab: 'ins' }) },
+      { sel: 'fav', do: () => this.setState(s => ({ rFav: !s.rFav })) },
+      { sel: 'ing', do: () => this.setState({ rTab: 'ing' }) },
+      { sel: 'm0', do: () => this._qty(0, -1) },
+      { sel: 'p1', do: () => this._qty(1, 1) }
+    ];
+  }
+
+  async _run() {
+    let i = 0, key = this.screen;
+    while (this._alive) {
+      while (!this.state.auto) { await this._wait(300); if (!this._alive) return; }
+      if (this.screen !== key) { key = this.screen; i = 0; this.setState({ cur: null, hot: null, press: null }); await this._wait(400); }
+      const steps = this._script();
+      const s = steps[i % steps.length]; i++;
+      const pt = this._at(s.sel);
+      if (!pt) { await this._wait(400); continue; }
+      this.setState({ cur: pt, hot: s.sel, press: null });
+      await this._wait(700);
+      if (!this._alive || !this.state.auto) continue;
+      this.setState({ press: s.sel });
+      await this._wait(190);
+      s.do();
+      await this._wait(240);
+      this.setState({ press: null });
+      await this._wait(1100);
+    }
+  }
+
+  componentDidMount() {
+    this._alive = true; this._ts = [];
+    if (this.still) { if (this.screen === 'goals') this.setState({ gPicked: { '0-0': true, '0-2': true } }); return; }
+    setTimeout(() => this._run(), 700 + (Number(this.props.delay) || 0));
+  }
+  componentWillUnmount() { this._alive = false; (this._ts || []).forEach(clearTimeout); }
+
+  _gRing() { this.setState(st => ({ gLogged: st.gLogged >= 3 ? 1 : st.gLogged + 1 })); }
+  _pslot(day, i) { const k = day + '-' + i, f = this.state.pFill; return f[k] !== undefined ? f[k] : PLAN[day][i]; }
+  _pTapSlot(i) { this.setState(st => { const k = st.pDay + '-' + i, cur = st.pFill[k] !== undefined ? st.pFill[k] : PLAN[st.pDay][i];
+    const used = SLOTS.map((m, j) => { if (j === i) return null; const kk = st.pDay + '-' + j; return st.pFill[kk] !== undefined ? st.pFill[kk] : PLAN[st.pDay][j]; }).filter(v => v !== null);
+    let next = cur === null ? (i * 2) % POOL.length : (cur + 1) % POOL.length;
+    for (let t = 0; t < POOL.length && used.indexOf(next) !== -1; t++) next = (next + 1) % POOL.length;
+    return { pFill: { ...st.pFill, [k]: next } }; }); }
+  _pGen() { this.setState(st => { const f = { ...st.pFill }; Object.keys(PLAN).forEach(d => PLAN[d].forEach((v, i) => { const k = d + '-' + i; const cur = f[k] !== undefined ? f[k] : v; if (cur === null) f[k] = (Number(d) * 2 + i) % POOL.length; })); return { pFill: f, pGenOn: true }; }); }
+  _cheer(i) { this.setState(st => ({ ptCheer: { ...st.ptCheer, [i]: !st.ptCheer[i] } })); }
+  _ptDay(i) { this.setState(st => ({ ptWeek: { ...st.ptWeek, [i]: !st.ptWeek[i] } })); }
+  _lgAdd(m) { this.setState(st => { const e = { ...st.lgEntries }; const list = (e[m] || []).slice(); list.push((m * 2 + list.length) % POOL.length); e[m] = list; return { lgEntries: e }; }); }
+  _lgRemove(m) { this.setState(st => { const e = { ...st.lgEntries }; const list = (e[m] || []).slice(); list.pop(); e[m] = list; return { lgEntries: e }; }); }
+  _pick(i) { this.setState(s => { const k = s.gStep + '-' + i, p = { ...s.gPicked }; p[k] = !p[k]; return { gPicked: p }; }); }
+  _gNext() { this.setState(s => ({ gStep: (s.gStep + 1) % 5, gPicked: s.gStep === 4 ? {} : s.gPicked })); }
+  _heart(i) { this.setState(s => { const k = this._mealIdx() + '-' + i, h = { ...s.hHearts }; h[k] = !h[k]; return { hHearts: h }; }); }
+  _mealIdx() { return ['Breakfast', 'Lunch', 'Dinner'].indexOf(this.state.hMeal); }
+  _qty(i, d) { this.setState(s => { const q = s.rQty.slice(); q[i] = Math.max(0, q[i] + d); return { rQty: q }; }); }
+
+  renderVals() {
+    const s = this.state, still = this.still;
+    const cls = k => (s.hot === k ? ' nhhot' : '') + (s.press === k ? ' is-press' : '');
+    const T = f => (still ? undefined : f);
+    const g = GOALS[s.gStep], mi = this._mealIdx();
+    const nav = {};
+    for (let i = 0; i < 4; i++) {
+      nav['hNav' + i] = (s.hNav === i ? 'is-on' : '') + cls('n' + i);
+      nav['hNavTap' + i] = still ? undefined : () => this.setState({ hNav: i });
+    }
+
+    return {
+      stage: el => { this._stage = el; },
+      stillCls: still ? 'is-still' : '',
+      pause: T(() => this.setState({ auto: false, cur: null, hot: null, press: null })),
+      resume: T(() => this.setState({ auto: true })),
+      curPos: s.cur ? 'left:' + s.cur.x + '%;top:' + s.cur.y + '%;opacity:1' : 'left:50%;top:50%;opacity:0',
+      curCls: s.press ? 'is-press' : '',
+
+      isGoals: this.screen === 'goals',
+      isHome: this.screen === 'home',
+      isRecipe: this.screen === 'recipe',
+      isProgress: this.screen === 'progress',
+      isPlanner: this.screen === 'planner',
+
+      gDate: 'Wed 20 Aug',
+      gMeals: s.gLogged + '/3',
+      gRingOff: String(263.9 * (1 - s.gLogged / 3)),
+      gRingCls: cls('ring'),
+      gRing: T(() => this._gRing()),
+      gProtein: (s.gLogged * 36) + 'g of 120g',
+      gProteinFill: 'width:' + Math.min(100, s.gLogged * 36 / 120 * 100) + '%',
+      gStreak: '5 days',
+      gWeek: [0, 1, 2, 3, 4, 5, 6].map(i => (i < 5 ? 'is-on' : '')),
+      isPartners: this.screen === 'partners',
+      isLog: this.screen === 'log',
+
+      pDays: DAYS.map((d, i) => ({
+        k: d[0], n: d[1], d: 'pd' + i,
+        cls: (s.pDay === i ? 'is-on' : '') + cls('pd' + i),
+        tap: T(() => this.setState({ pDay: i }))
+      })),
+      pSlots: SLOTS.map((meal, i) => {
+        const idx = this._pslot(s.pDay, i), r = idx === null ? null : POOL[idx];
+        return {
+          meal, d: 'ps' + i,
+          cls: (r ? '' : 'is-empty') + cls('ps' + i),
+          bg: r ? 'background-image:url(' + r.img + ')' : '',
+          name: r ? r.name : 'Tap to add a meal',
+          kcal: r ? r.kcal + ' kcal' : '',
+          tap: T(() => this._pTapSlot(i))
+        };
+      }),
+      pGenLabel: s.pGenOn ? 'Week planned' : 'Generate my week',
+      pGenCls: cls('pgen'),
+      pGen: T(() => this._pGen()),
+
+      ptStreak: (() => { let n = 0; for (let i = 0; i < 7; i++) { if (s.ptWeek[i]) n++; else break; } return n + ' day streak'; })(),
+      ptWeek: DAYS.map((d, i) => ({
+        d: 'pw' + i,
+        cls: (s.ptWeek[i] ? 'is-on' : '') + cls('pw' + i),
+        tap: T(() => this._ptDay(i))
+      })),
+      ptRows: PARTNERS.map((p, i) => ({
+        name: p.name, act: p.act, initial: p.name.charAt(0),
+        tint: 'background:' + p.tint, d: 'pc' + i,
+        cls: (s.ptCheer[i] ? 'is-on' : '') + cls('pc' + i),
+        label: s.ptCheer[i] ? 'Cheered' : 'Cheer',
+        tap: T(() => this._cheer(i))
+      })),
+      ptCount: PARTNERS.length + ' people',
+      ptInvCls: cls('pinv'),
+      ptInv: T(() => {}),
+
+      lgTotal: (() => { let t = 0; LOGMEALS.forEach((m, i) => (s.lgEntries[i] || []).forEach(x => t += POOL[x].kcal)); return t.toLocaleString(); })(),
+      lgGoal: '/ 2,000 kcal',
+      lgFill: (() => { let t = 0; LOGMEALS.forEach((m, i) => (s.lgEntries[i] || []).forEach(x => t += POOL[x].kcal)); return 'width:' + Math.min(100, t / 2000 * 100) + '%'; })(),
+      lgMacs: (() => {
+        let t = 0; LOGMEALS.forEach((m, i) => (s.lgEntries[i] || []).forEach(x => t += POOL[x].kcal));
+        return [['Carbs', Math.round(t * 0.115), 230], ['Protein', Math.round(t * 0.055), 120], ['Fats', Math.round(t * 0.032), 70]]
+          .map(([k, v, g]) => ({ k, v: v + 'g', fill: 'width:' + Math.min(100, v / g * 100) + '%' }));
+      })(),
+      lgRows: LOGMEALS.map((meal, i) => {
+        const list = s.lgEntries[i] || [];
+        const kcal = list.reduce((a, x) => a + POOL[x].kcal, 0);
+        return {
+          meal, md: 'lm' + i, pd: 'la' + i,
+          items: list.length ? list.map(x => POOL[x].name).join(', ') : 'Nothing logged yet',
+          kcal: list.length ? kcal + ' kcal' : '',
+          mcls: (list.length ? '' : 'is-off') + cls('lm' + i),
+          pcls: cls('la' + i),
+          remove: T(() => this._lgRemove(i)),
+          add: T(() => this._lgAdd(i))
+        };
+      }),
+
+      gCount: (s.gStep + 1) + ' OUT OF 5',
+      gFill: 'width:' + ((s.gStep + 1) / 5 * 100) + '%',
+      gKick: g.kick,
+      gQuestion: g.q,
+      gChips: g.chips.map((label, i) => ({
+        label, icon: (g.icons || [])[i], d: 'c' + i,
+        cls: (s.gPicked[s.gStep + '-' + i] ? 'is-on' : '') + cls('c' + i),
+        tap: T(() => this._pick(i))
+      })),
+      gNext: T(() => this._gNext()),
+      gNextLabel: s.gStep === 4 ? 'FINISH' : 'NEXT',
+      gNextCls: cls('next'),
+
+      hMeals: ['Breakfast', 'Lunch', 'Dinner'].map((label, i) => ({
+        label, d: 'm' + i,
+        cls: (s.hMeal === label ? 'is-on' : '') + cls('m' + i),
+        tap: T(() => this.setState({ hMeal: label }))
+      })),
+      hCards: MEALS[s.hMeal].map((c, i) => ({
+        bg: 'background-image:url(' + c.img + ')', name: c.name, d: 'k' + i, cls: cls('k' + i),
+        hd: 'h' + i, hcls: (s.hHearts[mi + '-' + i] ? 'is-on' : '') + cls('h' + i),
+        tap: undefined, heart: T(e => { if (e && e.stopPropagation) e.stopPropagation(); this._heart(i); })
+      })),
+      ...nav,
+      hChefCls: cls('chef'),
+      hChef: undefined,
+
+      rCloseCls: cls('close'),
+      rFavCls: (s.rFav ? 'is-on' : '') + cls('fav'),
+      rFav: T(() => this.setState(st => ({ rFav: !st.rFav }))),
+      rClose: undefined,
+      rIngCls: (s.rTab === 'ing' ? 'is-on' : '') + cls('ing'),
+      rInsCls: (s.rTab === 'ins' ? 'is-on' : '') + cls('ins'),
+      rIng: T(() => this.setState({ rTab: 'ing' })),
+      rIns: T(() => this.setState({ rTab: 'ins' })),
+      rShowIng: s.rTab === 'ing',
+      rShowIns: s.rTab === 'ins',
+      rCount: s.rQty.filter(n => n > 0).length + ' Item',
+      rItems: ITEMS.map((it, i) => ({
+        name: it.name, n: s.rQty[i], initial: it.name.charAt(0),
+        tint: 'background:' + TINTS[i % TINTS.length],
+        md: 'm' + i, pd: 'p' + i,
+        mcls: (s.rQty[i] === 0 ? 'is-off' : '') + cls('m' + i),
+        pcls: cls('p' + i),
+        minus: T(() => this._qty(i, -1)), plus: T(() => this._qty(i, 1))
+      })),
+      rSteps: STEPS.map((t, i) => ({ n: String(i + 1), t }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

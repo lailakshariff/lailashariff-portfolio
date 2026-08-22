@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<title>SayPlay — Laila Shariff</title>
+<meta name="description" content="Case study: an AAC communication app designed with the United Cerebral Palsy Center of Greater Cleveland.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
@@ -13,19 +15,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./responsive.css">
 <style>
-body{margin:0;background:#fff}
+body{margin:0;background:var(--bg)}
 html{scroll-behavior:smooth}
-a{color:#3f3f42}a:hover{color:#3d7d7a}
+a{color:var(--ink)}a:hover{color:var(--accent)}
 ::selection{background:#fbeccb}
 @keyframes spUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes spFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(calc(var(--r,0deg) + 5deg))}}
 .sph3{animation:spFloat var(--d,5.4s) ease-in-out infinite}
 .spsb{scrollbar-width:none}.spsb::-webkit-scrollbar{display:none}
-.spnext{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;padding:22px 24px 24px;border:1px solid rgba(63,63,66,.1);border-radius:16px;background:#fff;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1),border-color .4s ease,background .4s ease}
+.spnext{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;padding:22px 24px 24px;border:1px solid rgba(var(--inkrgb),.1);border-radius:16px;background:var(--card);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1),border-color .4s ease,background .4s ease}
 .spnhead{display:flex;align-items:center;gap:12px}
 .spnhead .spnmascot{margin-left:auto}
 .spnext::before{content:"";position:absolute;right:-14%;bottom:-38%;width:62%;aspect-ratio:1;border-radius:50%;background:var(--tint);opacity:0;transform:scale(.7);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
-.spnext:hover{transform:translateY(-5px);border-color:var(--ring);background:var(--tint);box-shadow:0 22px 40px -24px rgba(63,63,66,.5)}
+.spnext:hover{transform:translateY(-5px);border-color:var(--ring);background:var(--tint);box-shadow:0 22px 40px -24px rgba(var(--inkrgb),.5)}
 .spnext:hover::before{opacity:.55;transform:scale(1)}
 .spnext > *{position:relative;z-index:1}
 .spnstage{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:6px 12px;border-radius:99px;border:1px solid var(--ring);font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dot)}
@@ -38,7 +40,7 @@ a{color:#3f3f42}a:hover{color:#3d7d7a}
 @media (prefers-reduced-motion:reduce){.spnext,.spnmascot,.spnext::before{transition:none}.spnext:hover{transform:none}}
 @media (max-width:900px){.spnmascot{width:50px;height:50px}}
 @media (prefers-reduced-motion:reduce){.sph3{animation:none}}
-.spmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(63,63,66,.1)}
+.spmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(var(--inkrgb),.1)}
 .spmeta > div:first-child{border-left:0;padding-left:0}
 @media (max-width:900px){.sprail{display:none !important}}
 /*mobm*/
@@ -57,9 +59,9 @@ h1{font-size:clamp(38px,11vw,52px) !important}
 }
 
 @media (max-width:760px){
-.spmeta > div{padding:20px 0 22px;border-left:0;border-top:1px solid rgba(63,63,66,.1)}
+.spmeta > div{padding:20px 0 22px;border-left:0;border-top:1px solid rgba(var(--inkrgb),.1)}
 .spmeta > div:first-child,.spmeta > div:nth-child(2){border-top:0}
-.spmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(63,63,66,.1)}
+.spmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(var(--inkrgb),.1)}
 }
 @media (max-width:560px){
 .spnav{font-size:10px !important;letter-spacing:.1em !important;padding-top:16px !important;padding-bottom:16px !important}
@@ -94,7 +96,7 @@ h1{font-size:clamp(38px,11vw,52px) !important}
 @media (prefers-reduced-motion:reduce){.spcur{display:none}}
 
 .spshot{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease}
-figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px -26px rgba(63,63,66,.6)}
+figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px -26px rgba(var(--inkrgb),.6)}
 #sp-system-track figure{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 #sp-system-track figure:hover{transform:translateY(-4px)}
 .sptick{position:absolute;display:grid;place-items:center;width:7.5%;aspect-ratio:1;border-radius:50%;background:#31706B;color:#fff;font:700 clamp(8px,1.5cqw,15px)/1 Outfit,sans-serif;opacity:0;scale:.4;pointer-events:none;z-index:2;box-shadow:0 4px 12px rgba(42,102,96,.5)}
@@ -155,12 +157,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 .spdcur v{position:absolute;left:-2.6cqh;top:-2.6cqh;width:5.2cqh;height:5.2cqh;border-radius:50%;border:.36cqh solid #31706B;box-sizing:border-box;opacity:0;transform:scale(.5)}
 .spdcur.is-tap v{animation:spdRip .5s cubic-bezier(.2,.7,.2,1)}
 @keyframes spdRip{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.5)}}
-.spdhint{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 13px;border-radius:99px;background:#f3f4f4;border:1px solid rgba(61,125,122,.18);color:#5e5e68;font:500 11.5px/1 Outfit,sans-serif;white-space:nowrap}
+.spdhint{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 13px;border-radius:99px;background:var(--surf-2);border:1px solid rgba(var(--inkrgb),.14);color:var(--body);font:500 11.5px/1 Outfit,sans-serif;white-space:nowrap}
 .spdhint i{display:block;width:6px;height:6px;border-radius:50%;background:#3d7d7a;flex:0 0 auto}
 @media (prefers-reduced-motion:reduce){.spdcur{transition:none}.spdwave b s{animation:none}}
 
 .spf{position:relative;width:100%;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#FFFDF5;display:flex;flex-direction:column;container-type:size;user-select:none;transition:box-shadow .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
-.spf:hover{transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(63,63,66,.65)}
+.spf:hover{transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(var(--inkrgb),.65)}
 .spfhead{flex:0 0 auto;display:flex;align-items:center;gap:2cqh;height:10cqh;padding:0 3.4cqh;background:#44817D;color:#FFFDF5;font:600 4cqh/1 Outfit,sans-serif}
 .spfhead em{margin-left:auto;font:400 3cqh/1 Outfit,sans-serif;font-style:normal;color:rgba(255,253,245,.7)}
 .spfbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:2.4cqh;padding:3cqh 3.4cqh}
@@ -221,7 +223,7 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 .spfcur.is-tap v{animation:spdRip .5s cubic-bezier(.2,.7,.2,1)}
 @media (prefers-reduced-motion:reduce){.spfcur{transition:none}}
 
-.sx{position:relative;width:100%;aspect-ratio:16/10.4;border-radius:18px;overflow:hidden;background:#FFFDF5;display:flex;container-type:size;user-select:none;box-shadow:0 18px 40px -28px rgba(63,63,66,.6)}
+.sx{position:relative;width:100%;aspect-ratio:16/10.4;border-radius:18px;overflow:hidden;background:#FFFDF5;display:flex;container-type:size;user-select:none;box-shadow:0 18px 40px -28px rgba(var(--inkrgb),.6)}
 .sxrail{flex:0 0 8.6cqw;display:flex;flex-direction:column;align-items:center;gap:1.04cqw;padding:1.43cqw 0;background:#FBF7EA;border-right:1px solid #F1E6CC}
 .sxback{display:grid;place-items:center;width:3.4cqw;height:3.4cqw;border-radius:50%;background:#fff;border:1px solid #EFE6D2;color:#A79E8B;font:400 1.5cqw/1 Outfit,sans-serif}
 .sxnav{display:flex;flex-direction:column;align-items:center;gap:0.325cqw;width:6.6cqw;padding:0.65cqw 0;border-radius:1.4cqw;font:500 1.02cqw/1 Outfit,sans-serif;color:#A79E8B}
@@ -520,41 +522,49 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
   .sxmodes{flex-wrap:wrap}
   .sxmode{flex:1 1 45%}
 }
-.sxtag{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 13px;border-radius:99px;background:#f3f4f4;border:1px solid rgba(61,125,122,.18);color:#5e5e68;font:500 11.5px/1 Outfit,sans-serif;white-space:nowrap}
+.sxtag{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 13px;border-radius:99px;background:var(--surf-2);border:1px solid rgba(var(--inkrgb),.14);color:var(--body);font:500 11.5px/1 Outfit,sans-serif;white-space:nowrap}
 .sxtag i{display:block;width:6px;height:6px;border-radius:50%;background:#3d7d7a;flex:0 0 auto}
 /*navtap*/@media (max-width:900px){.spnav a{display:inline-flex;align-items:center;min-height:44px}.spnav{padding-top:4px !important;padding-bottom:4px !important}}
 </style>
-<script src="./dot-cursor.js"></script></helmet>
+<script src="./dot-cursor.js"></script><style>:root{--bg:#ffffff;--ink:#3f3f42;--body:#5e5e68;--body-2:#6b6b74;--muted:#9a9aa2;--surf:#fdf8e2;--surf-2:#f5f7f7;--card:#ffffff;--accent:#3d7d7a;--inkrgb:63,63,66;--hover:#fdf3e4}
+html[data-theme="dark"]{--bg:#17160f;--ink:#f0eee7;--body:#c6c2b8;--body-2:#b2ada2;--muted:#918d84;--surf:#242219;--surf-2:#1f231f;--card:#232620;--accent:#79c3bd;--dot:#ffffff;--inkrgb:240,238,231;--hover:#2b2a20}
+html[data-theme="dark"] .sx{--accent:#3d7d7a;--card:#ffffff}
+html[data-theme="dark"] .sx, html[data-theme="dark"] .sxrail, html[data-theme="dark"] .sxsearch, html[data-theme="dark"] .sxback, html[data-theme="dark"] .spboard{--ink:#3f3f42;--body:#5e5e68;--body-2:#6b6b74;--muted:#9a9aa2}
+@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:color-mix(in srgb,var(--bg) 92%,transparent);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(var(--inkrgb),.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(var(--inkrgb),.09);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-sheet a:last-child{border-bottom:0}.mnav-open .mnav-sheet a{opacity:1;transform:none}.mnav-open .mnav-sheet a:nth-child(1){transition-delay:.07s}.mnav-open .mnav-sheet a:nth-child(2){transition-delay:.12s}.mnav-open .mnav-sheet a:nth-child(3){transition-delay:.17s}.mnav-open .mnav-sheet a:nth-child(4){transition-delay:.22s}@media (min-width:769px){.mnav-sheet{display:none}}
+body{background:var(--bg);color:var(--ink)}</style>
+<link rel="stylesheet" href="./theme.css">
+<script src="./theme.js"></script><script data-mnav="1">(function(){var QQ=String.fromCharCode(34);function build(){var sel='[style*='+QQ+'position:sticky'+QQ+'],[style*='+QQ+'position: sticky'+QQ+'],.nav';var bars=document.querySelectorAll(sel);var nav=null;for(var i=0;i<bars.length;i++){var b=bars[i];if(b.querySelectorAll('a').length>=2&&b.getBoundingClientRect().top<200){nav=b;break;}}if(!nav||nav.dataset.mnav)return false;var groups=nav.querySelectorAll('div');var group=null;for(var g=0;g<groups.length;g++){if(groups[g].querySelectorAll('a').length>=2){group=groups[g];break;}}if(!group)return false;nav.dataset.mnav='1';group.classList.add('mnav-hide');var btn=document.createElement('button');btn.className='mnav-burger';btn.type='button';btn.setAttribute('aria-label','Menu');btn.setAttribute('aria-expanded','false');btn.appendChild(document.createElement('span'));nav.appendChild(btn);var sheet=document.createElement('div');sheet.className='mnav-sheet';var cs=window.getComputedStyle(nav);sheet.style.font=cs.font;var links=group.querySelectorAll('a');var here=(location.pathname.split('/').pop()||'index.html').toLowerCase();function isHere(h){h=(h||'').split('#')[0].split('/').pop().toLowerCase();if(!h)return true;if(h===here)return true;var home={'index.html':1,'home.dc.html':1};return home[h]===1&&home[here]===1;}function close(){if(opened)set(false);}for(var k=0;k<links.length;k++){var a=document.createElement('a');a.href=links[k].getAttribute('href');a.textContent=links[k].textContent;if(isHere(links[k].getAttribute('href'))){a.className='mnav-on';a.setAttribute('aria-current','page');}a.addEventListener('click',close);sheet.appendChild(a);}nav.parentNode.insertBefore(sheet,nav.nextSibling);var opened=false;function set(v){opened=v;document.documentElement.classList.toggle('mnav-open',v);btn.setAttribute('aria-expanded',v?'true':'false');}btn.addEventListener('click',function(e){e.stopPropagation();set(!opened);});document.addEventListener('click',function(e){if(opened&&!sheet.contains(e.target)&&!btn.contains(e.target))close();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});window.addEventListener('resize',function(){if(window.innerWidth>768)close();});return true;}var t=setInterval(function(){if(build())clearInterval(t);},150);setTimeout(function(){clearInterval(t);},12000);})();</script>
+</helmet>
 
-<div style="background:#fff;color:#3f3f42;font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+<div style="background:var(--bg);color:var(--ink);font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
 
-<div class="spnav" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase">
-<a href="index.html" style="text-decoration:none;color:#3f3f42">Laila Shariff</a>
+<div class="spnav" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase">
+<a href="index.html" style="text-decoration:none;color:var(--ink)">Laila Shariff</a>
 <div style="display:flex;gap:26px">
-<a href="index.html#work" style="text-decoration:none;color:#3f3f42">Work</a>
-<a href="playground.html" style="text-decoration:none;color:#3f3f42">Playground</a>
-<a href="about.html" style="text-decoration:none;color:#3f3f42">About</a>
+<a href="index.html#work" style="text-decoration:none;color:var(--ink)">Work</a>
+<a href="playground.html" style="text-decoration:none;color:var(--ink)">Playground</a>
+<a href="about.html" style="text-decoration:none;color:var(--ink)">About</a><button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
 </div>
 </div>
 
 <div id="top" style="max-width:1240px;margin:0 auto;padding:88px 64px 0;animation:spUp .9s cubic-bezier(.2,.7,.2,1) both">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
 <img src="assets/inline/sayplay-1.png" alt="SayPlay logo" style="display:block;width:40px;height:40px;border-radius:9px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Case study · 2025</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Case study · 2025</div>
 </div>
 <h1 style="margin:0;max-width:16ch;font:500 clamp(46px,7vw,88px)/1.02 Newsreader,Georgia,serif;letter-spacing:-.035em">SayPlay</h1>
-<p style="margin:26px 0 0;max-width:720px;font:300 clamp(19px,2vw,23px)/1.55 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">A digital AAC app that helps children with cerebral palsy communicate through play — designed over a summer embedded with the therapists, caregivers and children who would use it.</p>
+<p style="margin:26px 0 0;max-width:720px;font:300 clamp(19px,2vw,23px)/1.55 Outfit,sans-serif;color:var(--body);text-wrap:pretty">A digital AAC app that helps children with cerebral palsy communicate through play — designed over a summer embedded with the therapists, caregivers and children who would use it.</p>
 
-<div style="display:flex;align-items:flex-start;gap:16px;margin-top:30px;max-width:720px;padding:20px 22px;border-radius:14px;background:#f5f7f7;border:1px solid rgba(61,125,122,.16)">
-<span style="flex:0 0 auto;margin-top:2px;font:700 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#3d7d7a">AAC</span>
-<p style="margin:0;font:300 15.5px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty"><b style="font-weight:600;color:#3f3f42">Augmentative and Alternative Communication</b> — the tools people use to communicate when speech alone is not enough. Here that means a tablet board of symbol tiles a child taps to build a sentence, which the device then speaks aloud.</p>
+<div style="display:flex;align-items:flex-start;gap:16px;margin-top:30px;max-width:720px;padding:20px 22px;border-radius:14px;background:var(--surf-2);border:1px solid rgba(61,125,122,.16)">
+<span style="flex:0 0 auto;margin-top:2px;font:700 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">AAC</span>
+<p style="margin:0;font:300 15.5px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty"><b style="font-weight:600;color:var(--ink)">Augmentative and Alternative Communication</b> — the tools people use to communicate when speech alone is not enough. Here that means a tablet board of symbol tiles a child taps to build a sentence, which the device then speaks aloud.</p>
 </div>
 
-<div class="spmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(63,63,66,.1);border-bottom:1px solid rgba(63,63,66,.1)">
+<div class="spmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(var(--inkrgb),.1);border-bottom:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ meta }}" as="m">
 <div>
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">{{ m.k }}</div>
-<div style="margin-top:14px;font:400 15px/1.5 Outfit,sans-serif;color:#3f3f42;text-wrap:pretty">{{ m.v }}</div>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">{{ m.k }}</div>
+<div style="margin-top:14px;font:400 15px/1.5 Outfit,sans-serif;color:var(--ink);text-wrap:pretty">{{ m.v }}</div>
 </div>
 </sc-for>
 </div>
@@ -620,100 +630,100 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 <div style="display:flex;flex-direction:column;min-width:0">
 
 <div id="overview" data-sec="overview" style="scroll-margin-top:110px;padding-top:112px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Overview</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Overview</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">I designed an AAC platform that gives children with cerebral palsy a voice through play</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Over the summer of 2025 I led SayPlay in partnership with the United Cerebral Palsy Center of Greater Cleveland, working alongside two developers. Existing AAC tools ask a child to hunt through a dense grid of symbols with an adult beside them; almost none of them carry the vocabulary for how that child feels. I spent eight weeks on site to understand why, then designed a platform around play, emotion and connection.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Over the summer of 2025 I led SayPlay in partnership with the United Cerebral Palsy Center of Greater Cleveland. Existing AAC tools ask a child to hunt through a dense grid of symbols with an adult beside them; almost none of them carry the vocabulary for how that child feels. I spent eight weeks on site to understand why, then designed a platform around play, emotion and connection.</p>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px">
 <sc-for list="{{ steps }}" as="s">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:24px">
-<div style="display:flex;align-items:baseline;gap:10px"><span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;color:#3d7d7a">{{ s.n }}</span><span style="font:500 15px/1 Outfit,sans-serif;color:#3f3f42">{{ s.t }}</span></div>
-<p style="margin:14px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:#6b6b74">{{ s.b }}</p>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
+<div style="display:flex;align-items:baseline;gap:10px"><span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;color:var(--accent)">{{ s.n }}</span><span style="font:500 15px/1 Outfit,sans-serif;color:var(--ink)">{{ s.t }}</span></div>
+<p style="margin:14px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:var(--body-2)">{{ s.b }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="problem" data-sec="problem" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Problem</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Problem</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Existing AAC tools weren't built for how young children with cerebral palsy actually think and move</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Children with cerebral palsy often experience significant speech and motor impairments that make verbal communication difficult or impossible. While AAC tools exist to support expressive language, many are designed without considering the unique cognitive, physical, and emotional needs of young children with motor impairments.</p>
-<p style="margin:16px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">This results in tools that are unintuitive, disengaging, and difficult for children and caregivers to use consistently. There is a pressing need for an accessible, adaptable, and engaging AAC platform that empowers children with cerebral palsy to express themselves more independently and meaningfully — both at home and in therapy settings.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Children with cerebral palsy often experience significant speech and motor impairments that make verbal communication difficult or impossible. While AAC tools exist to support expressive language, many are designed without considering the unique cognitive, physical, and emotional needs of young children with motor impairments.</p>
+<p style="margin:16px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">This results in tools that are unintuitive, disengaging, and difficult for children and caregivers to use consistently. There is a pressing need for an accessible, adaptable, and engaging AAC platform that empowers children with cerebral palsy to express themselves more independently and meaningfully — both at home and in therapy settings.</p>
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px">
 <sc-for list="{{ frictions }}" as="f">
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:#3f3f42">{{ f }}</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:var(--ink)">{{ f }}</div>
 </sc-for>
 </div>
-<p style="margin:16px 0 0;font:400 13.5px/1.6 Outfit,sans-serif;color:#9a9aa2">The four barriers that came up in every conversation on site.</p>
+<p style="margin:16px 0 0;font:400 13.5px/1.6 Outfit,sans-serif;color:var(--muted)">The four barriers that came up in every conversation on site.</p>
 </div>
 
 <div id="market" data-sec="market" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Market research</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Market research</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Five AAC apps, and the same gap in every one of them</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">I looked at the leading platforms in the AAC space and noted how much adult support each one assumes — and how little emotional vocabulary any of them carry.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">I looked at the leading platforms in the AAC space and noted how much adult support each one assumes — and how little emotional vocabulary any of them carry.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px">
 <sc-for list="{{ competitors }}" as="c">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
-<div style="font:500 15.5px/1 Outfit,sans-serif;color:#3f3f42">{{ c.name }}</div>
-<p style="margin:0;font:300 14.5px/1.65 Outfit,sans-serif;color:#6b6b74;flex:1;text-wrap:pretty">{{ c.body }}</p>
-<p style="margin:0;font:400 14px/1.5 Outfit,sans-serif;color:#3d7d7a">{{ c.note }}</p>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
+<div style="font:500 15.5px/1 Outfit,sans-serif;color:var(--ink)">{{ c.name }}</div>
+<p style="margin:0;font:300 14.5px/1.65 Outfit,sans-serif;color:var(--body-2);flex:1;text-wrap:pretty">{{ c.body }}</p>
+<p style="margin:0;font:400 14px/1.5 Outfit,sans-serif;color:var(--accent)">{{ c.note }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="findings" data-sec="findings" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Research findings</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Research findings</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Eight weeks at UCP with therapists, caregivers, and the children themselves</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Speech-language pathologists, occupational therapists, and physical therapists — hearing three disciplines talk about the same child surfaced four themes in affinity mapping.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Speech-language pathologists, occupational therapists, and physical therapists — hearing three disciplines talk about the same child surfaced four themes in affinity mapping.</p>
 
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px">
 <sc-for list="{{ stats }}" as="s">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:26px 28px">
-<div style="font:600 40px/1 Outfit,sans-serif;letter-spacing:-.035em;color:#3f3f42">{{ s.n }}</div>
-<div style="margin-top:10px;font:400 11px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#9a9aa2">{{ s.l }}</div>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:26px 28px">
+<div style="font:600 40px/1 Outfit,sans-serif;letter-spacing:-.035em;color:var(--ink)">{{ s.n }}</div>
+<div style="margin-top:10px;font:400 11px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">{{ s.l }}</div>
 </div>
 </sc-for>
 </div>
 
-<div style="margin-top:20px;border-top:1px solid rgba(63,63,66,.1)">
+<div style="margin-top:20px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ themes }}" as="t">
-<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(63,63,66,.1)">
-<div style="font:500 15px/1.4 Outfit,sans-serif;color:#3f3f42">{{ t.k }}</div>
-<p style="margin:0;font:300 15.5px/1.7 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">{{ t.v }}</p>
+<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:500 15px/1.4 Outfit,sans-serif;color:var(--ink)">{{ t.k }}</div>
+<p style="margin:0;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body);text-wrap:pretty">{{ t.v }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="hmw" data-sec="hmw" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">How might we</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">How might we</div>
 <div style="margin-top:22px;border-left:3px solid #3d7d7a;padding:6px 0 6px 32px">
-<p style="margin:0;max-width:900px;font:400 clamp(28px,3.4vw,42px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:#3f3f42;text-wrap:pretty">How might we design an AAC system that acts less like a tool and more like a playful, emotionally intelligent companion?</p>
+<p style="margin:0;max-width:900px;font:400 clamp(28px,3.4vw,42px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:var(--ink);text-wrap:pretty">How might we design an AAC system that acts less like a tool and more like a playful, emotionally intelligent companion?</p>
 </div>
 </div>
 
 <div id="personas" data-sec="personas" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Who it's for</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Who it's for</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Three people have to succeed for SayPlay to work</h2>
 <div style="display:flex;flex-direction:column;gap:16px;margin-top:44px">
 <sc-for list="{{ personas }}" as="p">
-<div style="display:grid;grid-template-columns:92px minmax(0,1fr);gap:26px;padding:28px;border-radius:14px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07)">
+<div style="display:grid;grid-template-columns:92px minmax(0,1fr);gap:26px;padding:28px;border-radius:14px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07)">
 <span role="img" aria-label="{{ p.alt }}" style="display:block;width:92px;height:92px;border-radius:50%;object-fit:cover;background-image:url({{ p.img }});background-size:contain;background-repeat:no-repeat;background-position:center"></span>
 <div>
 <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
-<h3 style="margin:0;font:500 21px/1.2 Newsreader,Georgia,serif;letter-spacing:-.025em;color:#3f3f42">{{ p.name }}</h3>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">{{ p.role }}</span>
+<h3 style="margin:0;font:500 21px/1.2 Newsreader,Georgia,serif;letter-spacing:-.025em;color:var(--ink)">{{ p.name }}</h3>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ p.role }}</span>
 </div>
-<p style="margin:12px 0 0;font:300 16px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">{{ p.body }}</p>
+<p style="margin:12px 0 0;font:300 16px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty">{{ p.body }}</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:20px">
 <div>
-<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">Goals</div>
-<p style="margin:8px 0 0;font:300 15px/1.6 Outfit,sans-serif;color:#6b6b74">{{ p.goals }}</p>
+<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">Goals</div>
+<p style="margin:8px 0 0;font:300 15px/1.6 Outfit,sans-serif;color:var(--body-2)">{{ p.goals }}</p>
 </div>
 <div>
-<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">Frustrations</div>
-<p style="margin:8px 0 0;font:300 15px/1.6 Outfit,sans-serif;color:#6b6b74">{{ p.pains }}</p>
+<div style="font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">Frustrations</div>
+<p style="margin:8px 0 0;font:300 15px/1.6 Outfit,sans-serif;color:var(--body-2)">{{ p.pains }}</p>
 </div>
 </div>
 </div>
@@ -723,15 +733,15 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 
 <div id="principles" data-sec="principles" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Design principles</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design principles</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">What eight weeks of watching therapy sessions taught me to hold onto</h2>
-<div style="margin-top:40px;border-top:1px solid rgba(63,63,66,.1)">
+<div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ principles }}" as="p">
-<div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;padding:26px 0;border-bottom:1px solid rgba(63,63,66,.1)">
+<div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;padding:26px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
 <div style="font:400 26px/1 Newsreader,Georgia,serif;color:#d8cba6">{{ p.n }}</div>
 <div>
-<h3 style="margin:0;font:500 19px/1.35 Outfit,sans-serif;color:#3f3f42">{{ p.t }}</h3>
-<p style="margin:10px 0 0;max-width:620px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">{{ p.b }}</p>
+<h3 style="margin:0;font:500 19px/1.35 Outfit,sans-serif;color:var(--ink)">{{ p.t }}</h3>
+<p style="margin:10px 0 0;max-width:620px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">{{ p.b }}</p>
 </div>
 </div>
 </sc-for>
@@ -739,15 +749,15 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 
 <div id="kpis" data-sec="kpis" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">What success looks like</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">What success looks like</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The questions a working AAC platform has to answer</h2>
-<div style="margin-top:40px;border-top:1px solid rgba(63,63,66,.1)">
+<div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ kpis }}" as="k">
-<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(63,63,66,.1)">
-<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">{{ k.cat }}</div>
+<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ k.cat }}</div>
 <div style="display:flex;flex-direction:column;gap:8px">
 <sc-for list="{{ k.items }}" as="it" hint-placeholder-count="2">
-<div style="font:400 16px/1.55 Outfit,sans-serif;color:#3f3f42">{{ it }}</div>
+<div style="font:400 16px/1.55 Outfit,sans-serif;color:var(--ink)">{{ it }}</div>
 </sc-for>
 </div>
 </div>
@@ -756,21 +766,21 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 
 <div id="process" data-sec="process" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Design process</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design process</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Each theme became a feature area, not a nice-to-have</h2>
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px">
 <sc-for list="{{ spine }}" as="s">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:12px;padding:20px">
-<div style="font:400 16px/1.35 Newsreader,Georgia,serif;color:#3f3f42">{{ s.q }}</div>
-<div style="margin-top:12px;font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#3d7d7a">{{ s.sec }}</div>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:12px;padding:20px">
+<div style="font:400 16px/1.35 Newsreader,Georgia,serif;color:var(--ink)">{{ s.q }}</div>
+<div style="margin-top:12px;font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">{{ s.sec }}</div>
 </div>
 </sc-for>
 </div>
 
 <h3 style="margin:72px 0 0;font:500 clamp(24px,2.6vw,32px)/1.2 Newsreader,Georgia,serif;letter-spacing:-.024em">Mapping every screen before adding a single colour</h3>
-<p style="margin:18px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Low-fidelity screens for all three roles — the child's communication board and story builder, the co-play activity flows, and the parent and therapist dashboards. Working in grey kept the focus on hierarchy, button size, and how few taps it takes to say something.</p>
-<div style="margin-top:28px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:16px;padding:20px">
+<p style="margin:18px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Low-fidelity screens for all three roles — the child's communication board and story builder, the co-play activity flows, and the parent and therapist dashboards. Working in grey kept the focus on hierarchy, button size, and how few taps it takes to say something.</p>
+<div style="margin-top:28px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:16px;padding:20px">
 <img src="assets/sp-wireframes.jpg" alt="SayPlay wireframes: set-up, role selection, avatar, co-play home, group activity, story builder, parent and therapist dashboards" style="display:block;width:100%;border-radius:8px;background:#f5f5f5">
 </div>
 
@@ -778,12 +788,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 <div style="display:flex;flex-direction:column;gap:56px;margin-top:36px">
 <div>
 <div style="display:flex;align-items:baseline;gap:12px">
-<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#3d7d7a">01</span>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Motivation</span>
+<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)">01</span>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Motivation</span>
 </div>
-<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:#3f3f42">An adaptive home page</h4>
-<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">The home page grows with each child, surfacing favourite activities, most-used tools, and personalised modules so every login feels familiar.</p>
-<div style="margin-top:24px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:20px;padding:20px">
+<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:var(--ink)">An adaptive home page</h4>
+<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">The home page grows with each child, surfacing favourite activities, most-used tools, and personalised modules so every login feels familiar.</p>
+<div style="margin-top:24px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:20px;padding:20px">
 <div class="sx" ref="{{ xLearn.ref }}" onMouseEnter="{{ xLearn.pause }}" onMouseLeave="{{ xLearn.resume }}">
 <div class="sxrail">
 <span class="sxback">‹</span>
@@ -829,12 +839,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 <div>
 <div style="display:flex;align-items:baseline;gap:12px">
-<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#3d7d7a">02</span>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Connection</span>
+<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)">02</span>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Connection</span>
 </div>
-<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:#3f3f42">Social communication tools</h4>
-<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">With Let’s Talk, children connect with peers and caregivers in a safe space — choosing who to play with and practising turn-taking on one shared board.</p>
-<div style="margin-top:24px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:20px;padding:20px">
+<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:var(--ink)">Social communication tools</h4>
+<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">With Let’s Talk, children connect with peers and caregivers in a safe space — choosing who to play with and practising turn-taking on one shared board.</p>
+<div style="margin-top:24px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:20px;padding:20px">
 <div class="sx" ref="{{ xTalk.ref }}" onMouseEnter="{{ xTalk.pause }}" onMouseLeave="{{ xTalk.resume }}">
 <div class="sxrail">
 <span class="sxback">‹</span>
@@ -876,12 +886,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 <div>
 <div style="display:flex;align-items:baseline;gap:12px">
-<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#3d7d7a">03</span>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Caregiver control</span>
+<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)">03</span>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Caregiver control</span>
 </div>
-<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:#3f3f42">Personalised profile settings</h4>
-<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">Caregivers tailor the platform to a child’s communication style — full sentences, single words, gestures, or symbols — in a guided five-step setup.</p>
-<div style="margin-top:24px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:20px;padding:20px">
+<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:var(--ink)">Personalised profile settings</h4>
+<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">Caregivers tailor the platform to a child’s communication style — full sentences, single words, gestures, or symbols — in a guided five-step setup.</p>
+<div style="margin-top:24px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:20px;padding:20px">
 <div class="sx" ref="{{ xProf.ref }}" onMouseEnter="{{ xProf.pause }}" onMouseLeave="{{ xProf.resume }}">
 <div class="sxrail">
 <span class="sxback">‹</span>
@@ -923,12 +933,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 <div>
 <div style="display:flex;align-items:baseline;gap:12px">
-<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:#3d7d7a">04</span>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa2">Access</span>
+<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)">04</span>
+<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">Access</span>
 </div>
-<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:#3f3f42">Settings that adapt to the child</h4>
-<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">Text size, contrast, tile count, speech rate and switch access all sit in one place, and every change applies straight away so a therapist can adjust mid-session.</p>
-<div style="margin-top:24px;background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:20px;padding:20px">
+<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:var(--ink)">Settings that adapt to the child</h4>
+<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">Text size, contrast, tile count, speech rate and switch access all sit in one place, and every change applies straight away so a therapist can adjust mid-session.</p>
+<div style="margin-top:24px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:20px;padding:20px">
 <div class="sx" ref="{{ xAcc.ref }}" onMouseEnter="{{ xAcc.pause }}" onMouseLeave="{{ xAcc.resume }}">
 <div class="sxrail">
 <span class="sxback">‹</span>
@@ -980,20 +990,20 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 <div id="system" data-sec="system" style="scroll-margin-top:110px;padding-top:128px">
 <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
 <div>
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Design system</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design system</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">A library built for large targets and high contrast</h2>
 </div>
 <div style="display:flex;gap:8px">
-<button onClick="{{ slidePrev }}" aria-label="Previous screen" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(63,63,66,.18);background:#fff;color:#3f3f42;font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:#fdf3e4;border-color:#3d7d7a">‹</button>
-<button onClick="{{ slideNext }}" aria-label="Next screen" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(63,63,66,.18);background:#fff;color:#3f3f42;font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:#fdf3e4;border-color:#3d7d7a">›</button>
+<button onClick="{{ slidePrev }}" aria-label="Previous screen" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">‹</button>
+<button onClick="{{ slideNext }}" aria-label="Next screen" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">›</button>
 </div>
 </div>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Every component was sized for a child with limited fine motor control first: oversized targets, generous spacing, and a palette that stays legible at low contrast sensitivity. The four avatars carry the personality so the interface itself can stay quiet.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Every component was sized for a child with limited fine motor control first: oversized targets, generous spacing, and a palette that stays legible at low contrast sensitivity. The four avatars carry the personality so the interface itself can stay quiet.</p>
 
 <div id="sp-system-track" class="spsb" style="display:flex;gap:16px;margin-top:36px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px">
 <sc-for list="{{ screens }}" as="s">
 <figure style="margin:0;flex:0 0 clamp(240px,44%,360px);scroll-snap-align:start">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:center">
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:center">
 <span class="spshot" style="width:88%">
 <span role="img" aria-label="{{ s.alt }}" style="display:block;width:100%;aspect-ratio:1388/959;border-radius:8px;background-image:url({{ s.img }});background-size:contain;background-repeat:no-repeat;background-position:center"></span>
 <sc-if value="{{ s.tick }}"><span class="sptick sptick1">✓</span><span class="sptick sptick2">✓</span></sc-if>
@@ -1001,26 +1011,26 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 <span class="spcur {{ s.cur }}"><b></b><i></i></span>
 </span>
 </div>
-<figcaption style="margin-top:12px;font:300 13.5px/1.6 Outfit,sans-serif;color:#9a9aa2;text-wrap:pretty">{{ s.cap }}</figcaption>
+<figcaption style="margin-top:12px;font:300 13.5px/1.6 Outfit,sans-serif;color:var(--muted);text-wrap:pretty">{{ s.cap }}</figcaption>
 </figure>
 </sc-for>
 </div>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px">
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Palette</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Palette</div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px">
 <sc-for list="{{ palette }}" as="c">
 <div>
-<div style="aspect-ratio:1/1;border-radius:10px;background:{{ c.hex }};border:1px solid rgba(63,63,66,.08)"></div>
-<div style="margin-top:6px;text-align:center;font:400 9px/1 'Space Mono',ui-monospace,monospace;color:#9a9aa2">{{ c.hex }}</div>
+<div style="aspect-ratio:1/1;border-radius:10px;background:{{ c.hex }};border:1px solid rgba(var(--inkrgb),.08)"></div>
+<div style="margin-top:6px;text-align:center;font:400 9px/1 'Space Mono',ui-monospace,monospace;color:var(--muted)">{{ c.hex }}</div>
 </div>
 </sc-for>
 </div>
 </div>
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px;display:flex;flex-direction:column">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Characters</div>
-<div style="font:600 22px/1 Outfit,sans-serif;color:#3d7d7a;margin-top:16px">SayPlay!</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px;display:flex;flex-direction:column">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Characters</div>
+<div style="font:600 22px/1 Outfit,sans-serif;color:var(--accent);margin-top:16px">SayPlay!</div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px">
 <sc-for list="{{ avatars }}" as="a">
 <div style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#fffcf6;border-radius:10px;overflow:hidden">
@@ -1028,18 +1038,18 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 </sc-for>
 </div>
-<div style="margin-top:14px;font:400 10px/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#9a9aa2">Four avatar characters</div>
+<div style="margin-top:14px;font:400 10px/1.4 'Space Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Four avatar characters</div>
 </div>
 </div>
 </div>
 
 <div id="final" data-sec="final" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Final design</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Final design</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The main board, as a child and a caregiver both see it</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">One screen carries the whole interaction. Boards stay fixed down the left so a child learns their position by muscle memory rather than by reading. The sentence builds left to right along the top, where a caregiver leaning over the tablet can read it without blocking the grid. Everything else recedes.</p>
+<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">One screen carries the whole interaction. Boards stay fixed down the left so a child learns their position by muscle memory rather than by reading. The sentence builds left to right along the top, where a caregiver leaning over the tablet can read it without blocking the grid. Everything else recedes.</p>
 
 <figure style="margin:36px 0 0">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:16px;padding:20px">
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:16px;padding:20px">
 <div class="spd" ref="{{ stageRef }}" onMouseEnter="{{ dPause }}" onMouseLeave="{{ dResume }}">
 <div class="spdhead">SayPlay<span>Boards</span></div>
 <div class="spdbody">
@@ -1067,52 +1077,52 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 <div class="spdhint"><i></i>Auto-playing — hover to take over</div>
 </div>
-<figcaption style="margin-top:14px;font:300 13.5px/1.6 Outfit,sans-serif;color:#9a9aa2;text-wrap:pretty">Animals board, 10.9-inch tablet, landscape. The symbol set is the one already used in therapy at UCP.</figcaption>
+<figcaption style="margin-top:14px;font:300 13.5px/1.6 Outfit,sans-serif;color:var(--muted);text-wrap:pretty">Animals board, 10.9-inch tablet, landscape. The symbol set is the one already used in therapy at UCP.</figcaption>
 </figure>
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px">
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Sentence strip</div>
-<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Each word stays a tappable chip after it lands, so a wrong pick is corrected by touching it rather than clearing the line and starting over.</p>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Sentence strip</div>
+<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Each word stays a tappable chip after it lands, so a wrong pick is corrected by touching it rather than clearing the line and starting over.</p>
 </div>
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Board rail</div>
-<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Five boards, always in the same order, each with a fixed colour. Position and colour do the identifying work so the labels are a convenience rather than a requirement.</p>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Board rail</div>
+<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Five boards, always in the same order, each with a fixed colour. Position and colour do the identifying work so the labels are a convenience rather than a requirement.</p>
 </div>
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Grid</div>
-<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Fifteen tiles per page rather than a dense board. Targets clear the motor-control threshold therapists set, and the selected tile holds a visible ring so a child can see what they chose.</p>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Grid</div>
+<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Fifteen tiles per page rather than a dense board. Targets clear the motor-control threshold therapists set, and the selected tile holds a visible ring so a child can see what they chose.</p>
 </div>
-<div style="border:1px solid rgba(63,63,66,.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Progress row</div>
-<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">Kept factual and placed at the bottom edge. It is there for the caregiver reviewing a session, not as a reward loop competing with the child's attention.</p>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Progress row</div>
+<p style="margin:14px 0 0;font:300 15.5px/1.65 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Kept factual and placed at the bottom edge. It is there for the caregiver reviewing a session, not as a reward loop competing with the child's attention.</p>
 </div>
 </div>
 </div>
 
 <div id="outcome" data-sec="outcome" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">Outcome</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Outcome</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Where it stands</h2>
-<div style="margin-top:40px;border-top:1px solid rgba(63,63,66,.1)">
+<div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ outcomes }}" as="o">
-<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(63,63,66,.1)">
-<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a9aa2">{{ o.cat }}</div>
-<div style="font:400 16px/1.6 Outfit,sans-serif;color:#3f3f42">{{ o.v }}</div>
+<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ o.cat }}</div>
+<div style="font:400 16px/1.6 Outfit,sans-serif;color:var(--ink)">{{ o.v }}</div>
 </div>
 </sc-for>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px">
 <sc-for list="{{ reflections }}" as="r">
-<div style="background:#fdf8e2;border:1px solid rgba(63,63,66,.07);border-radius:14px;padding:24px">
-<h3 style="margin:0;font:500 17px/1.35 Outfit,sans-serif;color:#3f3f42">{{ r.t }}</h3>
-<p style="margin:12px 0 0;font:300 15px/1.65 Outfit,sans-serif;color:#6b6b74;text-wrap:pretty">{{ r.b }}</p>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
+<h3 style="margin:0;font:500 17px/1.35 Outfit,sans-serif;color:var(--ink)">{{ r.t }}</h3>
+<p style="margin:12px 0 0;font:300 15px/1.65 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="next" data-sec="next" style="scroll-margin-top:110px;padding-top:128px;padding-bottom:120px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#9a9aa2">What's next</div>
+<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">What's next</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">A prototype is not a product in a child's hands</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px">
 <sc-for list="{{ next }}" as="n">
@@ -1122,8 +1132,8 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 <span class="spnstage"><i></i>{{ n.stage }}</span>
 <span class="spnmascot"><span role="img" aria-label="{{ n.alt }}" style=";background-image:url({{ n.img }});background-size:contain;background-repeat:no-repeat;background-position:center"></span></span>
 </div>
-<h3 style="margin:0;font:500 21px/1.24 Newsreader,Georgia,serif;letter-spacing:-.018em;color:#1c1b1f;text-wrap:pretty">{{ n.t }}</h3>
-<p style="margin:0;font:300 14.5px/1.6 Outfit,sans-serif;color:#5e5e68;text-wrap:pretty">{{ n.b }}</p>
+<h3 style="margin:0;font:500 21px/1.24 Newsreader,Georgia,serif;letter-spacing:-.018em;color:var(--ink);text-wrap:pretty">{{ n.t }}</h3>
+<p style="margin:0;font:300 14.5px/1.6 Outfit,sans-serif;color:var(--body);text-wrap:pretty">{{ n.b }}</p>
 </div>
 </sc-for>
 </div>
@@ -1132,13 +1142,13 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 </div>
 </div>
 
-<div style="border-top:1px solid rgba(63,63,66,.1)">
+<div style="border-top:1px solid rgba(var(--inkrgb),.1)">
 <div style="max-width:1240px;margin:0 auto;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
 <div>
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#9a9aa2">Next project</div>
-<a href="nutrihealth.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:#3f3f42;transition:color .25s" style-hover="color:#3d7d7a">NutriHealth →</a>
+<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Next project</div>
+<a href="nutrihealth.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:var(--ink);transition:color .25s" style-hover="color:var(--accent)">NutriHealth →</a>
 </div>
-<a href="index.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(63,63,66,.2);text-decoration:none;color:#3f3f42;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .25s" style-hover="background:#fdf3e4">All work</a>
+<a href="index.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(var(--inkrgb),.2);text-decoration:none;color:var(--ink);font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--hover)">All work</a>
 </div>
 <div style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
 </div>
@@ -1375,7 +1385,7 @@ class Component extends DCLogic {
         links.forEach(a => {
           const id = a.getAttribute('data-toc');
           const on = id === active;
-          a.style.color = on ? '#3f3f42' : '#b0aeb6';
+          a.style.color = on ? 'var(--ink)' : '#b0aeb6';
         });
       });
     };
@@ -1605,7 +1615,7 @@ class Component extends DCLogic {
         { k: 'Role', v: 'Project Lead' },
         { k: 'Partner', v: 'United Cerebral Palsy Center of Greater Cleveland' },
         { k: 'Timeline', v: 'May – Aug 2025' },
-        { k: 'Team', v: '1 lead, 2 developers' }
+        { k: 'Team', v: 'Solo — research, design, testing' }
       ],
 
       toc: [
@@ -1627,7 +1637,7 @@ class Component extends DCLogic {
       steps: [
         { n: '01', t: 'Research', b: 'Eight weeks embedded at UCP, interviewing clinicians across three disciplines and observing therapy sessions.' },
         { n: '02', t: 'Design', b: 'Owned the end-to-end product design — four feature areas, an accessible component library, and four illustrated avatars.' },
-        { n: '03', t: 'Leadership', b: 'Set direction for two developers, translated clinical feedback into scope, and kept the build accessible-first.' }
+        { n: '03', t: 'Iteration', b: 'Translated clinical feedback into scope round after round, and kept every screen accessible-first.' }
       ],
 
       frictions: ['Cognitive overload', 'No emotional vocabulary', 'Adult dependence', 'No social use'],
@@ -1710,7 +1720,7 @@ class Component extends DCLogic {
       outcomes: [
         { cat: 'Delivered', v: 'A full product design across four feature areas, an accessible component library sized for limited fine motor control, and four illustrated avatar characters.' },
         { cat: 'Research', v: 'Eight weeks on site at UCP, clinicians across three disciplines interviewed, and four themes mapped from affinity analysis of those sessions.' },
-        { cat: 'Team', v: 'Direction set for two developers, with clinical feedback translated into scope decisions week by week.' },
+        { cat: 'Team', v: 'Worked solo, translating clinical feedback into scope decisions week by week.' },
         { cat: 'Measurement', v: 'Outcomes to be captured in pilot testing with families against the four success areas above.' }
       ],
 
