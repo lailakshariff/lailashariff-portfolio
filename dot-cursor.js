@@ -30,6 +30,78 @@
     document.head.appendChild(s);
   }
 
+  /* --- shooting-star trail: hero section only, deliberately sparse --- */
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* weighted palette from the existing artwork: rust, slate, charcoal, cream (rare) */
+  var TRAIL_COLORS = ['#a8544a', '#a8544a', '#a8544a', '#5b7794', '#5b7794', '#8f4038', '#22201d', '#e3dccb'];
+  var lastSpawn = { x: -999, y: -999 }, live = 0, hero = null, heroChecked = false;
+
+  function heroEl() {
+    if (!heroChecked) { hero = document.querySelector('.ls-hero'); heroChecked = !!hero; }
+    return hero;
+  }
+
+  /* true only while the pointer is inside the hero's visible area */
+  function inHero(cx, cy) {
+    var h = heroEl();
+    if (!h) return false;
+    var r = h.getBoundingClientRect();
+    if (r.bottom <= 0 || r.top >= innerHeight) return false;
+    return cy >= Math.max(0, r.top) && cy <= Math.min(innerHeight, r.bottom) && cx >= r.left && cx <= r.right;
+  }
+
+  function overType(el) {
+    return !!(el && el.closest && el.closest('.ls-hero-h1,.ls-hero-sub,.ls-hero-current,.ls-hero-nav'));
+  }
+
+  function spawn(cx, cy, vx, vy, quiet) {
+    if (live >= 12) return;
+    var big = Math.random() < 0.18;
+    var size = quiet ? 4.5 + Math.random() * 3.5 : (big ? 11 + Math.random() * 3 : 5.5 + Math.random() * 5);
+    var col = TRAIL_COLORS[(Math.random() * TRAIL_COLORS.length) | 0];
+    if (quiet && col === '#e3dccb') col = '#a8544a';
+    var mag = Math.hypot(vx, vy) || 1;
+    var reach = quiet ? 8 + Math.random() * 10 : 12 + Math.random() * 16;
+    var dx = -(vx / mag) * reach + (Math.random() - 0.5) * 11;
+    var dy = -(vy / mag) * reach + 6 + Math.random() * 13;
+    var el = document.createElement('div');
+    el.setAttribute('aria-hidden', 'true');
+    var op = quiet ? 0.5 : 0.82;
+    el.style.cssText =
+      'position:fixed;left:' + cx.toFixed(1) + 'px;top:' + cy.toFixed(1) + 'px;' +
+      'width:' + size.toFixed(1) + 'px;height:' + size.toFixed(1) + 'px;' +
+      'margin:' + (-size / 2).toFixed(1) + 'px 0 0 ' + (-size / 2).toFixed(1) + 'px;' +
+      'background:' + col + ';pointer-events:none;z-index:2147483646;opacity:' + op + ';' +
+      '-webkit-mask-image:' + STAR + ';mask-image:' + STAR + ';' +
+      '-webkit-mask-size:100% 100%;mask-size:100% 100%;' +
+      '-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;' +
+      'will-change:transform,opacity';
+    document.body.appendChild(el);
+    live++;
+    var dur = quiet ? 260 + Math.random() * 160 : 400 + Math.random() * 260;
+    var rot = (Math.random() - 0.5) * 150;
+    var done = function () { if (el.parentNode) el.remove(); live--; };
+    if (el.animate) {
+      var a = el.animate([
+        { transform: 'translate3d(0,0,0) scale(1) rotate(0deg)', opacity: op },
+        { transform: 'translate3d(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px,0) scale(.3) rotate(' + rot.toFixed(0) + 'deg)', opacity: 0 }
+      ], { duration: dur, easing: 'cubic-bezier(.25,.6,.3,1)', fill: 'forwards' });
+      a.onfinish = done;
+    } else {
+      setTimeout(done, dur);
+    }
+  }
+
+  function maybeTrail(target, cx, cy, vx, vy) {
+    if (REDUCED || !inHero(cx, cy)) return;
+    var quiet = overType(target);
+    var gap = quiet ? 54 : 34;                       // px of travel between stars
+    if (Math.hypot(cx - lastSpawn.x, cy - lastSpawn.y) < gap) return;
+    lastSpawn.x = cx; lastSpawn.y = cy;
+    if (quiet && Math.random() < 0.45) return;       // thin out over the headline
+    spawn(cx, cy, vx, vy, quiet);
+  }
+
   function hoverable(el) {
     return !!(el && el.closest && el.closest('a,button,[role="button"],.pile-card,input,textarea,select,summary'));
   }
@@ -165,8 +237,10 @@
 
   document.addEventListener('mousemove', function (e) {
     build();
+    var pvx = e.clientX - tx, pvy = e.clientY - ty;
     tx = e.clientX; ty = e.clientY;
     adapt(e.target, e.clientX, e.clientY);
+    maybeTrail(e.target, tx, ty, pvx, pvy);
     scale = hoverable(e.target) ? 1.55 : 1;
     if (dot) dot.style.opacity = '1';
     if (!raf) { x = tx; y = ty; raf = requestAnimationFrame(tick); }
