@@ -42,9 +42,131 @@
     raf = requestAnimationFrame(tick);
   }
 
+  /* --- adaptive contrast: keep the star visible on light artwork in dark mode --- */
+  var DARK_INK = '#141311', LIGHT_INK = '#f4f1ea';
+  var imgCache = new WeakMap(), lastPaint = 0, paintedLight = null;
+
+  function lum(r, g, b) { return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255; }
+
+  function parseRgb(str) {
+    var m = /rgba?\(([^)]+)\)/.exec(str || '');
+    if (!m) return null;
+    var p = m[1].split(',').map(parseFloat);
+    if (p.length > 3 && p[3] < 0.55) return null;
+    return p;
+  }
+
+  function sampleImage(el, cx, cy) {
+    var rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) return null;
+    var c = imgCache.get(el);
+    if (c === false) return null;
+    if (!c) {
+      if (!el.complete || !el.naturalWidth) return null;
+      try {
+        var cv = document.createElement('canvas');
+        cv.width = 32; cv.height = 32;
+        cv.getContext('2d').drawImage(el, 0, 0, 32, 32);
+        c = cv.getContext('2d').getImageData(0, 0, 32, 32).data;
+      } catch (err) { imgCache.set(el, false); return null; }
+      imgCache.set(el, c);
+    }
+    var gx = Math.min(31, Math.max(0, Math.floor((cx - rect.left) / rect.width * 32)));
+    var gy = Math.min(31, Math.max(0, Math.floor((cy - rect.top) / rect.height * 32)));
+    var i = (gy * 32 + gx) * 4;
+    return lum(c[i], c[i + 1], c[i + 2]);
+  }
+
+  var bgImgCache = {};
+
+  function gradientLum(bgi) {
+    if (!bgi || bgi === 'none' || bgi.indexOf('gradient') < 0) return null;
+    var m = bgi.match(/rgba?\([^)]+\)/g);
+    if (!m || !m.length) return null;
+    var tot = 0, n = 0;
+    for (var i = 0; i < Math.min(2, m.length); i++) {
+      var p = m[i].match(/[\d.]+/g).map(Number);
+      if (p.length > 3 && p[3] < 0.5) continue;
+      tot += lum(p[0], p[1], p[2]); n++;
+    }
+    return n ? tot / n : null;
+  }
+
+  function bgUrlLum(el, bgi, cx, cy) {
+    var u = /url\(["']?([^"')]+)["']?\)/.exec(bgi);
+    if (!u) return null;
+    var im = bgImgCache[u[1]];
+    if (im === false) return null;
+    if (!im) {
+      im = new Image();
+      im.onerror = function () { bgImgCache[u[1]] = false; };
+      im.src = u[1];
+      bgImgCache[u[1]] = im;
+      return null;
+    }
+    if (!im.complete || !im.naturalWidth) return null;
+    var rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) return null;
+    var c = imgCache.get(im);
+    if (c === false) return null;
+    if (!c) {
+      try {
+        var cv = document.createElement('canvas');
+        cv.width = 32; cv.height = 32;
+        var ctx = cv.getContext('2d');
+        ctx.drawImage(im, 0, 0, 32, 32);
+        c = ctx.getImageData(0, 0, 32, 32).data;
+      } catch (err) { imgCache.set(im, false); return null; }
+      imgCache.set(im, c);
+    }
+    var gx = Math.min(31, Math.max(0, Math.floor((cx - rect.left) / rect.width * 32)));
+    var gy = Math.min(31, Math.max(0, Math.floor((cy - rect.top) / rect.height * 32)));
+    var i2 = (gy * 32 + gx) * 4;
+    return lum(c[i2], c[i2 + 1], c[i2 + 2]);
+  }
+
+  function surfaceLum(el, cx, cy) {
+    var stack = [];
+    if (document.elementsFromPoint) stack = document.elementsFromPoint(cx, cy) || [];
+    var n = el, hops = 0;
+    while (n && n.nodeType === 1 && hops++ < 16) { stack.push(n); n = n.parentElement; }
+    for (var i = 0; i < stack.length; i++) {
+      var e2 = stack[i];
+      if (!e2 || e2.nodeType !== 1) continue;
+      if (e2.tagName === 'IMG') {
+        var l = sampleImage(e2, cx, cy);
+        if (l !== null) return l;
+      }
+      var cs = getComputedStyle(e2);
+      if (parseFloat(cs.opacity) < 0.5) continue;
+      var bgi = cs.backgroundImage;
+      var g = gradientLum(bgi);
+      if (g !== null) return g;
+      var iu = bgUrlLum(e2, bgi, cx, cy);
+      if (iu !== null) return iu;
+      var p = parseRgb(cs.backgroundColor);
+      if (p) return lum(p[0], p[1], p[2]);
+    }
+    return null;
+  }
+
+  function adapt(el, cx, cy) {
+    if (!dot) return;
+    var now = Date.now();
+    if (now - lastPaint < 70) return;
+    lastPaint = now;
+    var l = surfaceLum(el, cx, cy);
+    if (l === null) { paintedLight = null; dot.style.background = 'var(--dot,' + COLOR + ')'; return; }
+    var wantDark = l > 0.55;
+    if (paintedLight === wantDark) return;
+    paintedLight = wantDark;
+    dot.style.background = wantDark ? DARK_INK : LIGHT_INK;
+  }
+
   document.addEventListener('mousemove', function (e) {
     build();
     tx = e.clientX; ty = e.clientY;
+    adapt(e.target, e.clientX, e.clientY);
     scale = hoverable(e.target) ? 1.55 : 1;
     if (dot) dot.style.opacity = '1';
     if (!raf) { x = tx; y = ty; raf = requestAnimationFrame(tick); }

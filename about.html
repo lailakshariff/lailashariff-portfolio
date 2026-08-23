@@ -54,11 +54,15 @@ html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#cdc7ba;--body-2:#b5ae
 .ab-note-in{position:relative}
 .ab-note-d{position:relative}
 .ab-note-d[open]{margin-bottom:46px}
-.ab-note-t{list-style:none;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:9px;font:italic 300 16px/1.4 Newsreader,serif;color:var(--body);transition:color .3s ease}
+.ab-note-t{list-style:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;font:italic 300 21px/1.4 Newsreader,serif;color:var(--body);transition:color .3s ease}
+.ab-note-lbl{display:flex;align-items:center;gap:10px}
 .ab-note-t::-webkit-details-marker{display:none}
 .ab-note-t::marker{content:''}
 .ab-note-t:hover{color:var(--ink)}
-.ab-note-glyph{display:block;width:24px;height:auto;margin:0;flex:0 0 auto}
+.ab-note-glyph{display:block;width:86px;height:auto;margin:0;flex:0 0 auto;transform-origin:50% 50%;animation:abStarBeat 2.8s ease-in-out infinite}
+@keyframes abStarBeat{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.22) rotate(-6deg)}}
+.ab-note-d[open] .ab-note-glyph{animation:none}
+@media (prefers-reduced-motion:reduce){.ab-note-glyph{animation:none!important}}
 .ab-glyph-d{display:none}
 html[data-theme="dark"] .ab-glyph-l{display:none}
 html[data-theme="dark"] .ab-glyph-d{display:block}
@@ -175,7 +179,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="ab-note" aria-labelledby="ab-note-h">
 <div class="ab-note-in">
 <details class="ab-note-d">
-<summary class="ab-note-t"><img class="ab-note-glyph ab-glyph-l" src="assets/star-solid.png" alt=""><img class="ab-note-glyph ab-glyph-d" src="assets/star-solid-blue.png" alt=""><span id="ab-note-h">a little note on the star</span><s>›</s></summary>
+<summary class="ab-note-t"><img class="ab-note-glyph ab-glyph-l" src="assets/star-grid.svg" alt=""><img class="ab-note-glyph ab-glyph-d" src="assets/star-grid-blue.svg" alt=""><span class="ab-note-lbl"><span id="ab-note-h">a little note on the star</span><s>›</s></span></summary>
 <div class="ab-note-inner">
 <div class="ab-note-copy"><p>“Laila” comes from the Arabic word for <em style="font-style:normal;color:var(--navon)">night</em>. Growing up, my mom would tell me it meant I was a night star, and stars slowly became my thing — scribbled across notebooks, worked into signatures, and doodled anywhere I could fit one.</p><p>So when I needed a mark that felt like me, a shooting star felt inevitable. Its colors borrow from another visual language I love: the warm terracottas, dusty blues, creams, and deep tones of Moroccan tilework.</p><div class="ab-note-sw" aria-hidden="true"><i style="background:#b5a799"></i><i style="background:#97540c"></i><i style="background:#4a4746"></i><i style="background:#54658a"></i></div></div>
 <div class="ab-note-arch"><img src="assets/about-arch.png" alt="A Marrakech courtyard seen through an arch" loading="lazy"></div>
