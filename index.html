@@ -212,6 +212,20 @@ svg[aria-label="Shooting star"] path:nth-of-type(9){animation:crossPop 3s ease-i
 @media (hover:none){}
 @media (prefers-reduced-motion:reduce){.wcard-art > div:first-child{transition:none}}
 @media (max-width:1150px){.wcard-head{flex-direction:column;align-items:flex-start;gap:12px;margin-top:18px}.wcard-chips{justify-content:flex-start;flex-wrap:wrap}.wcard-head h3{font-size:23px}}
+.smrwcard .smrwstack{display:flex;flex-direction:column;align-items:center;gap:5.4cqh}
+.smrwcard .smrwlogo{display:flex;align-items:center;gap:2.4cqh}
+.smrwcard .smrwlogo img{display:block;width:9cqh;height:9cqh}
+.smrwcard .smrwlogo span{font:700 8.2cqh/1 'Plus Jakarta Sans',sans-serif;letter-spacing:-.025em;color:#fff}
+.smrwcard .smrwkick{font:400 3.2cqh/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#1ED760;transition:opacity .4s ease}
+.smrwcard .smrwstrip{display:flex;gap:1.8cqh}
+.smrwcard .smrwstrip img{display:block;width:14cqh;height:14cqh;object-fit:cover;border-radius:1cqh;box-shadow:0 2.4cqh 4cqh rgba(0,0,0,.55);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.wcard:hover .smrwcard .smrwstrip img{transform:translateY(-2cqh)}
+.wcard:hover .smrwcard .smrwstrip img:nth-child(2){transition-delay:.05s}
+.wcard:hover .smrwcard .smrwstrip img:nth-child(3){transition-delay:.1s}
+.wcard:hover .smrwcard .smrwstrip img:nth-child(4){transition-delay:.15s}
+.wcard:hover .smrwcard .smrwstrip img:nth-child(5){transition-delay:.2s}
+html[data-theme="dark"] .smrwcard .smrwstrip img,html[data-theme="dark"] .smrwcard .smrwlogo img{filter:none}
+@media (prefers-reduced-motion:reduce){.smrwcard .smrwstrip img{transition:none}}
 .pforbit{position:relative;width:100cqh;height:100cqh;transform:scale(.78) translateZ(0)}
 .pfring{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%)}
 .pfr1{width:85.4cqh;height:85.4cqh;border:.38cqh dotted #A99CD0;opacity:.75;animation:pfRing 150s linear infinite}
@@ -532,6 +546,18 @@ setTimeout(go,5200);})();</script>
 <div class="wcard-art"><div class="nhwcard" data-chip="Case study" style="position:relative;width:100%;aspect-ratio:4/3;border-radius:0;overflow:hidden;background:linear-gradient(155deg,#fdfaf0 0%,#e4f1de 28%,#bfdec6 58%,#8fc4a1 85%,#6fb188 100%);display:grid;place-items:center;container-type:size"><div class="nhwin"><div class="nhrail"><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div></div></div></div></div>
 <div class="wcard-head"><h3>NutriHealth</h3><div class="wcard-chips"><span class="wchip">AI</span><span class="wchip">Mobile</span><span class="wchip wchip-yr">2025</span></div></div>
 <p class="wcard-desc">A mobile app that helps college students build easier eating habits around busy schedules.</p>
+</a>
+
+<a href="spotify-monthly-recap.html" class="wcard" style="display:block;text-decoration:none;color:inherit">
+<div class="wcard-art"><div class="smrwcard" style="position:relative;width:100%;aspect-ratio:4/3;border-radius:0;overflow:hidden;background:radial-gradient(122% 96% at 50% 14%,#211d18 0%,#0e0d0c 56%,#000000 100%);display:grid;place-items:center;container-type:size">
+<div class="smrwstack">
+<div class="smrwlogo"><img src="assets/smr/spotify-logo.webp" alt="Spotify logo"><span>Spotify</span></div>
+<div class="smrwkick">Chapters · August 2026</div>
+<div class="smrwstrip"><img src="assets/smr/album-art/pw.jpg" alt="Album artwork"><img src="assets/smr/album-art/sz.jpg" alt="Album artwork"><img src="assets/smr/album-art/cc.jpg" alt="Album artwork"><img src="assets/smr/album-art/no.jpg" alt="Album artwork"><img src="assets/smr/album-art/sf.jpg" alt="Album artwork"></div>
+</div>
+</div></div>
+<div class="wcard-head"><h3>Spotify Chapters</h3><div class="wcard-chips"><span class="wchip">Product Concept</span><span class="wchip">Mobile + Desktop</span><span class="wchip wchip-yr">2026</span></div></div>
+<p class="wcard-desc">An independent product concept turning each month of listening into a visual archive of music, moments, and memories.</p>
 </a>
 
 </div>
