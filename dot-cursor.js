@@ -17,7 +17,7 @@
     dot.style.cssText =
       'position:fixed;left:0;top:0;width:' + W + 'px;height:' + H + 'px;' +
       'margin:' + (-H / 2) + 'px 0 0 ' + (-W / 2) + 'px;' +
-      'background:var(--dot,' + COLOR + ');pointer-events:none;z-index:2147483647;' +
+      'background:#a8544a;pointer-events:none;z-index:2147483647;' +
       '-webkit-mask-image:' + STAR + ';mask-image:' + STAR + ';' +
       '-webkit-mask-size:100% 100%;mask-size:100% 100%;' +
       '-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;' +
@@ -33,7 +33,7 @@
   /* --- shooting-star trail: hero section only, deliberately sparse --- */
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   /* weighted palette from the existing artwork: rust, slate, charcoal, cream (rare) */
-  var TRAIL_COLORS = ['#a8544a', '#a8544a', '#a8544a', '#5b7794', '#5b7794', '#8f4038', '#22201d', '#e3dccb'];
+  var TRAIL_COLORS = ['#a8544a', '#a8544a', '#5b7794', '#5b7794', '#8f4038', '#22201d'];
   var lastSpawn = { x: -999, y: -999 }, live = 0, hero = null, heroChecked = false;
 
   function heroEl() {
@@ -55,11 +55,11 @@
   }
 
   function spawn(cx, cy, vx, vy, quiet) {
-    if (live >= 12) return;
-    var big = Math.random() < 0.18;
-    var size = quiet ? 4.5 + Math.random() * 3.5 : (big ? 11 + Math.random() * 3 : 5.5 + Math.random() * 5);
+    if (live >= 9) return;
+    var big = Math.random() < 0.2;
+    var size = quiet ? 5 + Math.random() * 3 : (big ? 11 + Math.random() * 3 : 6.5 + Math.random() * 4.5);
     var col = TRAIL_COLORS[(Math.random() * TRAIL_COLORS.length) | 0];
-    if (quiet && col === '#e3dccb') col = '#a8544a';
+    
     var mag = Math.hypot(vx, vy) || 1;
     var reach = quiet ? 8 + Math.random() * 10 : 12 + Math.random() * 16;
     var dx = -(vx / mag) * reach + (Math.random() - 0.5) * 11;
@@ -78,7 +78,7 @@
       'will-change:transform,opacity';
     document.body.appendChild(el);
     live++;
-    var dur = quiet ? 260 + Math.random() * 160 : 400 + Math.random() * 260;
+    var dur = quiet ? 220 + Math.random() * 130 : 330 + Math.random() * 210;
     var rot = (Math.random() - 0.5) * 150;
     var done = function () { if (el.parentNode) el.remove(); live--; };
     if (el.animate) {
@@ -95,11 +95,27 @@
   function maybeTrail(target, cx, cy, vx, vy) {
     if (REDUCED || !inHero(cx, cy)) return;
     var quiet = overType(target);
-    var gap = quiet ? 54 : 34;                       // px of travel between stars
+    var gap = quiet ? 70 : 44;                       // px of travel between stars
     if (Math.hypot(cx - lastSpawn.x, cy - lastSpawn.y) < gap) return;
     lastSpawn.x = cx; lastSpawn.y = cy;
-    if (quiet && Math.random() < 0.45) return;       // thin out over the headline
+    if (quiet && Math.random() < 0.55) return;       // thin out over the headline
     spawn(cx, cy, vx, vy, quiet);
+  }
+
+  /* star goes black while the pointer is on nav text */
+  var STAR_BASE = '#a8544a', navBlack = false;
+
+  function overNavText(el) {
+    return !!(el && el.closest && el.closest('.pnav a,.pnav button,.pnav-wordmark,.ls-hero-nav a,.ls-hero-nav button'));
+  }
+
+  function navTint(el) {
+    if (!dot) return;
+    var want = overNavText(el);
+    if (want === navBlack) return;
+    navBlack = want;
+    var over = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : '#000000';
+    dot.style.background = want ? over : STAR_BASE;
   }
 
   function hoverable(el) {
@@ -223,6 +239,7 @@
   }
 
   function adapt(el, cx, cy) {
+    return; /* mix-blend-mode:difference now handles contrast */
     if (!dot) return;
     var now = Date.now();
     if (now - lastPaint < 70) return;
@@ -240,6 +257,7 @@
     var pvx = e.clientX - tx, pvy = e.clientY - ty;
     tx = e.clientX; ty = e.clientY;
     adapt(e.target, e.clientX, e.clientY);
+    navTint(e.target);
     maybeTrail(e.target, tx, ty, pvx, pvy);
     scale = hoverable(e.target) ? 1.55 : 1;
     if (dot) dot.style.opacity = '1';

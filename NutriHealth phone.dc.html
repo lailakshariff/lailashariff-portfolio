@@ -9,10 +9,20 @@
 <x-dc>
 <helmet>
 <style>
-.nhph{position:relative;width:100%;aspect-ratio:377/760;container-type:size;user-select:none;font-family:Outfit,system-ui,sans-serif}
-.nhbez{position:absolute;inset:0;border-radius:7.6cqh;background:linear-gradient(150deg,#3a3a3c,#101012 40%,#2c2c2e);padding:1.15cqh;box-sizing:border-box;box-shadow:0 3cqh 6cqh -2cqh rgba(20,44,30,.5)}
-.nhin{position:absolute;inset:1.15cqh;border-radius:6.5cqh;background:#FDF8EF;overflow:hidden;display:flex;flex-direction:column;color:#2F3A31}
-.nhnotch{position:absolute;left:50%;top:1.9cqh;transform:translateX(-50%);width:14cqh;height:2.4cqh;border-radius:99px;background:#0e0e10;z-index:6}
+.nhph{position:relative;width:100%;aspect-ratio:393/852;container-type:size;user-select:none;font-family:Outfit,system-ui,sans-serif}
+.nhbez{position:absolute;inset:0;border-radius:6.6cqh;padding:1.05cqh;box-sizing:border-box;
+  background:linear-gradient(142deg,#6e6e74 0%,#3a3a3f 9%,#151518 34%,#0d0d0f 58%,#26262b 80%,#5c5c63 100%);box-shadow:0 3cqh 6cqh -2cqh rgba(20,44,30,.5)}
+.nhin{position:absolute;inset:1.05cqh;border-radius:5.62cqh;background:#FDF8EF;overflow:hidden;display:flex;flex-direction:column;color:#2F3A31}
+.nhnotch{position:absolute;left:50%;top:2.4cqh;transform:translateX(-50%);width:14.6cqh;height:4.05cqh;border-radius:99px;background:#000;z-index:6}
+.nhbez::after{content:'';position:absolute;inset:0;border-radius:6.6cqh;pointer-events:none;
+  box-shadow:inset 0 0 0 .16cqh rgba(255,255,255,.26),inset 0 0 0 .55cqh rgba(0,0,0,.55)}
+.nhbtn{position:absolute;z-index:5;border-radius:.34cqh;background:linear-gradient(90deg,#4a4a50,#191a1d 60%,#3a3a40)}
+.nhbtn-l{left:-.5cqh;width:.5cqh}
+.nhbtn-r{right:-.5cqh;width:.5cqh;background:linear-gradient(270deg,#4a4a50,#191a1d 60%,#3a3a40)}
+.nhbtn-a{top:16.5%;height:3.4%}
+.nhbtn-u{top:23.5%;height:7.4%}
+.nhbtn-d{top:32.5%;height:7.4%}
+.nhbtn-p{top:25.5%;height:10.2%}
 .nhcur{position:absolute;width:2.9cqh;height:2.9cqh;margin:-1.45cqh 0 0 -1.45cqh;border-radius:50%;background:rgba(47,58,49,.24);border:.28cqh solid rgba(255,255,255,.9);box-shadow:0 .6cqh 1.6cqh rgba(20,44,30,.4);z-index:8;pointer-events:none;transition:left .62s cubic-bezier(.32,.72,.2,1),top .62s cubic-bezier(.32,.72,.2,1),transform .18s ease,opacity .3s}
 .nhcur.is-press{transform:scale(.62);background:rgba(47,58,49,.5)}
 .nhph:hover .nhcur{opacity:0}
@@ -429,6 +439,10 @@
 
 </div>
 <div class="nhnotch"></div>
+<span class="nhbtn nhbtn-l nhbtn-a" aria-hidden="true"></span>
+<span class="nhbtn nhbtn-l nhbtn-u" aria-hidden="true"></span>
+<span class="nhbtn nhbtn-l nhbtn-d" aria-hidden="true"></span>
+<span class="nhbtn nhbtn-r nhbtn-p" aria-hidden="true"></span>
 <div class="nhcur {{ curCls }}" style="{{ curPos }}"></div>
 </div>
 </div>

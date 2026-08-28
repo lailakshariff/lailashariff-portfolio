@@ -1,0 +1,38 @@
+/* Site header: name left, nav right — uncontained, fixed, quiet.
+   Keeps the original bar's typography and blurred surface; adds persistence
+   and a terracotta current-page marker. */
+:root{--pnav-on:#a8544a;--pnav-hover:#a8544a}
+html[data-theme="dark"]{--pnav-on:#d98d7e;--pnav-hover:#d98d7e}
+
+.pnav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:22px 64px;pointer-events:none;
+  background:color-mix(in srgb,var(--bg) 84%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px)}
+/* at the top of the page the bar is invisible — it only gains a surface once content scrolls under it */
+html[data-pnav="full"] .pnav{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+.pnav{transition:background .3s ease}
+@media (prefers-reduced-motion:reduce){.pnav{transition:none}}
+.pnav-space{height:66px}
+
+.pnav-wordmark{pointer-events:auto;display:inline-flex;align-items:center;min-height:24px;text-decoration:none;font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap;transition:color .22s ease}
+.pnav-wordmark:hover{color:var(--pnav-hover)}
+.pnav-wordmark:focus-visible{outline:2px solid var(--pnav-on);outline-offset:3px}
+
+.pnav-in{pointer-events:auto;display:flex;align-items:center;gap:28px}
+.pnav-in a{display:inline-flex;align-items:center;min-height:24px;text-decoration:none;
+  font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  transition:color .22s ease}
+.pnav-in a:hover{color:var(--pnav-hover)}
+.pnav-in a[aria-current]{color:var(--ink)}
+.pnav-in a:focus-visible,.pnav .tmode:focus-visible,.pnav .ls-theme-toggle:focus-visible{outline:2px solid var(--pnav-on);outline-offset:3px}
+
+.pnav .tmode,.pnav .ls-theme-toggle{margin:-6px -8px -6px -4px;width:34px;height:34px;color:var(--ink)}
+.pnav .tmode:hover,.pnav .ls-theme-toggle:hover{color:var(--pnav-hover);background:none}
+.pnav .tmode svg,.pnav .ls-theme-toggle svg{width:16px;height:16px;stroke-width:1.6}
+
+@media (max-width:900px){.pnav{padding:18px 24px}.pnav-in{gap:22px}.pnav-in a,.pnav-wordmark{min-height:44px}}
+@media (max-width:560px){.pnav{padding:14px 20px;gap:14px}.pnav-space{height:52px}
+  .pnav-wordmark{font-size:10.5px;letter-spacing:.09em}
+  .pnav-in{gap:15px}.pnav-in a{font-size:10.5px;letter-spacing:.08em}}
+@media (max-width:390px){.pnav-wordmark{display:none}}
+@media (prefers-reduced-motion:reduce){.pnav-in a{transition:none}}

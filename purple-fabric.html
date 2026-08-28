@@ -10,7 +10,7 @@
 <helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./responsive.css">
 <style>
 body{margin:0;background:var(--bg)}
@@ -24,12 +24,12 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 .pfbrowser{width:min(100%,660px);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 40px 76px rgba(52,20,90,.32),0 5px 14px rgba(52,20,90,.18)}
 .pfbar{display:flex;align-items:center;gap:6px;padding:0 14px;height:34px;background:#f4f0f9;border-bottom:1px solid rgba(40,20,70,.07)}
 .pfdot{width:7px;height:7px;border-radius:50%;background:#ddd4e8}
-.pfurl{margin-left:14px;padding:4px 14px;border-radius:99px;background:#fff;border:1px solid rgba(40,20,70,.08);font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.1em;color:var(--muted-2)}
+.pfurl{margin-left:14px;padding:4px 14px;border-radius:99px;background:#fff;border:1px solid rgba(40,20,70,.08);font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--muted-2)}
 .pfpage{position:relative;height:clamp(248px,28vw,330px);box-sizing:border-box}
 .pfband{position:absolute;left:16px;right:16px;top:3.6%;height:13%;display:flex;align-items:center;gap:12px;padding:0 16px;box-sizing:border-box;border-radius:9px;background:var(--surf-2);border:1px solid rgba(var(--inkrgb),.07);color:var(--body);will-change:transform}
 .pbdot{flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:#c3bcd2}
-.pbl{font:500 clamp(12px,1.35vw,14.5px)/1 Outfit,sans-serif;white-space:nowrap}
-.pbk{font:400 clamp(9px,1vw,10.5px)/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap}
+.pbl{font:500 clamp(12px,1.35vw,14.5px)/1 'Instrument Sans',system-ui,sans-serif;white-space:nowrap}
+.pbk{font:500 clamp(9px,1vw,10.5px)/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap}
 .pbskel{margin-left:auto;display:flex;flex-direction:column;gap:5px;width:24%;min-width:60px}
 .pbskel i{display:block;height:4px;border-radius:99px;background:rgba(var(--inkrgb),.1)}
 .pbskel i:last-child{width:62%}
@@ -46,7 +46,7 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 @keyframes pbB5{0%,32%{transform:translateY(492.3%)}44%,88%{transform:translateY(492.3%)}100%{transform:translateY(492.3%)}}
 @keyframes pbB6{0%,32%{transform:translateY(615.4%)}44%,88%{transform:translateY(615.4%)}100%{transform:translateY(615.4%)}}
 .pfphase{position:relative;height:20px;width:100%;display:flex;justify-content:center}
-.pfph{position:absolute;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.pfph{position:absolute;font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
 .pfpha{color:var(--accent-3);animation:pbPhA 13s linear infinite}
 .pfphb{color:var(--accent-2);animation:pbPhB 13s linear infinite}
 @keyframes pbPhA{0%,32%{opacity:1}40%,92%{opacity:0}100%{opacity:1}}
@@ -58,6 +58,8 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 .pfmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(var(--inkrgb),.1)}
 .pfmeta > div:first-child{border-left:0;padding-left:0}
 @media (max-width:900px){.pfrail{display:none !important}}
+@media (max-width:900px){.pfbody{grid-template-columns:minmax(0,1fr) !important;gap:0 !important;padding-left:24px !important;padding-right:24px !important}}
+@media (max-width:1150px){.pfrow{grid-template-columns:minmax(0,1fr) !important;gap:10px !important}}
 /*mobm*/
 @media (max-width:1150px){
 [style*="grid-template-columns:180px minmax(0,1fr)"],[style*="grid-template-columns:230px minmax(0,1fr)"]{grid-template-columns:minmax(0,1fr) !important;gap:10px !important}
@@ -69,7 +71,6 @@ h1{font-size:clamp(38px,11vw,52px) !important}
 [data-sec]{padding-top:72px !important}
 [data-sec] h2{font-size:clamp(25px,6.6vw,32px) !important;line-height:1.18 !important}
 [data-sec] h3,[data-sec] h4{font-size:clamp(19px,5vw,25px) !important}
-.pfnav{padding-left:24px !important;padding-right:24px !important}
 }
 
 @media (max-width:760px){
@@ -77,51 +78,51 @@ h1{font-size:clamp(38px,11vw,52px) !important}
 .pfmeta > div:first-child,.pfmeta > div:nth-child(2){border-top:0}
 .pfmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(var(--inkrgb),.1)}
 }
-@media (max-width:560px){
-.pfnav{font-size:10px !important;letter-spacing:.1em !important;padding-top:16px !important;padding-bottom:16px !important}
-.pfnav > div{gap:16px !important}
-}
-/*navtap*/@media (max-width:900px){.pfnav a{display:inline-flex;align-items:center;min-height:44px}.pfnav{padding-top:4px !important;padding-bottom:4px !important}}
+
+
 </style>
 <script src="./dot-cursor.js"></script><style>:root{--bg:#ffffff;--ink:#1c1b1f;--body:#4a4750;--body-2:#6a6672;--muted:#8b8894;--muted-2:#a9a4b5;--surf:#f8f6fb;--surf-2:#f6f3fa;--accent:#4b1d7a;--accent-2:#3b1466;--accent-3:#6b5b84;--card:#ffffff;--tile:#ece5f6;--inkrgb:28,27,31;--hover:#f1eaf9}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f1eff4;--body:#c9c5d0;--body-2:#aeaab8;--muted:#918d9b;--muted-2:#7e7a8a;--surf:#221f2a;--surf-2:#1e1c25;--accent:#b79ae0;--accent-2:#c9b3ec;--accent-3:#a79cbe;--card:#231f2c;--tile:#2e2740;--dot:#ffffff;--inkrgb:241,239,244;--hover:#2b2536}
 html[data-theme="dark"] .pfmock{--card:#ffffff;--tile:#ece5f6;--accent:#4b1d7a;--accent-2:#3b1466;--accent-3:#6b5b84;--ink:#1c1b1f;--body:#5e5e68;--body-2:#6b6b74;--muted:#9a9aa2;--surf:#f8f6fb;--surf-2:#f6f3fa}
 @media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:color-mix(in srgb,var(--bg) 92%,transparent);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(var(--inkrgb),.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(var(--inkrgb),.09);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-sheet a:last-child{border-bottom:0}.mnav-open .mnav-sheet a{opacity:1;transform:none}.mnav-open .mnav-sheet a:nth-child(1){transition-delay:.07s}.mnav-open .mnav-sheet a:nth-child(2){transition-delay:.12s}.mnav-open .mnav-sheet a:nth-child(3){transition-delay:.17s}.mnav-open .mnav-sheet a:nth-child(4){transition-delay:.22s}@media (min-width:769px){.mnav-sheet{display:none}}
-[data-sec] h3.kicker,h3.kicker{font-size:11.5px !important;line-height:1.7 !important;letter-spacing:.18em !important;text-wrap:balance}
-@media (max-width:640px){[data-sec] h3.kicker,h3.kicker{font-size:10.5px !important;letter-spacing:.14em !important;line-height:1.75 !important}}
+[data-sec] h3.kicker,h3.kicker{font-size:11.5px !important;line-height:1.7 !important;letter-spacing:.07em !important;text-wrap:balance}
+@media (max-width:640px){[data-sec] h3.kicker,h3.kicker{font-size:11px !important;letter-spacing:.07em !important;line-height:1.75 !important}}
 .pfsteps{min-width:0}
 @media (max-width:1000px){.pfsteps{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:16px !important}}
 @media (max-width:620px){.pfsteps{grid-template-columns:minmax(0,1fr) !important}}
 .pfsteph{flex-wrap:wrap}
 body{background:var(--bg);color:var(--ink)}</style>
 <link rel="stylesheet" href="./theme.css">
-<script src="./theme.js"></script><script data-mnav="1">(function(){var QQ=String.fromCharCode(34);function build(){var sel='[style*='+QQ+'position:sticky'+QQ+'],[style*='+QQ+'position: sticky'+QQ+'],.nav';var bars=document.querySelectorAll(sel);var nav=null;for(var i=0;i<bars.length;i++){var b=bars[i];if(b.querySelectorAll('a').length>=2&&b.getBoundingClientRect().top<200){nav=b;break;}}if(!nav||nav.dataset.mnav)return false;var groups=nav.querySelectorAll('div');var group=null;for(var g=0;g<groups.length;g++){if(groups[g].querySelectorAll('a').length>=2){group=groups[g];break;}}if(!group)return false;nav.dataset.mnav='1';group.classList.add('mnav-hide');var btn=document.createElement('button');btn.className='mnav-burger';btn.type='button';btn.setAttribute('aria-label','Menu');btn.setAttribute('aria-expanded','false');btn.appendChild(document.createElement('span'));nav.appendChild(btn);var sheet=document.createElement('div');sheet.className='mnav-sheet';var cs=window.getComputedStyle(nav);sheet.style.font=cs.font;var links=group.querySelectorAll('a');var here=(location.pathname.split('/').pop()||'index.html').toLowerCase();function isHere(h){h=(h||'').split('#')[0].split('/').pop().toLowerCase();if(!h)return true;if(h===here)return true;var home={'index.html':1,'home.dc.html':1};return home[h]===1&&home[here]===1;}function close(){if(opened)set(false);}for(var k=0;k<links.length;k++){var a=document.createElement('a');a.href=links[k].getAttribute('href');a.textContent=links[k].textContent;if(isHere(links[k].getAttribute('href'))){a.className='mnav-on';a.setAttribute('aria-current','page');}a.addEventListener('click',close);sheet.appendChild(a);}nav.parentNode.insertBefore(sheet,nav.nextSibling);var opened=false;function set(v){opened=v;document.documentElement.classList.toggle('mnav-open',v);btn.setAttribute('aria-expanded',v?'true':'false');}btn.addEventListener('click',function(e){e.stopPropagation();set(!opened);});document.addEventListener('click',function(e){if(opened&&!sheet.contains(e.target)&&!btn.contains(e.target))close();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});window.addEventListener('resize',function(){if(window.innerWidth>768)close();});return true;}var t=setInterval(function(){if(build())clearInterval(t);},150);setTimeout(function(){clearInterval(t);},12000);})();</script>
+<link rel="stylesheet" href="./pill-nav.css">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script>
 </helmet>
 
-<div style="background:var(--bg);color:var(--ink);font-family:Outfit,system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+<div style="background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased">
 
-<div class="pfnav" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase">
-<a href="index.html" style="text-decoration:none;color:var(--ink)">Laila Shariff</a>
-<div style="display:flex;gap:26px">
-<a href="index.html#work" style="text-decoration:none;color:var(--ink)">Work</a>
-<a href="playground.html" style="text-decoration:none;color:var(--ink)">Playground</a>
-<a href="about.html" style="text-decoration:none;color:var(--ink)">About</a><button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+<div class="pnav">
+<a href="index.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="index.html#work" aria-current="page">Work</a>
+<a href="playground.html">Playground</a>
+<a href="about.html">About</a>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
 </div>
 </div>
+<div class="pnav-space" aria-hidden="true"></div>
 
 <div id="top" style="max-width:1240px;margin:0 auto;padding:88px 64px 0;animation:pfUp .9s cubic-bezier(.2,.7,.2,1) both">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
 <img src="assets/inline/purple-fabric-1.png" alt="Purple Fabric logo" style="display:block;width:40px;height:40px;border-radius:9px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Case study · 2026</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Case study · 2026</div>
 </div>
 <h1 style="margin:0;max-width:16ch;font:500 clamp(46px,7vw,88px)/1.02 Newsreader,Georgia,serif;letter-spacing:-.035em">Purple Fabric</h1>
-<p style="margin:26px 0 0;max-width:720px;font:300 clamp(19px,2vw,23px)/1.55 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Redesigning the homepage of an enterprise AI platform for financial institutions — so a first-time visitor understands what it does, who it serves, and why to trust it in under 30 seconds.</p>
+<p style="margin:24px 0 0;max-width:62ch;font:400 clamp(16px,1.6vw,18.5px)/1.68 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Redesigning the homepage of an enterprise AI platform for financial institutions — so a first-time visitor understands what it does, who it serves, and why to trust it in under 30 seconds.</p>
 
 <div class="pfmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(var(--inkrgb),.1);border-bottom:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
 <div>
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">{{ m.k }}</div>
-<div style="margin-top:14px;font:400 15px/1.5 Outfit,sans-serif;color:var(--ink);text-wrap:pretty">{{ m.v }}</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">{{ m.k }}</div>
+<div style="margin-top:14px;font:400 15px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">{{ m.v }}</div>
 </div>
 </sc-for>
 </div>
@@ -147,13 +148,13 @@ body{background:var(--bg);color:var(--ink)}</style>
 
 </div>
 
-<div style="max-width:1240px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 72px;align-items:start">
+<div class="pfbody" style="max-width:1240px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 72px;align-items:start">
 
 <div class="pfrail" style="position:sticky;top:92px;padding-top:112px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:#b3b0ba;margin-bottom:18px">Contents</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#b3b0ba;margin-bottom:18px">Contents</div>
 <div style="display:flex;flex-direction:column">
 <sc-for list="{{ toc }}" as="t" hint-placeholder-count="11">
-<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:9px 0;text-decoration:none;font:400 14px/1.4 Outfit,sans-serif;color:#b0aeb6;transition:color .28s">
+<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:9px 0;text-decoration:none;font:400 14px/1.4 'Instrument Sans',system-ui,sans-serif;color:#b0aeb6;transition:color .28s">
 {{ t.label }}
 </a>
 </sc-for>
@@ -163,9 +164,9 @@ body{background:var(--bg);color:var(--ink)}</style>
 <div style="display:flex;flex-direction:column;min-width:0">
 
 <div id="overview" data-sec="overview" style="scroll-margin-top:110px;padding-top:112px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Overview</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Overview</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">I rebuilt an enterprise AI homepage around the buyer's questions instead of the platform's architecture</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Purple Fabric is Intellect Design Arena's enterprise AI platform. Its homepage led with internal vocabulary — Enterprise OS, Knowledge Garden, Digital Experts, Business Impact AI — which meant a first-time visitor had to learn the company's language before learning what the product does. I audited the page, benchmarked five competitors, restructured the information architecture around a buyer's decision path, and designed a new homepage.</p>
+<p style="margin:26px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Purple Fabric is Intellect Design Arena's enterprise AI platform. Its homepage led with internal vocabulary — Enterprise OS, Knowledge Garden, Digital Experts, Business Impact AI — which meant a first-time visitor had to learn the company's language before learning what the product does. I audited the page, benchmarked five competitors, restructured the information architecture around a buyer's decision path, and designed a new homepage.</p>
 <div class="pfsteps" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px">
 <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
 <div style="box-sizing:border-box;min-width:0;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
@@ -173,78 +174,78 @@ body{background:var(--bg);color:var(--ink)}</style>
 <span style="display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--tile);flex:0 0 auto">
 <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="{{ s.icon }}"></path></svg>
 </span>
-<div style="display:flex;align-items:baseline;gap:10px;min-width:0"><span style="font:700 20px/1 'Space Mono',ui-monospace,monospace;color:var(--accent)">{{ s.n }}</span><span style="font:500 24px/1 Outfit,sans-serif;letter-spacing:-.018em;color:var(--ink)">{{ s.t }}</span></div>
+<div style="display:flex;align-items:baseline;gap:10px;min-width:0"><span style="font:600 19px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.02em;color:var(--accent)">{{ s.n }}</span><span style="font:500 24px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:-.018em;color:var(--ink)">{{ s.t }}</span></div>
 </div>
-<p style="margin:16px 0 0;font:400 14.5px/1.62 Outfit,sans-serif;color:var(--body)">{{ s.b }}</p>
+<p style="margin:16px 0 0;font:400 14px/1.62 'Instrument Sans',system-ui,sans-serif;color:var(--body)">{{ s.b }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="problem" data-sec="problem" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Problem</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Problem</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The homepage explained the platform's components before its value</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">I came to the product as a newcomer, which turned out to be useful. Even after completing a certification course, the platform only started making sense to me once I'd been walked through its concepts over several days. A first-time visitor gets seconds, not days.</p>
+<p style="margin:26px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">I came to the product as a newcomer, which turned out to be useful. Even after completing a certification course, the platform only started making sense to me once I'd been walked through its concepts over several days. A first-time visitor gets seconds, not days.</p>
 
 <div style="margin-top:44px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:28px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Terms a first-time viewer has to decode</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Terms a first-time viewer has to decode</div>
 <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
 <sc-for list="{{ jargon }}" as="j" hint-placeholder-count="6">
-<span style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid rgba(var(--inkrgb),.18);font:400 13.5px/1 Outfit,sans-serif;color:var(--accent)">{{ j }}</span>
+<span style="display:inline-block;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid rgba(var(--inkrgb),.18);font:400 13.5px/1 'Instrument Sans',system-ui,sans-serif;color:var(--accent)">{{ j }}</span>
 </sc-for>
 </div>
 </div>
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px">
 <sc-for list="{{ frictions }}" as="f" hint-placeholder-count="4">
-<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;font:400 15px/1.35 Outfit,sans-serif;color:var(--ink)">{{ f }}</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ f }}</div>
 </sc-for>
 </div>
-<p style="margin:16px 0 0;font:400 13.5px/1.6 Outfit,sans-serif;color:var(--muted)">The four friction points the platform actually resolves — none of which the homepage named.</p>
+<p style="margin:16px 0 0;font:400 13.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body-2)">The four friction points the platform actually resolves — none of which the homepage named.</p>
 
-<h3 class="kicker" style="margin:64px 0 0;font:400 11.5px/1.7 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;max-width:44ch;text-transform:uppercase;color:var(--muted)">The audit, section by section</h3>
+<h3 class="kicker" style="margin:64px 0 0;font:500 11.5px/1.7 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;max-width:44ch;text-transform:uppercase;color:var(--body-2)">The audit, section by section</h3>
 <div style="margin-top:22px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ audit }}" as="a" hint-placeholder-count="6">
-<div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;padding:22px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
-<div style="font:500 15px/1.4 Outfit,sans-serif;color:var(--ink)">{{ a.k }}</div>
-<p style="margin:0;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body);text-wrap:pretty">{{ a.v }}</p>
+<div class="pfrow" style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;padding:22px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:500 15px/1.4 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ a.k }}</div>
+<p style="margin:0;font:400 15px/1.7 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">{{ a.v }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="findings" data-sec="findings" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Findings</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Findings</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Every platform I benchmarked led with outcomes, not architecture — ours led with vocabulary</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">I studied seven enterprise AI platforms — how they position themselves, what vocabulary they use, how they build trust, and how their homepages are structured.</p>
+<p style="margin:26px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">I studied seven enterprise AI platforms — how they position themselves, what vocabulary they use, how they build trust, and how their homepages are structured.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px">
 <sc-for list="{{ competitors }}" as="c" hint-placeholder-count="6">
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
-<div style="font:500 15.5px/1 Outfit,sans-serif;color:var(--ink)">{{ c.name }}</div>
-<p style="margin:0;font:300 14.5px/1.65 Outfit,sans-serif;color:var(--body-2);flex:1;text-wrap:pretty">{{ c.body }}</p>
-<p style="margin:0;font:400 14px/1.5 Outfit,sans-serif;color:var(--accent)">{{ c.note }}</p>
+<div style="font:500 15.5px/1 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ c.name }}</div>
+<p style="margin:0;font:400 14px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);flex:1;text-wrap:pretty">{{ c.body }}</p>
+<p style="margin:0;font:400 14px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--accent)">{{ c.note }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="hmw" data-sec="hmw" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">How might we</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">How might we</div>
 <div style="margin-top:22px;border-left:3px solid #4b1d7a;padding:6px 0 6px 32px">
 <p style="margin:0;max-width:900px;font:400 clamp(28px,3.4vw,42px)/1.22 Newsreader,Georgia,serif;letter-spacing:-.026em;color:var(--ink);text-wrap:pretty">How do we make a first-time visitor understand what Purple Fabric does, who it's built for, and why to trust it — without asking them to learn our internal vocabulary first?</p>
 </div>
 </div>
 
 <div id="principles" data-sec="principles" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design principles</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Design principles</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">What the audit and the benchmark agreed on</h2>
 <div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
 <div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;padding:26px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
 <div style="font:400 26px/1 Newsreader,Georgia,serif;color:#c9bfd8">{{ p.n }}</div>
 <div>
-<h3 style="margin:0;font:500 19px/1.35 Outfit,sans-serif;color:var(--ink)">{{ p.t }}</h3>
-<p style="margin:10px 0 0;max-width:620px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">{{ p.b }}</p>
+<h3 style="margin:0;font:500 19px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ p.t }}</h3>
+<p style="margin:10px 0 0;max-width:620px;font:400 15px/1.7 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">{{ p.b }}</p>
 </div>
 </div>
 </sc-for>
@@ -252,15 +253,15 @@ body{background:var(--bg);color:var(--ink)}</style>
 </div>
 
 <div id="kpis" data-sec="kpis" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">What success looks like</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">What success looks like</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The four questions the new page has to answer</h2>
 <div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
-<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
-<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ k.cat }}</div>
+<div class="pfrow" style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:500 11px/1.5 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">{{ k.cat }}</div>
 <div style="display:flex;flex-direction:column;gap:8px">
 <sc-for list="{{ k.items }}" as="it" hint-placeholder-count="2">
-<div style="font:400 16px/1.55 Outfit,sans-serif;color:var(--ink)">{{ it }}</div>
+<div style="font:400 16px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ it }}</div>
 </sc-for>
 </div>
 </div>
@@ -269,23 +270,23 @@ body{background:var(--bg);color:var(--ink)}</style>
 </div>
 
 <div id="process" data-sec="process" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design process</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Design process</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Before laying out sections, I wrote the questions the page has to answer in order</h2>
 
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px">
 <sc-for list="{{ spine }}" as="s" hint-placeholder-count="6">
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:12px;padding:20px">
 <div style="font:400 16px/1.35 Newsreader,Georgia,serif;color:var(--ink)">{{ s.q }}</div>
-<div style="margin-top:12px;font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">{{ s.sec }}</div>
+<div style="margin-top:12px;font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">{{ s.sec }}</div>
 </div>
 </sc-for>
 </div>
 
 <div style="margin-top:20px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:28px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Why Purple Fabric — the four claims every section reinforces</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Why Purple Fabric — the four claims every section reinforces</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin-top:18px">
 <sc-for list="{{ claims }}" as="c" hint-placeholder-count="4">
-<div style="font:300 15.5px/1.6 Outfit,sans-serif;color:var(--body)"><strong style="font-weight:500;color:var(--ink)">{{ c.s }}</strong>{{ c.r }}</div>
+<div style="font:400 15.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body)"><strong style="font-weight:500;color:var(--ink)">{{ c.s }}</strong>{{ c.r }}</div>
 </sc-for>
 </div>
 </div>
@@ -293,18 +294,18 @@ body{background:var(--bg);color:var(--ink)}</style>
 <h3 style="margin:72px 0 0;font:500 clamp(24px,2.6vw,32px)/1.2 Newsreader,Georgia,serif;letter-spacing:-.024em">Nine sections in, nine sections out — reordered around the buyer</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">
 <div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Current</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Current</div>
 <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
 <sc-for list="{{ iaBefore }}" as="i" hint-placeholder-count="9">
-<div style="font:300 14.5px/1.5 Outfit,sans-serif;color:var(--muted)">{{ i }}</div>
+<div style="font:400 14.5px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--muted)">{{ i }}</div>
 </sc-for>
 </div>
 </div>
 <div style="border:1px solid rgba(var(--inkrgb),.18);background:var(--card);border-radius:14px;padding:24px">
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)">Proposed</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Proposed</div>
 <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
 <sc-for list="{{ iaAfter }}" as="i" hint-placeholder-count="9">
-<div style="font:400 14.5px/1.5 Outfit,sans-serif;color:var(--ink)">{{ i }}</div>
+<div style="font:400 14.5px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ i }}</div>
 </sc-for>
 </div>
 </div>
@@ -315,11 +316,11 @@ body{background:var(--bg);color:var(--ink)}</style>
 <sc-for list="{{ redesign }}" as="r">
 <div>
 <div style="display:flex;align-items:baseline;gap:12px">
-<span style="font:700 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;color:var(--accent)">{{ r.n }}</span>
-<span style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">{{ r.kicker }}</span>
+<span style="font:600 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--accent)">{{ r.n }}</span>
+<span style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">{{ r.kicker }}</span>
 </div>
-<h4 style="margin:14px 0 0;font:500 21px/1.3 Outfit,sans-serif;color:var(--ink)">{{ r.t }}</h4>
-<p style="margin:12px 0 0;max-width:660px;font:300 15.5px/1.7 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
+<h4 style="margin:14px 0 0;font:500 21px/1.3 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ r.t }}</h4>
+<p style="margin:12px 0 0;max-width:660px;font:400 15px/1.7 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
 <div style="margin-top:24px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:16px">
 <span role="img" aria-label="{{ r.alt }}" style="{{ r.bg }};display:block;width:100%;aspect-ratio:{{ r.ar }};border-radius:8px;background-size:cover;background-position:top center;background-repeat:no-repeat"></span>
 <sc-if value="{{ r.img2 }}" hint-placeholder-val="{{ false }}">
@@ -334,16 +335,16 @@ body{background:var(--bg);color:var(--ink)}</style>
 <div id="sandbox" data-sec="sandbox" style="scroll-margin-top:110px;padding-top:128px">
 <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
 <div>
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Design sandbox</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Design sandbox</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Finding the balance between illustrative and technical</h2>
 </div>
 <div style="display:flex;gap:8px">
-<button onClick="{{ slidePrev }}" aria-label="Previous exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">‹</button>
-<button onClick="{{ slideNext }}" aria-label="Next exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 Outfit,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">›</button>
+<button onClick="{{ slidePrev }}" aria-label="Previous exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 'Instrument Sans',system-ui,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">‹</button>
+<button onClick="{{ slideNext }}" aria-label="Next exploration" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--inkrgb),.18);background:var(--card);color:var(--ink);font:400 17px/1 'Instrument Sans',system-ui,sans-serif;cursor:pointer;transition:background .22s,border-color .22s" style-hover="background:var(--hover);border-color:var(--accent)">›</button>
 </div>
 </div>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">The eight disciplines were the hardest part of the page to design. They needed to feel like one connected system rather than a list of capabilities, and the visual language had to read as credible to a bank without becoming another grid of grey boxes.</p>
-<p style="margin:16px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">The fabric metaphor drove most of it — separate threads woven into one material — so the early explorations took that literally. The imagery was beautiful, but on its own it said very little about what the platform does. Pulling the other way, a purely functional card grid was easy to scan and lost every trace of the brand. Both extremes failed for opposite reasons.</p>
+<p style="margin:26px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The eight disciplines were the hardest part of the page to design. They needed to feel like one connected system rather than a list of capabilities, and the visual language had to read as credible to a bank without becoming another grid of grey boxes.</p>
+<p style="margin:16px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The fabric metaphor drove most of it — separate threads woven into one material — so the early explorations took that literally. The imagery was beautiful, but on its own it said very little about what the platform does. Pulling the other way, a purely functional card grid was easy to scan and lost every trace of the brand. Both extremes failed for opposite reasons.</p>
 
 <div id="pf-sandbox-track" class="pfsb" style="display:flex;gap:16px;margin-top:36px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px">
 <sc-for list="{{ sandbox }}" as="s">
@@ -351,23 +352,23 @@ body{background:var(--bg);color:var(--ink)}</style>
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:16px">
 <span role="img" aria-label="{{ s.alt }}" style="{{ s.bg }};display:block;width:100%;aspect-ratio:{{ s.ar }};border-radius:8px;background-size:cover;background-position:top center;background-repeat:no-repeat"></span>
 </div>
-<figcaption style="margin-top:12px;font:300 13.5px/1.6 Outfit,sans-serif;color:var(--muted);text-wrap:pretty">{{ s.cap }}</figcaption>
+<figcaption style="margin-top:12px;font:400 13.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--muted);text-wrap:pretty">{{ s.cap }}</figcaption>
 </figure>
 </sc-for>
 </div>
 
-<p style="margin:34px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">What shipped keeps the weave in the language rather than the layout. The disciplines sit in a calm eight-card grid that scans in one pass, each carrying an isometric illustration in the brand purples on a warm apricot ground. The illustration work is where the personality lives now — credible enough for a bank, warm enough not to read as another enterprise feature grid.</p>
+<p style="margin:34px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">What shipped keeps the weave in the language rather than the layout. The disciplines sit in a calm eight-card grid that scans in one pass, each carrying an isometric illustration in the brand purples on a warm apricot ground. The illustration work is where the personality lives now — credible enough for a bank, warm enough not to read as another enterprise feature grid.</p>
 </div>
 
 <div id="final" data-sec="final" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Final design</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Final design</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Eight disciplines, one governed fabric</h2>
-<p style="margin:26px 0 0;max-width:660px;font:300 17.5px/1.75 Outfit,sans-serif;color:var(--body);text-wrap:pretty">Scrolling through the rebuilt homepage — how each section hands off to the next, and how the platform reveals its depth on demand rather than all at once.</p>
+<p style="margin:26px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Scrolling through the rebuilt homepage — how each section hands off to the next, and how the platform reveals its depth on demand rather than all at once.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px">
 <sc-for list="{{ prototypes }}" as="p">
 <div>
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">{{ p.n }}</div>
-<p style="margin:12px 0 0;font:300 14.5px/1.6 Outfit,sans-serif;color:var(--body-2)">{{ p.b }}</p>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">{{ p.n }}</div>
+<p style="margin:12px 0 0;font:400 14px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body-2)">{{ p.b }}</p>
 <div style="margin-top:16px;background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:16px;padding:16px">
 <sc-if value="{{ p.src }}" hint-placeholder-val="{{ false }}">
 <video src="{{ p.src }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="display:block;width:100%;border-radius:8px"></video>
@@ -379,34 +380,34 @@ body{background:var(--bg);color:var(--ink)}</style>
 </div>
 
 <div id="outcome" data-sec="outcome" style="scroll-margin-top:110px;padding-top:128px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">Outcome</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Outcome</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Where it stands</h2>
 <div style="margin-top:40px;border-top:1px solid rgba(var(--inkrgb),.1)">
 <sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="4">
-<div style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
-<div style="font:400 10.5px/1.5 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ o.cat }}</div>
-<div style="font:400 16px/1.6 Outfit,sans-serif;color:var(--ink)">{{ o.v }}</div>
+<div class="pfrow" style="display:grid;grid-template-columns:230px minmax(0,1fr);gap:28px;padding:24px 0;border-bottom:1px solid rgba(var(--inkrgb),.1)">
+<div style="font:500 11px/1.5 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">{{ o.cat }}</div>
+<div style="font:400 16px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ o.v }}</div>
 </div>
 </sc-for>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px">
 <sc-for list="{{ reflections }}" as="r" hint-placeholder-count="4">
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
-<h3 style="margin:0;font:500 17px/1.35 Outfit,sans-serif;color:var(--ink)">{{ r.t }}</h3>
-<p style="margin:12px 0 0;font:300 15px/1.65 Outfit,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
+<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ r.t }}</h3>
+<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
 </div>
 </sc-for>
 </div>
 </div>
 
 <div id="next" data-sec="next" style="scroll-margin-top:110px;padding-top:128px;padding-bottom:120px">
-<div style="font:400 11.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)">What's next</div>
+<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">What's next</div>
 <h2 style="margin:20px 0 0;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">The homepage is the entry point, not the whole job</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px">
 <sc-for list="{{ next }}" as="n" hint-placeholder-count="4">
 <div style="display:flex;gap:14px;align-items:flex-start;border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px">
 <span style="display:block;width:7px;height:7px;border-radius:50%;background:#4b1d7a;margin-top:7px"></span>
-<span style="font:400 15.5px/1.55 Outfit,sans-serif;color:var(--ink)">{{ n }}</span>
+<span style="font:400 15.5px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ n }}</span>
 </div>
 </sc-for>
 </div>
@@ -418,16 +419,16 @@ body{background:var(--bg);color:var(--ink)}</style>
 <div style="border-top:1px solid rgba(var(--inkrgb),.1)">
 <div style="max-width:1240px;margin:0 auto;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
 <div>
-<div style="font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Next project</div>
+<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Next project</div>
 <a href="sayplay.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:var(--ink);transition:color .25s" style-hover="color:var(--accent)">SayPlay →</a>
 </div>
-<a href="index.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(var(--inkrgb),.2);text-decoration:none;color:var(--ink);font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--hover)">All work</a>
+<a href="index.html#work" style="display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1px solid rgba(var(--inkrgb),.2);text-decoration:none;color:var(--ink);font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;transition:background .25s" style-hover="background:var(--hover)">All work</a>
 </div>
-<div style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
+<div style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
 </div>
 
 </div>
-</x-dc>
+</div></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
 class Component extends DCLogic {
   componentDidMount() {
