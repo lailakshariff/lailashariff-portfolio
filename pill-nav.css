@@ -23,7 +23,7 @@ html[data-pnav="full"] .pnav{background:transparent;-webkit-backdrop-filter:none
   font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
   transition:color .22s ease}
 .pnav-in a:hover{color:var(--pnav-hover)}
-.pnav-in a[aria-current]{color:var(--ink)}
+.pnav-in a[aria-current]{color:var(--pnav-on)}
 .pnav-in a:focus-visible,.pnav .tmode:focus-visible,.pnav .ls-theme-toggle:focus-visible{outline:2px solid var(--pnav-on);outline-offset:3px}
 
 .pnav .tmode,.pnav .ls-theme-toggle{margin:-6px -8px -6px -4px;width:34px;height:34px;color:var(--ink)}

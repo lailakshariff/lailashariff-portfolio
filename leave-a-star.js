@@ -27,12 +27,19 @@
   };
   /* Portfolio colours, tuned to stay legible against a dusk ground in both modes. */
   var COLORS = {
-    terracotta: { label: 'Terracotta', l: '#c96b56', d: '#d98d7e' },
-    dusty:      { label: 'Dusty blue', l: '#9db6d3', d: '#93aecb' },
-    ochre:      { label: 'Ochre',      l: '#dba957', d: '#dcae60' },
-    cream:      { label: 'Cream',      l: '#f2e9d8', d: '#efe4c9' },
-    charcoal:   { label: 'Charcoal',   l: '#232228', d: '#736d61' }
+    terracotta: { label: 'Terracotta', l1: '#8f3a2c', l2: '#f4ab95', d: '#d98d7e' },
+    dusty:      { label: 'Dusty blue', l1: '#2f4d78', l2: '#c3d8ef', d: '#93aecb' },
+    ochre:      { label: 'Ochre',      l1: '#8a5c10', l2: '#f3d193', d: '#dcae60' },
+    cream:      { label: 'Cream',      l1: '#8a7a58', l2: '#f9f2e0', d: '#efe4c9' },
+    charcoal:   { label: 'Charcoal',   l1: '#1b1a20', l2: '#d3d7e0', d: '#8d8778' }
   };
+
+  function hx(c) { return [parseInt(c.slice(1,3),16), parseInt(c.slice(3,5),16), parseInt(c.slice(5,7),16)]; }
+  function mix(a, b, t) {
+    var x = hx(a), y = hx(b), o = '#';
+    for (var i = 0; i < 3; i++) o += ('0' + Math.round(x[i] + (y[i] - x[i]) * t).toString(16)).slice(-2);
+    return o;
+  }
 
   /* ---- Supabase (PostgREST) ------------------------------------------------
      Two calls only: one SELECT on load, one INSERT when a visitor finishes.  */
@@ -201,9 +208,15 @@
     };
 
     function dark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
-    function hex(k) { var c = COLORS[k] || COLORS.terracotta; return dark() ? c.d : c.l; }
-    function svg(sh, co, size) {
-      var s = SHAPES[sh] || SHAPES.five, f = hex(co);
+    /* y is depth 0..1 down the field: the deeper the star, the lighter it must run */
+    function hex(k, y) {
+      var c = COLORS[k] || COLORS.terracotta;
+      if (dark()) return c.d;
+      var t = Math.min(1, Math.max(0, (y === undefined ? 0 : y)));
+      return mix(c.l1, c.l2, t * t * 0.55 + t * 0.45);
+    }
+    function svg(sh, co, size, y) {
+      var s = SHAPES[sh] || SHAPES.five, f = hex(co, y);
       return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true" style="display:block;overflow:visible">' +
         (s.fill ? '<path d="' + s.d + '" fill="' + f + '"/>'
                 : '<path d="' + s.d + '" stroke="' + f + '" stroke-width="2" stroke-linecap="round" fill="none"/>') + '</svg>';
@@ -222,12 +235,23 @@
     tip.style.cssText = 'position:absolute;z-index:5;opacity:0;pointer-events:none;transform:translate(-50%,-100%);transition:opacity .25s ease;white-space:nowrap;text-align:center;text-shadow:0 1px 10px rgba(10,12,16,.6)';
     layer.appendChild(tip);
 
+    var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    /* `t` is the row's own created_at, parsed on read — never page-load time. */
     function ago(t) {
-      var h = (Date.now() - t) / 3600000;
-      if (h < 1) return 'left just now';
-      if (h < 24) { var hh = Math.max(1, Math.round(h)); return 'left ' + hh + (hh === 1 ? ' hour ago' : ' hours ago'); }
-      var d = Math.round(h / 24);
-      return 'left ' + d + (d === 1 ? ' day ago' : ' days ago');
+      if (!t || !isFinite(t)) return '';
+      var mins = (Date.now() - t) / 60000;
+      if (mins < 0) mins = 0;
+      if (mins < 1) return 'Created just now';
+      if (mins < 60) { var m = Math.floor(mins); return 'Created ' + m + (m === 1 ? ' minute ago' : ' minutes ago'); }
+      var hrs = mins / 60;
+      if (hrs < 24) { var h = Math.floor(hrs); return 'Created ' + h + (h === 1 ? ' hour ago' : ' hours ago'); }
+      var days = Math.floor(hrs / 24);
+      if (days === 1) return 'Created yesterday';
+      if (days < 7) return 'Created ' + days + ' days ago';
+      if (days < 28) { var w = Math.floor(days / 7); return 'Created ' + w + (w === 1 ? ' week ago' : ' weeks ago'); }
+      var d = new Date(t);
+      return 'Created ' + MON[d.getMonth()] + ' ' + d.getDate();
     }
 
     function visible() {
@@ -249,7 +273,7 @@
         'transform:translate(-50%,-50%) rotate(' + (((s.x * 211) % 17) - 8).toFixed(1) + 'deg);' +
         'width:40px;height:40px;display:grid;place-items:center;border:0;background:none;padding:0;cursor:pointer;' +
         'opacity:' + (s.mine ? 1 : Math.min(1, s.op || 0.85)).toFixed(2) + ';-webkit-tap-highlight-color:transparent;transition:opacity .3s ease';
-      b.innerHTML = svg(s.shape, s.color, size);
+      b.innerHTML = svg(s.shape, s.color, size, s.y);
       var reveal = function () {
         if (armed) return;                              /* placement mode wins over discovery */
         if (!s.word) { tip.style.opacity = '0'; return; }
@@ -280,7 +304,7 @@
       d.setAttribute('aria-hidden', 'true');
       d.style.cssText = 'position:absolute;left:' + (s.x * 100).toFixed(3) + '%;top:' + (s.y * 100).toFixed(3) + '%;' +
         'transform:translate(-50%,-50%);pointer-events:none;opacity:' + s.op.toFixed(2);
-      d.innerHTML = svg(s.shape, s.color, Math.max(8, 13 * s.k).toFixed(1));
+      d.innerHTML = svg(s.shape, s.color, Math.max(8, 13 * s.k).toFixed(1), s.y);
       return d;
     }
 
@@ -301,20 +325,20 @@
       root.querySelectorAll('[data-shape]').forEach(function (b) {
         var on = b.dataset.shape === shape;
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
-        b.style.color = on ? hex(color) : 'currentColor';
-        b.style.opacity = on ? '1' : (dark() ? '.55' : '.62');
+        b.style.color = on ? hex(color, 0) : 'currentColor';
+        b.style.opacity = on ? '1' : (dark() ? '.55' : '.8');
       });
       root.querySelectorAll('[data-color]').forEach(function (b) {
         var on = b.dataset.color === color, dot = b.firstElementChild;
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
         if (dot) {
-          dot.style.background = hex(b.dataset.color);
+          dot.style.background = hex(b.dataset.color, 0);
           dot.style.boxShadow = on ? (dark() ? '0 0 0 1.5px rgba(244,236,221,.9)' : '0 0 0 1.5px rgba(38,41,48,.8)') : 'none';
           dot.style.opacity = on ? '1' : '.68';
         }
       });
       if (el.choice) el.choice.textContent = SHAPES[shape].label + ' · ' + COLORS[color].label;
-      if (ghost.style.opacity !== '0') ghost.innerHTML = svg(shape, color, 19);
+      if (ghost.style.opacity !== '0') ghost.innerHTML = svg(shape, color, 19, ghostY);
     }
 
     /* keeps the sky from ever becoming a pile */
@@ -336,7 +360,7 @@
     }
 
     function burst(x, y) {
-      var col = hex(color);
+      var col = hex(color, y);
       for (var i = 0; i < 3; i++) {
         var p = document.createElement('span');
         p.setAttribute('aria-hidden', 'true');
@@ -446,7 +470,7 @@
           s = saved;
         }
         var b2 = layer.querySelector('[data-star="' + s.id + '"]');
-        if (b2 && s.word) b2.setAttribute('aria-label', 'A star, with the word: ' + s.word + ', left just now');
+        if (b2 && s.word) b2.setAttribute('aria-label', 'A star, with the word: ' + s.word + ', ' + ago(s.t));
         tally();
         if (el.word) {
           el.word.style.opacity = '0';
@@ -536,9 +560,11 @@
       say('Across ' + Math.round(kx * 100) + ', down ' + Math.round(ky * 100) + '. Press Enter to leave your star here.');
     });
 
+    var ghostY = 0.5;
     function moveGhost(x, y) {
       if (pending) return;
-      ghost.innerHTML = svg(shape, color, 19);
+      ghostY = y;
+      ghost.innerHTML = svg(shape, color, 19, y);
       ghost.style.left = (Math.min(0.98, Math.max(0.02, x)) * 100) + '%';
       ghost.style.top = (Math.min(0.97, Math.max(0.03, y)) * 100) + '%';
       ghost.style.opacity = '.38';

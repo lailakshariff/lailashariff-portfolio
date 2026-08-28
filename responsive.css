@@ -63,7 +63,6 @@ img, video, svg, canvas { max-width: 100%; }
   /* --- touch targets -------------------------------------------------- */
   a[href], button { -webkit-tap-highlight-color: rgba(168, 84, 74, .12); }
   .mnav-sheet a { min-height: 48px; display: flex !important; align-items: center; }
-
   /* --- misc ----------------------------------------------------------- */
   [style*="position:sticky"][style*="top:92px"], [style*="position: sticky"][style*="top: 92px"] { position: static !important; }
   [style*="white-space:nowrap"] { white-space: normal !important; }

@@ -36,19 +36,19 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 /* ---- Before you go: the sky ---- */
-.ls-sky{position:relative;isolation:isolate;margin-top:96px;padding:120px 64px 190px;overflow:hidden;background:linear-gradient(to bottom,var(--bg) 0,#fdfbf7 4%,#faf5ec 9%,#f5efe3 15%,#eee7d9 21%,#d9d8d8 27%,#a9b3c4 36%,#6d7585 54%,#474b56 72%,#343841 84%,#33373f 91%,#4e525b 95.5%,#9096a0 98.3%,var(--bg) 100%)}
+.ls-sky{position:relative;isolation:isolate;margin-top:96px;padding:120px 64px 190px;overflow:hidden;background:linear-gradient(to bottom,var(--bg) 0,#fdfbf7 4%,#f9f2e4 9%,#f0e6cf 15%,#ddd8ce 21%,#b3bccd 27%,#7d8fae 36%,#4b5c7c 54%,#2e3a52 72%,#222b3e 84%,#202839 91%,#3a4459 95.5%,#848d9f 98.3%,var(--bg) 100%)}
 html[data-theme="dark"] .ls-sky{background:linear-gradient(to bottom,var(--bg) 0,#191811 4%,#1d1b14 10%,#231f18 17%,#22232a 30%,#1a1e26 50%,#12151b 72%,#090a0d 86%,#0a0b0e 92.5%,#0f1014 96.5%,#14150f 98.6%,var(--bg) 100%)}
 .ls-horizon{position:absolute;left:50%;top:0;width:min(1500px,140%);height:52%;transform:translateX(-50%);z-index:0;pointer-events:none;background:radial-gradient(62% 100% at 50% 14%,rgba(232,203,158,.26) 0,rgba(232,203,158,.1) 48%,rgba(232,203,158,0) 80%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 9%,#000 22%,#000 100%);mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 9%,#000 22%,#000 100%)}
 html[data-theme="dark"] .ls-horizon{background:radial-gradient(62% 100% at 50% 14%,rgba(196,140,92,.15) 0,rgba(196,140,92,.055) 48%,rgba(196,140,92,0) 80%)}
-.ls-veil{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:linear-gradient(to bottom,rgba(28,31,38,0) 18%,rgba(28,31,38,.26) 52%,rgba(16,18,22,.46) 82%,rgba(16,18,22,0) 100%);transition:opacity .5s linear}
+.ls-veil{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:linear-gradient(to bottom,rgba(24,30,45,0) 18%,rgba(24,30,45,.28) 52%,rgba(14,19,30,.5) 82%,rgba(14,19,30,0) 100%);transition:opacity .5s linear}
 html[data-theme="dark"] .ls-veil{background:linear-gradient(to bottom,rgba(6,7,9,0) 18%,rgba(6,7,9,.3) 52%,rgba(4,5,6,.5) 82%,rgba(4,5,6,0) 100%)}
 .ls-sky > *:not(.ls-veil):not(.ls-horizon){position:relative;z-index:1}
 .ls-h{margin:0;font:400 clamp(30px,4.6vw,46px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.028em;color:var(--ink)}
 .ls-sub{margin:14px 0 0;font:300 italic clamp(19px,2.4vw,24px)/1.4 Newsreader,serif;color:var(--body-2)}
-.ls-hint{margin:12px 0 0;font:300 17px/1.5 Newsreader,serif;color:#5d6472}
+.ls-hint{margin:12px 0 0;font:300 17px/1.5 Newsreader,serif;color:#3b4353}
 html[data-theme="dark"] .ls-hint{color:#8d8578}
-.ls-palette{display:flex;align-items:center;gap:clamp(10px,2.4vw,22px);flex-wrap:wrap;margin:52px 0 0;color:#474b55}
-.ls-pcount{margin-left:auto;font:300 italic 16px/1.4 Newsreader,serif;color:rgba(45,48,56,.8)}
+.ls-palette{display:flex;align-items:center;gap:clamp(10px,2.4vw,22px);flex-wrap:wrap;margin:52px 0 0;color:#23283a}
+.ls-pcount{margin-left:auto;font:300 italic 16px/1.4 Newsreader,serif;color:#1e2431}
 html[data-theme="dark"] .ls-pcount{color:rgba(240,232,218,.7)}
 html[data-theme="dark"] .ls-palette{color:#eae2d3}
 .ls-palette button{width:44px;height:44px;display:grid;place-items:center;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .3s ease,color .3s ease}
@@ -58,7 +58,7 @@ html[data-theme="dark"] .ls-palette button:focus-visible{outline-color:rgba(244,
 .ls-pdot{width:13px;height:13px;border-radius:50%;transition:box-shadow .25s ease,opacity .25s ease}
 .ls-pdiv{width:1px;height:20px;background:rgba(45,48,56,.3)}
 html[data-theme="dark"] .ls-pdiv{background:rgba(234,226,211,.28)}
-.ls-plabel{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:rgba(40,43,50,.9)}
+.ls-plabel{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#1e2431}
 html[data-theme="dark"] .ls-plabel{color:rgba(240,232,218,.85)}
 .ls-field{position:relative;height:clamp(480px,84vh,740px);margin:26px 0 0}
 .ls-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

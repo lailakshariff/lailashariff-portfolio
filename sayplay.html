@@ -523,6 +523,12 @@ figure:hover .spshot,.spshot:hover{transform:scale(1.028);box-shadow:0 22px 44px
 .sxtag{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 13px;border-radius:99px;background:var(--surf-2);border:1px solid rgba(var(--inkrgb),.14);color:var(--body);font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;white-space:nowrap}
 .sxtag i{display:block;width:6px;height:6px;border-radius:50%;background:#3d7d7a;flex:0 0 auto}
 /*navtap*/@media (max-width:900px){.spnav a{display:inline-flex;align-items:center;min-height:44px}.spnav{padding-top:4px !important;padding-bottom:4px !important}}
+/* affinity board: four clusters abreast, then a clean 2x2 — never an orphan row */
+.afgrid{display:grid;gap:22px;align-items:start;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1180px){.afgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.afgrid{grid-template-columns:minmax(0,1fr)}}
+.afcluster{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;align-content:start}
+@media (min-width:621px) and (max-width:1180px){.afcluster{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script src="./dot-cursor.js"></script><style>:root{--bg:#ffffff;--ink:#3f3f42;--body:#5e5e68;--body-2:#6b6b74;--muted:#9a9aa2;--surf:#fdf8e2;--surf-2:#f5f7f7;--card:#ffffff;--tile:#e4efe9;--accent:#3d7d7a;--inkrgb:63,63,66;--hover:#fdf3e4}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f0eee7;--body:#c6c2b8;--body-2:#b2ada2;--muted:#918d84;--surf:#242219;--surf-2:#1f231f;--card:#232620;--tile:#2c3733;--accent:#79c3bd;--dot:#ffffff;--inkrgb:240,238,231;--hover:#2b2a20}
@@ -660,9 +666,22 @@ body{background:var(--bg);color:var(--ink)}</style>
 <p style="margin:16px 0 0;max-width:660px;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">This results in tools that are unintuitive, disengaging, and difficult for children and caregivers to use consistently. There is a pressing need for an accessible, adaptable, and engaging AAC platform that empowers children with cerebral palsy to express themselves more independently and meaningfully — both at home and in therapy settings.</p>
 
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px">
-<sc-for list="{{ frictions }}" as="f">
-<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ f }}</div>
-</sc-for>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.6" y="2.6" width="5.6" height="5.6" rx="1.2"></rect><rect x="9.8" y="2.6" width="5.6" height="5.6" rx="1.2"></rect><rect x="17" y="2.6" width="4.4" height="5.6" rx="1.2"></rect><rect x="2.6" y="9.8" width="5.6" height="5.6" rx="1.2"></rect><rect x="9.8" y="9.8" width="5.6" height="5.6" rx="1.2"></rect><rect x="17" y="9.8" width="4.4" height="5.6" rx="1.2"></rect><rect x="2.6" y="17" width="5.6" height="4.4" rx="1.2"></rect><rect x="9.8" y="17" width="5.6" height="4.4" rx="1.2"></rect><rect x="17" y="17" width="4.4" height="4.4" rx="1.2"></rect></svg>
+<span style="font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">Cognitive overload</span>
+</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.6c0 3.9-4 7-9 7a10.6 10.6 0 0 1-2.6-.32L4 21.4l1.3-3.7A7.6 7.6 0 0 1 3 12.6c0-3.9 4-7 9-7s9 3.1 9 7Z"></path><path d="M9.2 11.4h.01M14.8 11.4h.01"></path><path d="M9.4 15.2a4 4 0 0 1 5.2 0" stroke-dasharray="1.6 1.9"></path></svg>
+<span style="font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">No emotional vocabulary</span>
+</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.4" cy="5.6" r="2.9"></circle><path d="M2.7 20.4v-1.7a4.7 4.7 0 0 1 4.7-4.7 4.7 4.7 0 0 1 4.2 2.6"></path><rect x="13.6" y="9.4" width="7.7" height="11" rx="1.8"></rect><path d="M15.9 12.6h3.1"></path></svg>
+<span style="font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">Adult dependence</span>
+</div>
+<div style="border:1px solid rgba(var(--inkrgb),.1);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.4" cy="6.6" r="2.8"></circle><path d="M1.9 19.8v-1.5a4.5 4.5 0 0 1 9 0v1.5"></path><circle cx="17.6" cy="6.6" r="2.8"></circle><path d="M13.1 19.8v-1.5a4.5 4.5 0 0 1 9 0v1.5"></path></svg>
+<span style="font:400 15px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">No social use</span>
+</div>
 </div>
 <p style="margin:16px 0 0;font:400 13.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--muted)">The four barriers that came up in every conversation on site.</p>
 </div>
@@ -675,7 +694,14 @@ body{background:var(--bg);color:var(--ink)}</style>
 <sc-for list="{{ competitors }}" as="c">
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px">
 <div style="font:500 15.5px/1 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ c.name }}</div>
-<p style="margin:0;font:400 14.5px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);flex:1;text-wrap:pretty">{{ c.body }}</p>
+<div style="display:flex;flex-direction:column;gap:9px;flex:1">
+<sc-for list="{{ c.points }}" as="pt" hint-placeholder-count="2">
+<div style="display:flex;gap:10px;align-items:flex-start">
+<span style="flex:none;width:4px;height:4px;border-radius:50%;background:var(--accent);margin-top:8px;opacity:.65"></span>
+<span style="font:400 14.5px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">{{ pt }}</span>
+</div>
+</sc-for>
+</div>
 <p style="margin:0;font:400 14px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--accent)">{{ c.note }}</p>
 </div>
 </sc-for>
@@ -711,109 +737,109 @@ body{background:var(--bg);color:var(--ink)}</style>
 </div>
 
 <div style="position:relative;padding:34px 22px 40px;background-image:radial-gradient(rgba(23,23,20,.16) 1px,transparent 1px);background-size:19px 19px">
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));gap:22px">
-<div style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px;display:flex;flex-direction:column;gap:13px">
+<div class="afgrid">
+<div class="afcluster" style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px">
 <div style="position:absolute;top:-11px;left:13px;background:#ffffff;border:1px solid #d9dbe1;border-radius:5px;padding:4px 9px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.03em;color:#2c2b28;box-shadow:0 1px 2px rgba(23,23,20,.06)">Cognitive overload</div>
-<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.3deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.3deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Too many buttons live on a single page</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">SLP</span>
 </div>
 </div>
-<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.9deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.9deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Tires before the sentence is finished</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">OT</span>
 </div>
 </div>
-<div style="background:#FEF08A;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.5deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FEF08A;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.5deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Gives up mid-search and hands the tablet back</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">PT</span>
 </div>
 </div>
-<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFF9B1;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Screens get busier as vocabulary grows</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Observed</span>
 </div>
 </div>
 </div>
-<div style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px;display:flex;flex-direction:column;gap:13px">
+<div class="afcluster" style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px">
 <div style="position:absolute;top:-11px;left:13px;background:#ffffff;border:1px solid #d9dbe1;border-radius:5px;padding:4px 9px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.03em;color:#2c2b28;box-shadow:0 1px 2px rgba(23,23,20,.06)">Emotional expression</div>
-<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.1deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.1deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">No symbol anywhere for “I don’t want to”</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">SLP</span>
 </div>
 </div>
-<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.4deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.4deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Frustration arrives as behaviour, not language</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">OT</span>
 </div>
 </div>
-<div style="background:#FBC3D8;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.6deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FBC3D8;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.6deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Wants to say why, not only what</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Caregiver</span>
 </div>
 </div>
-<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.7deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#FFCEE0;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.7deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Feelings live outside the board entirely</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Observed</span>
 </div>
 </div>
 </div>
-<div style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px;display:flex;flex-direction:column;gap:13px">
+<div class="afcluster" style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px">
 <div style="position:absolute;top:-11px;left:13px;background:#ffffff;border:1px solid #d9dbe1;border-radius:5px;padding:4px 9px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.03em;color:#2c2b28;box-shadow:0 1px 2px rgba(23,23,20,.06)">Social engagement</div>
-<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.9deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.9deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">No shared activity between two children</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">PT</span>
 </div>
 </div>
-<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.3deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.3deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Play runs parallel rather than together</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">OT</span>
 </div>
 </div>
-<div style="background:#9AC2EF;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.1deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#9AC2EF;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.1deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Siblings don’t know how to join in</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Caregiver</span>
 </div>
 </div>
-<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.7deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#A6CCF5;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.7deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Board comes out in session, then goes away</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Observed</span>
 </div>
 </div>
 </div>
-<div style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px;display:flex;flex-direction:column;gap:13px">
+<div class="afcluster" style="position:relative;border:1.5px dashed #b7bac2;border-radius:10px;padding:28px 14px 16px">
 <div style="position:absolute;top:-11px;left:13px;background:#ffffff;border:1px solid #d9dbe1;border-radius:5px;padding:4px 9px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.03em;color:#2c2b28;box-shadow:0 1px 2px rgba(23,23,20,.06)">Adult dependence</div>
-<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Waits for a grown-up to change the page</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">OT</span>
 </div>
 </div>
-<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-1.2deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">The parent becomes the interface</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Caregiver</span>
 </div>
 </div>
-<div style="background:#CBEE82;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.8deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#CBEE82;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(0.8deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Asks by looking at me, not at the screen</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">SLP</span>
 </div>
 </div>
-<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:108px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.6deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
+<div style="background:#D5F692;border-radius:2px;padding:14px 14px 11px;min-height:94px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;transform:rotate(-0.6deg);box-shadow:0 2px 3px rgba(23,23,20,.16),0 9px 16px rgba(23,23,20,.06)">
 <div style="font:400 13px/1.45 'Instrument Sans',system-ui,sans-serif;color:#1c1b18">Menu depth always needs an adult</div>
 <div style="display:flex;align-items:center;gap:7px">
 <span style="font:400 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:rgba(28,27,24,.55)">Observed</span>
@@ -1255,12 +1281,26 @@ body{background:var(--bg);color:var(--ink)}</style>
 </sc-for>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:44px">
-<sc-for list="{{ reflections }}" as="r">
 <div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
-<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">{{ r.t }}</h3>
-<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">{{ r.b }}</p>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin-bottom:14px"><path d="M20.4 11a8.4 8.4 0 0 0-14.6-4.4L2.9 9.3"></path><path d="M2.9 4.7v4.6h4.6"></path><path d="M3.6 13a8.4 8.4 0 0 0 14.6 4.4l2.9-2.7"></path><path d="M21.1 19.3v-4.6h-4.6"></path></svg>
+<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">Accessibility takes empathy and iteration.</h3>
+<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">It’s never one-size-fits-all — every detail matters, from button size to contrast to the cognitive load of a single tap.</p>
 </div>
-</sc-for>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin-bottom:14px"><circle cx="8.6" cy="7.4" r="3"></circle><path d="M2.9 20.2v-1.6a5.7 5.7 0 0 1 11.4 0v1.6"></path><circle cx="17.4" cy="9.1" r="2.3"></circle><path d="M17 14.1a4.4 4.4 0 0 1 4.1 4.4v1.7"></path></svg>
+<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">Collaboration with real users is everything.</h3>
+<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">Partnering with therapists, families, and children at UCP grounded every decision in lived experience.</p>
+</div>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin-bottom:14px"><path d="M20.6 12.1c0 3.7-3.8 6.7-8.6 6.7a11 11 0 0 1-2.5-.3L4.2 20.8l1.3-3.6a6.9 6.9 0 0 1-2.1-5.1c0-3.7 3.8-6.7 8.6-6.7s8.6 3 8.6 6.7Z"></path><path d="M11.9 8.3l1.1 2.4 2.6.2-2 1.7.6 2.5-2.3-1.4-2.3 1.4.6-2.5-2-1.7 2.6-.2Z"></path></svg>
+<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">Play is a powerful entry point for language.</h3>
+<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">Emotional expression and storytelling aren’t extras — they’re building blocks for confidence and language development.</p>
+</div>
+<div style="background:var(--surf);border:1px solid rgba(var(--inkrgb),.07);border-radius:14px;padding:24px">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block;margin-bottom:14px"><rect x="2.8" y="4.3" width="18.4" height="13.4" rx="2.2" stroke-dasharray="3 3.2"></rect><path d="M12 8.9v6.2"></path><path d="M9.4 11.1a2.6 2.6 0 0 1 5.2 0"></path></svg>
+<h3 style="margin:0;font:500 17px/1.35 'Instrument Sans',system-ui,sans-serif;color:var(--ink)">The best interfaces disappear.</h3>
+<p style="margin:12px 0 0;font:400 15px/1.65 'Instrument Sans',system-ui,sans-serif;color:var(--body-2);text-wrap:pretty">The goal was never a functional app, but one where the technology gets out of the way and the child’s voice takes centre stage.</p>
+</div>
 </div>
 </div>
 
@@ -1786,11 +1826,11 @@ class Component extends DCLogic {
       frictions: ['Cognitive overload', 'No emotional vocabulary', 'Adult dependence', 'No social use'],
 
       competitors: [
-        { name: 'Proloquo2Go', body: 'The category standard, with an enormous vocabulary and deep customisation. That depth is the problem for a young child: the grid density assumes an adult has already configured and narrowed it.', note: 'Powerful, but configured by adults for adults.' },
-        { name: 'TouchChat HD', body: 'Strong page-based navigation and solid symbol libraries. Getting to the right page still takes several deliberate taps, which is exactly where fine motor control breaks down.', note: 'Navigation cost falls on the child.' },
-        { name: 'LAMP Words for Life', body: 'Built on motor planning — consistent button positions so the sequence becomes muscle memory. Genuinely evidence-led, and the most rigorous of the five.', note: 'Best learning model; no emotional layer.' },
-        { name: 'CoughDrop', body: 'Cloud-based and openly shareable across a care team, which solves the visibility problem for caregivers and therapists better than anyone else here.', note: 'Strongest on caregiver access.' },
-        { name: 'Avaz AAC', body: 'The friendliest visual language of the group and a graded vocabulary that grows with the child. Still framed around requesting things rather than expressing feeling.', note: 'Warmest interface, same functional scope.' }
+        { name: 'Proloquo2Go', points: ['The category standard \u2014 enormous vocabulary, deep customisation', 'Grid density assumes an adult has already configured and narrowed it'], note: 'Powerful, but configured by adults for adults.' },
+        { name: 'TouchChat HD', points: ['Strong page-based navigation and solid symbol libraries', 'Reaching the right page takes several deliberate taps'], note: 'Navigation cost falls on the child.' },
+        { name: 'LAMP Words for Life', points: ['Motor planning \u2014 fixed button positions build muscle memory', 'Evidence-led, and the most rigorous of the five'], note: 'Best learning model; no emotional layer.' },
+        { name: 'CoughDrop', points: ['Cloud-based and openly shareable across a care team', 'Best visibility for caregivers and therapists'], note: 'Strongest on caregiver access.' },
+        { name: 'Avaz AAC', points: ['Friendliest visual language; vocabulary grows with the child', 'Framed around requesting things, not expressing feeling'], note: 'Warmest interface, same functional scope.' }
       ],
 
       stats: [
