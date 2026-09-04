@@ -7,107 +7,111 @@
 </head>
 <body>
 <x-dc>
-<helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Outfit:wght@300;400;500;600&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./responsive.css">
-<style>
-body{margin:0;background:#fff}
-html{scroll-behavior:smooth}
-a{color:var(--ink)}a:hover{color:var(--kick)}
-::selection{background:#f0dcc4}
-@keyframes smrUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes smrRise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-.smrp1{animation:smrRise 1.4s cubic-bezier(.18,.8,.22,1) .3s both}
-.smrp2{animation:smrRise 1.4s cubic-bezier(.18,.8,.22,1) .12s both}
-.smrmeta > div{padding:26px 32px 28px;border-left:1px solid rgba(var(--inkrgb),.1)}
-.smrmeta > div:first-child{border-left:0;padding-left:0}
+<helmet><title>Spotify Chapters — Laila Shariff</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./theme.css">
+<link rel="stylesheet" href="./case-theme.css">
+<script src="./theme.js"></script>
+<link rel="stylesheet" href="./pill-nav.css">
+<style>:root{--bg:#ffffff;--ink:#1a1a1a;--body:#555555;--body-2:#6e6a64;--muted:#a8a49c;--faint:#c9c9c9;--line:#ececec;--line-2:#e6e4e0;--surface:#f6f6f7;--card:#ffffff;--tint-a:100%;--inkrgb:26,26,26;--dot:#1a1a1a;--accent:#1a7f3c;--brand:#1a7f3c;--brand-deep:#15682f;--mark:#cdebd6;--tint-bg:#f5faf6;--tint-line:#d7eadd}
+html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa39a;--muted:#8b8479;--faint:#4b463d;--line:rgba(255,255,255,.11);--line-2:rgba(255,255,255,.15);--surface:#211f17;--card:#1d1b14;--tint-a:30%;--inkrgb:242,239,230;--dot:#f2efe6;--accent:#6ec98a;--brand:#6ec98a;--brand-deep:#84d69c;--mark:rgba(110,201,138,.26);--tint-bg:rgba(110,201,138,.07);--tint-line:rgba(110,201,138,.20)}
+body{margin:0;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--body)}
+::selection{background:rgba(29,185,84,.18)}
+.mono{font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.scrail{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow-y:auto;padding:24px 0}
+.scrail a{position:relative;transition:color .28s,font-weight .28s}
 .smrframe{position:relative;width:100%;overflow:hidden;background:#000}
-.smrwide{width:100%;max-width:100%;min-width:0}
 .smrframe-in{transform-origin:0 0}
-@media (max-width:900px){.smrtoc{display:none !important}.smrbody{grid-template-columns:minmax(0,1fr) !important;gap:0 !important;padding-left:24px !important;padding-right:24px !important}}
-@media (max-width:1150px){.smrsplit,.smrcols{grid-template-columns:minmax(0,1fr) !important;gap:30px !important}}
-.smrrail{display:flex;align-items:flex-start;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px;scrollbar-width:none}
+.smrwide{width:100%;max-width:100%;min-width:0}
+.smrrail{display:flex;align-items:flex-start;gap:24px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:8px;scrollbar-width:none}
 .smrrail::-webkit-scrollbar{display:none}
 .smrrail > div{scroll-snap-align:start;flex:0 0 auto}
-.smrbtn{display:inline-flex;align-items:center;min-height:44px;padding:0 24px;border-radius:999px;text-decoration:none;font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;transition:background .25s,color .25s,border-color .25s}
-@media (max-width:900px){
-.smrmeta > div{padding:20px 0 22px;border-left:0;border-top:1px solid rgba(var(--inkrgb),.1)}
-.smrmeta > div:first-child,.smrmeta > div:nth-child(2){border-top:0}
-.smrmeta > div:nth-child(even){padding-left:24px;border-left:1px solid rgba(var(--inkrgb),.1)}
+.scbleed{margin-left:-80px;margin-right:-80px}
+.sccluster:hover .scphoto{filter:saturate(.82) brightness(1.03);opacity:.72}
+.scphoto{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1),opacity .4s ease,filter .4s ease;will-change:transform}
+.sccluster:hover .scphoto:hover{transform:rotate(0deg) translateY(-16px) scale(1.07);box-shadow:0 40px 70px -22px rgba(26,24,20,.5);opacity:1;filter:none;z-index:9}
+.scstrip{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.scbanner:hover .scstrip{transform:translateY(-8px)}
+.scbanner:hover .scstrip:nth-child(2){transition-delay:.05s}
+.scbanner:hover .scstrip:nth-child(3){transition-delay:.1s}
+.scbanner:hover .scstrip:nth-child(4){transition-delay:.15s}
+.scbanner:hover .scstrip:nth-child(5){transition-delay:.2s}
+.scmonth{font-weight:700;letter-spacing:-0.03em;line-height:.82;text-transform:uppercase;color:var(--line);font-size:clamp(72px,13vw,168px)}
+.sclink{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:15px;font-weight:500;color:var(--brand);border-bottom:1px solid rgba(26,127,60,.28);transition:border-color .28s}
+.sclink:hover{border-bottom-color:var(--brand)}
+@media (max-width:1100px){.scmain{padding:48px 40px 100px 40px !important}.scbleed{margin-left:-40px;margin-right:-40px}}
+@media (max-width:1150px){
+.scrail{display:none !important}
+.scrailcol{display:none !important}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:26px !important}
+.g2{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
 }
-@media (max-width:900px){
-.smrpad{padding-left:24px !important;padding-right:24px !important}
-#top{padding-top:56px !important}
-h1{font-size:clamp(38px,11vw,52px) !important}
-[data-sec]{padding-top:74px !important}
-[data-sec] h2{font-size:clamp(25px,6.6vw,32px) !important;line-height:1.18 !important}
-[data-sec] h3{font-size:clamp(19px,5.2vw,24px) !important}
-.smrnav{padding-left:24px !important;padding-right:24px !important}
-.smrnav a{display:inline-flex;align-items:center;min-height:44px}
-.smrstage{padding:22px 18px !important;border-radius:14px !important}
-.smrsplit{grid-template-columns:minmax(0,1fr) !important;gap:30px !important}
-.smrcols{grid-template-columns:minmax(0,1fr) !important;gap:34px !important}
-.smrhide-sm{display:none !important}
-.smrherogrid{grid-template-columns:minmax(0,1fr) !important}
-.smrherogrid > div{width:100%;min-width:0}
-.smrherogrid > div:last-child > div:first-child{width:min(74%,320px);margin:0 auto}
+@media (max-width:900px){.screl{grid-template-columns:minmax(0,1fr) !important;gap:40px !important}
+.sctrack{grid-template-columns:minmax(0,1fr) !important;gap:28px !important}
+.scsplit{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
+.scwall{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+.scprin{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
+.sccluster{height:320px !important}}
+@media (max-width:760px){h1{font-size:34px !important}h2{font-size:28px !important}}
+@media (max-width:640px){.scmain{padding:40px 24px 80px 24px !important}.scbleed{margin-left:-24px;margin-right:-24px}.g4{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width:560px){.scwall{grid-template-columns:repeat(3,minmax(0,1fr)) !important}.sccluster{height:230px !important}}
+
+@media (max-width:600px){
+h1{font-size:25px !important;line-height:1.2 !important}
+h2{font-size:22px !important;line-height:1.3 !important}
+[style*="--font-serif"]{font-size:23px !important;line-height:1.32 !important}
 }
-@media (max-width:560px){
-.smrnav{font-size:10px !important;letter-spacing:.1em !important}
-.smrnav > div{gap:16px !important}
+@media (max-width:400px){
+h1{font-size:23px !important}
+h2{font-size:20px !important}
+[style*="--font-serif"]{font-size:21px !important}
 }
-@media (max-width:760px){
-.smrwide{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.smrwide::-webkit-scrollbar{display:none}
-.smrmeta{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+
+.metarow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media (max-width:900px){.metarow{gap:18px}}
+@media (max-width:600px){.metarow{gap:12px}
+.metarow .mono{font-size:9px !important;letter-spacing:.05em !important;margin-bottom:7px !important}
+.metarow > div > div:last-child{font-size:11.5px !important;line-height:1.35 !important}}
+@media (max-width:600px){.metarow{margin-bottom:26px !important}
+.metarow + div[style*="border-top"]{margin-bottom:26px !important}}
+@media (max-width:400px){.metarow{gap:9px}
+.metarow .mono{font-size:8px !important}
+.metarow > div > div:last-child{font-size:10.5px !important}}
+
+@media (max-width:900px){.scprin > div > div:first-child{border-top:0 !important;padding-top:0 !important}}
+
+@media (max-width:600px){
+[style*="margin-top:96px"]{margin-top:52px !important}
+[style*="margin-top:104px"]{margin-top:56px !important}
+[style*="margin-top:120px"]{margin-top:58px !important}
+[style*="margin-top:72px"]{margin-top:42px !important}
+[style*="margin-bottom:-56px"]{margin-bottom:-30px !important}
 }
-@media (max-width:520px){
-.smrpad{padding-left:18px !important;padding-right:18px !important}
-.smrrail{gap:18px !important}
+
+@media (min-width:601px) and (max-width:1000px){
+[style*="margin-top:96px"]{margin-top:70px !important}
+[style*="margin-top:104px"]{margin-top:74px !important}
+[style*="margin-top:120px"]{margin-top:80px !important}
 }
-@media (max-width:900px){
-.smrartgrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:7px !important}
-.smrphotogrid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:7px !important}
-.smrmeta{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:0 !important}
+@media (max-width:600px){
+[style*="margin-top:56px"]{margin-top:36px !important}
+[style*="margin-top:44px"]{margin-top:30px !important}
+[style*="margin-top:48px"]{margin-top:32px !important}
+[style*="margin-top:40px"]{margin-top:28px !important}
+[style*="margin-bottom:48px"]{margin-bottom:30px !important}
+[style*="margin-bottom:44px"]{margin-bottom:28px !important}
 }
-@media (max-width:560px){
-.smrartgrid{grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:6px !important}
-.smrphotogrid{gap:6px !important}
-}
-@media (max-width:900px){
-/* the embedded prototype keeps its own layout: undo the site-wide mobile collapse inside frames */
-.smrframe-in [style*="white-space: nowrap"],.smrframe-in [style*="white-space:nowrap"]{white-space:nowrap !important}
-.smrframe-in [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr 1fr !important}
-.smrframe-in [style*="grid-template-columns: repeat(2, 1fr)"]{grid-template-columns:repeat(2, 1fr) !important}
-.smrframe-in [style*="grid-template-columns: repeat(3, 1fr)"]{grid-template-columns:repeat(3, 1fr) !important}
-.smrframe-in [style*="grid-template-columns: repeat(4, 1fr)"]{grid-template-columns:repeat(4, 1fr) !important}
-.smrframe-in [style*="grid-template-columns: repeat(5, 1fr)"]{grid-template-columns:repeat(5, 1fr) !important}
-.smrframe-in [style*="grid-template-columns: repeat(6, 1fr)"]{grid-template-columns:repeat(6, 1fr) !important}
-.smrframe-in [style*="grid-template-columns: 30px minmax(0px, 1fr) 14px"]{grid-template-columns:30px minmax(0px, 1fr) 14px !important}
-.smrframe-in [style*="grid-template-columns: 24px minmax(0px, 1fr) 12px"]{grid-template-columns:24px minmax(0px, 1fr) 12px !important}
-.smrframe-in [style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"]{grid-template-columns:repeat(3, minmax(0px, 1fr)) !important}
-.smrframe-in [style*="grid-template-columns: minmax(0px, 1.08fr) minmax(0px, 0.92fr)"]{grid-template-columns:minmax(0px, 1.08fr) minmax(0px, 0.92fr) !important}
-}
-[data-sec] h3.kicker,h3.kicker{font:500 11.5px/1.7 'Instrument Sans',system-ui,sans-serif;letter-spacing:.03em !important;letter-spacing:.18em !important;text-transform:uppercase;text-wrap:balance}
-@media (max-width:640px){[data-sec] h3.kicker,h3.kicker{font-size:10.5px !important;letter-spacing:.14em !important}}
 </style>
-<script src="./dot-cursor.js"></script><style>:root{--bg:#ffffff;--ink:#2b2724;--body:#5d564f;--body-2:#6b645c;--muted:#9a9289;--surf:#f6f1e8;--accent:#a8632a;--kick:#c07338;--tile:#eee6d8;--inkrgb:43,39,36}
-html[data-theme="dark"]{--bg:#17140f;--ink:#f3ede2;--body:#c9c0b2;--body-2:#b6ada0;--muted:#928a7e;--surf:#221e18;--accent:#d08c4a;--kick:#e0a065;--tile:#2b2620;--dot:#ffffff;--inkrgb:243,237,226}
-
-@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:color-mix(in srgb,var(--bg) 92%,transparent);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(var(--inkrgb),.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(var(--inkrgb),.09);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-sheet a:last-child{border-bottom:0}.mnav-open .mnav-sheet a{opacity:1;transform:none}.mnav-open .mnav-sheet a:nth-child(1){transition-delay:.07s}.mnav-open .mnav-sheet a:nth-child(2){transition-delay:.12s}.mnav-open .mnav-sheet a:nth-child(3){transition-delay:.17s}.mnav-open .mnav-sheet a:nth-child(4){transition-delay:.22s}@media (min-width:769px){.mnav-sheet{display:none}}
-
-@media (max-width:640px){[data-sec] h3.kicker,h3.kicker{font-size:10.5px !important;letter-spacing:.14em !important;line-height:1.75 !important}}
-
-
-body{background:var(--bg);color:var(--ink)}</style>
-<link rel="stylesheet" href="./theme.css">
-<link rel="stylesheet" href="./pill-nav.css">
-<script src="./theme.js"></script><script src="./pill-nav.js"></script>
+<script src="./pill-nav.js"></script>
+<script src="./dot-cursor.js"></script>
 </helmet>
 
-<div style="background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased">
+<div style="font-family:var(--font-sans); color:var(--ink); background:var(--bg); min-height:100vh; overflow-x:hidden;">
 
 <div class="pnav">
 <a href="index.html" class="pnav-wordmark">Laila Shariff</a>
@@ -120,405 +124,243 @@ body{background:var(--bg);color:var(--ink)}</style>
 </div>
 <div class="pnav-space" aria-hidden="true"></div>
 
-<div id="top" class="smrpad" style="max-width:1240px;margin:0 auto;padding:88px 64px 0;animation:smrUp .9s cubic-bezier(.2,.7,.2,1) both">
-<div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
-<div style="font:500 11.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Case study · 2026</div>
+<div class="scbanner" style="box-sizing:border-box; position:relative; width:100%; height:clamp(360px,42vw,520px); display:grid; place-items:center; background:radial-gradient(122% 96% at 50% 14%,#211d18 0%,#0e0d0c 56%,#000000 100%); overflow:hidden;">
+<div style="display:flex; flex-direction:column; align-items:center; gap:clamp(20px,3.4vw,34px);">
+<div style="display:flex; align-items:center; gap:14px;">
+<img src="assets/smr/spotify-logo.webp" alt="Spotify logo" style="display:block; width:clamp(38px,4.6vw,56px); height:clamp(38px,4.6vw,56px);">
+<span style="font-family:var(--font-sans); font-weight:700; font-size:clamp(34px,4.2vw,52px); letter-spacing:-0.025em; color:#fff; line-height:1;">Spotify</span>
 </div>
-<h1 style="margin:0;max-width:18ch;font:500 clamp(46px,7vw,88px)/1.02 Newsreader,Georgia,serif;letter-spacing:-.035em">Spotify Chapters</h1>
-<p style="margin:16px 0 0;max-width:40ch;font:400 clamp(15.5px,1.5vw,17.5px)/1.5 'Instrument Sans',system-ui,sans-serif;letter-spacing:.005em;color:var(--accent);text-wrap:pretty">Turning monthly listening into memories worth revisiting.</p>
-<p style="margin:26px 0 0;max-width:680px;font:400 clamp(18px,1.9vw,22px)/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">An independent product concept exploring how Spotify could transform monthly listening data into a personal archive of music, moments, and memories.</p>
-
-<div class="smrmeta" style="display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;border-top:1px solid rgba(var(--inkrgb),.1);border-bottom:1px solid rgba(var(--inkrgb),.1)">
-<div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Role</div>
-<div style="margin-top:14px;font:400 15px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">Product Designer</div>
+<div style="font-size:clamp(11px,1.2vw,14px); font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#1ED760;">Chapters &middot; August 2026</div>
+<div style="display:flex; gap:clamp(8px,1vw,12px);">
+<sc-for list="{{ strip }}" as="c" hint-placeholder-count="5">
+<img class="scstrip" src="{{ c }}" alt="Album artwork" style="display:block; width:clamp(58px,7.4vw,92px); height:clamp(58px,7.4vw,92px); object-fit:cover; border-radius:7px; box-shadow:0 16px 28px rgba(0,0,0,.55);">
+</sc-for>
 </div>
-<div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Project Type</div>
-<div style="margin-top:14px;font:400 15px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">Independent Product Concept</div>
-</div>
-<div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Focus</div>
-<div style="margin-top:14px;font:400 15px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">Interaction Design · Visual Design · Prototyping</div>
-</div>
-<div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Platforms</div>
-<div style="margin-top:14px;font:400 15px/1.5 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">Mobile + Desktop</div>
 </div>
 </div>
 
-<div style="margin-top:20px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Independent Concept · Not affiliated with Spotify</div>
+<div style="display:flex;">
 
-<div class="smrstage" style="margin-top:46px;border-radius:20px;overflow:hidden;background:#ffffff;border:1px solid rgba(var(--inkrgb),.12);padding:clamp(26px,4vw,54px) clamp(26px,4.5vw,60px)">
-<div class="smrherogrid" style="display:grid;grid-template-columns:minmax(0,1fr) clamp(132px,13vw,178px);gap:clamp(22px,2.8vw,46px);align-items:center">
-<div class="smrp2">
-<div style="filter:drop-shadow(0 30px 54px rgba(27,24,16,.28))">
+<div class="scrailcol" style="width:200px; flex-shrink:0; padding-left:48px;">
+<div class="scrail">
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:auto 0 18px">Contents</div>
+<div style="display:flex;flex-direction:column;margin-bottom:auto">
+<sc-for list="{{ toc }}" as="t" hint-placeholder-count="9">
+<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:8px 0;text-decoration:none;font:400 13.5px/1.4 var(--font-sans);color:var(--muted);transition:color .28s">{{ t.label }}</a>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="flex:1; max-width:1400px; min-width:0;">
+<div class="scmain" style="padding:48px 80px 100px 80px;">
+
+<div id="overview" data-sec="overview" data-screen-label="Overview" style="scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:28px;">Independent concept &middot; 2026</div>
+<div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+<h1 style="font-size:40px; font-weight:500; color:var(--ink); line-height:1.15; letter-spacing:-0.02em; margin:0;">Spotify Chapters</h1>
+<img src="assets/smr/spotify-logo.webp" alt="Spotify" style="display:block; height:26px; width:auto; opacity:.85;">
+</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 48px 0; max-width:38ch;">A year of listening, kept as twelve smaller stories</h2>
+<div class="metarow" style="">
+<sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+<div>
+<div class="mono" style="margin-bottom:12px;">{{ m.k }}</div>
+<div style="font-size:16px; color:var(--ink); line-height:1.5;">{{ m.v }}</div>
+</div>
+</sc-for>
+</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:44px;">Spotify Wrapped has made reflecting on a year of listening feel like an event. But our relationship with music doesn't happen once a year. I designed Chapters to explore what music reflection could look like at a more personal, monthly scale, pairing listening data with the photographs from that same period.</div>
+</div>
+
+<div id="opportunity" data-sec="opportunity" data-screen-label="The opportunity" style="margin-top:120px; scroll-margin-top:110px;">
+<div class="scmonth">January</div>
+<h2 style="font-family:var(--font-serif); font-size:44px; font-weight:400; color:var(--ink); line-height:1.16; letter-spacing:-0.01em; margin:28px 0 0 0; max-width:30ch;">We remember the year. What about everything in between?</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:60ch; margin-top:28px;">Spotify Wrapped arrives once a year, but songs become attached to commutes, trips, friendships, late nights, new cities, ordinary Tuesdays, and entire phases of our lives. Most of those smaller listening eras disappear into our history.</div>
+<div style="display:flex; align-items:baseline; gap:18px; margin-top:56px;">
+<div style="font-size:32px; font-weight:500; letter-spacing:-0.03em; color:var(--faint); line-height:1;">365 days</div>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"></path></svg>
+<div style="font-size:32px; font-weight:500; letter-spacing:-0.03em; color:var(--ink); line-height:1;">12 smaller stories</div>
+</div>
+</div>
+
+<div style="margin-top:96px; display:grid; grid-template-columns:minmax(0,1fr); gap:0;">
+<div class="sccluster" style="position:relative; height:440px;">
+<sc-for list="{{ cluster }}" as="c" hint-placeholder-count="5">
+<img class="scphoto" src="{{ c.src }}" alt="" loading="lazy" style="position:absolute; left:{{ c.x }}; top:{{ c.y }}; width:{{ c.w }}; aspect-ratio:4/5; object-fit:cover; border-radius:16px; transform:rotate({{ c.rot }}); box-shadow:0 22px 44px -18px rgba(26,24,20,.4); --rot:{{ c.rot }};">
+</sc-for>
+</div>
+<div class="scsplit" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; margin-top:36px; align-items:start;">
+<div>
+<div class="mono" style="margin-bottom:14px;">From data to memory</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">Designing beyond the numbers</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6;">Listening data is useful, but statistics alone don't always explain why a song mattered. I wanted the experience to sit somewhere between data visualisation and memory keeping. Personal imagery provides the context; together they turn passive listening history into something emotionally meaningful and worth returning to.</div>
+</div>
+<div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.6;">Each chapter is built from six ingredients, three from the platform and three from the person.</div>
+<div style="display:flex; flex-wrap:wrap; gap:8px 10px; margin-top:18px;">
+<sc-for list="{{ ingredients }}" as="g" hint-placeholder-count="6">
+<div style="font-size:14px; color:var(--body); line-height:1.4; padding:8px 14px; border:1px solid var(--line-2); border-radius:99px;">{{ g }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div id="concept" data-sec="concept" data-screen-label="The concept" style="margin-top:120px; scroll-margin-top:110px;">
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 32px 0; max-width:36ch;">Every month becomes a tiny time capsule. Part recap, part scrapbook.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin:0 0 36px 0;">Chapters transforms each month of listening into a visual memory archive. Instead of focusing only on statistics, the experience brings together what you listened to, what defined the month, and what you want to remember. Users can revisit favourite artists, albums, tracks and listening patterns alongside their own photographs from the same weeks.</div>
 <div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="560" data-still="1" style="border-radius:12px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:1440px;height:560px;pointer-events:none"><dc-import name="Spotify Chapters" screen="chapterComplete" root-h="560px" hint-size="1440px,560px"></dc-import></div>
+<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:14px; box-shadow:0 40px 80px -46px rgba(16,20,16,.5);">
+<div class="smrframe-in" style="width:1440px; height:700px; pointer-events:none;"><dc-import name="Spotify Chapters" screen="overview" root-h="700px" hint-size="1440px,620px"></dc-import></div>
 </div>
 </div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.55; margin-top:14px;">Monthly overview, desktop.</div>
 </div>
-<div style="margin-top:14px;font:500 9.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Desktop</div>
-</div>
-<div class="smrp1">
-<div style="filter:drop-shadow(0 24px 44px rgba(27,24,16,.32))">
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:26px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:430px;height:970px;pointer-events:none"><dc-import name="Spotify Chapters Mobile" screen="chapterComplete" root-h="970px" hint-size="430px,970px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 9.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Mobile</div>
-</div>
-</div>
+
+<div class="sctrack" style="display:grid; grid-template-columns:220px minmax(0,1fr); gap:52px; margin-top:120px; align-items:center;">
+<img src="assets/smr/album-art/sz.jpg" alt="Album art for Snooze by SZA" loading="lazy" style="display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:14px; box-shadow:0 24px 48px -22px rgba(26,24,20,.45);">
+<div>
+<div class="mono" style="margin-bottom:16px;">Most played, August</div>
+<div style="font-size:clamp(40px,6vw,76px); font-weight:500; letter-spacing:-0.035em; line-height:.98; color:var(--ink);">Snooze</div>
+<div style="font-family:var(--font-serif); font-size:30px; color:var(--body-2); line-height:1.2; margin-top:12px;">SZA &middot; 63 plays</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:46ch; margin-top:24px;">Statistics alone don't explain why a song mattered. The photograph taken that week does. Chapters puts them on the same screen.</div>
 </div>
 </div>
 
-<div class="smrbody" style="max-width:1240px;margin:0 auto;padding:0 64px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 72px;align-items:start">
-
-<div class="smrtoc" style="position:sticky;top:92px;padding-top:110px">
-<div style="font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#b3b0ba;margin-bottom:18px">Contents</div>
-<div style="display:flex;flex-direction:column">
-<sc-for list="{{ toc }}" as="t" hint-placeholder-count="10">
-<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:9px 0;text-decoration:none;font:400 14px/1.4 'Instrument Sans',system-ui,sans-serif;color:#b0aeb6;transition:color .28s">
-{{ t.label }}
-</a>
+<div id="principles" data-sec="principles" data-screen-label="Principles" style="margin-top:120px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Experience principles</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 40px 0; max-width:40ch;">Making data feel personal</h2>
+<div class="scprin" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:40px;">
+<sc-for list="{{ principles }}" as="p" hint-placeholder-count="3">
+<div>
+<div style="border-top:2px solid var(--ink); padding-top:18px;">
+<div class="mono" style="margin-bottom:10px; color:var(--faint);">{{ p.n }}</div>
+<div style="font-size:19px; font-weight:500; color:var(--ink); line-height:1.3;">{{ p.t }}</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.6; margin-top:10px;">{{ p.b }}</div>
+</div>
+<div style="margin-top:26px;">
+<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:18px; border:1px solid var(--line-2);">
+<div class="smrframe-in" style="width:430px; height:970px; pointer-events:none;"><dc-import name="Spotify Chapters Mobile" screen="{{ p.screen }}" root-h="970px" hint-size="430px,970px"></dc-import></div>
+</div>
+</div>
+</div>
 </sc-for>
 </div>
 </div>
 
-<div style="display:flex;flex-direction:column;min-width:0">
+<div id="experience" data-sec="experience" data-screen-label="The experience" style="margin-top:120px; scroll-margin-top:110px;">
+<div class="scmonth">August</div>
+<h2 style="font-family:var(--font-serif); font-size:38px; font-weight:400; color:var(--ink); line-height:1.2; letter-spacing:-0.008em; margin:28px 0 20px 0; max-width:30ch;">A story, not a dashboard.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch; margin-bottom:40px;">Rather than presenting the month as one dense analytics screen, I structured the recap as a sequence of smaller moments. Each section reveals another part of the listener's month, so the experience unfolds like a story rather than a report.</div>
+<div class="smrrail">
+<sc-for list="{{ rail }}" as="r" hint-placeholder-count="4">
+<div data-railcard="1" style="width:min(74vw,620px);">
+<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:12px;">
+<div class="smrframe-in" style="width:1440px; height:700px; pointer-events:none;"><dc-import name="Spotify Chapters" screen="{{ r.screen }}" root-h="700px" hint-size="1440px,620px"></dc-import></div>
+</div>
+<div class="mono" style="margin-top:18px; color:var(--brand);">{{ r.k }}</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.55; margin-top:8px;">{{ r.b }}</div>
+</div>
+</sc-for>
+</div>
+<div style="font-size:14px; color:var(--muted); line-height:1.5; margin-top:14px;">Four moments, in order. Scroll sideways.</div>
+</div>
 
-<div id="opportunity" data-sec="opportunity" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">The opportunity</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;margin-top:26px;align-items:start">
+<div id="system" data-sec="system" data-screen-label="The system" style="margin-top:120px; scroll-margin-top:110px;">
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 12px 0; max-width:34ch;">Consistent structure. Different story.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:56ch;">The hierarchy and components stay fixed. Artwork, photography and listening data change the character of every recap, so the system feels familiar without making each month feel identical.</div>
+<div class="scwall" style="display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:8px; margin-top:44px; border-radius:10px; overflow:hidden;">
+<sc-for list="{{ covers }}" as="c" hint-placeholder-count="12">
+<img src="{{ c }}" alt="" loading="lazy" style="display:block; width:100%; aspect-ratio:1; object-fit:cover;">
+</sc-for>
+</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.55; margin-top:16px;">The same structure, twelve times over. Only the material changes.</div>
+
+<div class="screl" style="display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:56px; margin-top:96px; align-items:center;">
 <div>
-<h2 style="margin:0;max-width:22ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">We remember the year. What about everything in between?</h2>
-</div>
-<div style="display:flex;flex-direction:column;gap:18px;padding-top:8px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Spotify Wrapped has made reflecting on a year of listening feel like an event. But our relationship with music doesn't happen once a year.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Songs become attached to commutes, trips, friendships, late nights, new cities, ordinary Tuesdays, and entire phases of our lives.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Yet most of those smaller listening eras disappear into our history.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">I saw an opportunity to explore what music reflection could look like at a more personal, monthly scale.</p>
-</div>
-</div>
-
-<div style="margin-top:64px;padding:52px 0;border-top:1px solid rgba(var(--inkrgb),.12);border-bottom:1px solid rgba(var(--inkrgb),.12);display:flex;align-items:center;justify-content:center;gap:clamp(24px,5vw,72px);flex-wrap:wrap;text-align:center">
-<div>
-<div style="font:400 clamp(44px,7vw,92px)/1 Newsreader,Georgia,serif;letter-spacing:-.03em;color:var(--muted)">365</div>
-<div style="margin-top:12px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">days</div>
-</div>
-<div style="font:400 clamp(22px,3vw,34px)/1 'Instrument Sans',system-ui,sans-serif;color:var(--accent)">→</div>
-<div>
-<div style="font:400 clamp(44px,7vw,92px)/1 Newsreader,Georgia,serif;letter-spacing:-.03em;color:var(--ink)">12</div>
-<div style="margin-top:12px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--ink)">smaller stories</div>
-</div>
-</div>
-</div>
-
-<div id="concept" data-sec="concept" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">The concept</h3>
-<h2 style="margin:22px 0 0;max-width:24ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">What if every month became a tiny time capsule?</h2>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:30px">
-<div style="display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">I designed <strong style="font-weight:500;color:var(--ink)">Spotify Chapters</strong>, a concept that transforms each month of listening into a visual memory archive.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Instead of focusing only on statistics, the experience brings together three things at once.</p>
-<p style="margin:6px 0 0;font:italic 300 clamp(19px,2vw,25px)/1.4 Newsreader,Georgia,serif;color:var(--ink);text-wrap:pretty">what you listened to&thinsp;+&thinsp;what defined the month&thinsp;+&thinsp;what you want to remember</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The result is part listening recap, part digital scrapbook.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Users can revisit their favorite artists, albums, tracks, and listening patterns alongside personal photographs from that same period — creating a richer record of not just what they listened to, but what life looked and felt like while they were listening.</p>
-</div>
-</div>
-
-<div style="margin-top:52px">
-<div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:14px;box-shadow:0 40px 80px -46px rgba(27,24,16,.5)">
-<div class="smrframe-in" style="width:1440px;height:700px;pointer-events:none"><dc-import name="Spotify Chapters" screen="overview" root-h="700px" hint-size="1440px,620px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Monthly overview · desktop</div>
-</div>
-</div>
-
-<div id="data" data-sec="data" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">From data to memory</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px;margin-top:26px;align-items:start">
-<div>
-<h2 style="margin:0;max-width:20ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em;text-wrap:pretty">Designing beyond the numbers</h2>
-<div style="margin-top:26px;display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Listening data is useful, but statistics alone don't always explain why a song mattered.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--ink);text-wrap:pretty">I wanted the experience to sit somewhere between data visualization and memory keeping.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Personal imagery provides the context. Together, they turn passive listening history into something more emotionally meaningful and worth returning to.</p>
-</div>
-<div style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px">
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--body-2)">Top artists</div>
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--body-2)">Favorite albums</div>
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--body-2)">Most-played tracks</div>
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--body-2)">Listening patterns</div>
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--body-2)">Monthly highlights</div>
-<div style="padding:12px 0;border-top:1px solid rgba(var(--inkrgb),.12);font:500 11.5px/1.4 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--accent)">Personal photographs</div>
-</div>
+<div class="mono" style="margin-bottom:14px;">Designed across devices</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">One experience, two rhythms</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6;">I designed the concept across mobile and desktop rather than treating desktop as an enlarged phone. On mobile the experience is intimate and sequential, designed for tapping, scrolling and moving quickly through memories. On desktop the additional space lets content, imagery and listening data become more editorial and immersive. The underlying story stays consistent while the composition adapts to how each device is used.</div>
 </div>
 <div>
-<div class="smrartgrid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
-<img src="assets/smr/album-art/pw.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/sz.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/cc.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/no.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/sf.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/bl.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/sh.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
-<img src="assets/smr/album-art/ki.jpg" alt="Album artwork from the prototype" style="display:block;width:100%;aspect-ratio:1;object-fit:cover">
+<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:20px; border:1px solid var(--line-2);">
+<div class="smrframe-in" style="width:430px; height:970px; pointer-events:none;"><dc-import name="Spotify Chapters Mobile" screen="chapterComplete" root-h="970px" hint-size="430px,970px"></dc-import></div>
 </div>
-<div class="smrphotogrid" style="margin-top:8px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-<img src="assets/smr/photos/03.jpg" alt="Camera-roll photograph paired with a track in the prototype" style="display:block;width:100%;aspect-ratio:3/4;object-fit:cover">
-<img src="assets/smr/photos/07.jpg" alt="Camera-roll photograph paired with a track in the prototype" style="display:block;width:100%;aspect-ratio:3/4;object-fit:cover">
-<img src="assets/smr/photos/11.jpg" alt="Camera-roll photograph paired with a track in the prototype" style="display:block;width:100%;aspect-ratio:3/4;object-fit:cover">
+<div style="font-size:15px; color:var(--body-2); line-height:1.55; margin-top:14px;">Mobile, same chapter.</div>
 </div>
-<div style="margin-top:14px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Artwork and photography from the prototype</div>
 </div>
 </div>
 
-<div style="margin-top:56px">
-<div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:14px;box-shadow:0 40px 80px -46px rgba(27,24,16,.5)">
-<div class="smrframe-in" style="width:1440px;height:700px;pointer-events:none"><dc-import name="Spotify Chapters" screen="songMemory" root-h="700px" hint-size="1440px,620px"></dc-import></div>
+<div id="archive" data-sec="archive" data-screen-label="The archive" style="margin-top:120px; scroll-margin-top:110px;">
+<div style="position:relative; height:clamp(280px,34vw,420px); max-width:1000px; overflow:hidden; border-radius:16px;">
+<img src="assets/smr/photos/07.jpg" alt="" loading="lazy" style="display:block; width:100%; height:100%; object-fit:cover;">
 </div>
-</div>
-<div style="margin-top:14px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">A single track, with the moment attached to it</div>
-</div>
+<h2 style="font-family:var(--font-serif); font-size:44px; font-weight:400; color:var(--ink); line-height:1.16; letter-spacing:-0.01em; margin:56px 0 0 0; max-width:28ch;">January sounded different from June. June felt different from October.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:60ch; margin-top:24px;">The larger idea extends beyond any individual month. Over time, Chapters becomes a growing archive of listening eras: a way to look back and remember not only which songs were on repeat, but the life happening around them. Together, those months tell a story that an annual summary alone can't fully capture.</div>
 </div>
 
-<div id="principles" data-sec="principles" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">Experience principles</h3>
-<h2 style="margin:22px 0 0;max-width:20ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">Making data feel personal</h2>
-<div class="smrcols" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px;margin-top:48px">
+<div id="prototype" data-sec="prototype" data-screen-label="Try it" style="margin-top:120px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Live prototype</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 12px 0; max-width:36ch;">Designed to unfold. Click anywhere inside it.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Motion helps turn the recap from a collection of statistics into an experience. I prototyped interactions across mobile and desktop to explore how transitions, scrolling, layering and progressive reveals could guide someone through the month without overwhelming them. The goal was not motion for decoration, but motion that creates pacing and makes each part of the recap feel intentionally revealed.</div>
+<div class="screl" style="display:grid; grid-template-columns:minmax(0,1fr) clamp(132px,13vw,182px); gap:36px; margin-top:40px; align-items:start;">
 <div>
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:22px;border:1px solid rgba(var(--inkrgb),.12)">
-<div class="smrframe-in" style="width:430px;height:970px;pointer-events:none"><dc-import name="Spotify Chapters Mobile" screen="overview" root-h="970px" hint-size="430px,970px"></dc-import></div>
+<div class="smrframe" data-w="1440" data-h="900" style="border-radius:12px; border:1px solid var(--line-2);">
+<div class="smrframe-in" style="width:1440px; height:900px;"><dc-import name="Spotify Chapters" screen="home" root-h="900px" hint-size="1440px,900px"></dc-import></div>
 </div>
-<div style="margin-top:24px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--accent)">01 — Glanceable</div>
-<p style="margin:14px 0 0;font:400 16.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Listening insights should be understandable within seconds. Clear hierarchy, large statistics, recognizable artwork, minimal supporting copy.</p>
+<a class="sclink" href="spotify-recap-desktop.html" style="margin-top:16px;">Open the desktop prototype</a>
 </div>
 <div>
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:22px;border:1px solid rgba(var(--inkrgb),.12)">
-<div class="smrframe-in" style="width:430px;height:970px;pointer-events:none"><dc-import name="Spotify Chapters Mobile" screen="chapterComplete" root-h="970px" hint-size="430px,970px"></dc-import></div>
+<div class="smrframe" data-w="430" data-h="970" data-nofit="1" style="border-radius:18px; border:1px solid var(--line-2);">
+<div class="smrframe-in" style="width:430px; height:970px;"><dc-import name="Spotify Chapters Mobile" screen="home" root-h="970px" hint-size="430px,970px"></dc-import></div>
 </div>
-<div style="margin-top:24px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--accent)">02 — Personal</div>
-<p style="margin:14px 0 0;font:400 16.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The experience should feel different for every listener. Music, photographs, and listening behavior become the visual language of each recap.</p>
+<a class="sclink" href="spotify-recap-mobile.html" style="margin-top:14px;">Mobile</a>
+</div>
+</div>
+</div>
+
+<div id="reflection" data-sec="reflection" data-screen-label="Reflection" style="margin-top:120px; scroll-margin-top:110px;">
+<div class="scmonth">December</div>
+<h2 style="font-family:var(--font-serif); font-size:38px; font-weight:400; color:var(--ink); line-height:1.2; letter-spacing:-0.008em; margin:28px 0 28px 0; max-width:30ch;">Behavioural data as an emotional material.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.65; max-width:64ch;">This project gave me an opportunity to explore how behavioural data can become an emotional design material. The most interesting challenge wasn't deciding which statistics to show. It was thinking about what could make those statistics meaningful enough for someone to want to return to them. Pairing listening behaviour with personal imagery shifted the experience from “What did I listen to?” toward “What did this part of my life feel like?” That distinction became the foundation of the concept.</div>
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; margin-top:56px;">
+<div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">Working within a known system</div>
+<div style="font-size:16px; color:var(--body); line-height:1.65;">Designing inside a product people already know meant the interface had to feel familiar before it felt new. The structure carries the recognition; the content carries the difference.</div>
 </div>
 <div>
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:22px;border:1px solid rgba(var(--inkrgb),.12)">
-<div class="smrframe-in" style="width:430px;height:970px;pointer-events:none"><dc-import name="Spotify Chapters Mobile" screen="archive" root-h="970px" hint-size="430px,970px"></dc-import></div>
-</div>
-<div style="margin-top:24px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;color:var(--accent)">03 — Worth revisiting</div>
-<p style="margin:14px 0 0;font:400 16.5px/1.6 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Less an analytics dashboard, more something users might return to months or years later. Each month is part of an evolving personal archive.</p>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">If I took it further&hellip;</div>
+<div style="font-size:16px; color:var(--body); line-height:1.65;">I'd test whether people actually revisit a past month, which is the claim the whole concept rests on, and design what a chapter looks like when someone adds no photographs at all.</div>
 </div>
 </div>
 </div>
 
-<div id="experience" data-sec="experience" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">The monthly experience</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px;align-items:end">
-<h2 style="margin:0;max-width:18ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">A story, not a dashboard</h2>
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Rather than presenting the month as one dense analytics screen, I structured the recap as a sequence of smaller moments.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Each section reveals another part of the listener's month, allowing the experience to unfold more like a story than a report.</p>
+<div style="position:relative; margin-top:120px; overflow:hidden; border-radius:18px; background:#0c0c0c; max-width:1000px;">
+<div class="smrframe" data-w="1440" data-h="900" data-nofit="1" data-still="1" style="border-radius:0;">
+<div class="smrframe-in" style="width:1440px; height:900px; pointer-events:none;"><dc-import name="Spotify Chapters" screen="archive" root-h="900px" hint-size="1440px,900px"></dc-import></div>
+</div>
+<div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:28px; background:linear-gradient(180deg,rgba(8,8,8,.7),rgba(8,8,8,.52) 45%,rgba(8,8,8,.78));">
+<div style="font-family:var(--font-serif); font-size:clamp(30px,4.4vw,60px); font-weight:400; color:#f6f1e7; line-height:1.14; letter-spacing:-0.008em; max-width:22ch;">Your year isn't one story. It's twelve of them.</div>
+<div style="margin-top:clamp(22px,3vw,44px); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(246,241,231,.68); line-height:1.9;">Spotify Chapters<br>Independent product concept</div>
 </div>
 </div>
 
-<div class="smrrail" style="margin-top:46px">
-<div data-railcard="1" style="width:min(74vw,660px)">
-<div class="smrframe" data-w="1440" data-h="900" data-nofit="1" data-still="1" style="border-radius:12px">
-<div class="smrframe-in" style="width:1440px;height:900px;pointer-events:none"><dc-import name="Spotify Chapters" screen="recapReady" root-h="900px" hint-size="1440px,900px"></dc-import></div>
-</div>
-<div style="margin-top:18px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Monthly overview</div>
-<p style="margin:10px 0 0;max-width:44ch;font:400 16px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body)">A snapshot of the month and its listening identity.</p>
-</div>
-<div data-railcard="1" style="width:min(74vw,660px)">
-<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:12px">
-<div class="smrframe-in" style="width:1440px;height:700px;pointer-events:none"><dc-import name="Spotify Chapters" screen="songSelect" root-h="700px" hint-size="1440px,620px"></dc-import></div>
-</div>
-<div style="margin-top:18px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Top music</div>
-<p style="margin:10px 0 0;max-width:44ch;font:400 16px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body)">Favorite artists, albums, and tracks surfaced through strong visual hierarchy.</p>
-</div>
-<div data-railcard="1" style="width:min(74vw,660px)">
-<div class="smrframe" data-w="1440" data-h="700" data-still="1" style="border-radius:12px">
-<div class="smrframe-in" style="width:1440px;height:700px;pointer-events:none"><dc-import name="Spotify Chapters" screen="photoSelect" root-h="700px" hint-size="1440px,620px"></dc-import></div>
-</div>
-<div style="margin-top:18px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Memory layer</div>
-<p style="margin:10px 0 0;max-width:44ch;font:400 16px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body)">Personal photographs bring context to the music and connect listening behavior with real-life experiences.</p>
-</div>
-<div data-railcard="1" style="width:min(74vw,660px)">
-<div class="smrframe" data-w="1440" data-h="900" data-still="1" style="border-radius:12px">
-<div class="smrframe-in" style="width:1440px;height:900px;pointer-events:none"><dc-import name="Spotify Chapters" screen="archive" root-h="900px" hint-size="1440px,620px"></dc-import></div>
-</div>
-<div style="margin-top:18px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Archive</div>
-<p style="margin:10px 0 0;max-width:44ch;font:400 16px/1.55 'Instrument Sans',system-ui,sans-serif;color:var(--body)">Past months become something users can return to rather than disappearing once the recap ends.</p>
-</div>
-</div>
-<div style="margin-top:16px;font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Scroll →</div>
-</div>
-
-<div id="system" data-sec="system" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">A system that evolves every month</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px;align-items:end">
-<h2 style="margin:0;max-width:20ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">Consistent structure. Different story.</h2>
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">One challenge was creating a visual system structured enough to feel recognizably Spotify while still allowing every month to have its own personality.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The interface uses a consistent hierarchy and component structure, while album artwork, photography, listening data, and content naturally change the visual character of each recap. This allows the system to feel familiar without making every month feel identical.</p>
-</div>
-</div>
-<div style="margin-top:46px">
-<div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="560" data-still="1" style="border-radius:14px;box-shadow:0 40px 80px -46px rgba(27,24,16,.5)">
-<div class="smrframe-in" style="width:1440px;height:560px;pointer-events:none"><dc-import name="Spotify Chapters" screen="yearInChapters" root-h="560px" hint-size="1440px,620px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">The same structure, twelve times over</div>
-</div>
-</div>
-
-<div id="responsive" data-sec="responsive" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">Designed across devices</h3>
-<h2 style="margin:22px 0 0;max-width:18ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">One experience, two rhythms</h2>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">I designed the concept across both mobile and desktop, rather than treating desktop as an enlarged version of the mobile interface. On mobile, the experience is intimate and sequential — designed for tapping, scrolling, and quickly moving through memories.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">On desktop, the additional space allows content, imagery, and listening data to become more editorial and immersive. The underlying story remains consistent while the composition adapts to the way each device is used.</p>
-</div>
-
-<div style="margin-top:48px;border-radius:20px;overflow:hidden;background:#ffffff;border:1px solid rgba(var(--inkrgb),.12);padding:clamp(24px,3.6vw,52px)">
-<div style="display:grid;grid-template-columns:minmax(0,1fr) clamp(132px,13vw,182px);gap:clamp(20px,3vw,44px);align-items:center" class="smrsplit">
-<div style="filter:drop-shadow(0 28px 50px rgba(27,24,16,.26))">
-<div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="560" data-still="1" style="border-radius:10px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:1440px;height:560px;pointer-events:none"><dc-import name="Spotify Chapters" screen="chapterComplete" root-h="560px" hint-size="1440px,560px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Desktop</div>
-</div>
-<div style="filter:drop-shadow(0 24px 44px rgba(27,24,16,.3))">
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" data-still="1" style="border-radius:24px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:430px;height:970px;pointer-events:none"><dc-import name="Spotify Chapters Mobile" screen="chapterComplete" root-h="970px" hint-size="430px,970px"></dc-import></div>
-</div>
-<div style="margin-top:14px;font:500 10px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Mobile</div>
-</div>
-</div>
-</div>
-</div>
-
-<div id="prototype" data-sec="prototype" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">Interaction &amp; prototyping</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px;align-items:end">
-<h2 style="margin:0;max-width:16ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">Designed to unfold</h2>
-<div style="display:flex;flex-direction:column;gap:16px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Motion helps turn the recap from a collection of statistics into an experience. I prototyped interactions across mobile and desktop to explore how transitions, scrolling, layering, and progressive reveals could guide users through the month without overwhelming them with information at once.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The goal was not motion for decoration, but motion that creates pacing and makes each part of the recap feel intentionally revealed.</p>
-</div>
-</div>
-
-<div style="margin-top:46px;border-radius:20px;overflow:hidden;background:#ffffff;border:1px solid rgba(var(--inkrgb),.12);padding:clamp(22px,3.4vw,44px)">
-<div style="display:flex;align-items:center;gap:10px;margin-bottom:clamp(16px,2vw,24px)">
-<span style="width:7px;height:7px;border-radius:999px;background:#1ED760;box-shadow:0 0 0 4px rgba(30,215,96,.16)"></span>
-<span style="font:500 9.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Live prototype · click anywhere in it</span>
-</div>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) clamp(132px,13vw,182px);gap:clamp(20px,3vw,44px);align-items:center">
+<div style="margin-top:96px; padding-top:40px; border-top:1px solid var(--line); display:flex; align-items:baseline; justify-content:space-between; gap:32px; flex-wrap:wrap;">
 <div>
-<div style="filter:drop-shadow(0 28px 50px rgba(27,24,16,.26))">
-<div class="smrframe" data-w="1440" data-h="900" style="border-radius:10px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:1440px;height:900px"><dc-import name="Spotify Chapters" screen="home" root-h="900px" hint-size="1440px,900px"></dc-import></div>
+<div class="mono" style="margin-bottom:12px;">Next project</div>
+<a href="purple-fabric.html" style="font-size:26px; font-weight:500; color:var(--ink); line-height:1.2;">Purple Fabric</a>
 </div>
-</div>
-<div style="margin-top:14px;font:500 9.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Desktop</div>
-</div>
-<div>
-<div style="filter:drop-shadow(0 24px 44px rgba(27,24,16,.3))">
-<div class="smrframe" data-w="430" data-h="970" data-nofit="1" style="border-radius:26px;border:1px solid rgba(var(--inkrgb),.14)">
-<div class="smrframe-in" style="width:430px;height:970px"><dc-import name="Spotify Chapters Mobile" screen="home" root-h="970px" hint-size="430px,970px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 9.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Mobile</div>
-</div>
-</div>
-</div>
-<div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
-<div style="font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Both screens above are the real prototype</div>
-<div style="display:flex;gap:12px;flex-wrap:wrap">
-<a class="smrbtn" href="spotify-recap-desktop.html" style="border:1px solid rgba(var(--inkrgb),.2);color:var(--ink)" style-hover="background:var(--surf)">Try the desktop prototype →</a>
-<a class="smrbtn" href="spotify-recap-mobile.html" style="border:1px solid rgba(var(--inkrgb),.2);color:var(--ink)" style-hover="background:var(--surf)">Try the mobile prototype →</a>
-</div>
-</div>
-</div>
-
-<div id="archive" data-sec="archive" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">The archive</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px;align-items:start">
-<div>
-<h2 style="margin:0;max-width:20ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">From recap to personal archive</h2>
-<p style="margin:26px 0 0;font:italic 300 clamp(21px,2.3vw,28px)/1.4 Newsreader,Georgia,serif;color:var(--accent);text-wrap:pretty">January sounded different from June. June felt different from October.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:16px;padding-top:6px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The larger idea extends beyond any individual month. Over time, Chapters becomes a growing archive of listening eras — a way to look back and remember not only which songs were on repeat, but the life happening around them.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Together, those months tell a story that an annual summary alone can't fully capture.</p>
-</div>
-</div>
-<div style="margin-top:46px">
-<div class="smrwide">
-<div class="smrframe" data-w="1440" data-h="900" data-still="1" style="border-radius:14px;box-shadow:0 40px 80px -46px rgba(27,24,16,.5)">
-<div class="smrframe-in" style="width:1440px;height:900px;pointer-events:none"><dc-import name="Spotify Chapters" screen="archive" root-h="900px" hint-size="1440px,620px"></dc-import></div>
-</div>
-</div>
-<div style="margin-top:14px;font:500 10.5px/1.6 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Your chapters · the months that exist in the prototype</div>
-</div>
-</div>
-
-<div id="reflection" data-sec="reflection" style="scroll-margin-top:110px;padding-top:110px">
-<h3 class="kicker" style="margin:0;color:var(--accent)">Reflection</h3>
-<div class="smrsplit" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;margin-top:26px;align-items:start">
-<h2 style="margin:0;max-width:14ch;font:500 clamp(30px,3.5vw,44px)/1.14 Newsreader,Georgia,serif;letter-spacing:-.028em">What I explored</h2>
-<div style="display:flex;flex-direction:column;gap:18px">
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">This project gave me an opportunity to explore how behavioral data can become an emotional design material.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">The most interesting challenge wasn't deciding which statistics to show. It was thinking about what could make those statistics meaningful enough for someone to want to return to them.</p>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">Pairing listening behavior with personal imagery shifted the experience from simply:</p>
-<div style="display:flex;flex-direction:column;gap:10px;margin:2px 0">
-<div style="font:italic 300 clamp(20px,2.2vw,27px)/1.35 Newsreader,Georgia,serif;color:var(--muted)">“What did I listen to?”</div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">toward</div>
-<div style="font:italic 300 clamp(20px,2.2vw,27px)/1.35 Newsreader,Georgia,serif;color:var(--ink)">“What did this part of my life feel like?”</div>
-</div>
-<p style="margin:0;font:400 16.5px/1.72 'Instrument Sans',system-ui,sans-serif;color:var(--body);text-wrap:pretty">That distinction became the foundation of the concept.</p>
-</div>
-</div>
+<a href="index.html#work" style="font-size:15px; color:var(--body-2);">All work</a>
 </div>
 
 </div>
 </div>
-
-<div class="smrpad" style="max-width:1240px;margin:0 auto;padding:104px 64px 0">
-<div style="position:relative;border-radius:20px;overflow:hidden;background:#0c0c0c">
-<div class="smrframe" data-w="1440" data-h="900" data-nofit="1" data-still="1" style="border-radius:0">
-<div class="smrframe-in" style="width:1440px;height:900px;pointer-events:none"><dc-import name="Spotify Chapters" screen="archive" root-h="900px" hint-size="1440px,900px"></dc-import></div>
-</div>
-<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;background:linear-gradient(180deg,rgba(8,8,8,.68),rgba(8,8,8,.8))">
-<div style="font:400 clamp(26px,4.2vw,58px)/1.16 Newsreader,Georgia,serif;letter-spacing:-.03em;color:#f6efe3;text-wrap:balance">Your year isn't one story.<br>It's twelve of them.</div>
-<div style="margin-top:clamp(20px,3vw,38px);font:500 10.5px/1.7 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:rgba(246,239,227,.62)">Spotify Chapters<br>Independent Product Concept</div>
-</div>
 </div>
 </div>
 
-<div style="margin-top:96px;border-top:1px solid rgba(var(--inkrgb),.1)">
-<div class="smrpad" style="max-width:1240px;margin:0 auto;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
-<div>
-<div style="font:500 10.5px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--body-2)">Next project</div>
-<a href="purple-fabric.html" style="display:inline-block;margin-top:12px;font:500 clamp(26px,3vw,38px)/1.1 Newsreader,Georgia,serif;letter-spacing:-.025em;text-decoration:none;color:var(--ink);transition:color .25s" style-hover="color:var(--kick)">Purple Fabric →</a>
-</div>
-<a href="index.html#work" class="smrbtn" style="border:1px solid rgba(var(--inkrgb),.2);color:var(--ink)" style-hover="background:var(--surf)">All work</a>
-</div>
-<div class="smrpad" style="max-width:1240px;margin:0 auto;padding:0 64px 44px;font:500 11px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#b3b0ba">Laila Shariff · 2026</div>
-</div>
-
-</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   componentDidMount() {
     this._fit = () => {
@@ -530,22 +372,19 @@ class Component extends DCLogic {
         const inner = f.querySelector('.smrframe-in');
         if (!inner) return;
         const root = inner.querySelector('.smrx');
-        const s = w / dw;
+        const sc = w / dw;
         inner.style.width = dw + 'px';
-        inner.style.transform = 'scale(' + s + ')';
-        const apply = (v) => {
-          inner.style.height = v + 'px';
-          if (root) root.style.height = v + 'px';
-        };
+        inner.style.transform = 'scale(' + sc + ')';
+        const apply = v => { inner.style.height = v + 'px'; if (root) root.style.height = v + 'px'; };
         let h = parseFloat(f.getAttribute('data-fit')) || base;
-        const settled = f.hasAttribute('data-fitted') || f.hasAttribute('data-nofit') || !root;
-        if (settled) {
+        if (f.hasAttribute('data-fitted') || f.hasAttribute('data-nofit') || !root) {
           apply(h);
         } else {
+          // grow the frame until the screen's own content stops overflowing
           h = base;
           apply(h);
           for (let i = 0; i < 12; i++) {
-            let over = 0;
+            let over = root.scrollHeight - root.clientHeight;
             const kids = root.querySelectorAll('*');
             for (let k = 0; k < kids.length; k++) {
               const el = kids[k];
@@ -554,8 +393,6 @@ class Component extends DCLogic {
                 if (d > over) over = d;
               }
             }
-            const rd = root.scrollHeight - root.clientHeight;
-            if (rd > over) over = rd;
             if (over <= 10) break;
             h = Math.min(h + over, 2200);
             apply(h);
@@ -564,88 +401,130 @@ class Component extends DCLogic {
           f.setAttribute('data-fit', h);
           f.setAttribute('data-fitted', '1');
         }
-        f.style.height = (h * s) + 'px';
+        f.style.height = (h * sc) + 'px';
       });
+    };
+    // rail cards share one height so their labels sit on a common baseline
+    this._railAlign = () => {
       document.querySelectorAll('.smrrail').forEach(rail => {
-        const cards = Array.prototype.slice.call(rail.querySelectorAll('[data-railcard]'));
-        if (!cards.length) return;
-        const info = cards.map(c => {
-          const fr = c.querySelector('.smrframe');
-          if (!fr) return null;
-          return {
-            c: c, f: fr,
-            dw: parseFloat(fr.getAttribute('data-w')) || 1440,
-            h: parseFloat(fr.getAttribute('data-fit')) || parseFloat(fr.getAttribute('data-h')) || 900
-          };
-        }).filter(Boolean);
-        if (!info.length) return;
-        const cw = rail.clientWidth || 0;
-        if (!cw) return;
-        const maxW = Math.min(cw, window.innerWidth * 0.92);
-        let minRatio = Infinity;
-        info.forEach(x => { const r = x.h / x.dw; if (r < minRatio) minRatio = r; });
-        const RH = Math.min(430, Math.max(200, cw * 0.44), maxW * minRatio);
-        info.forEach(x => {
-          const w = Math.round(RH * x.dw / x.h);
-          x.c.style.setProperty('width', w + 'px', 'important');
-          const inner = x.f.querySelector('.smrframe-in');
+        const frames = Array.from(rail.querySelectorAll('[data-railcard] .smrframe'));
+        if (!frames.length) return;
+        let tallest = 0;
+        frames.forEach(f => {
+          const h = parseFloat(f.getAttribute('data-fit')) || parseFloat(f.getAttribute('data-h')) || 0;
+          if (h > tallest) tallest = h;
+        });
+        if (!tallest) return;
+        frames.forEach(f => {
+          const inner = f.querySelector('.smrframe-in');
           if (!inner) return;
-          const sc = w / x.dw;
-          inner.style.width = x.dw + 'px';
-          inner.style.height = x.h + 'px';
-          inner.style.transform = 'scale(' + sc + ')';
-          x.f.style.height = Math.round(x.h * sc) + 'px';
+          const dw = parseFloat(f.getAttribute('data-w')) || 1440;
+          const w = f.clientWidth;
+          if (!w) return;
+          const root = inner.querySelector('.smrx');
+          inner.style.height = tallest + 'px';
+          if (root) root.style.height = tallest + 'px';
+          f.style.height = (tallest * (w / dw)) + 'px';
         });
       });
     };
-    let queued = false;
-    this._spy = () => {
-      queued = false;
-      const secs = Array.from(document.querySelectorAll('[data-sec]'));
-      const links = Array.from(document.querySelectorAll('[data-toc]'));
-      if (!secs.length || !links.length) return;
-      const line = window.innerHeight * 0.32;
-      let active = secs[0].getAttribute('data-sec');
-      secs.forEach(s => {
-        if (s.getBoundingClientRect().top <= line) active = s.getAttribute('data-sec');
-      });
-      links.forEach(a => {
-        const on = a.getAttribute('data-toc') === active;
-        a.style.color = on ? 'var(--ink)' : '#b0aeb6';
-        a.style.fontWeight = on ? '500' : '400';
-      });
-    };
-    this._onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(this._spy); } };
-    window.addEventListener('scroll', this._onScroll, { passive: true });
-    this._spy();
+    const fitOnce = this._fit;
+    this._fit = () => { fitOnce(); this._railAlign(); };
     window.addEventListener('resize', this._fit, { passive: true });
     this._fitTimer = setInterval(this._fit, 500);
     this._fit();
-    requestAnimationFrame(this._fit);
-    setTimeout(this._fit, 400);
+
+    let queued = false;
+    this._spy = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const secs = Array.from(document.querySelectorAll('[data-sec]'));
+        const links = Array.from(document.querySelectorAll('.scrail a[data-toc]'));
+        if (!secs.length || !links.length) return;
+        const line = window.innerHeight * 0.32;
+        let active = secs[0].getAttribute('data-sec');
+        secs.forEach(sec => {
+          if (sec.getBoundingClientRect().top <= line) active = sec.getAttribute('data-sec');
+        });
+        links.forEach(a => {
+          const on = a.getAttribute('data-toc') === active;
+          a.style.color = on ? 'var(--ink)' : 'var(--muted)';
+          a.style.fontWeight = on ? '500' : '400';
+        });
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spyTimer = setInterval(this._spy, 400);
+    this._spy();
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this._fit);
-    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('scroll', this._spy);
+    window.removeEventListener('resize', this._spy);
     clearInterval(this._fitTimer);
+    clearInterval(this._spyTimer);
   }
+
   renderVals() {
     return {
       toc: [
+        { id: 'overview', href: '#overview', label: 'Overview' },
         { id: 'opportunity', href: '#opportunity', label: 'The opportunity' },
         { id: 'concept', href: '#concept', label: 'The concept' },
-        { id: 'data', href: '#data', label: 'From data to memory' },
-        { id: 'principles', href: '#principles', label: 'Experience principles' },
-        { id: 'experience', href: '#experience', label: 'The monthly experience' },
-        { id: 'system', href: '#system', label: 'A system that evolves' },
-        { id: 'responsive', href: '#responsive', label: 'Across devices' },
-        { id: 'prototype', href: '#prototype', label: 'Interaction & prototyping' },
+        { id: 'principles', href: '#principles', label: 'Principles' },
+        { id: 'experience', href: '#experience', label: 'The experience' },
+        { id: 'system', href: '#system', label: 'The system' },
         { id: 'archive', href: '#archive', label: 'The archive' },
+        { id: 'prototype', href: '#prototype', label: 'Try it' },
         { id: 'reflection', href: '#reflection', label: 'Reflection' }
+      ],
+
+      strip: ['assets/smr/album-art/pw.jpg', 'assets/smr/album-art/sz.jpg', 'assets/smr/album-art/cc.jpg', 'assets/smr/album-art/no.jpg', 'assets/smr/album-art/sf.jpg'],
+
+      meta: [
+        { k: 'Role', v: 'Product designer' },
+        { k: 'Type', v: 'Independent concept' },
+        { k: 'Focus', v: 'Listening data as memory' },
+        { k: 'Scope', v: 'Concept to live prototype' }
+      ],
+
+      cluster: [
+        { src: 'assets/smr/photos/02.jpg', x: '0%', y: '14%', w: '23%', rot: '-6deg' },
+        { src: 'assets/smr/photos/05.jpg', x: '18%', y: '2%', w: '25%', rot: '3deg' },
+        { src: 'assets/smr/photos/09.jpg', x: '39%', y: '18%', w: '22%', rot: '-3deg' },
+        { src: 'assets/smr/photos/11.jpg', x: '57%', y: '4%', w: '24%', rot: '5deg' },
+        { src: 'assets/smr/photos/03.jpg', x: '77%', y: '20%', w: '21%', rot: '-4deg' }
+      ],
+
+      covers: [
+        'assets/smr/album-art/sz.jpg', 'assets/smr/album-art/pw.jpg', 'assets/smr/album-art/sf.jpg',
+        'assets/smr/album-art/bl.jpg', 'assets/smr/album-art/cc.jpg', 'assets/smr/album-art/no.jpg',
+        'assets/smr/album-art/sh.jpg', 'assets/smr/album-art/ki.jpg', 'assets/smr/album-art/bh.jpg',
+        'assets/smr/album-art/sp.jpg', 'assets/smr/album-art/alt2.jpg', 'assets/smr/album-art/alt5.jpg'
+      ],
+
+      ingredients: ['Top artists', 'Favourite albums', 'Most-played tracks', 'Listening patterns', 'Monthly highlights', 'Personal photographs'],
+
+      principles: [
+        { n: '01', screen: 'overview', t: 'Glanceable', b: 'Understandable in seconds. Clear hierarchy, large statistics, recognisable artwork, minimal copy.' },
+        { n: '02', screen: 'chapterComplete', t: 'Personal', b: 'Music, photographs and listening behaviour become the visual language of each recap.' },
+        { n: '03', screen: 'archive', t: 'Worth revisiting', b: 'Not an analytics dashboard. Something to return to months or years later.' }
+      ],
+
+      rail: [
+        { k: 'Monthly overview', screen: 'recapReady', b: 'A snapshot of the month and its listening identity.' },
+        { k: 'Top music', screen: 'songSelect', b: 'Favourite artists, albums and tracks surfaced through strong visual hierarchy.' },
+        { k: 'Memory layer', screen: 'photoSelect', b: 'Personal photographs connect listening behaviour with real-life experiences.' },
+        { k: 'Archive', screen: 'archive', b: 'Past months become something to return to rather than disappearing once the recap ends.' }
       ]
     };
   }
 }
+
 </script>
 </body>
 </html>

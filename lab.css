@@ -1,0 +1,156 @@
+/* Playground — Made with AI. Ten small experiments.
+   Each tile keeps its own ground colour, like product art, so these
+   do not follow the light/dark tokens. */
+
+.labhead{padding:88px 64px 0}
+.labhead .k{font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.labhead h2{margin:16px 0 0;font:500 clamp(30px,4vw,44px)/1.08 var(--font-sans);letter-spacing:-.018em}
+.labhead p{margin:16px 0 0;max-width:56ch;font:400 18px/1.65 var(--font-sans);color:var(--body-2);text-wrap:pretty}
+.labhead .hint{margin-top:14px;font:400 13.5px/1.5 var(--font-sans);color:var(--muted)}
+
+.labgrid{columns:3;column-gap:16px;padding:34px 64px 0}
+.labtile{break-inside:avoid;margin:0 0 16px;display:block}
+.labbox{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.08),0 14px 30px -22px rgba(0,0,0,.4)}
+.labcap{display:flex;align-items:baseline;gap:9px;padding:11px 2px 0}
+.labcap b{font:500 12.5px/1.35 var(--font-sans);color:var(--ink)}
+.labcap span{font:400 11.5px/1.35 var(--font-sans);color:var(--muted)}
+.labbox canvas{display:block;width:100%;height:100%}
+.labbox.h-s{height:220px}
+.labbox.h-m{height:310px}
+.labbox.h-l{height:420px}
+
+/* 01 halftone dither */
+#lab-dither{background:#f3efe6;cursor:crosshair}
+
+/* 02 ascii */
+#lab-ascii{background:#14140f;cursor:crosshair}
+
+/* 03 progressive blur */
+#lab-blur{background:#0f0e0b}
+#lab-blur img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#lab-blur .pb{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(var(--b));-webkit-backdrop-filter:blur(var(--b));
+  -webkit-mask-image:linear-gradient(to top,#000 var(--s),transparent calc(var(--s) + 26%));
+  mask-image:linear-gradient(to top,#000 var(--s),transparent calc(var(--s) + 26%));
+  opacity:0;transition:opacity 1.1s ease}
+#lab-blur.on .pb{opacity:1}
+#lab-blur .cap{position:absolute;left:20px;right:20px;bottom:18px;z-index:3;color:#fff;
+  font:400 15px/1.45 var(--font-serif);letter-spacing:.005em;text-shadow:0 1px 12px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(8px);transition:opacity .9s ease .3s,transform .9s cubic-bezier(.2,.7,.2,1) .3s}
+#lab-blur.on .cap{opacity:1;transform:none}
+
+/* 04 elastic type */
+#lab-elastic{background:#26301f;display:grid;place-items:center;cursor:default}
+#lab-elastic .line{display:flex;flex-wrap:wrap;justify-content:center;padding:0 26px;max-width:100%}
+#lab-elastic i{display:inline-block;font:400 clamp(26px,3.4vw,40px)/1.1 var(--font-serif);color:#e8e4d5;
+  font-style:normal;transform-origin:50% 100%;will-change:transform;
+  transition:transform .62s cubic-bezier(.16,.9,.24,1),color .62s ease}
+#lab-elastic i.sp{width:.3em}
+
+/* 05 cursor gallery */
+#lab-gallery{background:#faf8f3;cursor:none}
+#lab-gallery .ghost{position:absolute;width:126px;aspect-ratio:3/4;margin:-84px 0 0 -63px;border-radius:6px;
+  overflow:hidden;pointer-events:none;box-shadow:0 12px 26px rgba(34,32,29,.24);will-change:transform,opacity}
+#lab-gallery .ghost img{width:100%;height:100%;object-fit:cover;display:block}
+#lab-gallery .idle{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;
+  font:400 13px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:#b3ac9e;transition:opacity .4s}
+#lab-gallery.moved .idle{opacity:0}
+
+/* 06 glass pill */
+#lab-glass{background:#1a2733}
+#lab-glass .bed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
+#lab-glass .pill{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;align-items:flex-end;gap:10px;
+  padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.15);
+  backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.12),0 14px 34px rgba(0,0,0,.34)}
+#lab-glass .app{position:relative;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;
+  font:500 13px/1 var(--font-sans);color:#fff;text-decoration:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 3px 8px rgba(0,0,0,.22);
+  transform-origin:50% 100%;transition:transform .34s cubic-bezier(.2,.8,.2,1)}
+#lab-glass .app em{position:absolute;bottom:118%;left:50%;transform:translateX(-50%) translateY(4px);
+  padding:4px 9px;border-radius:6px;background:rgba(18,18,16,.76);backdrop-filter:blur(6px);
+  font:500 10px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;font-style:normal;color:#fff;
+  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .26s ease,transform .26s ease}
+#lab-glass .app:hover em{opacity:1;transform:translateX(-50%)}
+
+/* 07 stitch generator */
+#lab-stitch{background:#efe6d6;cursor:pointer}
+#lab-stitch .again{position:absolute;right:12px;bottom:12px;z-index:2;padding:7px 13px;border-radius:999px;
+  border:0;background:rgba(34,32,29,.72);color:#fff;font:500 10px/1 var(--font-sans);letter-spacing:.13em;
+  text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);transition:background .3s}
+#lab-stitch .again:hover{background:rgba(34,32,29,.92)}
+
+/* 08 palette extractor */
+#lab-palette{background:#fbfaf7;cursor:pointer}
+#lab-palette .ph{position:absolute;left:0;top:0;right:0;height:62%;object-fit:cover;width:100%}
+#lab-palette .sw{position:absolute;left:0;right:0;bottom:0;height:38%;display:flex}
+#lab-palette .sw div{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:9px;
+  font:500 9.5px/1 var(--font-sans);letter-spacing:.04em;transition:flex .5s cubic-bezier(.2,.8,.2,1)}
+#lab-palette .sw div:hover{flex:1.5}
+
+/* 09 marker highlight */
+#lab-marker{background:#fffdf8;display:grid;place-items:center;padding:0 30px}
+#lab-marker p{margin:0;font:400 clamp(19px,2.3vw,25px)/1.5 var(--font-serif);color:#22201d;text-align:center;text-wrap:pretty}
+#lab-marker mark{background-color:transparent;background-image:linear-gradient(transparent 58%,var(--mk) 58%);background-repeat:no-repeat;
+  background-size:0% 100%;color:inherit;padding:0 3px;transition:background-size 1.15s cubic-bezier(.3,.75,.2,1)}
+#lab-marker.on mark{background-size:100% 100%}
+#lab-marker mark:nth-of-type(2){transition-delay:.42s}
+#lab-marker mark:nth-of-type(3){transition-delay:.84s}
+
+/* 10 type pairing */
+#lab-type{background:#1c1b17;padding:26px 24px;display:flex;flex-direction:column;justify-content:space-between}
+#lab-type .spec{position:relative;flex:1;min-height:0;overflow:hidden;display:grid;place-items:center;pointer-events:none}
+#lab-type .spec span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  font-size:clamp(24px,3vw,36px);line-height:1.14;letter-spacing:-.01em;color:#f0ece0;padding:0 6px}
+#lab-type .g{font-family:var(--font-serif);font-weight:400}
+#lab-type .s{font-family:var(--font-sans);font-weight:500}
+#lab-type .ctl{position:relative;z-index:2;display:flex;align-items:center;gap:12px;flex:0 0 auto}
+#lab-type .ctl b{font:500 9.5px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:#8f8a7c;flex:0 0 auto}
+#lab-type input{flex:1;-webkit-appearance:none;appearance:none;height:16px;border-radius:2px;background:transparent;outline:none;touch-action:none;margin:0}
+#lab-type input::-webkit-slider-runnable-track{height:2px;border-radius:2px;background:#4a473d}
+#lab-type input::-moz-range-track{height:2px;border-radius:2px;background:#4a473d}
+#lab-type input::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;margin-top:-6.5px;border-radius:50%;background:#f0ece0;cursor:grab}
+#lab-type input::-moz-range-thumb{width:15px;height:15px;border:0;border-radius:50%;background:#f0ece0;cursor:grab}
+
+/* ---- tablet ---- */
+@media (max-width:1100px){
+  .labgrid{columns:2}
+  .labhead,.labgrid{padding-left:40px;padding-right:40px}
+  .labhead{padding-top:68px}
+  .labhead p{font-size:17px}
+  .labbox.h-l{height:380px}.labbox.h-m{height:290px}
+}
+
+/* ---- phone ---- */
+@media (max-width:720px){
+  .labgrid{columns:1;padding:24px 20px 0;column-gap:0}
+  .labhead{padding:52px 20px 0}
+  .labhead h2{font-size:clamp(26px,7.4vw,32px)}
+  .labhead p{font-size:16px;line-height:1.6}
+  .labhead .hint{font-size:12.5px;margin-top:12px}
+  .labtile{margin-bottom:20px}
+  .labbox{border-radius:10px}
+  .labbox.h-s{height:210px}.labbox.h-m{height:250px}.labbox.h-l{height:300px}
+  .labcap{gap:0;flex-direction:column;align-items:flex-start;padding-top:9px}
+  .labcap b{font-size:12px}
+  .labcap span{font-size:11px;margin-top:2px}
+  #lab-marker{padding:0 22px}
+  #lab-marker p{font-size:18px;line-height:1.45}
+  #lab-type{padding:20px 18px}
+  #lab-type .spec span{font-size:21px;line-height:1.16}
+  #lab-type .ctl{gap:9px}
+  #lab-type .ctl b{font-size:8.5px;letter-spacing:.1em}
+}
+@media (max-width:400px){
+  .labbox.h-s{height:190px}.labbox.h-m{height:230px}.labbox.h-l{height:270px}
+  #lab-type .spec span{font-size:19px}
+}
+
+/* Touch: the canvases self-animate, so a finger drag must never be
+   swallowed by a tile — vertical scrolling stays with the page. */
+@media (hover:none){
+  #lab-dither,#lab-ascii,#lab-blur,#lab-gallery{cursor:default;touch-action:pan-y}
+  #lab-type input{touch-action:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #lab-elastic i,#lab-marker mark,#lab-glass .app{transition:none !important}
+}

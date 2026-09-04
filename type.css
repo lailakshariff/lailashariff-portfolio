@@ -1,0 +1,6 @@
+/* Global typography system — single source of truth.
+   Satoshi = functional voice (~85-90%). EB Garamond = editorial voice (~10-15%). */
+:root{
+  --font-sans:'Satoshi',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  --font-serif:'EB Garamond',Garamond,Georgia,serif;
+}

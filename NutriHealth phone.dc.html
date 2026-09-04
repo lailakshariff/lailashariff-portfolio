@@ -28,7 +28,7 @@
 .nhph:hover .nhcur{opacity:0}
 .nhhot{box-shadow:0 0 0 .3cqh rgba(110,141,107,.45)}
 
-.nhpad{flex:1;min-height:0;display:flex;flex-direction:column;padding:6.4cqh 3.6cqh 3.2cqh}
+.nhpad{flex:1;min-height:0;display:flex;flex-direction:column;padding:9.4cqh 3.6cqh 3.2cqh}
 .nhstepn{text-align:center;font:400 1.5cqh/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;color:#8C8A80}
 .nhtrack{margin-top:1.6cqh;height:1.05cqh;border-radius:99px;background:#E7E2D5;overflow:hidden}
 .nhtrack>i{display:block;height:100%;border-radius:99px;background:#6E8D6B;transition:width .5s cubic-bezier(.2,.7,.2,1)}
@@ -45,7 +45,7 @@
 .nhnext.is-off{background:#C6CFC2;color:#F4F2EA}
 
 .nhhead{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:1.6cqh;padding:6.6cqh 3.6cqh 0}
-.nhhello{font:500 3.7cqh/1.1 Newsreader,Georgia,serif;letter-spacing:-.02em;color:#2F3A31}
+.nhhello{font:500 3.7cqh/1.1 'EB Garamond',Garamond,Georgia,serif;letter-spacing:-.01em;color:#2F3A31}
 .nhsub{margin:.9cqh 0 0;font:300 1.85cqh/1.3 Outfit,sans-serif;color:#8C8A80}
 .nhav{width:6.2cqh;height:6.2cqh;border-radius:50%;object-fit:cover;flex:0 0 auto;border:.26cqh solid #DCE8D9}
 .nhtabs{flex:0 0 auto;display:flex;gap:1.3cqh;padding:2.8cqh 3.6cqh 0}
@@ -115,7 +115,7 @@
 @media (prefers-reduced-motion:reduce){.nhcur{transition:none}}
 .nhpl{flex:1;min-height:0;display:flex;flex-direction:column;padding:6.4cqh 3.4cqh 3.2cqh}
 .nhtop2{display:flex;align-items:baseline;justify-content:space-between;gap:1.4cqh}
-.nhtop2 b{font:500 3.4cqh/1.1 Newsreader,Georgia,serif;color:#2F3A31}
+.nhtop2 b{font:500 3.4cqh/1.1 'EB Garamond',Garamond,Georgia,serif;color:#2F3A31}
 .nhtop2 s{font:400 1.6cqh/1 Outfit,sans-serif;color:#9A988E;text-decoration:none;white-space:nowrap}
 .nhdays{margin-top:2.4cqh;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.85cqh}
 .nhday{display:flex;flex-direction:column;align-items:center;gap:.7cqh;padding:1.2cqh 0;border-radius:1.6cqh;background:#fff;border:.14cqh solid #EDE8DC;cursor:pointer;transition:transform .3s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s}
@@ -252,13 +252,7 @@
 </sc-for>
 </div>
 </div>
-<div class="nhbar">
-<span class="{{ hNav0 }}" data-f="n0" onClick="{{ hNavTap0 }}"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg></span>
-<span class="{{ hNav1 }}" data-f="n1" onClick="{{ hNavTap1 }}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="M15.5 15.5L20 20"></path></svg></span>
-<span class="{{ hNav2 }}" data-f="n2" onClick="{{ hNavTap2 }}"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6zM10 20h4"></path></svg></span>
-<span class="{{ hNav3 }}" data-f="n3" onClick="{{ hNavTap3 }}"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"></circle><path d="M5 20c1-4 4-5.5 7-5.5s6 1.5 7 5.5"></path></svg></span>
-<div class="nhchef {{ hChefCls }}" data-f="chef" onClick="{{ hChef }}"><svg viewBox="0 0 24 24"><path d="M7 20h10M6.5 16h11a4.5 4.5 0 0 0 .5-8.9A4 4 0 0 0 12 4.6 4 4 0 0 0 6 7.1A4.5 4.5 0 0 0 6.5 16z"></path></svg></div>
-</div>
+
 </sc-if>
 
 <sc-if value="{{ isRecipe }}" hint-placeholder-val="{{ true }}">
@@ -437,6 +431,15 @@
 </div>
 </sc-if>
 
+<sc-if value="{{ showBar }}" hint-placeholder-val="{{ true }}">
+<div class="nhbar">
+<span class="{{ hNav0 }}" data-f="n0" onClick="{{ hNavTap0 }}"><svg viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg></span>
+<span class="{{ hNav1 }}" data-f="n1" onClick="{{ hNavTap1 }}"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="M15.5 15.5L20 20"></path></svg></span>
+<span class="{{ hNav2 }}" data-f="n2" onClick="{{ hNavTap2 }}"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6zM10 20h4"></path></svg></span>
+<span class="{{ hNav3 }}" data-f="n3" onClick="{{ hNavTap3 }}"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"></circle><path d="M5 20c1-4 4-5.5 7-5.5s6 1.5 7 5.5"></path></svg></span>
+<div class="nhchef {{ hChefCls }}" data-f="chef" onClick="{{ hChef }}"><svg viewBox="0 0 24 24"><path d="M7 20h10M6.5 16h11a4.5 4.5 0 0 0 .5-8.9A4 4 0 0 0 12 4.6 4 4 0 0 0 6 7.1A4.5 4.5 0 0 0 6.5 16z"></path></svg></div>
+</div>
+</sc-if>
 </div>
 <div class="nhnotch"></div>
 <span class="nhbtn nhbtn-l nhbtn-a" aria-hidden="true"></span>
@@ -675,6 +678,7 @@ class Component extends DCLogic {
     }
 
     return {
+      showBar: this.screen === 'home' || this.screen === 'progress',
       stage: el => { this._stage = el; },
       stillCls: still ? 'is-still' : '',
       pause: T(() => this.setState({ auto: false, cur: null, hot: null, press: null })),

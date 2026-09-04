@@ -11,16 +11,19 @@
 <title>Playground — Laila Shariff</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:Newsreader,Georgia,serif;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
   a{color:var(--ink)}
   a:hover{color:var(--accent)}
-  .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px 64px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#70707a}
+  .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px 64px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;color:#70707a}
   .nav a{text-decoration:none}
   .wrap{padding:0 64px}
-  .eyebrow{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .eyebrow{font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .sect{display:none}
   .sect.live{display:block}
   html[data-pg] .sect.live{display:none}
@@ -35,10 +38,10 @@
   html[data-pg="photography"] #photography,
   html[data-pg="craft"] #craft{display:block !important}
   .sect{padding:96px 64px 0;scroll-margin-top:78px}
-  .sect h2{margin:14px 0 0;font:400 40px/1.1 Newsreader,serif;letter-spacing:-.025em}
-  .lede{margin:14px 0 0;max-width:640px;font:300 18px/1.65 Newsreader,serif;color:var(--body-2);text-wrap:pretty}
+  .sect h2{margin:14px 0 0;font:500 37.2px/1.1 var(--font-sans);letter-spacing:-.012em}
+  .lede{margin:14px 0 0;max-width:640px;font:400 18px/1.65 var(--font-sans);color:var(--body-2);text-wrap:pretty}
   .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
-  .tag{font:400 11px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--body-2);display:inline-flex;align-items:center}
+  .tag{font:400 11px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--body-2);display:inline-flex;align-items:center}
   .tag + .tag::before{content:"·";margin:0 10px;color:rgba(var(--inkrgb),.35)}
   .tags{display:flex;flex-wrap:wrap;align-items:center;gap:0}
   .grid{display:grid;gap:16px;margin-top:32px}
@@ -46,17 +49,17 @@
   .g3{grid-template-columns:repeat(3,1fr)}
   .shot{display:block;width:100%;border-radius:10px;border:1px solid rgba(var(--inkrgb),.09);background:#fff}
   .rule{height:1px;background:rgba(var(--inkrgb),.1);margin:0 64px}
-  .note{margin-top:14px;font:400 12.5px/1.5 system-ui,sans-serif;color:var(--muted)}
+  .note{margin-top:14px;font:400 12.5px/1.5 var(--font-sans);color:var(--muted)}
   .egg{position:relative;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;vertical-align:-6px;color:var(--muted);text-decoration:none;transition:color .3s ease}
   .egg:hover,.egg:focus-visible{color:var(--accent);outline:none}
-  .egg i{position:absolute;left:50%;bottom:128%;transform:translateX(-50%) translateY(5px);white-space:nowrap;font:300 italic 14px/1 Newsreader,serif;color:var(--accent);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+  .egg i{position:absolute;left:50%;bottom:128%;transform:translateX(-50%) translateY(5px);white-space:nowrap;font:400 italic 14px/1 var(--font-serif);color:var(--accent);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
   .egg:hover i,.egg:focus-visible i{opacity:1;transform:translateX(-50%)}
   .invite{display:block;text-decoration:none;color:inherit;margin-top:96px;border-top:1px solid rgba(var(--inkrgb),.1)}
   .invite > div{position:relative;overflow:hidden;padding:46px 0 50px;display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap}
-  .invite h2{margin:14px 0 0;font:400 clamp(26px,3.4vw,36px)/1.12 Newsreader,serif;letter-spacing:-.025em;transition:color .3s ease}
+  .invite h2{margin:14px 0 0;font:400 clamp(26px,3.4vw,36px)/1.12 var(--font-serif);letter-spacing:-.012em;transition:color .3s ease}
   .invite:hover h2{color:var(--accent)}
-  .invite p{margin:10px 0 0;font:300 17px/1.5 Newsreader,serif;color:var(--muted)}
-  .invite .open{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:6px}
+  .invite p{margin:10px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)}
+  .invite .open{font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:6px}
   .invite svg{position:absolute;pointer-events:none;color:var(--muted);opacity:.42}
 
   .ringwrap{position:relative;padding:64px 0 28px;overflow:hidden}
@@ -71,17 +74,17 @@
   .ring:hover .rcard:hover{opacity:1}
   .rcard:hover > span{transform:scale(1.18);box-shadow:0 16px 34px rgba(var(--inkrgb),.26)}
   .rhub{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:calc(var(--h) * 0.44)}
-  .rhub .k{font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.28em;text-transform:uppercase;color:#a09889}
-  .rhub .t{font:400 clamp(24px,3.2vw,40px)/1.08 Newsreader,serif;letter-spacing:-.03em;color:var(--ink)}
-  .rhub .d{font:300 15px/1.6 Newsreader,serif;color:#6b6559;text-wrap:pretty;min-height:3.2em}
-  .rhub .go{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;transition:background .3s ease}
+  .rhub .k{font:500 10.5px/1 var(--font-sans);letter-spacing:.28em;text-transform:uppercase;color:#a09889}
+  .rhub .t{font:500 clamp(24px,3.2vw,37.2px)/1.08 var(--font-sans);letter-spacing:-.015em;color:var(--ink)}
+  .rhub .d{font:400 15px/1.6 var(--font-sans);color:#6b6559;text-wrap:pretty;min-height:3.2em}
+  .rhub .go{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;transition:background .3s ease}
   .rhub .go:hover{background:var(--accent);color:var(--bg)}
-  .rscroll{margin-top:8px;text-align:center;font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.26em;text-transform:uppercase;color:#b3aa9a}
+  .rscroll{margin-top:8px;text-align:center;font:500 10px/1 var(--font-sans);letter-spacing:.26em;text-transform:uppercase;color:#b3aa9a}
   .viewer{min-width:0}
-  .viewer .vnum{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  .viewer h2{margin:14px 0 0;font:400 40px/1.08 Newsreader,serif;letter-spacing:-.025em}
-  .viewer p{margin:14px 0 0;max-width:460px;font:300 18px/1.65 Newsreader,serif;color:var(--body-2);text-wrap:pretty}
-  .viewer .go{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:13px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:400 12px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+  .viewer .vnum{font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .viewer h2{margin:14px 0 0;font:500 37.2px/1.08 var(--font-sans);letter-spacing:-.012em}
+  .viewer p{margin:14px 0 0;max-width:460px;font:400 18px/1.65 var(--font-sans);color:var(--body-2);text-wrap:pretty}
+  .viewer .go{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:13px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:400 12px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase}
   .viewer .go:hover{color:var(--bg);background:var(--accent)}
   .vfade{animation:vfade .5s ease both}
   @keyframes vfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -135,12 +138,22 @@ function boot(){
   function tick(){ cur+=(target-cur)*0.09; ring.style.setProperty('--rot',cur.toFixed(2)+'deg');
     if(Math.abs(target-cur)>0.05){ raf=requestAnimationFrame(tick); } else { raf=0; } }
   if(!reduce){ window.addEventListener('scroll',onScroll,{passive:true}); onScroll(); }
+  function preview(c){ K.textContent=c.dataset.k; T.textContent=c.dataset.t; D.textContent=''; G.setAttribute('href','#'+c.dataset.id); G.style.visibility='visible'; }
   cards.forEach(function(c){
-    c.addEventListener('mouseenter',function(){ K.textContent=c.dataset.k; T.textContent=c.dataset.t; D.textContent=''; G.setAttribute('href','#'+c.dataset.id); G.style.visibility='visible'; });
-    c.addEventListener('click',function(){ show(c.dataset.id); });
+    c.addEventListener('mouseenter',function(){ preview(c); });
+    c.addEventListener('focus',function(){ preview(c); });
+  });
+  // Delegated, so the card under the pointer always resolves to its own
+  // project — touch never fires mouseenter, which used to leave the hub's
+  // link pointing at whatever was hovered last.
+  ring.addEventListener('click',function(e){
+    var c=e.target.closest&&e.target.closest('.rcard');
+    if(!c||!c.dataset.id) return;
+    preview(c);
+    show(c.dataset.id);
   });
   stage.addEventListener('mouseleave',function(){ K.textContent=base.k; T.textContent=base.t; D.textContent=base.d; G.style.visibility='hidden'; });
-  G.addEventListener('click',function(){ show(G.getAttribute('href').slice(1)); });
+  G.addEventListener('click',function(e){ e.preventDefault(); show((G.getAttribute('href')||'').slice(1)); });
   function show(id){
     var el=document.getElementById(id); if(!el) return;
     document.documentElement.setAttribute('data-pg', id);
@@ -156,12 +169,13 @@ setTimeout(function(){ clearInterval(t); },12000);
 })();</script>
 <script>(function(){var QQ=String.fromCharCode(34);function build(){var sel='[style*='+QQ+'position:sticky'+QQ+'],[style*='+QQ+'position: sticky'+QQ+'],.nav';var bars=document.querySelectorAll(sel);var nav=null;for(var i=0;i<bars.length;i++){var b=bars[i];if(b.querySelectorAll('a').length>=2&&b.getBoundingClientRect().top<200){nav=b;break;}}if(!nav||nav.dataset.mnav)return false;var groups=nav.querySelectorAll('div');var group=null;for(var g=0;g<groups.length;g++){if(groups[g].querySelectorAll('a').length>=2){group=groups[g];break;}}if(!group)return false;nav.dataset.mnav='1';group.classList.add('mnav-hide');var btn=document.createElement('button');btn.className='mnav-burger';btn.type='button';btn.setAttribute('aria-label','Menu');btn.setAttribute('aria-expanded','false');btn.appendChild(document.createElement('span'));nav.appendChild(btn);var sheet=document.createElement('div');sheet.className='mnav-sheet';var cs=window.getComputedStyle(nav);sheet.style.font=cs.font;var links=group.querySelectorAll('a');var here=(location.pathname.split('/').pop()||'index.html').toLowerCase();function isHere(h){h=(h||'').split('#')[0].split('/').pop().toLowerCase();if(!h)return true;if(h===here)return true;var home={'index.html':1,'home.dc.html':1};return home[h]===1&&home[here]===1;}function close(){if(opened)set(false);}for(var k=0;k<links.length;k++){var a=document.createElement('a');a.href=links[k].getAttribute('href');a.textContent=links[k].textContent;if(isHere(links[k].getAttribute('href'))){a.className='mnav-on';a.setAttribute('aria-current','page');}a.addEventListener('click',close);sheet.appendChild(a);}nav.parentNode.insertBefore(sheet,nav.nextSibling);var opened=false;function set(v){opened=v;document.documentElement.classList.toggle('mnav-open',v);btn.setAttribute('aria-expanded',v?'true':'false');}btn.addEventListener('click',function(e){e.stopPropagation();set(!opened);});document.addEventListener('click',function(e){if(opened&&!sheet.contains(e.target)&&!btn.contains(e.target))close();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});window.addEventListener('resize',function(){if(window.innerWidth>768)close();});return true;}var t=setInterval(function(){if(build())clearInterval(t);},150);setTimeout(function(){clearInterval(t);},12000);})();</script>
 
-<script src="./dot-cursor.js"></script><style>:root{--bg:#ffffff;--ink:#22201d;--body:#4b473f;--body-2:#5b564f;--muted:#8a8478;--surf:#f4f1eb;--accent:#a8544a;--navon:#a8544a;--inkrgb:34,32,29}
+<script src="./dot-cursor.js"></script><style>:root{--font-sans:'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;--font-serif:'EB Garamond',Garamond,Georgia,serif;--bg:#ffffff;--ink:#22201d;--body:#4b473f;--body-2:#5b564f;--muted:#8a8478;--surf:#f4f1eb;--accent:#a8544a;--navon:#a8544a;--inkrgb:34,32,29}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#cdc7ba;--body-2:#b5aea1;--muted:#958f83;--surf:#211f18;--accent:#d98d7e;--dot:#ffffff;--navon:#d98d7e;--inkrgb:242,239,230}
-body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}@media (max-width:768px){[style*='Space Mono'] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}</style>
+body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}@media (max-width:768px){[data-mono] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}</style>
 <link rel="stylesheet" href="./theme.css">
 <link rel="stylesheet" href="./pill-nav.css">
-<script src="./theme.js"></script><script src="./pill-nav.js"></script></helmet>
+<link rel="stylesheet" href="./lab.css">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab.js" defer></script></helmet>
 
 <div class="pnav">
 <a href="index.html" class="pnav-wordmark">Laila Shariff</a>
@@ -176,8 +190,8 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 
 <div class="wrap" style="padding-top:88px">
   <div class="eyebrow">Everything else</div>
-  <h1 style="margin:22px 0 0;max-width:900px;font:400 60px/1.08 Newsreader,serif;letter-spacing:-.03em">Playground</h1>
-  <p style="margin:22px 0 0;max-width:660px;font:300 20px/1.6 Newsreader,serif;color:var(--body-2);text-wrap:pretty">The work that doesn't fit in a case study — brand campaigns, marketing strategy, a children's book, research, film photographs, and things I make with my hands.</p>
+  <h1 style="margin:22px 0 0;max-width:900px;font:500 55.8px/1.08 var(--font-sans);letter-spacing:-.015em">Playground</h1>
+  <p style="margin:22px 0 0;max-width:660px;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">The work that doesn't fit in a case study: brand campaigns, marketing strategy, a children's book, research, film photographs, and things I make with my hands.</p>
   <div class="tags" style="margin-top:26px">
     <span class="tag">Brand &amp; Marketing</span>
     <span class="tag">Strategy</span>
@@ -187,6 +201,85 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
   </div>
 </div>
 
+
+<div class="labhead">
+  <div class="k">Built with code + AI</div>
+  <h2>Ten small experiments</h2>
+  <p>Interface effects I wanted to understand, so I built them. Each started as a small curiosity and was developed with AI as a creative coding partner. Every one is live code rather than a recording: the grain, characters, swatches, and interactions are computed while you look at them.</p>
+  <div class="hint">Some run on their own. Others wake when you touch them.</div>
+</div>
+
+<div class="labgrid">
+
+<div class="labtile">
+  <div class="labbox h-l" id="lab-dither" data-src="assets/pg-ph-13.jpg"><canvas></canvas></div>
+  <div class="labcap"><b>Halftone dither</b><span>A reflecting pool in Marrakech &middot; move up and down to change the pitch</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-ascii" data-src="assets/pg-ph-1.jpg"><canvas></canvas></div>
+  <div class="labcap"><b>ASCII on hover</b><span>Brooklyn Flea &middot; characters resolve under the cursor</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-blur" data-cap="Dubrovnik, from a taxi windshield"><img src="assets/pg-ph-4.jpg" alt="A hillside in Dubrovnik seen through a windshield"></div>
+  <div class="labcap"><b>Progressive blur</b><span>Four masked layers, stacking upward</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-elastic" data-text="pull me apart"><div class="line"></div></div>
+  <div class="labcap"><b>Elastic type</b><span>EB Garamond, struck like a string</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-l" id="lab-gallery" data-srcs="assets/pg-ph-2.jpg,assets/pg-ph-5.jpg,assets/pg-ph-9.jpg,assets/pg-ph-11.jpg,assets/pg-ph-3.jpg,assets/pg-ph-12.jpg,assets/pg-ph-7.jpg,assets/pg-ph-10.jpg"><div class="idle">Move here</div></div>
+  <div class="labcap"><b>Cursor gallery</b><span>A travel log, dropped along the trail</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-glass">
+    <img class="bed" src="assets/pg-ph-6.jpg" alt="">
+    <div class="pill">
+      <a class="app" href="index.html#work" style="background:linear-gradient(160deg,#b76b5f,#8f4038)">W<em>Work</em></a>
+      <a class="app" href="playground.html" style="background:linear-gradient(160deg,#8fa2c0,#657899)">P<em>Playground</em></a>
+      <a class="app" href="about.html" style="background:linear-gradient(160deg,#7f9c86,#4f6b58)">A<em>About</em></a>
+      <a class="app" href="mailto:lailashariff@gmail.com" style="background:linear-gradient(160deg,#d9b27a,#b08442)">@<em>Email</em></a>
+    </div>
+  </div>
+  <div class="labcap"><b>Glass pill</b><span>Backdrop blur, with dock magnification</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-stitch"><canvas></canvas><button class="again" type="button">New pattern</button></div>
+  <div class="labcap"><b>Stitch generator</b><span>Crochet rows, turning at each end</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-palette" data-srcs="assets/pg-ph-12.jpg,assets/pg-ph-8.jpg,assets/pg-ph-2.jpg,assets/pg-craft-a.jpg,assets/pg-ph-11.jpg"><img class="ph" alt="A photograph the palette is measured from"><div class="sw"></div></div>
+  <div class="labcap"><b>Palette extractor</b><span>Click for another photograph</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-marker">
+    <p>The best interfaces <mark style="--mk:#f2d9c4">disappear</mark>. What stays is <mark style="--mk:#cfe0dd">the thing</mark> you came to do.</p>
+  </div>
+  <div class="labcap"><b>Marker highlight</b><span>Drawing itself as it enters view</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-type">
+    <div class="spec">
+      <span class="g">Product designer creating clear, human-centered experiences.</span>
+      <span class="s">Product designer creating clear, human-centered experiences.</span>
+    </div>
+    <div class="ctl"><b>Garamond</b><input type="range" min="0" max="100" value="30" aria-label="Blend between EB Garamond and Satoshi"><b>Satoshi</b></div>
+  </div>
+  <div class="labcap"><b>Type pairing</b><span>Drag to cross the two faces</span></div>
+</div>
+
+</div>
+
+<div class="rule" style="margin-top:64px"></div>
 
 <div class="ringwrap">
   <div class="ringstage" id="ring-stage">
@@ -229,7 +322,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
     <span class="tag">Packaging</span>
     <span class="tag">Experiential</span>
   </div>
-  <p style="margin:0 0 26px;max-width:660px;font:300 18px/1.65 Newsreader,serif;color:var(--body);text-wrap:pretty">Beyond the campaign imagery, I developed the products and mockups for both brands and designed <strong style="font-weight:500">The Melt Bar</strong> — a live pop-up with a gloss try-on station and scannable QR cups that unlock a shade matched to your flavour.</p>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">Beyond the campaign imagery, I developed the products and mockups for both brands and designed <strong style="font-weight:500">The Melt Bar</strong> — a live pop-up with a gloss try-on station and scannable QR cups that unlock a shade matched to your flavour.</p>
   <div class="grid g2">
     <img class="shot" src="assets/pg-gloss-10.jpg" alt="Made to Melt beauty portrait — glossed lip and mint shimmer">
     <img class="shot" src="assets/pg-gloss-28.jpg" alt="Made to melt — gloss dripping onto a strawberry scoop, orange field">
@@ -243,7 +336,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 <div class="sect" id="nike">
   <div class="eyebrow">02 · Marketing Strategy</div>
   <h2>Air Force 1, in a mature market</h2>
-  <p style="margin:0 0 26px;max-width:660px;font:300 18px/1.65 Newsreader,serif;color:var(--body);text-wrap:pretty">For my Marketing Management class I analysed Nike's brand marketing for the Air Force 1 — how a performance basketball shoe became a cultural icon — and built a strategy for defending that position against hype fatigue and shifting Gen Z values.</p>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">For my Marketing Management class I analysed Nike's brand marketing for the Air Force 1 — how a performance basketball shoe became a cultural icon — and built a strategy for defending that position against hype fatigue and shifting Gen Z values.</p>
   <div class="tags">
     <span class="tag">Marketing Strategy</span>
     <span class="tag">Brand Evolution</span>
@@ -267,8 +360,8 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
       <img src="assets/book-cover.png" alt="The Map Inside of Me — front cover" style="display:block;width:100%">
     </a>
     <div>
-      <p style="margin:0;font:300 19px/1.65 Newsreader,serif;color:var(--body);text-wrap:pretty">While designing SayPlay through my work with United Cerebral Palsy, I kept thinking about how design and storytelling could make complex ideas around cerebral palsy more approachable for children. For my Creativity in Business class, I explored that idea through a completely different medium: a children’s book. The Map Inside of Me uses storytelling and illustration to help explain the relationship between the brain and movement in a way that feels imaginative, gentle, and accessible.</p>
-      <a href="assets/the-map-inside-of-me.pdf" target="_blank" rel="noopener" style="display:inline-block;margin-top:22px;font:400 13px/1 system-ui,sans-serif;padding:14px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none">Read the book ↗</a>
+      <p style="margin:0;font:400 19px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">While designing SayPlay through my work with United Cerebral Palsy, I kept thinking about how design and storytelling could make complex ideas around cerebral palsy more approachable for children. For my Creativity in Business class, I explored that idea through a completely different medium: a children’s book. The Map Inside of Me uses storytelling and illustration to help explain the relationship between the brain and movement in a way that feels imaginative, gentle, and accessible.</p>
+      <a href="assets/the-map-inside-of-me.pdf" target="_blank" rel="noopener" style="display:inline-block;margin-top:22px;font:400 13px/1 var(--font-sans);padding:14px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none">Read the book ↗</a>
       <p class="note">Opens the first five pages in a new tab.</p>
     </div>
   </div>
@@ -277,7 +370,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 <div class="sect" id="graphic">
   <div class="eyebrow">04 · Graphic Design</div>
   <h2>Posters, layouts, type</h2>
-  <p style="margin:0 0 26px;max-width:660px;font:300 18px/1.65 Newsreader,serif;color:var(--body);text-wrap:pretty">Part of my minor in Visual Design, alongside Design and Color, Graphic Design, New Media Arts, and Introduction to AR and VR.</p>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">Part of my minor in Visual Design, alongside Design and Color, Graphic Design, New Media Arts, and Introduction to AR and VR.</p>
   <div class="grid g3">
     <img class="shot" src="assets/pg-gd-nike1.jpg" alt="Nike AIR Collection poster with cut-paper collage and Just Do It lockup">
     <img class="shot" src="assets/pg-gd-collage1.jpg" alt="Photo collage — astronaut, skyline, Saturn and a grapefruit planet">
@@ -304,7 +397,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
       <img src="assets/pg-res-logo.jpg" alt="CASE Lab — Communication and Speech Emergence Lab" style="display:block;width:250px;max-width:100%">
     </div>
     <div style="padding:30px 32px;border-radius:14px;background:var(--surf)">
-      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font:300 18px/1.6 Newsreader,serif;color:var(--body)">
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font:400 18px/1.6 var(--font-sans);color:var(--body)">
         <li>Analyzed 100+ pages of qualitative transcripts, identifying recurring communication and engagement patterns.</li>
         <li>Synthesized findings into structured insights and applied qualitative coding to strengthen rigour in ongoing research.</li>
       </ul>
@@ -358,7 +451,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
         <path d="M36 24 C30 26 16 22 7 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/>
         <path d="M14 7 L6.5 4 L9 12" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span style="font:400 17px/1.4 Newsreader,Georgia,serif;color:#6b6355;margin-top:12px">me in my pieces</span>
+      <span style="font:400 17px/1.4 var(--font-sans);color:#6b6355;margin-top:12px">me in my pieces</span>
       <svg width="42" height="28" viewBox="0 0 42 28" fill="none" aria-hidden="true" style="flex:0 0 auto;margin-top:6px">
         <path d="M6 24 C12 26 26 22 35 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/>
         <path d="M28 7 L35.5 4 L33 12" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -372,30 +465,33 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 <div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
 
 <div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
-<div style="max-width:440px">
-<h2 style="margin:0;font:400 36px/1.15 Newsreader,Georgia,serif;letter-spacing:-.02em">Thanks for stopping by.</h2>
-<p style="margin:14px 0 0;font:300 17px/1.5 Newsreader,serif;color:var(--muted)">Always happy to talk design, research, or a new idea.</p>
+<div style="display:flex;align-items:flex-start;gap:30px;max-width:560px">
+<svg viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootnddchtml" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootnddchtml)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootnddchtml)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+</div>
 </div>
 
 <div style="display:flex;gap:64px">
 <div>
-<div style="font:600 11px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
-<div style="display:flex;flex-direction:column;gap:10px;font:400 13px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.03em">
-<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--muted)">Email</a>
-<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--muted)">LinkedIn</a>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
 </div>
 </div>
 <div>
-<div style="font:600 11px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
-<div style="display:flex;flex-direction:column;gap:10px;font:400 13px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.03em">
-<a href="index.html#work" style="text-decoration:none;color:var(--muted)">Work</a>
-<a href="about.html" style="text-decoration:none;color:var(--muted)">About</a>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="index.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="about.html" style="text-decoration:none;color:var(--body-2)">About</a>
 </div>
 </div>
 </div>
 </div>
 
-<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
 <span>Made with ♥ by Laila · 2026</span>
 <a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surf)">↑ Back to top</a>
 </div>

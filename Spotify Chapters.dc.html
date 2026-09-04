@@ -15,13 +15,21 @@
 </template>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Oswald:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Oswald:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
 <style>
   .smrx ::-webkit-scrollbar{width:8px;height:8px}
   .smrx ::-webkit-scrollbar-thumb{background:#3a3a3a;border-radius:4px}
   @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   @keyframes grainShift{0%{transform:translate(0,0)}100%{transform:translate(-4%,-3%)}}
+  .ccph{transition:transform .55s cubic-bezier(.22,.8,.24,1),opacity .4s ease,filter .4s ease}
+  .ccph > div{transition:box-shadow .55s cubic-bezier(.22,.8,.24,1)}
+  .ccstack:hover .ccph{opacity:.55;filter:saturate(.85)}
+  .ccstack:hover .ccph:hover{opacity:1;filter:none;transform:rotate(0deg) translateY(-14px) scale(1.06);z-index:9}
+  .ccstack:hover .ccph:hover > div{box-shadow:0 3px 8px rgba(0,0,0,.45),0 44px 80px -26px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.1)}
+  .ccrow{transition:background .3s ease,padding .3s ease}
+  .ccrow:hover .ccarr{color:#f3eee3;transform:translate(2px,-2px)}
+  .ccarr{transition:color .3s ease,transform .3s ease}
 </style>
 </helmet>
 
@@ -96,7 +104,7 @@
   <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.15em;color:#1ED760;margin-bottom:20px;animation:fadeUp 0.6s ease both">CHAPTERS</div>
   <div style="width:120px;height:120px;border-radius:50%;background:url('assets/smr/album-art/sz.jpg') center/cover no-repeat;margin-bottom:36px;box-shadow:0 20px 60px rgba(180,110,40,0.25);animation:fadeUp 0.7s ease both 0.05s"></div>
   <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:76px;letter-spacing:0.01em;line-height:0.95;text-transform:uppercase;animation:fadeUp 0.7s ease both 0.12s">Your August<br>is ready</div>
-  <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:#d8d0c4;margin-top:18px;max-width:420px;animation:fadeUp 0.7s ease both 0.2s">What did this month sound like — and what did it feel like?</div>
+  <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:22px;color:#d8d0c4;margin-top:18px;max-width:420px;animation:fadeUp 0.7s ease both 0.2s">What did this month sound like — and what did it feel like?</div>
   <div onClick="{{ goToOverview }}" style="margin-top:44px;background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:15px 36px;border-radius:999px;cursor:pointer;animation:fadeUp 0.7s ease both 0.3s" style-hover="transform:scale(1.03);background:#1fdf64">Open your August</div>
 </div>
 </sc-if>
@@ -159,7 +167,7 @@
     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1ED760">{{ meaningfulCount }} / 8 SELECTED</div>
   </div>
   <div style="padding:20px 40px 8px;max-width:640px">
-    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;line-height:1.15">Which songs defined your month?</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:38px;line-height:1.15">Which songs defined your month?</div>
     <div style="color:#a7a7a7;font-size:14px;margin-top:10px">Listening frequency isn't the same as meaning. Pick 3–8 songs that felt like August — whether you played them once or fifty times.</div>
   </div>
 
@@ -190,7 +198,7 @@
     <div onClick="{{ goToChapterComplete }}" style="color:#1ED760;font-size:13px;cursor:pointer;font-weight:700">Skip photos, save Chapter →</div>
   </div>
   <div style="padding:20px 40px 8px;max-width:640px">
-    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;line-height:1.15">Add the moments that went with them.</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:38px;line-height:1.15">Add the moments that went with them.</div>
     <div style="color:#a7a7a7;font-size:14px;margin-top:10px">Photos from August 1–31. Pick a few, then tap a song below to pair them. Totally optional.</div>
   </div>
 
@@ -236,7 +244,7 @@
         <div onClick="{{ pickPairPhoto }}" data-id="{{ p.id }}" style="aspect-ratio:1;border-radius:5px;background:{{ p.gradient }};cursor:pointer;outline:{{ p.outline }};outline-offset:2px"></div>
       </sc-for>
     </div>
-    <input value="{{ captionDraft }}" onChange="{{ setCaptionDraft }}" placeholder="Add a short memory (optional)" style="background:#0f0f0f;border:1px solid #333;border-radius:8px;padding:11px 14px;color:#fff;font-size:13px;font-family:'Instrument Serif',serif;font-style:italic;outline:none">
+    <input value="{{ captionDraft }}" onChange="{{ setCaptionDraft }}" placeholder="Add a short memory (optional)" style="background:#0f0f0f;border:1px solid #333;border-radius:8px;padding:11px 14px;color:#fff;font-size:13px;font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;outline:none">
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:4px">
       <div onClick="{{ closePairModal }}" style="color:#a7a7a7;font-size:13px;font-weight:700;cursor:pointer;padding:10px 16px">Cancel</div>
       <div onClick="{{ savePairing }}" style="background:#1ED760;color:#000;font-weight:800;font-size:13px;padding:10px 20px;border-radius:999px;cursor:pointer">Save</div>
@@ -248,13 +256,13 @@
 
 <!-- ============ CHAPTER COMPLETE ============ -->
 <sc-if value="{{ isChapterComplete }}" hint-placeholder-val="{{ false }}">
-<div style="height:100%;overflow-y:auto;background:#0e0d0b;color:#f3eee3;position:relative">
+<div style="height:100%;overflow-y:auto;background:linear-gradient(180deg,#111010 0%,#0b0a09 58%,#080808 100%);color:#f3eee3;position:relative">
+  <div style="position:absolute;left:-6%;top:18%;width:62%;height:64%;border-radius:50%;background:radial-gradient(closest-side,rgba(209,135,63,.16),rgba(209,135,63,0) 70%);filter:blur(10px);pointer-events:none;z-index:0"></div>
   <div style="position:absolute;inset:0;opacity:0.07;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);pointer-events:none"></div>
   <div style="position:relative;padding:24px 60px 0;display:flex;justify-content:space-between;align-items:center;z-index:3">
     <div onClick="{{ goToArchive }}" style="color:#9a9081;font-size:13px;cursor:pointer;font-weight:600;letter-spacing:-.005em" style-hover="color:#f3eee3">← Your Chapters</div>
     <div style="display:flex;align-items:center;gap:16px">
-      <div style="width:72px;height:1px;background:rgba(243,238,227,0.22)"></div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#d1873f">CH. 08 / 2026</div>
+      <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-size:14px;letter-spacing:0.2em;color:#d1873f">CH. 08 / 2026</div>
     </div>
   </div>
 
@@ -262,70 +270,67 @@
 
     <div style="position:relative;min-width:0">
       <div style="position:relative">
-        <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:116px;line-height:0.82;letter-spacing:0.005em;text-transform:uppercase">August</div>
+        <div style="font-weight:600;font-size:104px;line-height:0.86;letter-spacing:-0.045em;text-transform:uppercase;color:#f6f2ea">August</div>
         <div style="display:flex;align-items:center;gap:18px;margin-top:14px">
-          <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:21px;color:#9a9081;white-space:nowrap">your soundtrack to this chapter</div>
-          <div style="height:1px;flex:1;background:rgba(243,238,227,0.16)"></div>
+          <div style="font-size:17px;font-weight:400;letter-spacing:-0.012em;color:#9a9081;white-space:nowrap">your soundtrack to this chapter</div>
         </div>
       </div>
 
-      <div style="position:relative;width:100%;max-width:700px;height:0;padding-bottom:37.4%;margin-top:36px">
+      <div class="ccstack" style="position:relative;width:100%;max-width:700px;height:0;padding-bottom:37.4%;margin-top:40px;z-index:1">
         <sc-for list="{{ chapterPhotos }}" as="p" hint-placeholder-count="5">
-          <div style="position:absolute;left:{{ p.x }};top:{{ p.y }};width:{{ p.w }};z-index:{{ p.z }};transform:rotate({{ p.rot }}deg);transition:transform .5s cubic-bezier(.2,.7,.2,1)" style-hover="transform:rotate(0deg) translateY(-6px)">
-            <div style="background:{{ p.gradient }};aspect-ratio:4/5;border:7px solid #fff;border-radius:1px;box-shadow:0 18px 34px rgba(0,0,0,0.55)"></div>
+          <div class="ccph" style="position:absolute;left:{{ p.x }};top:{{ p.y }};width:{{ p.w }};z-index:{{ p.z }};transform:rotate({{ p.rot }}deg)">
+            <div style="background:{{ p.gradient }};aspect-ratio:4/5;border-radius:18px;box-shadow:0 2px 6px rgba(0,0,0,.4),0 26px 60px -20px rgba(0,0,0,.66),inset 0 0 0 1px rgba(255,255,255,.07)"></div>
           </div>
         </sc-for>
       </div>
 
       <div style="display:flex;align-items:flex-start;gap:16px;margin-top:30px;max-width:480px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:#d1873f;padding-top:7px;white-space:nowrap">THE MOMENT</div>
-        <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:19px;line-height:1.35;color:#a99e8d">{{ heroCaption }}</div>
+        <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-size:13px;letter-spacing:0.2em;color:#d1873f;padding-top:6px;white-space:nowrap">THE MOMENT</div>
+        <div style="font-size:16.5px;font-weight:400;line-height:1.45;letter-spacing:-0.011em;color:#a99e8d">{{ heroCaption }}</div>
       </div>
     </div>
 
     <div style="min-width:0;padding-top:18px">
       <div style="display:flex;align-items:center;gap:14px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#d1873f">MOST MEANINGFUL</div>
-        <div style="height:1px;flex:1;background:rgba(243,238,227,0.14)"></div>
+        <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-size:14px;letter-spacing:0.2em;color:#d1873f">MOST MEANINGFUL</div>
       </div>
       <div style="display:flex;flex-direction:column;margin-top:6px">
         <sc-for list="{{ meaningfulSongs }}" as="s" hint-placeholder-count="5">
-          <div onClick="{{ openSongMemory }}" data-id="{{ s.id }}" style="display:grid;grid-template-columns:30px minmax(0,1fr) 14px;gap:14px;align-items:baseline;padding:13px 8px 13px 0;border-bottom:1px solid rgba(243,238,227,0.1);cursor:pointer;transition:padding .3s ease,background .3s ease" style-hover="background:rgba(255,255,255,0.06);padding-left:8px">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#d1873f">{{ s.num }}</span>
-            <span style="min-width:0;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-size:16px;font-weight:700;letter-spacing:-0.012em">{{ s.title }}</span><span style="font-size:13px;color:#9a9081;font-style:italic;margin-left:9px">{{ s.artist }}</span></span>
-            <span style="font-size:12px;color:#6f665b">↗</span>
+          <div class="ccrow" onClick="{{ openSongMemory }}" data-id="{{ s.id }}" style="display:grid;grid-template-columns:30px minmax(0,1fr) 14px;gap:14px;align-items:baseline;padding:15px 10px 15px 0;border-bottom:1px solid rgba(243,238,227,0.07);border-radius:10px;cursor:pointer" style-hover="background:rgba(255,255,255,0.045);padding-left:10px">
+            <span style="font-family:'EB Garamond',Garamond,Georgia,serif;font-size:15px;color:#d1873f">{{ s.num }}</span>
+            <span style="min-width:0;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-size:16.5px;font-weight:500;letter-spacing:-0.016em">{{ s.title }}</span><span style="font-size:14px;color:#9a9081;letter-spacing:-0.01em;margin-left:10px">{{ s.artist }}</span></span>
+            <span class="ccarr" style="display:inline-block;font-size:12px;color:#6f665b">↗</span>
           </div>
         </sc-for>
       </div>
 
       <div style="display:flex;align-items:center;gap:14px;margin-top:26px">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#d1873f">MOST PLAYED</div>
-        <div style="height:1px;flex:1;background:rgba(243,238,227,0.14)"></div>
+        <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-size:14px;letter-spacing:0.2em;color:#d1873f">MOST PLAYED</div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
         <sc-for list="{{ mostPlayed }}" as="s" hint-placeholder-count="5">
-          <div style="font-size:12.5px;padding:7px 13px;border:1px solid rgba(243,238,227,0.22);border-radius:999px;transition:background .25s ease,border-color .25s ease" style-hover="background:#f3eee3;border-color:#f3eee3;color:#12100e">{{ s.artist }}</div>
+          <div style="font-size:13px;font-weight:500;letter-spacing:-0.01em;padding:9px 16px;border:1px solid rgba(243,238,227,0.16);border-radius:999px;transition:background .25s ease,border-color .25s ease" style-hover="background:rgba(243,238,227,0.1);border-color:rgba(243,238,227,0.32)">{{ s.artist }}</div>
         </sc-for>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;padding-top:20px;border-top:1px solid rgba(243,238,227,0.16)">
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;padding-top:20px;border-top:1px solid rgba(243,238,227,0.09)">
         <div>
-          <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:32px;line-height:1;letter-spacing:0.01em">361</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#8a8074;margin-top:7px">SONGS</div>
+          <div style="font-weight:600;font-size:34px;line-height:1;letter-spacing:-0.035em;font-variant-numeric:tabular-nums">361</div>
+          <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;color:#8a8074;margin-top:9px">SONGS</div>
         </div>
         <div>
-          <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:32px;line-height:1;letter-spacing:0.01em">{{ meaningfulCount }}</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#8a8074;margin-top:7px">MEANINGFUL</div>
+          <div style="font-weight:600;font-size:34px;line-height:1;letter-spacing:-0.035em;font-variant-numeric:tabular-nums">{{ meaningfulCount }}</div>
+          <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;color:#8a8074;margin-top:9px">MEANINGFUL</div>
         </div>
         <div>
-          <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:32px;line-height:1;letter-spacing:0.01em">{{ selectedPhotoCount }}</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#8a8074;margin-top:7px">MEMORIES</div>
+          <div style="font-weight:600;font-size:34px;line-height:1;letter-spacing:-0.035em;font-variant-numeric:tabular-nums">{{ selectedPhotoCount }}</div>
+          <div style="font-size:10px;font-weight:500;letter-spacing:0.16em;color:#8a8074;margin-top:9px">MEMORIES</div>
         </div>
       </div>
 
-      <div onClick="{{ openRunItBack }}" style="margin-top:30px;background:#f3eee3;color:#12100e;font-weight:700;font-size:15px;padding:17px 30px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;letter-spacing:0.01em;transition:background .25s ease" style-hover="background:#d1873f">
+      <div onClick="{{ openRunItBack }}" style="margin-top:32px;background:#f3eee3;color:#12100e;font-weight:500;font-size:15.5px;padding:16px 28px;border-radius:980px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;letter-spacing:-0.012em;box-shadow:0 10px 30px -14px rgba(0,0,0,.7);transition:background .25s ease,transform .25s ease" style-hover="background:#ffffff;transform:translateY(-1px)">
         <span style="display:flex;align-items:center;gap:11px">▶ Run It Back</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;color:rgba(18,16,14,0.55)">AUG 2026</span>
+        <span style="font-size:10.5px;font-weight:500;letter-spacing:0.16em;color:rgba(18,16,14,0.5)">AUG 2026</span>
       </div>
     </div>
   </div>
@@ -342,7 +347,7 @@
   </div>
   <div style="max-width:520px;margin:0 auto;padding:50px 40px 60px;text-align:center">
     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#c9bfa8;margin-bottom:20px">AUGUST 2026</div>
-    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:48px;line-height:1.05">{{ activeSongMemoryTitle }}</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:48px;line-height:1.05">{{ activeSongMemoryTitle }}</div>
     <div style="font-size:15px;color:#c9bfa8;margin-top:8px">{{ activeSongMemoryArtist }}</div>
 
     <div style="margin:36px 0;border-radius:4px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.4)">
@@ -350,7 +355,7 @@
     </div>
 
     <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#c9bfa8;margin-bottom:10px">YOUR MEMORY</div>
-    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;line-height:1.4">"{{ activeSongMemoryCaption }}"</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:22px;line-height:1.4">"{{ activeSongMemoryCaption }}"</div>
 
     <div onClick="{{ openRunItBack }}" style="margin-top:44px;display:inline-flex;align-items:center;gap:10px;color:#f3eee3;border:1px solid rgba(243,238,227,0.35);padding:12px 26px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600">▶ Play from here</div>
   </div>
@@ -405,7 +410,7 @@
       <div style="width:280px;aspect-ratio:4/5;border-radius:10px;background:{{ yearCoverGradient }};box-shadow:0 30px 70px rgba(0,0,0,0.5);flex-shrink:0"></div>
       <div>
         <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:64px;text-transform:uppercase;line-height:0.9">{{ yearMonthFull }}</div>
-        <div style="font-family:'Instrument Serif',serif;font-style:italic;color:#c9bfa8;font-size:18px;margin-top:10px">{{ yearMonthTopArtist }}</div>
+        <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;color:#c9bfa8;font-size:18px;margin-top:10px">{{ yearMonthTopArtist }}</div>
         <div style="display:flex;gap:24px;margin-top:20px;font-size:13px;color:#a7a7a7">
           <span>{{ yearMonthSongCount }} songs</span><span>{{ yearMonthMemoryCount }} memories</span>
         </div>
@@ -431,7 +436,7 @@
   <div onClick="{{ goToYearInChapters }}" style="position:absolute;top:28px;left:32px;color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Year in Chapters</div>
   <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;color:#c9bfa8;margin-bottom:6px">A LOOK AHEAD · YEAR-END PREVIEW</div>
   <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:52px;margin-top:14px">2026</div>
-  <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:26px;color:#e8dcc4;margin-top:18px;line-height:1.5">12 months.<br>84 songs.<br>127 memories.<br>One soundtrack.</div>
+  <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:26px;color:#e8dcc4;margin-top:18px;line-height:1.5">12 months.<br>84 songs.<br>127 memories.<br>One soundtrack.</div>
   <div onClick="{{ openRunItBackYear }}" style="margin-top:40px;background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:16px 44px;border-radius:999px;cursor:pointer" style-hover="transform:scale(1.03)">▶ Play My Year</div>
 </div>
 </sc-if>
@@ -453,7 +458,7 @@
   <div style="position:relative;z-index:1;text-align:center;margin-top:36px;color:#fff">
     <div style="font-size:20px;font-weight:700">{{ ribSongTitle }}</div>
     <div style="font-size:14px;color:#c9bfa8;margin-top:2px">{{ ribSongArtist }}</div>
-    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:#e8dcc4;margin-top:14px;max-width:400px">"{{ ribCaption }}"</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:17px;color:#e8dcc4;margin-top:14px;max-width:400px">"{{ ribCaption }}"</div>
   </div>
 
   <div style="position:relative;z-index:1;margin-top:32px;display:flex;align-items:center;gap:22px">

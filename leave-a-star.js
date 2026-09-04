@@ -282,7 +282,7 @@
         w.style.cssText = 'display:block;font:300 italic 16px/1.15 Newsreader,Georgia,serif;color:#f4ecdd';
         w.textContent = s.word;                         /* visitor text, as text only */
         var when = document.createElement('span');
-        when.style.cssText = "display:block;margin-top:4px;font:400 8.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,221,.52)";
+        when.style.cssText = "display:block;margin-top:4px;font:500 8.5px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,221,.52)";
         when.textContent = ago(s.t);
         tip.appendChild(w);
         tip.appendChild(when);

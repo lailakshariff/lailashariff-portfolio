@@ -14,13 +14,13 @@ html[data-pnav="full"] .pnav{background:transparent;-webkit-backdrop-filter:none
 @media (prefers-reduced-motion:reduce){.pnav{transition:none}}
 .pnav-space{height:66px}
 
-.pnav-wordmark{pointer-events:auto;display:inline-flex;align-items:center;min-height:24px;text-decoration:none;font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap;transition:color .22s ease}
+.pnav-wordmark{pointer-events:auto;display:inline-flex;align-items:center;min-height:24px;text-decoration:none;font:500 12px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;transition:color .22s ease;color:var(--ink);white-space:nowrap;transition:color .22s ease}
 .pnav-wordmark:hover{color:var(--pnav-hover)}
 .pnav-wordmark:focus-visible{outline:2px solid var(--pnav-on);outline-offset:3px}
 
-.pnav-in{pointer-events:auto;display:flex;align-items:center;gap:28px}
+.pnav-in{pointer-events:auto;display:flex;align-items:center;gap:24px}
 .pnav-in a{display:inline-flex;align-items:center;min-height:24px;text-decoration:none;
-  font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  font:500 12px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
   transition:color .22s ease}
 .pnav-in a:hover{color:var(--pnav-hover)}
 .pnav-in a[aria-current]{color:var(--pnav-on)}
