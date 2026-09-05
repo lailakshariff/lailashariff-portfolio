@@ -216,10 +216,25 @@
       g.innerHTML = '<img src="' + srcs[i % srcs.length] + '" alt="">';
       i++;
       var rot = (Math.random() * 14 - 7).toFixed(1);
-      g.style.left = x + 'px'; g.style.top = y + 'px';
+      g.style.left = '0px'; g.style.top = '0px';
+      g.style.visibility = 'hidden';
+      box.appendChild(g);
+      // the ghost is centred on the pointer via negative margins, so a drop near
+      // an edge would hang outside the box and be clipped to a half photo.
+      // Measure the real box (it shrinks on mobile) and keep the card whole.
+      var cs = getComputedStyle(g);
+      var gw = g.offsetWidth, gh = g.offsetHeight;
+      var ml = -parseFloat(cs.marginLeft) || 0, mt = -parseFloat(cs.marginTop) || 0;
+      var rr = Math.abs(parseFloat(rot)) * Math.PI / 180;
+      var pad = 6 + Math.round(Math.sin(rr) * (gw + gh) / 2);
+      var minX = ml + pad, maxX = r.width - (gw - ml) - pad;
+      var minY = mt + pad, maxY = r.height - (gh - mt) - pad;
+      var px = maxX < minX ? r.width / 2 : Math.min(Math.max(x, minX), maxX);
+      var py = maxY < minY ? r.height / 2 : Math.min(Math.max(y, minY), maxY);
+      g.style.left = px + 'px'; g.style.top = py + 'px';
       g.style.transform = 'rotate(' + rot + 'deg) scale(.82)';
       g.style.opacity = '0';
-      box.appendChild(g);
+      g.style.visibility = '';
       requestAnimationFrame(function () {
         g.style.transition = 'transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s ease';
         g.style.transform = 'rotate(' + rot + 'deg) scale(1)';

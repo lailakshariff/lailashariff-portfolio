@@ -123,6 +123,7 @@
 /* ---- phone ---- */
 @media (max-width:720px){
   .labgrid{columns:1;padding:24px 20px 0;column-gap:0}
+  #lab-gallery .ghost{width:100px;margin:-67px 0 0 -50px;border-radius:5px}
   .labhead{padding:52px 20px 0}
   .labhead h2{font-size:clamp(26px,7.4vw,32px)}
   .labhead p{font-size:16px;line-height:1.6}
