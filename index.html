@@ -510,13 +510,67 @@ svg.ls-mark:hover .ls-s{transform:rotate(9deg)}
 }
 /* ==== end transferred hero ==== */
 /*topgap3*/@media (max-width:768px){}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;padding:24px 0 22px !important;margin-top:24px !important;gap:12px;flex-wrap:nowrap !important}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}
-.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--body-2);white-space:nowrap;text-transform:none}
+/* ===== quiet card system ===== */
+.wcard-art{position:relative;box-sizing:border-box;aspect-ratio:1.4;display:grid;place-items:center;
+  padding:7%;border-radius:20px;background:var(--panel,#ffffff);overflow:hidden}
+.wcard-art{--panel:#ffffff}
+html[data-theme="dark"] .wcard-art{--panel:#232118}
+
+.wcard-art > div:first-child{width:auto !important;height:100% !important;max-width:100%;
+  border-radius:11px !important;
+  box-shadow:0 22px 44px -20px rgba(var(--inkrgb),.32),0 2px 6px rgba(var(--inkrgb),.055);
+  transition:transform .55s cubic-bezier(.2,.7,.2,1),box-shadow .55s ease}
+.wcard:hover .wcard-art > div:first-child{transform:translateY(-5px) scale(1.012) !important;
+  box-shadow:0 32px 58px -20px rgba(var(--inkrgb),.4),0 3px 9px rgba(var(--inkrgb),.07)}
+.wcard:hover 
+.wcard-head{margin-top:22px}
+.wcard-head h3{margin:0;max-width:30ch;font:400 27px/1.22 var(--font-sans);letter-spacing:-.02em;text-wrap:pretty}
+.wcard-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:9px}
+.wclient{margin-right:2px;font:400 14.5px/1 var(--font-sans);color:#8a847c;
+  transition:color .3s ease}
+html[data-theme="dark"] .wclient{color:#958f83}
+.wcard:hover .wclient{color:var(--body)}
+.wcard-meta .wchip{padding:7px 11px;border:0 !important;border-radius:9px;
+  background:rgba(var(--inkrgb),.035);font:400 12.5px/1 var(--font-sans);letter-spacing:0;
+  text-transform:none;color:#5b564f}
+html[data-theme="dark"] .wcard-meta .wchip{color:#d2ccbe;background:rgba(242,239,230,.055)}
+.wcard:hover .wcard-meta .wchip{background:rgba(var(--inkrgb),.06);color:var(--ink)}
+html[data-theme="dark"] .wcard:hover .wcard-meta .wchip{background:rgba(242,239,230,.1);color:#f2efe6}
+html[data-theme="dark"] .wcard:hover .wclient{color:#c2bcae}
+@media (max-width:900px){
+  .wcard-head h3{font-size:24px}
+  .wcard-art{padding:6%;border-radius:17px}
+  }
+@media (max-width:640px){
+  .wcard-head{margin-top:18px}
+  .wcard-head h3{font-size:22px;letter-spacing:-.016em}
+  .wcard-meta{gap:5px;margin-top:8px}
+  .wclient{font-size:13.5px}
+  .wcard-meta .wchip{padding:6px 10px;border-radius:8px;font-size:12px}
+  }
+/* ===== end quiet card system ===== */
+
+/* Spotify card now sits on white — scale the composition up and re-ink it */
+.smrwcard .smrwstack{gap:7cqh}
+.smrwcard .smrwlogo{gap:3cqh}
+.smrwcard .smrwlogo img{width:13cqh !important;height:13cqh !important}
+.smrwcard .smrwlogo span{font-size:11.5cqh !important;color:#ffffff !important}
+.smrwcard .smrwkick{font-size:4.2cqh !important;letter-spacing:.18em}
+.smrwcard .smrwstrip{gap:2.4cqh}
+.smrwcard .smrwstrip img{width:19cqh !important;height:19cqh !important;border-radius:1.4cqh;
+  box-shadow:0 2.4cqh 4.6cqh -1.2cqh rgba(0,0,0,.5),0 .3cqh .9cqh rgba(0,0,0,.28)}
+
+.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;
+  font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--muted);white-space:nowrap}
 .pnav-clock i{font-style:normal;font-variant-numeric:tabular-nums}
-.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round}
 @media (max-width:640px){.pnav-clock{display:none}}
+
 @keyframes lsfPop{0%{opacity:0;transform:scale(0)}62%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
 .lsfmark circle{opacity:0}
-.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
+.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;
+  animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
 .lsfmark.is-in g circle:nth-child(1){animation-delay:0.100s}
 .lsfmark.is-in g circle:nth-child(2){animation-delay:0.172s}
 .lsfmark.is-in g circle:nth-child(3){animation-delay:0.244s}
@@ -535,10 +589,12 @@ svg.ls-mark:hover .ls-s{transform:rotate(9deg)}
 </style><script data-pfcard-script="1">(function(){var t=setInterval(function(){var els=document.querySelectorAll('.pfcard');if(!els.length)return;clearInterval(t);els.forEach(function(c){if(c.dataset.w)return;c.dataset.w='1';var go=function(){c.classList.add('pfrun');};if(!('IntersectionObserver' in window)){go();return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go();o.unobserve(e.target);}});},{threshold:.15});o.observe(c);setTimeout(go,4000);});},150);})();</script><script data-nhwcard-script="1">(function(){var t=setInterval(function(){var c=document.querySelector('.nhwcard');if(!c)return;clearInterval(t);if(c.dataset.w)return;c.dataset.w='1';if(!('IntersectionObserver' in window)){c.classList.add('nhrun');return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('nhrun');o.unobserve(e.target);}});},{threshold:.35});o.observe(c);},150);})();</script>
 <script>(function(){
 var K='ls-theme', root=document.documentElement;
-function set(t){ root.setAttribute('data-theme',t); try{localStorage.setItem(K,t);}catch(e){} }
-var saved=null; try{saved=localStorage.getItem(K);}catch(e){}
-var hr=new Date().getHours();
-    set(saved || ((hr>=19||hr<7) ? 'dark' : 'light'));
+function set(t){ root.setAttribute('data-theme',t); try{localStorage.setItem(K,t);localStorage.setItem('ls-theme-at',String(Date.now()));}catch(e){} }
+var T='ls-theme-at', TTL=4*60*60*1000;
+var saved=null, at=0; try{saved=localStorage.getItem(K);at=parseInt(localStorage.getItem(T)||'0',10)||0;}catch(e){}
+if(saved && (Date.now()-at) > TTL){saved=null;try{localStorage.removeItem(K);localStorage.removeItem(T);}catch(e){}}
+var h=new Date().getHours();
+root.setAttribute('data-theme', saved || ((h>=19||h<7) ? 'dark' : 'light'));
 if(!window.__lsThemeWired){window.__lsThemeWired=1;document.addEventListener('click',function(e){ var b=e.target.closest&&e.target.closest('#ls-theme-toggle,#tmode,.ls-theme-toggle,.tmode'); if(!b) return; set(root.getAttribute('data-theme')==='dark'?'light':'dark'); },true);}
 })();</script>
 <link rel="stylesheet" href="./pill-nav.css">
@@ -553,15 +609,19 @@ if(document.readyState==='complete')go();else window.addEventListener('load',go)
 setTimeout(go,5200);})();</script>
 <script data-pnavclock="1">(function(){
 function tick(){var el=document.getElementById('pnav-time');if(!el)return;
- var d=new Date(),hh=d.getHours(),mm=d.getMinutes();
- var ap=hh<12?'AM':'PM';hh=hh%12;if(hh===0)hh=12;
- el.textContent=hh+':'+(mm<10?'0':'')+mm+' '+ap;}
+ var d=new Date(),h=d.getHours(),m=d.getMinutes();
+ var ap=h<12?'AM':'PM';h=h%12;if(h===0)h=12;
+ el.textContent=h+':'+(m<10?'0':'')+m+' '+ap;}
 function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
-if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);setTimeout(function(){clearInterval(t);},12000);}
-function fm(){var el=document.querySelector('.lsfmark');if(!el)return false;
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
+ setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
+<script data-lsfmark="1">(function(){
+function go(){var el=document.querySelector('.lsfmark');if(!el)return false;
  if(!('IntersectionObserver' in window)){el.classList.add('is-in');return true;}
- new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);return true;}
-if(!fm()){var t2=setInterval(function(){if(fm())clearInterval(t2);},140);setTimeout(function(){clearInterval(t2);},14000);}
+ new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);
+ return true;}
+if(!go()){var t=setInterval(function(){if(go())clearInterval(t);},140);setTimeout(function(){clearInterval(t);},14000);}
 })();</script>
 </helmet>
 
@@ -609,7 +669,7 @@ if(!fm()){var t2=setInterval(function(){if(fm())clearInterval(t2);},140);setTime
 <div class="wgrid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:56px;row-gap:84px;padding:0 64px">
 
 <a href="purple-fabric.html" class="wcard wc-pf" style="display:block;text-decoration:none;color:inherit">
-<div class="wcard-art"><div class="pfcard" data-chip="Case study" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;container-type:size;background:linear-gradient(148deg,#faf7fd 0%,#f1eafb 26%,#e2d0f6 52%,#c9a9e8 78%,#a878d8 100%)"><span class="pfglowa" aria-hidden="true"></span>
+<div class="wcard-art"><div class="pfcard" data-chip="Case study" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;container-type:size;background:linear-gradient(148deg,#fdfbfe 0%,#f6f1fc 26%,#ece0f8 52%,#dbc4ee 78%,#c39fe0 100%)"><span class="pfglowa" aria-hidden="true"></span>
 <div class="pfui" role="img" aria-label="An agent workspace: a build toolbar and a grid of governed AI agents with live, in-review and draft states">
 <div class="pfui-rail">
 <span class="pfui-mark" aria-hidden="true"><svg viewBox="229 211 61 98" fill="none"><path d="M246.16 235.086C246.72 233.815 248.16 230.955 251.36 228.651C254.96 226.109 258.64 225.87 260 225.87C260 221.58 260 217.29 260 213C258.24 213 248.24 213 240.24 220.786C232.08 228.73 232 238.741 232 240.489V250.896C233.04 248.592 234.88 245.335 237.76 242.078C240.8 238.661 243.92 236.437 246.24 235.086H246.16Z" fill="#fff"></path><path d="M262.32 234.844V248.111C269.36 249.224 274.64 255.182 274.64 262.412C274.64 270.436 268.08 276.871 259.92 276.871C254.72 276.871 250.16 274.249 247.6 270.198V287.199C251.36 289.027 255.52 290.059 259.92 290.059C275.36 290.059 288 277.666 288 262.412C288 247.158 276.64 236.035 262.32 234.844Z" fill="#fff"></path><path d="M260 247.876V234.688C254.64 234.688 249.68 236.197 245.44 238.739C237.36 243.586 232 252.325 232 262.335V307.064C239.36 307.064 245.36 301.105 245.36 293.796V262.335C245.36 254.311 251.92 247.876 260.08 247.876H260Z" fill="#fff"></path></svg></span>
@@ -635,12 +695,11 @@ if(!fm()){var t2=setInterval(function(){if(fm())clearInterval(t2);},140);setTime
 </div>
 </div></div></div>
 <div class="wcard-head"><h3>Making enterprise AI clearer</h3></div>
-<p class="wcard-desc">Redesigning Purple Fabric around how financial institutions evaluate AI platforms.</p>
-<div class="wcard-chips"><span class="wchip">Enterprise AI</span><span class="wchip">UX Strategy</span><span class="wchip wchip-yr">2026</span></div>
+<div class="wcard-meta"><span class="wclient">Intellect Design Arena</span><span class="wchip">2026</span><span class="wchip">UX Strategy</span></div>
 </a>
 
 <a href="sayplay.html" class="wcard wc-sp" style="display:block;text-decoration:none;color:inherit">
-<div class="wcard-art"><div class="spcard" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:linear-gradient(158deg,#FCFAF4 0%,#F5F0E4 58%,#ECE5D4 100%);display:grid;place-items:center;container-type:size">
+<div class="wcard-art"><div class="spcard" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:linear-gradient(158deg,#FDFCF8 0%,#F8F4EC 58%,#F1EBDE 100%);display:grid;place-items:center;container-type:size">
 <div class="sqstage">
 <div>
 <span class="sqslot"><b class="sqw sqw0"><span>I want a</span> <em>banana</em></b><b class="sqw sqw1"><span>I want to</span> <em>skate</em></b><b class="sqw sqw2"><span>I want a</span> <em>drink</em></b><b class="sqw sqw3"><span>I feel</span> <em>good</em></b></span>
@@ -650,19 +709,17 @@ if(!fm()){var t2=setInterval(function(){if(fm())clearInterval(t2);},140);setTime
 </div>
 </div></div>
 <div class="wcard-head"><h3>Communication built around play</h3></div>
-<p class="wcard-desc">An AAC app designed with therapists and caregivers for children with cerebral palsy.</p>
-<div class="wcard-chips"><span class="wchip">Accessibility</span><span class="wchip">UX Research</span><span class="wchip wchip-yr">2025</span></div>
+<div class="wcard-meta"><span class="wclient">United Cerebral Palsy</span><span class="wchip">2025</span><span class="wchip">Accessibility</span></div>
 </a>
 
 <a href="nutrihealth.html" class="wcard wc-nh" style="display:block;text-decoration:none;color:inherit">
-<div class="wcard-art"><div class="nhwcard" data-chip="Case study" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:linear-gradient(155deg,#fdfaf0 0%,#e4f1de 28%,#bfdec6 58%,#8fc4a1 85%,#6fb188 100%);display:grid;place-items:center;container-type:size"><div class="nhwin"><div class="nhrail"><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div></div></div></div></div>
+<div class="wcard-art"><div class="nhwcard" data-chip="Case study" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:linear-gradient(155deg,#fefdf6 0%,#eef7ea 28%,#d3e9d6 58%,#a9d3b6 85%,#8ec4a2 100%);display:grid;place-items:center;container-type:size"><div class="nhwin"><div class="nhrail"><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="goals" still="1" hint-size="100%,520px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="progress" still="1" hint-size="100%,580px"></dc-import></div><div><dc-import name="NutriHealth phone" screen="recipe" still="1" hint-size="100%,520px"></dc-import></div></div></div></div></div>
 <div class="wcard-head"><h3>Eating well on a student’s schedule</h3></div>
-<p class="wcard-desc">A nutrition app shaped by interviews with sixteen of my peers.</p>
-<div class="wcard-chips"><span class="wchip">AI</span><span class="wchip">Mobile</span><span class="wchip wchip-yr">2023</span></div>
+<div class="wcard-meta"><span class="wclient">Independent</span><span class="wchip">2023</span><span class="wchip">Mobile</span></div>
 </a>
 
 <a href="spotify-chapters.html" class="wcard wc-smr" style="display:block;text-decoration:none;color:inherit">
-<div class="wcard-art"><div class="smrwcard" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:radial-gradient(122% 96% at 50% 14%,#211d18 0%,#0e0d0c 56%,#000000 100%);display:grid;place-items:center;container-type:size">
+<div class="wcard-art"><div class="smrwcard" style="position:relative;width:100%;aspect-ratio:3/2;border-radius:18px;overflow:hidden;background:radial-gradient(122% 96% at 50% 14%,#2b2620 0%,#171512 56%,#0b0a09 100%);display:grid;place-items:center;container-type:size">
 <div class="smrwstack">
 <div class="smrwlogo"><img src="assets/smr/spotify-logo.webp" alt="Spotify logo"><span>Spotify</span></div>
 <div class="smrwkick">Chapters · August 2026</div>
@@ -670,8 +727,7 @@ if(!fm()){var t2=setInterval(function(){if(fm())clearInterval(t2);},140);setTime
 </div>
 </div></div>
 <div class="wcard-head"><h3>A month of listening, archived</h3></div>
-<p class="wcard-desc">An independent concept turning monthly listening into something worth revisiting.</p>
-<div class="wcard-chips"><span class="wchip">Product Concept</span><span class="wchip">Mobile + Desktop</span><span class="wchip wchip-yr">2026</span></div>
+<div class="wcard-meta"><span class="wclient">Independent concept</span><span class="wchip">2026</span><span class="wchip">Mobile + Desktop</span></div>
 </a>
 
 </div>
