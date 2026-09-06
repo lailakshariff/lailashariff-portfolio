@@ -171,11 +171,54 @@ setTimeout(function(){ clearInterval(t); },12000);
 
 <script src="./dot-cursor.js"></script><style>:root{--font-sans:'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;--font-serif:'EB Garamond',Garamond,Georgia,serif;--bg:#ffffff;--ink:#22201d;--body:#4b473f;--body-2:#5b564f;--muted:#8a8478;--surf:#f4f1eb;--accent:#a8544a;--navon:#a8544a;--inkrgb:34,32,29}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#cdc7ba;--body-2:#b5aea1;--muted:#958f83;--surf:#211f18;--accent:#d98d7e;--dot:#ffffff;--navon:#d98d7e;--inkrgb:242,239,230}
-body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}@media (max-width:768px){[data-mono] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}</style>
+body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}@media (max-width:768px){[data-mono] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}
+@keyframes lsfPop{0%{opacity:0;transform:scale(0)}62%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+.lsfmark circle{opacity:0}
+.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;
+  animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
+.lsfmark.is-in g circle:nth-child(1){animation-delay:0.100s}
+.lsfmark.is-in g circle:nth-child(2){animation-delay:0.172s}
+.lsfmark.is-in g circle:nth-child(3){animation-delay:0.244s}
+.lsfmark.is-in g circle:nth-child(4){animation-delay:0.316s}
+.lsfmark.is-in g circle:nth-child(5){animation-delay:0.388s}
+.lsfmark.is-in g circle:nth-child(6){animation-delay:0.460s}
+.lsfmark.is-in g circle:nth-child(7){animation-delay:0.532s}
+.lsfmark.is-in g circle:nth-child(8){animation-delay:0.604s}
+.lsfmark.is-in g circle:nth-child(9){animation-delay:0.676s}
+.lsfmark.is-in g circle:nth-child(10){animation-delay:0.748s}
+.lsfmark.is-in g circle:nth-child(11){animation-delay:0.820s}
+.lsfmark.is-in g circle:nth-child(12){animation-delay:0.892s}
+.lsfmark.is-in g circle:nth-child(13){animation-delay:0.964s}
+.lsfmark.is-in g circle:nth-child(14){animation-delay:1.036s}
+@media (prefers-reduced-motion:reduce){.lsfmark circle{opacity:1}.lsfmark.is-in circle{animation:none !important}}
+
+.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;
+  font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--body-2);white-space:nowrap}
+.pnav-clock i{font-style:normal;font-variant-numeric:tabular-nums}
+.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round}
+@media (max-width:640px){.pnav-clock{display:none}}
+</style>
 <link rel="stylesheet" href="./theme.css">
 <link rel="stylesheet" href="./pill-nav.css">
 <link rel="stylesheet" href="./lab.css">
-<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab.js" defer></script></helmet>
+<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab.js" defer></script><script data-lsfmark="1">(function(){
+function go(){var el=document.querySelector('.lsfmark');if(!el)return false;
+ if(!('IntersectionObserver' in window)){el.classList.add('is-in');return true;}
+ new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);
+ return true;}
+if(!go()){var t=setInterval(function(){if(go())clearInterval(t);},140);setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+<script data-pnavclock="1">(function(){
+function tick(){var el=document.getElementById('pnav-time');if(!el)return;
+ var d=new Date(),hh=d.getHours(),mm=d.getMinutes();
+ var ap=hh<12?'AM':'PM';hh=hh%12;if(hh===0)hh=12;
+ el.textContent=hh+':'+(mm<10?'0':'')+mm+' '+ap;}
+function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
+ setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
+</helmet>
 
 <div class="pnav">
 <a href="index.html" class="pnav-wordmark">Laila Shariff</a>
@@ -183,6 +226,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 <a href="index.html#work">Work</a>
 <a href="playground.html" aria-current="page">Playground</a>
 <a href="about.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
 <button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
 </div>
 </div>
@@ -466,7 +510,7 @@ body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > 
 
 <div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
 <div style="display:flex;align-items:flex-start;gap:30px;max-width:560px">
-<svg viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootnddchtml" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootnddchtml)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootnddchtml)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<svg class="lsfmark" viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootnddchtml" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootnddchtml)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootnddchtml)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
 <div>
 <h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
 <p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>

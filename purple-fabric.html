@@ -7,7 +7,7 @@
 </head>
 <body>
 <x-dc>
-<helmet><title>Purple Fabric — Laila Shariff</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./type.css">
@@ -154,6 +154,7 @@ h2{font-size:20px !important}
 @media (max-width:560px){.pfjar{gap:12px}.pfjcirc{flex:0 0 calc(33.333% - 8px);padding:8px !important;font-size:10.5px !important;line-height:1.25 !important}}
 @media (max-width:420px){.pfjar{gap:9px}.pfjcirc{flex:0 0 calc(33.333% - 6px);font-size:9px !important;padding:6px !important}}
 </style>
+<script src="./image-slot.js"></script>
 <link rel="stylesheet" href="./theme.css">
 <link rel="stylesheet" href="./case-theme.css">
 <script src="./theme.js"></script>
@@ -161,8 +162,51 @@ h2{font-size:20px !important}
 <style>:root{--bg:#ffffff;--ink:#1a1a1a;--body:#555555;--body-2:#6e6a64;--muted:#a8a49c;--faint:#c9c9c9;--line:#ececec;--line-2:#e6e4e0;--surface:#f6f6f7;--card:#ffffff;--tint-a:100%;--inkrgb:26,26,26;--accent:#a8544a;--brand:#7b3fa8;--brand-deep:#4e0973;--mark:#ecdff8;--tint-bg:#faf7fe;--tint-line:#e4dbf5;--hero-grad:var(--hero-grad)}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa39a;--muted:#8b8479;--faint:#4b463d;--line:rgba(255,255,255,.11);--line-2:rgba(255,255,255,.15);--surface:#211f17;--card:#1d1b14;--tint-a:22%;--inkrgb:242,239,230;--accent:#d98d7e;--brand:#b79ae0;--brand-deep:#c9b2ea;--mark:rgba(183,154,224,.30);--tint-bg:rgba(183,154,224,.07);--tint-line:rgba(183,154,224,.20);--hero-grad:radial-gradient(ellipse 118% 250% at 50% 50%, #f8f6f1 0%, #f6f2fb 38%, #efe7f9 66%, #e0cdf3 88%, #cfb6ec 100%)}
 @media (max-width:560px){.pfhero-shot{width:82% !important}}
-@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:rgba(255,255,255,.94);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(26,26,26,.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-open .mnav-sheet a{opacity:1;transform:none}</style>
+@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:rgba(255,255,255,.94);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(26,26,26,.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-open .mnav-sheet a{opacity:1;transform:none}
+@keyframes lsfPop{0%{opacity:0;transform:scale(0)}62%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+.lsfmark circle{opacity:0}
+.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;
+  animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
+.lsfmark.is-in g circle:nth-child(1){animation-delay:0.100s}
+.lsfmark.is-in g circle:nth-child(2){animation-delay:0.172s}
+.lsfmark.is-in g circle:nth-child(3){animation-delay:0.244s}
+.lsfmark.is-in g circle:nth-child(4){animation-delay:0.316s}
+.lsfmark.is-in g circle:nth-child(5){animation-delay:0.388s}
+.lsfmark.is-in g circle:nth-child(6){animation-delay:0.460s}
+.lsfmark.is-in g circle:nth-child(7){animation-delay:0.532s}
+.lsfmark.is-in g circle:nth-child(8){animation-delay:0.604s}
+.lsfmark.is-in g circle:nth-child(9){animation-delay:0.676s}
+.lsfmark.is-in g circle:nth-child(10){animation-delay:0.748s}
+.lsfmark.is-in g circle:nth-child(11){animation-delay:0.820s}
+.lsfmark.is-in g circle:nth-child(12){animation-delay:0.892s}
+.lsfmark.is-in g circle:nth-child(13){animation-delay:0.964s}
+.lsfmark.is-in g circle:nth-child(14){animation-delay:1.036s}
+@media (prefers-reduced-motion:reduce){.lsfmark circle{opacity:1}.lsfmark.is-in circle{animation:none !important}}
+
+.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;
+  font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--body-2);white-space:nowrap}
+.pnav-clock i{font-style:normal;font-variant-numeric:tabular-nums}
+.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round}
+@media (max-width:640px){.pnav-clock{display:none}}
+</style>
 <script src="./pill-nav.js"></script>
+<script data-lsfmark="1">(function(){
+function go(){var el=document.querySelector('.lsfmark');if(!el)return false;
+ if(!('IntersectionObserver' in window)){el.classList.add('is-in');return true;}
+ new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);
+ return true;}
+if(!go()){var t=setInterval(function(){if(go())clearInterval(t);},140);setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+<script data-pnavclock="1">(function(){
+function tick(){var el=document.getElementById('pnav-time');if(!el)return;
+ var d=new Date(),hh=d.getHours(),mm=d.getMinutes();
+ var ap=hh<12?'AM':'PM';hh=hh%12;if(hh===0)hh=12;
+ el.textContent=hh+':'+(mm<10?'0':'')+mm+' '+ap;}
+function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
+ setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
 </helmet>
 
 <div style="font-family:var(--font-sans); color:var(--ink); background:var(--bg); min-height:100vh; overflow-x:hidden;">
@@ -173,13 +217,14 @@ html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa3
 <a href="index.html#work" aria-current="page">Work</a>
 <a href="playground.html">Playground</a>
 <a href="about.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
 <button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
 </div>
 </div>
 <div class="pnav-space" aria-hidden="true"></div>
 
 <div style="width:100%; height:clamp(300px,40vw,480px); background:var(--hero-grad); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-<img src="assets/purple-fabric-orbit-transparent.svg" alt="Purple Fabric: seven enterprise systems orbiting one governed core" style="width:100%; height:100%; object-fit:contain; display:block;">
+<img src="exports/purple-fabric-orbit-transparent.svg" alt="Purple Fabric: seven enterprise systems orbiting one governed core" style="width:100%; height:100%; object-fit:contain; display:block;">
 </div>
 
 <div style="display:flex;">
@@ -480,7 +525,7 @@ html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa3
 
 <div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
 <div style="display:flex;align-items:flex-start;gap:30px;max-width:560px">
-<svg viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootpf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootpf)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootpf)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<svg class="lsfmark" viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootpf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootpf)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootpf)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
 <div>
 <h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
 <p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
