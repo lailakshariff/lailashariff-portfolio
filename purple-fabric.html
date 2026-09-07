@@ -155,10 +155,10 @@ h2{font-size:20px !important}
 @media (max-width:420px){.pfjar{gap:9px}.pfjcirc{flex:0 0 calc(33.333% - 6px);font-size:9px !important;padding:6px !important}}
 </style>
 <script src="./image-slot.js"></script>
-<link rel="stylesheet" href="./theme.css">
-<link rel="stylesheet" href="./case-theme.css">
+<link rel="stylesheet" href="./theme.css?v=5">
+<link rel="stylesheet" href="./case-theme.css?v=5">
 <script src="./theme.js"></script>
-<link rel="stylesheet" href="./pill-nav.css">
+<link rel="stylesheet" href="./pill-nav.css?v=2">
 <style>:root{--bg:#ffffff;--ink:#1a1a1a;--body:#555555;--body-2:#6e6a64;--muted:#a8a49c;--faint:#c9c9c9;--line:#ececec;--line-2:#e6e4e0;--surface:#f6f6f7;--card:#ffffff;--tint-a:100%;--inkrgb:26,26,26;--accent:#a8544a;--brand:#7b3fa8;--brand-deep:#4e0973;--mark:#ecdff8;--tint-bg:#faf7fe;--tint-line:#e4dbf5;--hero-grad:var(--hero-grad)}
 html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa39a;--muted:#8b8479;--faint:#4b463d;--line:rgba(255,255,255,.11);--line-2:rgba(255,255,255,.15);--surface:#211f17;--card:#1d1b14;--tint-a:22%;--inkrgb:242,239,230;--accent:#d98d7e;--brand:#b79ae0;--brand-deep:#c9b2ea;--mark:rgba(183,154,224,.30);--tint-bg:rgba(183,154,224,.07);--tint-line:rgba(183,154,224,.20);--hero-grad:radial-gradient(ellipse 118% 250% at 50% 50%, #f8f6f1 0%, #f6f2fb 38%, #efe7f9 66%, #e0cdf3 88%, #cfb6ec 100%)}
 @media (max-width:560px){.pfhero-shot{width:82% !important}}
@@ -206,6 +206,16 @@ function tick(){var el=document.getElementById('pnav-time');if(!el)return;
 function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
 if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
  setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
+<script data-lsfclock="1">(function(){if(window.__lsfClock)return;window.__lsfClock=1;
+var TZ='America/New_York';
+function tick(){var el=document.getElementById('lsf-time');if(!el)return;
+ var s;try{s=new Date().toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'});}
+ catch(e){s=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+ el.textContent=s;}
+function start(){if(!document.getElementById('lsf-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},140);
+ setTimeout(function(){clearInterval(t);},14000);}
 })();</script>
 </helmet>
 
@@ -524,11 +534,12 @@ if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
 <div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
 
 <div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
-<div style="display:flex;align-items:flex-start;gap:30px;max-width:560px">
-<svg class="lsfmark" viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootpf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootpf)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootpf)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div style="display:flex;align-items:center;gap:30px;max-width:560px">
+<svg class="lsfmark" viewBox="0 0 250 150" width="112" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;overflow:visible;color:var(--ink)"><defs><filter id="gooFootpf" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootpf)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootpf)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
 <div>
 <h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
 <p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+<p style="margin:18px 0 0;font:400 12.5px/1 var(--font-sans);color:var(--muted)">Currently in New York, <i id="lsf-time" style="font-style:normal;font-variant-numeric:tabular-nums">--:--</i></p>
 </div>
 </div>
 
