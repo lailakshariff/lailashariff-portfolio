@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sans comparison — four candidates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Instrument+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:#22201d;-webkit-font-smoothing:antialiased}
+  .page{max-width:1900px;margin:0 auto;padding:56px clamp(22px,5vw,60px) 90px}
+  .eyebrow{font:400 11px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:#8a8478}
+  .lede{margin:14px 0 0;max-width:62ch;font:400 16px/1.62 'Instrument Sans',system-ui,sans-serif;color:#5b564f;text-wrap:pretty}
+  h1.top{font-family:Newsreader,Georgia,serif;font-weight:500;margin:16px 0 0;font-size:clamp(30px,3.4vw,42px);line-height:1.1;letter-spacing:-.026em}
+
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px clamp(18px,2.2vw,32px);margin-top:44px;border-top:1px solid rgba(34,32,29,.12)}
+  .col{min-width:0;padding:26px 0 8px clamp(20px,2.4vw,36px);border-left:1px solid rgba(34,32,29,.1)}
+  .tag{display:flex;align-items:baseline;gap:10px;padding-bottom:20px;border-bottom:1px solid rgba(34,32,29,.1);margin-bottom:30px}
+  .tag b{font:600 13px/1 'Instrument Sans',system-ui,sans-serif;letter-spacing:-.01em}
+  .tag span{font:400 10.5px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#8a8478}
+  .row{padding:0 0 32px}
+  .row + .row{border-top:1px dashed rgba(34,32,29,.14);padding-top:26px}
+  .label{font:400 10px/1 'Space Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a8544a;margin-bottom:14px}
+
+  /* serif is FIXED in both columns — only the sans changes */
+  h2{font-family:Newsreader,Georgia,serif;font-weight:500;margin:0;font-size:clamp(25px,2.9vw,34px);line-height:1.14;letter-spacing:-.028em;text-wrap:pretty}
+  h3{font-family:Newsreader,Georgia,serif;font-weight:500;margin:0;font-size:20px;line-height:1.28;letter-spacing:-.02em}
+
+  /* the candidate faces */
+  .is{--sans:'Instrument Sans',system-ui,sans-serif}
+  .mr{--sans:'Manrope',system-ui,sans-serif}
+  .sg{--sans:'Schibsted Grotesk',system-ui,sans-serif}
+  .st{--sans:'Satoshi',system-ui,sans-serif}
+
+  .body-l{margin:16px 0 0;font:400 16.5px/1.72 var(--sans);color:#5b564f;text-wrap:pretty}
+  .body-s{margin:10px 0 0;font:400 14px/1.55 var(--sans);color:#6f6a5f;text-wrap:pretty}
+  .kicker{font:500 11.5px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#6f6a5f}
+  .navrow{display:flex;align-items:center;gap:26px;padding:14px 16px;border:1px solid rgba(34,32,29,.12);border-radius:8px;font:500 11.5px/1 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:#6f6a5f}
+  .navrow b{font-weight:500;color:#a8544a}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .chip{display:inline-flex;align-items:center;padding:6px 9px;border:1px solid rgba(34,32,29,.13);border-radius:5px;font:500 10.5px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#6f6a5f}
+  .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .btn{padding:13px 22px;border-radius:999px;background:#22201d;color:#fff;font:500 12.5px/1 var(--sans);letter-spacing:.01em}
+  .btn.ghost{background:none;color:#22201d;border:1px solid rgba(34,32,29,.25)}
+  .persona{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;margin-top:16px;padding:20px;border:1px solid rgba(34,32,29,.1);border-radius:12px;background:#fbfaf7}
+  .persona .av{width:44px;height:44px;border-radius:50%;background:#ece7dc}
+  .persona h4{margin:0;font:600 16px/1.25 var(--sans);letter-spacing:-.012em;color:#22201d}
+  .persona .rl{margin:4px 0 0;font:500 10.5px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#8a8478}
+  .persona p{margin:10px 0 0;font:400 14.5px/1.58 var(--sans);color:#5b564f}
+  .nums{display:flex;gap:28px;margin-top:14px;flex-wrap:wrap}
+  .nums div{min-width:96px}
+  .nums b{display:block;font:600 30px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .nums span{display:block;margin-top:7px;font:500 10.5px/1.3 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#8a8478}
+  .glyphs{margin-top:12px;font:400 26px/1.5 var(--sans);letter-spacing:.01em;color:#3a362f}
+  .weights p{margin:0 0 8px;font-family:var(--sans);font-size:19px;line-height:1.35;letter-spacing:-.012em}
+  .foot{margin-top:52px;padding-top:26px;border-top:1px solid rgba(34,32,29,.12)}
+  @media (max-width:640px){.col{border-left:0;padding-left:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Type comparison</div>
+  <h1 class="top">Four sans candidates, one fixed serif</h1>
+  <p class="lede">Newsreader is fixed in all four columns — every serif heading here is identical. Only the sans changes, at the same sizes and weights throughout. Instrument Sans is what the site uses now. Manrope is warmer and more distinctive. Schibsted Grotesk was drawn for news products, so it is the one built for long reading and dense small-size UI at the same time. Satoshi is the most geometric of the four and the only one not served from Google Fonts.</p>
+
+  <div class="cols">
+
+    <div class="col is">
+      <div class="tag"><b>Instrument Sans</b><span>current</span></div>
+
+      <div class="row">
+        <div class="label">Nav</div>
+        <div class="navrow"><b>Work</b><span>Playground</span><span>About</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Case-study body — the longest read on the site</div>
+        <h2>Existing AAC tools weren’t built for how young children play</h2>
+        <p class="body-l">Children with cerebral palsy often experience significant speech and motor limitations, yet most augmentative and alternative communication tools are designed around adult vocabularies and adult motor control. Grid sizes assume precision. Category structures assume literacy. The result is a tool that a therapist can operate but a four-year-old cannot, which pushes the child toward passive use and the caregiver toward abandonment within the first month.</p>
+        <p class="body-l">Over eight weeks at United Cerebral Palsy I observed therapy sessions, interviewed speech-language pathologists and occupational therapists, and sat with families during home practice.</p>
+      </div>
+
+      <div class="row">
+        <div class="label">Work card</div>
+        <h3>Communication built around play</h3>
+        <p class="body-s">An AAC app designed with therapists and caregivers for children with cerebral palsy.</p>
+        <div class="chips"><span class="chip">Accessibility</span><span class="chip">UX Research</span><span class="chip">2025</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Buttons</div>
+        <div class="btns"><span class="btn">Read case study</span><span class="btn ghost">View prototype</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Persona card</div>
+        <div class="persona">
+          <div class="av"></div>
+          <div>
+            <h4>Maya, 4</h4>
+            <div class="rl">Primary user</div>
+            <p>Wants to be understood without being slowed down. Uses two fingers, gets tired after ten minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Numerals</div>
+        <div class="nums">
+          <div><b>16</b><span>Interviews</span></div>
+          <div><b>8 wks</b><span>On site</span></div>
+          <div><b>100+</b><span>Transcript pages</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Weights 400 / 500 / 600</div>
+        <div class="weights">
+          <p style="font-weight:400">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:500">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:600">Research, systems thinking, visual craft.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Glyphs</div>
+        <div class="glyphs">aeghiklstRGQ &amp; 1234567890 — “quote” ✦</div>
+      </div>
+    </div>
+
+    <div class="col mr">
+      <div class="tag"><b style="font-family:Manrope,sans-serif">Manrope</b><span>candidate</span></div>
+
+      <div class="row">
+        <div class="label">Nav</div>
+        <div class="navrow"><b>Work</b><span>Playground</span><span>About</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Case-study body — the longest read on the site</div>
+        <h2>Existing AAC tools weren’t built for how young children play</h2>
+        <p class="body-l">Children with cerebral palsy often experience significant speech and motor limitations, yet most augmentative and alternative communication tools are designed around adult vocabularies and adult motor control. Grid sizes assume precision. Category structures assume literacy. The result is a tool that a therapist can operate but a four-year-old cannot, which pushes the child toward passive use and the caregiver toward abandonment within the first month.</p>
+        <p class="body-l">Over eight weeks at United Cerebral Palsy I observed therapy sessions, interviewed speech-language pathologists and occupational therapists, and sat with families during home practice.</p>
+      </div>
+
+      <div class="row">
+        <div class="label">Work card</div>
+        <h3>Communication built around play</h3>
+        <p class="body-s">An AAC app designed with therapists and caregivers for children with cerebral palsy.</p>
+        <div class="chips"><span class="chip">Accessibility</span><span class="chip">UX Research</span><span class="chip">2025</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Buttons</div>
+        <div class="btns"><span class="btn">Read case study</span><span class="btn ghost">View prototype</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Persona card</div>
+        <div class="persona">
+          <div class="av"></div>
+          <div>
+            <h4>Maya, 4</h4>
+            <div class="rl">Primary user</div>
+            <p>Wants to be understood without being slowed down. Uses two fingers, gets tired after ten minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Numerals</div>
+        <div class="nums">
+          <div><b>16</b><span>Interviews</span></div>
+          <div><b>8 wks</b><span>On site</span></div>
+          <div><b>100+</b><span>Transcript pages</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Weights 400 / 500 / 600</div>
+        <div class="weights">
+          <p style="font-weight:400">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:500">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:600">Research, systems thinking, visual craft.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Glyphs</div>
+        <div class="glyphs">aeghiklstRGQ &amp; 1234567890 — “quote” ✦</div>
+      </div>
+    </div>
+
+<div class="col sg">
+      <div class="tag"><b style="font-family:'Schibsted Grotesk',sans-serif">Schibsted Grotesk</b><span>candidate</span></div>
+
+      <div class="row">
+        <div class="label">Nav</div>
+        <div class="navrow"><b>Work</b><span>Playground</span><span>About</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Case-study body — the longest read on the site</div>
+        <h2>Existing AAC tools weren’t built for how young children play</h2>
+        <p class="body-l">Children with cerebral palsy often experience significant speech and motor limitations, yet most augmentative and alternative communication tools are designed around adult vocabularies and adult motor control. Grid sizes assume precision. Category structures assume literacy. The result is a tool that a therapist can operate but a four-year-old cannot, which pushes the child toward passive use and the caregiver toward abandonment within the first month.</p>
+        <p class="body-l">Over eight weeks at United Cerebral Palsy I observed therapy sessions, interviewed speech-language pathologists and occupational therapists, and sat with families during home practice.</p>
+      </div>
+
+      <div class="row">
+        <div class="label">Work card</div>
+        <h3>Communication built around play</h3>
+        <p class="body-s">An AAC app designed with therapists and caregivers for children with cerebral palsy.</p>
+        <div class="chips"><span class="chip">Accessibility</span><span class="chip">UX Research</span><span class="chip">2025</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Buttons</div>
+        <div class="btns"><span class="btn">Read case study</span><span class="btn ghost">View prototype</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Persona card</div>
+        <div class="persona">
+          <div class="av"></div>
+          <div>
+            <h4>Maya, 4</h4>
+            <div class="rl">Primary user</div>
+            <p>Wants to be understood without being slowed down. Uses two fingers, gets tired after ten minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Numerals</div>
+        <div class="nums">
+          <div><b>16</b><span>Interviews</span></div>
+          <div><b>8 wks</b><span>On site</span></div>
+          <div><b>100+</b><span>Transcript pages</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Weights 400 / 500 / 600</div>
+        <div class="weights">
+          <p style="font-weight:400">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:500">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:600">Research, systems thinking, visual craft.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Glyphs</div>
+        <div class="glyphs">aeghiklstRGQ &amp; 1234567890 — “quote” ✦</div>
+      </div>
+    </div>
+
+<div class="col st">
+      <div class="tag"><b style="font-family:Satoshi,sans-serif">Satoshi</b><span>candidate</span></div>
+
+      <div class="row">
+        <div class="label">Nav</div>
+        <div class="navrow"><b>Work</b><span>Playground</span><span>About</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Case-study body — the longest read on the site</div>
+        <h2>Existing AAC tools weren’t built for how young children play</h2>
+        <p class="body-l">Children with cerebral palsy often experience significant speech and motor limitations, yet most augmentative and alternative communication tools are designed around adult vocabularies and adult motor control. Grid sizes assume precision. Category structures assume literacy. The result is a tool that a therapist can operate but a four-year-old cannot, which pushes the child toward passive use and the caregiver toward abandonment within the first month.</p>
+        <p class="body-l">Over eight weeks at United Cerebral Palsy I observed therapy sessions, interviewed speech-language pathologists and occupational therapists, and sat with families during home practice.</p>
+      </div>
+
+      <div class="row">
+        <div class="label">Work card</div>
+        <h3>Communication built around play</h3>
+        <p class="body-s">An AAC app designed with therapists and caregivers for children with cerebral palsy.</p>
+        <div class="chips"><span class="chip">Accessibility</span><span class="chip">UX Research</span><span class="chip">2025</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Buttons</div>
+        <div class="btns"><span class="btn">Read case study</span><span class="btn ghost">View prototype</span></div>
+      </div>
+
+      <div class="row">
+        <div class="label">Persona card</div>
+        <div class="persona">
+          <div class="av"></div>
+          <div>
+            <h4>Maya, 4</h4>
+            <div class="rl">Primary user</div>
+            <p>Wants to be understood without being slowed down. Uses two fingers, gets tired after ten minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Numerals</div>
+        <div class="nums">
+          <div><b>16</b><span>Interviews</span></div>
+          <div><b>8 wks</b><span>On site</span></div>
+          <div><b>100+</b><span>Transcript pages</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Weights 400 / 500 / 600</div>
+        <div class="weights">
+          <p style="font-weight:400">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:500">Research, systems thinking, visual craft.</p>
+          <p style="font-weight:600">Research, systems thinking, visual craft.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label">Glyphs</div>
+        <div class="glyphs">aeghiklstRGQ &amp; 1234567890 — “quote” ✦</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot">
+    <p class="lede">What to look at. Read the two long paragraphs in each column first — that block is the heaviest reading on your site, and it is where the three genuinely differ. Then check the 10.5px uppercase chips and the persona card, which is where Instrument Sans gets narrow. Manrope has no italic; Schibsted Grotesk does. Both run a taller x-height than Instrument Sans, so 16.5px in either reads closer to 17.5px and body copy could come down half a pixel. Manrope carries more personality in the a, g and k; Schibsted Grotesk is quieter and holds its shape better at small sizes; Satoshi is the most geometric and the most neutral of the three candidates. One practical note on Satoshi: it loads from Fontshare rather than Google Fonts, so it adds a second font host to every page.</p>
+  </div>
+</div>
+</body>
+</html>

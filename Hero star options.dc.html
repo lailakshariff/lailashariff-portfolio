@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design_doc_mode" content="canvas">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#efece5;font-family:'Satoshi',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#22201d}a:hover{color:#a8544a}
+@keyframes ditherDriftA{0%,100%{transform:translate(0,0)}50%{transform:translate(1.6px,-1.2px)}}
+@keyframes ditherDriftB{0%,100%{transform:translate(0,0)}50%{transform:translate(-1.4px,1.4px)}}
+@keyframes ditherDriftC{0%,100%{transform:translate(0,0)}50%{transform:translate(1.2px,1.6px)}}
+@keyframes ditherFlicker{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes lsDitherBreathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.94;transform:scale(1.16)}}
+@keyframes fieldBreath{0%,100%{opacity:var(--o,.22)}50%{opacity:calc(var(--o,.22) * .45)}}
+.hsart svg circle{transform-box:fill-box;transform-origin:50% 50%}
+.dstar-head{transform-box:fill-box;transform-origin:50% 50%;animation:lsDitherBreathe 5.2s ease-in-out infinite}
+.dr1{animation:ditherDriftA 2.6s ease-in-out .1s infinite}
+.dr2{animation:ditherDriftA 3.4s ease-in-out .7s infinite}
+.dr3{animation:ditherDriftA 3.9s ease-in-out 1.3s infinite}
+.dr4{animation:ditherDriftB 2.4s ease-in-out .4s infinite}
+.dr5{animation:ditherDriftB 3.1s ease-in-out .9s infinite}
+.dr6{animation:ditherDriftB 3.7s ease-in-out 1.5s infinite}
+.dr7{animation:ditherDriftC 2.8s ease-in-out .2s infinite}
+.dr8{animation:ditherDriftC 3.3s ease-in-out 1.1s infinite}
+.dr9{animation:ditherDriftC 4.1s ease-in-out .6s infinite}
+.fl1{animation:ditherFlicker 1.6s ease-in-out .05s infinite}
+.fl2{animation:ditherFlicker 2.1s ease-in-out .5s infinite}
+.fl3{animation:ditherFlicker 2.4s ease-in-out 1.1s infinite}
+.fl4{animation:ditherFlicker 1.9s ease-in-out .8s infinite}
+.dr1.fl1{animation:ditherDriftA 2.6s ease-in-out .1s infinite,ditherFlicker 1.6s ease-in-out .05s infinite}
+.dr4.fl2{animation:ditherDriftB 2.4s ease-in-out .4s infinite,ditherFlicker 2.1s ease-in-out .5s infinite}
+.dr7.fl3{animation:ditherDriftC 2.8s ease-in-out .2s infinite,ditherFlicker 2.4s ease-in-out 1.1s infinite}
+circle.fb1{animation:fieldBreath 4.2s ease-in-out .3s infinite}
+circle.fb2{animation:fieldBreath 5.1s ease-in-out 1.1s infinite}
+circle.fb3{animation:fieldBreath 3.6s ease-in-out .7s infinite}
+circle.fb4{animation:fieldBreath 4.7s ease-in-out 1.6s infinite}
+.hsrow{display:flex;flex-wrap:nowrap;width:max-content;gap:34px;padding:38px}
+.hscard{flex:0 0 auto;width:920px;background:#fff;border-radius:16px;box-shadow:0 18px 44px -26px rgba(34,32,29,.4);overflow:hidden}
+.hsbadge{display:flex;align-items:center;gap:12px;padding:16px 26px;border-bottom:1px solid #ececec}
+.hsid{font:600 11px/1 'Satoshi';letter-spacing:.1em;color:#a8544a;padding:6px 9px;border:1px solid rgba(168,84,74,.34);border-radius:5px}
+.hsname{font:500 15px/1.3 'Satoshi';color:#22201d}
+.hsnote{font:400 13.5px/1.5 'Satoshi';color:#6b6660;margin-left:auto;max-width:46ch;text-align:right}
+.hshero{position:relative;display:grid;grid-template-columns:1.22fr .78fr;gap:16px;align-items:center;padding:56px 54px 60px}
+.hsfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hscopy,.hsart{position:relative;z-index:1}
+.hsh1{margin:0;font:400 40px/1.12 'EB Garamond',Georgia,serif;letter-spacing:-.006em;color:#22201d;text-wrap:pretty}
+.hssub{margin:22px 0 0;max-width:44ch;font:400 17px/1.6 'Satoshi';color:#5b564f;text-wrap:pretty}
+.hscur{margin:26px 0 0;font:600 10.5px/1 'Satoshi';letter-spacing:.14em;text-transform:uppercase;color:#8a847c}
+.hsart svg{display:block;width:100%;height:auto;overflow:visible}
+@media (prefers-reduced-motion:reduce){.hsart svg circle,.dstar-head,.hsfield circle{animation:none !important}}
+</style>
+</helmet>
+
+<section>
+<div class="hsrow">
+<sc-for list="{{ fields }}" as="o" hint-placeholder-count="3">
+<div class="hscard" id="{{ o.id }}">
+<div class="hsbadge">
+<span class="hsid">{{ o.id }}</span>
+<span class="hsname">{{ o.name }}</span>
+<span class="hsnote">{{ o.note }}</span>
+</div>
+<div class="hshero">
+<div class="hscopy">
+<h1 class="hsh1">Product designer creating clear, human-centered experiences.</h1>
+<p class="hssub">I bring together research, systems thinking, and visual craft to make complicated products feel intuitive.</p>
+<p class="hscur">Currently working on Enterprise AI @ Intellect Design</p>
+</div>
+<div class="hsart">
+<svg viewBox="0 0 400 390" role="img" aria-label="Dithered shooting star">
+<g>
+<sc-for list="{{ o.specks }}" as="s" hint-placeholder-count="10">
+<circle cx="{{ s.x }}" cy="{{ s.y }}" r="{{ s.r }}" fill="{{ s.f }}" opacity="{{ s.o }}" class="{{ s.c }}" style="--o:{{ s.o }}"></circle>
+</sc-for>
+</g>
+<sc-for list="{{ o.groups }}" as="g" hint-placeholder-count="2">
+<g class="{{ g.cls }}">
+<sc-for list="{{ g.dots }}" as="d" hint-placeholder-count="40">
+<circle cx="{{ d.x }}" cy="{{ d.y }}" r="{{ d.r }}" fill="{{ d.f }}" class="{{ d.c }}"></circle>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section>
+<div class="hsrow">
+<sc-for list="{{ variations }}" as="o" hint-placeholder-count="4">
+<div class="hscard" id="{{ o.id }}">
+<div class="hsbadge">
+<span class="hsid">{{ o.id }}</span>
+<span class="hsname">{{ o.name }}</span>
+<span class="hsnote">{{ o.note }}</span>
+</div>
+<div class="hshero">
+<div class="hscopy">
+<h1 class="hsh1">Product designer creating clear, human-centered experiences.</h1>
+<p class="hssub">I bring together research, systems thinking, and visual craft to make complicated products feel intuitive.</p>
+<p class="hscur">Currently working on Enterprise AI @ Intellect Design</p>
+</div>
+<div class="hsart">
+<svg viewBox="0 0 400 390" role="img" aria-label="{{ o.name }}">
+<sc-for list="{{ o.groups }}" as="g" hint-placeholder-count="2">
+<g class="{{ g.cls }}">
+<sc-for list="{{ g.dots }}" as="d" hint-placeholder-count="40">
+<circle cx="{{ d.x }}" cy="{{ d.y }}" r="{{ d.r }}" fill="{{ d.f }}" class="{{ d.c }}"></circle>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div class="hsrow" style="padding-top:0;">
+<sc-for list="{{ earlier }}" as="o" hint-placeholder-count="4">
+<div class="hscard" id="{{ o.id }}" style="width:440px;">
+<div class="hsbadge">
+<span class="hsid">{{ o.id }}</span>
+<span class="hsname">{{ o.name }}</span>
+</div>
+<div class="hsart" style="padding:22px 26px 30px;">
+<svg viewBox="0 0 400 390" role="img" aria-label="{{ o.name }}" style="width:70%;margin:0 auto;">
+<sc-for list="{{ o.groups }}" as="g" hint-placeholder-count="2">
+<g class="{{ g.cls }}">
+<sc-for list="{{ g.dots }}" as="d" hint-placeholder-count="40">
+<circle cx="{{ d.x }}" cy="{{ d.y }}" r="{{ d.r }}" fill="{{ d.f }}" class="{{ d.c }}"></circle>
+</sc-for>
+</g>
+</sc-for>
+</svg>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PAL = ['#8f4038', '#a8544a', '#f5efe3', '#7b8fae', '#657899', 'var(--ink,#22201d)'];
+
+// 1a: the real geometry lifted out of Home.dc.html, packed as x,y,r,fillIndex
+const STAR_1A_HEAD = '276.7,23.3,2.3,3;276.7,30,1.07,3;276.7,36.7,2.84,3;283.3,36.7,2.75,2;270,43.3,3.74,2;276.7,43.3,1.42,2;283.3,43.3,2.71,5;270,50,1.41,2;276.7,50,3.88,2;283.3,50,3.92,2;270,56.7,4.18,2;276.7,56.7,1.42,2;283.3,56.7,2.97,5;290,56.7,1.66,5;263.3,63.3,1.57,1;270,63.3,3.71,1;276.7,63.3,1.64,1;283.3,63.3,2.02,2;290,63.3,3.94,5;263.3,70,2.93,0;270,70,4.34,1;276.7,70,2.62,1;283.3,70,3.65,1;290,70,3.45,1;216.7,76.7,2.6,3;223.3,76.7,3.67,3;230,76.7,1.88,2;236.7,76.7,2.98,2;243.3,76.7,1.85,2;250,76.7,3,2;256.7,76.7,2.51,1;263.3,76.7,3.1,1;270,76.7,0.84,1;276.7,76.7,3.57,1;283.3,76.7,1.74,1;290,76.7,3.94,1;296.7,76.7,2.19,1;303.3,76.7,1.14,2;310,76.7,2.61,5;316.7,76.7,4,5;323.3,76.7,2.89,2;330,76.7,2.83,2;336.7,76.7,3.38,3;343.3,76.7,0.76,3;223.3,83.3,3.14,2;230,83.3,2.51,2;236.7,83.3,3.66,2;243.3,83.3,0.93,2;250,83.3,1.28,1;256.7,83.3,3.63,1;263.3,83.3,1.5,1;270,83.3,4.15,1;276.7,83.3,1.49,0;283.3,83.3,1.27,1;290,83.3,2.13,1;296.7,83.3,3.22,1;303.3,83.3,1.98,1;310,83.3,3.21,1;316.7,83.3,3.25,2;323.3,83.3,0.91,2;330,83.3,3.07,2;230,90,1.04,2;236.7,90,2.92,2;243.3,90,2.89,2;250,90,3.81,1;256.7,90,2.19,1;263.3,90,0.94,1;270,90,2.28,1;276.7,90,1.51,1;283.3,90,3.07,1;290,90,1.11,1;296.7,90,2.13,1;303.3,90,0.95,1;310,90,1.65,2;316.7,90,3.78,2;323.3,90,4.39,2;243.3,96.7,4.34,2;250,96.7,2.65,1;256.7,96.7,4.27,1;263.3,96.7,3.86,0;270,96.7,3.16,1;276.7,96.7,0.82,1;283.3,96.7,0.97,1;290,96.7,2.76,1;296.7,96.7,2.42,1;303.3,96.7,1.51,1;310,96.7,3.01,5;316.7,96.7,1.65,2;250,103.3,0.8,1;256.7,103.3,0.81,1;263.3,103.3,4.35,1;270,103.3,1.48,1;276.7,103.3,3.31,1;283.3,103.3,3.62,1;290,103.3,1.05,1;296.7,103.3,2.1,1;303.3,103.3,4.04,1;250,110,1.45,1;256.7,110,1.44,1;263.3,110,3.71,1;270,110,2.98,1;276.7,110,3.07,1;283.3,110,0.86,1;290,110,2.57,0;296.7,110,3.24,1;303.3,110,1.07,1;250,116.7,2.46,2;256.7,116.7,4.03,1;263.3,116.7,3.82,1;270,116.7,2.3,0;276.7,116.7,1.53,1;283.3,116.7,1.17,1;290,116.7,3.06,1;296.7,116.7,2.57,1;303.3,116.7,2.21,2;310,116.7,3.76,2;250,123.3,3.73,2;256.7,123.3,3.7,5;263.3,123.3,0.96,1;270,123.3,0.97,1;276.7,123.3,1.65,1;283.3,123.3,2.76,1;290,123.3,3.26,1;296.7,123.3,3.7,2;303.3,123.3,2.89,2;310,123.3,2.94,2;243.3,130,3.75,2;250,130,1.51,2;256.7,130,3.48,5;263.3,130,3.65,5;270,130,1.72,5;290,130,3.29,2;296.7,130,1.04,2;303.3,130,3.31,2;310,130,3.46,5;243.3,136.7,3.07,2;250,136.7,2.25,2;256.7,136.7,2.1,5;296.7,136.7,2.24,2;303.3,136.7,1.81,5;310,136.7,2.54,2;243.3,143.3,2.64,3;250,143.3,2.71,2;303.3,143.3,1.62,5;310,143.3,1.92,3;316.7,143.3,4.15,3;236.7,150,2.92,4;243.3,150,0.91,3;316.7,150,3.72,3';
+const STAR_1A_TAIL = '236.7,136.7,2.07,2;223.3,143.3,2.18,2;230,143.3,3.32,3;236.7,143.3,2.17,1;210,150,3.63,3;216.7,150,0.78,2;223.3,150,2.94,1;230,150,2.94,1;203.3,156.7,4.34,3;210,156.7,2.48,2;216.7,156.7,1.24,1;223.3,156.7,1,2;210,163.3,1.82,1;216.7,163.3,4.37,2;230,163.3,3.38,3;176.7,170,2.54,3;196.7,170,1.73,2;203.3,170,2.59,3;210,170,1.35,3;216.7,170,2.08,5;223.3,170,4.19,3;183.3,176.7,2.53,5;190,176.7,0.8,1;196.7,176.7,1.37,1;210,176.7,4.13,5;170,183.3,3.22,2;183.3,183.3,3.56,1;190,183.3,0.84,1;163.3,190,2.69,3;170,190,2.9,1;176.7,190,4.33,2;183.3,190,1.21,2;196.7,190,2.05,3;203.3,190,1.67,3;150,196.7,2.12,5;170,196.7,1.9,1;190,196.7,3.53,2;196.7,196.7,3.02,3;143.3,203.3,2.86,3;150,203.3,2.54,2;156.7,203.3,0.98,2;163.3,203.3,1.54,3;170,203.3,1.23,2;183.3,203.3,2.34,2;190,203.3,2.76,3;156.7,210,3.9,1;170,210,1.01,5;176.7,210,4.08,2;143.3,216.7,4.36,2;150,216.7,2.24,1;156.7,216.7,1.67,1;163.3,216.7,3.82,2;170,216.7,2.58,5;116.7,223.3,2.41,3;136.7,223.3,1.32,1;143.3,223.3,1.47,3;150,223.3,4.37,2;170,223.3,1.37,3;116.7,230,2.95,5;130,230,1.83,5;136.7,230,2.18,1;143.3,230,3.57,1;103.3,236.7,2.97,5;150,236.7,1.89,2;163.3,236.7,1.35,3;96.7,243.3,2.35,5;116.7,243.3,2.3,5;136.7,243.3,4.33,1;143.3,243.3,2.87,2;150,243.3,2.8,3;156.7,243.3,3.88,3;116.7,250,3.28,3;130,250,0.82,1;76.7,256.7,4.26,3;136.7,256.7,1.71,3;63.3,263.3,0.99,3;83.3,270,1.16,1;103.3,270,1.57,1;76.7,276.7,1.05,1;103.3,276.7,2.83,2;116.7,276.7,1.52,2;130,276.7,2.96,3;76.7,283.3,2.91,2;123.3,283.3,2.02,3;56.7,290,3.38,2;76.7,290,4.02,5;96.7,290,1.96,3;56.7,296.7,1.21,1;103.3,296.7,3.82,3;43.3,303.3,3.23,2;76.7,303.3,1.66,1;90,310,2.02,3;83.3,323.3,3.99,3;50,336.7,2.02,3';
+
+class Component extends DCLogic {
+  renderVals() {
+    let seed = 20260904;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+
+    // roughly a quarter of dots drift and a sixth flicker, matching the original artwork
+    const cls = () => {
+      let c = '';
+      if (rnd() < 0.26) c = 'dr' + (1 + Math.floor(rnd() * 9));
+      if (rnd() < 0.16) c += (c ? ' ' : '') + 'fl' + (1 + Math.floor(rnd() * 4));
+      return c;
+    };
+    const unpack = str => str.split(';').map(row => {
+      const [x, y, r, f] = row.split(',');
+      return { x, y, r, f: PAL[+f], c: cls() };
+    });
+
+    const starPoly = (cx, cy, R, rot) => {
+      const pts = [], inner = R * 0.382;
+      for (let i = 0; i < 10; i++) {
+        const a = (rot + i * 36) * Math.PI / 180;
+        pts.push([cx + Math.cos(a) * (i % 2 ? inner : R), cy + Math.sin(a) * (i % 2 ? inner : R)]);
+      }
+      return pts;
+    };
+    const inside = (p, x, y) => {
+      let c = false;
+      for (let i = 0, j = p.length - 1; i < p.length; j = i++) {
+        if (((p[i][1] > y) !== (p[j][1] > y)) &&
+            (x < (p[j][0] - p[i][0]) * (y - p[i][1]) / (p[j][1] - p[i][1]) + p[i][0])) c = !c;
+      }
+      return c;
+    };
+    const tone = d => {
+      const roll = rnd();
+      if (d < 0.42) return roll < 0.72 ? PAL[1] : (roll < 0.86 ? PAL[0] : PAL[2]);
+      if (d < 0.72) return roll < 0.5 ? PAL[2] : (roll < 0.78 ? PAL[1] : PAL[3]);
+      return roll < 0.42 ? PAL[3] : (roll < 0.66 ? PAL[2] : (roll < 0.86 ? PAL[4] : PAL[5]));
+    };
+    const dot = (x, y, r, f) => ({ x: x.toFixed(1), y: y.toFixed(1), r: r.toFixed(2), f, c: cls() });
+
+    // stepPx pins the dot grid in absolute units, so a smaller star gets fewer
+    // dots rather than the same count at a finer pitch
+    const star = (cx, cy, R, rot = -90, erode = null, stepPx = null) => {
+      const poly = starPoly(cx, cy, R, rot), step = stepPx || R / 17, k = step / 6.667, out = [];
+      for (let y = cy - R; y <= cy + R; y += step) {
+        for (let x = cx - R; x <= cx + R; x += step) {
+          if (!inside(poly, x, y)) continue;
+          const d = Math.hypot(x - cx, y - cy) / R;
+          if (rnd() < (erode ? erode(d) : d * 0.55)) continue;
+          out.push(dot(x, y, ((1 - d) * 3.1 + 0.9 + rnd() * 0.9) * k, tone(d)));
+        }
+      }
+      return out;
+    };
+
+    const breakAway = (cx, cy, R, angleDeg, count, spread, reach, sizeK = 1) => {
+      const a0 = angleDeg * Math.PI / 180, step = R / 17, k = step / 6.667, out = [];
+      for (let i = 0; i < count; i++) {
+        const t = Math.pow(rnd(), 0.62);
+        const a = a0 + (rnd() - 0.5) * spread * (0.35 + t);
+        const dist = R * (0.98 + t * reach);
+        const gx = Math.round((cx + Math.cos(a) * dist) / step) * step;
+        const gy = Math.round((cy + Math.sin(a) * dist) / step) * step;
+        const roll = rnd();
+        const f = roll < 0.44 ? PAL[3] : (roll < 0.68 ? PAL[2] : (roll < 0.88 ? PAL[4] : PAL[1]));
+        out.push(dot(gx, gy, (0.55 + (1 - t) * 1.5 + rnd() * 0.35) * k * sizeK, f));
+      }
+      return out;
+    };
+
+    const halo = (cx, cy, R) => {
+      const poly = starPoly(cx, cy, R * 1.2, -90), step = R / 17, k = step / 6.667, out = [];
+      for (let y = cy - R * 1.2; y <= cy + R * 1.2; y += step) {
+        for (let x = cx - R * 1.2; x <= cx + R * 1.2; x += step) {
+          if (!inside(poly, x, y)) continue;
+          const d = Math.hypot(x - cx, y - cy) / R;
+          if (d < 0.8) continue;
+          if (rnd() > 0.34 * Math.max(0, 1 - (d - 0.8) / 0.4)) continue;
+          out.push(dot(x, y, (0.5 + rnd() * 0.95) * k, tone(0.95)));
+        }
+      }
+      return out;
+    };
+
+    const ring = (cx, cy, rad, count, sizeK = 1) => {
+      const out = [];
+      for (let i = 0; i < count; i++) {
+        const a = (i / count) * Math.PI * 2, wob = rad + (rnd() - 0.5) * 8, roll = rnd();
+        const f = roll < 0.45 ? PAL[3] : (roll < 0.72 ? PAL[2] : (roll < 0.9 ? PAL[4] : PAL[1]));
+        out.push(dot(cx + Math.cos(a) * wob, cy + Math.sin(a) * wob, (1 + rnd() * 2.2 * sizeK), f));
+      }
+      return out;
+    };
+
+    // ---- background field: scattered nodes, a fifth to a third of them connected ----
+    // W/H match the hero's own box; the copy sits left of x≈620, so density is
+    // held down there and allowed to rise toward the centre and right.
+    const W = 1200, H = 444;
+    const field = opt => {
+      const nodes = [], edges = [];
+      const step = opt.step;
+      for (let gy = step * 0.5; gy < H; gy += step) {
+        for (let gx = step * 0.5; gx < W; gx += step) {
+          const x = gx + (rnd() - 0.5) * step * 0.9;
+          const y = gy + (rnd() - 0.5) * step * 0.9;
+          if (x < 4 || x > W - 4 || y < 4 || y > H - 4) continue;
+          let p = 0.1 + 0.9 * Math.pow(x / W, 1.5);           // quieter at the left
+          if (x < 640 && y > 70 && y < 350) p *= 0.22;         // clear of the type
+          if (rnd() > p * opt.density) continue;
+          const roll = rnd();
+          const f = roll < 0.42 ? PAL[3] : (roll < 0.66 ? PAL[4] : (roll < 0.86 ? PAL[5] : PAL[1]));
+          const near = Math.pow(x / W, 1.4);
+          nodes.push({
+            x: +x.toFixed(1), y: +y.toFixed(1),
+            r: +(0.7 + rnd() * (opt.rMax - 0.7)).toFixed(2),
+            f, o: +(opt.oMin + rnd() * (opt.oMax - opt.oMin) * (0.55 + near * 0.45)).toFixed(3),
+            // fieldBreath dims from --o; ditherFlicker would animate to full ink
+            c: rnd() < 0.14 ? 'fb' + (1 + Math.floor(rnd() * 4)) : ''
+          });
+        }
+      }
+      // small irregular clusters: a seed node plus 1-4 of its nearest unused neighbours
+      const used = new Array(nodes.length).fill(false);
+      const order = nodes.map((_, i) => i).sort(() => rnd() - 0.5);
+      const DIAG = Math.atan2(-1, 1.45);                       // echoes the star's travel
+      const target = Math.round(opt.connected * nodes.length);
+      let linked = 0;
+      for (const i of order) {
+        if (used[i] || linked >= target) continue;
+        if (rnd() > opt.clusterChance) continue;
+        const a = nodes[i];
+        const cand = [];
+        for (let j = 0; j < nodes.length; j++) {
+          if (j === i || used[j]) continue;
+          const b = nodes[j];
+          const dist = Math.hypot(b.x - a.x, b.y - a.y);
+          if (dist > opt.maxLen || dist < 12) continue;
+          let w = dist;
+          if (rnd() < 0.4) {                                   // some prefer the diagonal
+            const ang = Math.atan2(b.y - a.y, b.x - a.x);
+            const off = Math.abs(Math.atan2(Math.sin(ang - DIAG), Math.cos(ang - DIAG)));
+            w *= 0.55 + off;
+          }
+          cand.push({ j, dist, w });
+        }
+        if (!cand.length) continue;
+        cand.sort((p, q) => p.w - q.w);
+        const size = 1 + Math.floor(rnd() * opt.clusterMax);
+        const picked = cand.slice(0, size);
+        used[i] = true; linked++;
+        let from = i;
+        picked.forEach((p, k) => {
+          const b = nodes[p.j];
+          edges.push({
+            x1: nodes[from].x, y1: nodes[from].y, x2: b.x, y2: b.y,
+            s: rnd() < 0.62 ? PAL[4] : PAL[1],
+            w: +(0.3 + rnd() * 0.3).toFixed(2),
+            o: +(opt.eMin + rnd() * (opt.eMax - opt.eMin)).toFixed(3)
+          });
+          used[p.j] = true; linked++;
+          if (rnd() < 0.45 && k < picked.length - 1) from = p.j;   // occasional chain
+        });
+      }
+      return { nodes, edges, linked };
+    };
+
+    // maxLen must exceed the grid step or no neighbour is ever in reach
+    const A = field({ step: 50, density: 0.95, rMax: 1.7, oMin: 0.08, oMax: 0.3,
+      connected: 0.22, clusterChance: 0.42, clusterMax: 2, maxLen: 74, eMin: 0.05, eMax: 0.12 });
+    const B = field({ step: 38, density: 1, rMax: 2, oMin: 0.1, oMax: 0.36,
+      connected: 0.3, clusterChance: 0.5, clusterMax: 4, maxLen: 60, eMin: 0.07, eMax: 0.16 });
+
+    const heroStar = () => [
+      { cls: 'dstar-head', dots: unpack(STAR_1A_HEAD) },
+      { cls: '', dots: unpack(STAR_1A_TAIL) }
+    ];
+
+    // Ten distant points, placed by hand in the negative space the star leaves
+    // inside its own 400x390 box (the hero's right third). Head occupies roughly
+    // x 216-343 / y 23-150; trail runs x 43-236 / y 136-336. Nothing sits left of
+    // the star column, so the typography keeps clear air.
+    // cream reads as nothing on white in isolation, so those two became blue/slate
+    const SPECKS = [
+      { x: 62, y: 44, r: 0.95, f: PAL[3], o: 0.4, c: '' },
+      { x: 372, y: 58, r: 1.2, f: PAL[3], o: 0.42, c: 'fb2' },
+      { x: 150, y: 96, r: 0.8, f: PAL[4], o: 0.34, c: '' },
+      { x: 356, y: 128, r: 1.05, f: PAL[3], o: 0.36, c: '' },
+      { x: 108, y: 152, r: 1.35, f: PAL[3], o: 0.32, c: '' },
+      { x: 380, y: 200, r: 0.85, f: PAL[5], o: 0.3, c: '' },
+      { x: 268, y: 202, r: 1.1, f: PAL[1], o: 0.4, c: 'fb4' },
+      { x: 332, y: 256, r: 0.9, f: PAL[3], o: 0.36, c: '' },
+      { x: 262, y: 306, r: 1.25, f: PAL[4], o: 0.38, c: '' },
+      { x: 196, y: 348, r: 1, f: PAL[3], o: 0.33, c: '' }
+    ];
+
+    const fields = [
+      { id: '3o', name: 'Current hero, untouched',
+        note: 'The shooting star exactly as it is now, on plain white.',
+        specks: [], groups: heroStar() },
+      { id: '3c', name: 'Ten distant points',
+        note: '10 dots at 30\u201342% opacity, r 0.8\u20131.35 against the star\u2019s 0.8\u20134.4. No cream, no connections, no pattern.',
+        specks: SPECKS, groups: heroStar() }
+    ];
+
+    const CX = 200, CY = 192, R = 182;
+    const softEdge = d => (d < 0.74 ? d * 0.3 : 0.22 + (d - 0.74) * 2.5);
+
+    const variations = [
+      { id: '2a', name: 'A \u2014 dots breaking away, lower-left',
+        note: '26 dots leave the lower-left edge on the star\u2019s own grid. No trail line, no direction of travel.',
+        groups: [
+          { cls: 'dstar-head', dots: star(CX, CY, R) },
+          { cls: '', dots: breakAway(CX, CY, R, 146, 26, 0.62, 0.34) }
+        ] },
+      { id: '2b', name: 'B \u2014 two edges, thinning outward',
+        note: '20 dots lower-left, 13 upper-right, shrinking as they go. Around 88% of the mass stays in the star.',
+        groups: [
+          { cls: 'dstar-head', dots: star(CX, CY, R) },
+          { cls: '', dots: breakAway(CX, CY, R, 151, 20, 0.5, 0.4, 0.95).concat(breakAway(CX, CY, R, -58, 13, 0.42, 0.32, 0.85)) }
+        ] },
+      { id: '2c', name: 'C \u2014 outer edge dissolving',
+        note: 'The star\u2019s outermost dots migrate outward all round. Core untouched inside 0.74 of the radius.',
+        groups: [
+          { cls: 'dstar-head', dots: star(CX, CY, R, -90, softEdge) },
+          { cls: '', dots: halo(CX, CY, R) }
+        ] },
+      { id: '1b', name: '1b \u2014 the approved base, for reference',
+        note: 'One large star, no dispersal.',
+        groups: [{ cls: 'dstar-head', dots: star(CX, CY, R) }] }
+    ];
+
+    const earlier = [
+      { id: '1a', name: 'Shooting star (original)',
+        groups: heroStar() },
+      { id: '1c', name: 'Constellation',
+        groups: [
+          { cls: 'dstar-head', dots: star(238, 140, 128) },
+          { cls: '', dots: star(76, 296, 62, -84, null, 7.5).concat(
+              star(338, 308, 46, -96, null, 7.5), star(58, 92, 36, -88, null, 7.5)) }
+        ] },
+      { id: '1d', name: 'Dotted orbits',
+        groups: [
+          { cls: '', dots: ring(CX, CY, 178, 100, 0.85).concat(ring(CX, CY, 134, 70, 0.7)) },
+          { cls: 'dstar-head', dots: star(CX, CY, 100) }
+        ] },
+      { id: '1e', name: 'Oversized, cropped',
+        groups: [{ cls: 'dstar-head', dots: star(244, 150, 242) }] }
+    ];
+
+    return { fields, variations, earlier };
+  }
+}
+</script>
+</body>
+</html>

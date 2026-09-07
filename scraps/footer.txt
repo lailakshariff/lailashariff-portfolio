@@ -1,0 +1,35 @@
+<div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
+
+<div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
+<div style="display:flex;align-items:flex-start;gap:30px;max-width:560px">
+<svg viewBox="0 0 250 150" width="92" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;margin-top:4px;overflow:visible;color:var(--ink)"><defs><filter id="gooFootnddchtml" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootnddchtml)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootnddchtml)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+</div>
+</div>
+
+<div style="display:flex;gap:64px">
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
+</div>
+</div>
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="Home.dc.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="About.dc.html" style="text-decoration:none;color:var(--body-2)">About</a>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<span>Made with ♥ by Laila · 2026</span>
+<a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surf)">↑ Back to top</a>
+</div>
+
+</div>

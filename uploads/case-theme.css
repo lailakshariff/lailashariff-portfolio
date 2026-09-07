@@ -1,0 +1,20 @@
+/* case-study dark mode: image + logo handling (tokens live per page) */
+html[data-theme="dark"] img{filter:brightness(.94) saturate(.97)}
+html[data-theme="dark"] .monologo{filter:invert(1) brightness(1.9) contrast(1.04)}
+html[data-theme="dark"] .keepimg,html[data-theme="dark"] .keepimg img{filter:none}
+html[data-theme="dark"] ::selection{background:rgba(255,255,255,.18)}
+
+/* SVG presentation attributes carrying var() — CSS wins over the attribute, so
+   these resolve the token even where attribute-level var() is not honoured */
+[stroke="var(--brand)"]{stroke:var(--brand)}
+[stroke="var(--brand-deep)"]{stroke:var(--brand-deep)}
+[stroke="var(--muted)"]{stroke:var(--muted)}
+[stroke="var(--faint)"]{stroke:var(--faint)}
+[stroke="var(--ink)"]{stroke:var(--ink)}
+[stroke="var(--body)"]{stroke:var(--body)}
+[stroke="var(--body-2)"]{stroke:var(--body-2)}
+[stroke="var(--line)"]{stroke:var(--line)}
+[stroke="var(--line-2)"]{stroke:var(--line-2)}
+[fill="var(--ink)"]{fill:var(--ink)}
+[fill="var(--brand)"]{fill:var(--brand)}
+[fill="var(--muted)"]{fill:var(--muted)}

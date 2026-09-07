@@ -1,0 +1,8 @@
+html{background:var(--bg)}
+body{transition:background .4s ease,color .4s ease}
+.tmode{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin:-6px -8px -6px 4px;padding:0;border:0;border-radius:999px;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .3s ease;flex:0 0 auto}
+.tmode:hover{background:rgba(var(--inkrgb),.07)}
+.tmode svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tmode .sun{display:none}
+html[data-theme="dark"] .tmode .sun{display:block}
+html[data-theme="dark"] .tmode .moon{display:none}

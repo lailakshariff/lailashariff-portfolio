@@ -1,0 +1,82 @@
+/* ===== Laila Shariff portfolio — HERO SECTION ONLY =====
+   Fonts used: Newsreader (serif, headline/body), system-ui (nav uppercase labels).
+   Import once per page:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+*/
+
+.ls-hero, .ls-hero * { box-sizing: border-box; }
+.ls-hero {
+  background: var(--ls-bg, #ffffff);
+  color: var(--ls-ink, #22201d);
+  font-family: Newsreader, Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background .35s ease, color .35s ease;
+}
+.ls-hero[data-theme="light"] {
+  --ls-bg:#ffffff; --ls-ink:#22201d; --ls-ink-soft:#5b564f; --ls-ink-faint:#8a847c;
+  --ls-ink-muted:#6b6660; --ls-nav-bg:rgba(255,255,255,.82); --ls-border-strong:rgba(34,32,29,.2);
+  --bg:#ffffff; --ink:#22201d;
+}
+.ls-hero[data-theme="dark"] {
+  --ls-bg:#17140f; --ls-ink:#f3ede2; --ls-ink-soft:#cfc6b7; --ls-ink-faint:#a89f92;
+  --ls-ink-muted:#8f867a; --ls-nav-bg:rgba(23,20,15,.82); --ls-border-strong:rgba(255,255,255,.28);
+  --bg:#17140f; --ink:#f3ede2;
+}
+
+/* Nav */
+.ls-hero-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px 64px;background:var(--ls-nav-bg);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--ls-ink-muted)}
+.ls-hero-nav a{text-decoration:none;color:var(--ls-ink)}
+.ls-hero-nav-work{color:#a8544a !important}
+.ls-hero-nav-links{display:flex;align-items:center;gap:28px}
+.ls-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border:1px solid var(--ls-border-strong);border-radius:50%;background:none;color:var(--ls-ink);cursor:pointer;padding:0}
+.ls-hero[data-theme="light"] .ls-icon-moon,.ls-hero[data-theme="dark"] .ls-icon-sun{display:none}
+@keyframes lsThemeSpin{from{transform:rotate(-40deg) scale(.6);opacity:0}to{transform:none;opacity:1}}
+.ls-theme-toggle svg{animation:lsThemeSpin .35s cubic-bezier(.2,.7,.2,1) both}
+
+/* Hero grid */
+@keyframes lsRiseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.ls-hero-top{min-height:76vh;display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center;padding:52px 64px 72px;animation:lsRiseIn .9s cubic-bezier(.2,.7,.2,1) both}
+.ls-hero-h1{margin:0;font:400 40px/1.18 Newsreader,serif;letter-spacing:-.018em;text-wrap:pretty}
+.ls-hero-sub{margin:22px 0 0;max-width:560px;font:300 20px/1.6 Newsreader,serif;color:var(--ls-ink-soft);text-wrap:pretty}
+.ls-hero-current{margin:22px 0 0;font:italic 300 17px/1.5 Newsreader,serif;color:var(--ls-ink-faint)}
+
+/* LS monogram */
+svg.ls-mark{pointer-events:auto}
+svg.ls-mark .ls-s{transform-origin:175px 68px;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+svg.ls-mark:hover .ls-s{transform:rotate(9deg)}
+.ls-hero-mark{margin-bottom:32px}
+
+/* Dithered shooting-star artwork */
+@keyframes lsDitherBreathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.94;transform:scale(var(--star-pulse-scale,1.16))}}
+.dstar-head{animation:lsDitherBreathe var(--star-pulse-speed,5.5s) ease-in-out infinite;transform-origin:278px 96px}
+svg[aria-label="Dithered star"]{animation:lsDitherHue 9s ease-in-out infinite}
+@keyframes lsDitherHue{0%,100%{filter:hue-rotate(0deg) saturate(1)}33%{filter:hue-rotate(18deg) saturate(1.15)}66%{filter:hue-rotate(-14deg) saturate(1.1)}}
+@keyframes ditherDriftA{0%,100%{transform:translate(0,0)}50%{transform:translate(1.6px,-1.2px)}}
+@keyframes ditherDriftB{0%,100%{transform:translate(0,0)}50%{transform:translate(-1.4px,1.4px)}}
+@keyframes ditherDriftC{0%,100%{transform:translate(0,0)}50%{transform:translate(1.2px,1.6px)}}
+@keyframes ditherFlicker{0%,100%{opacity:1}50%{opacity:.15}}
+svg[aria-label="Dithered star"] circle{transform-box:fill-box;transform-origin:50% 50%}
+@keyframes lsDitherShootUp{0%{transform:translate(38px,220px) scale(.4);opacity:0}55%{transform:translate(-4px,-10px) scale(1.04);opacity:1}66%{transform:translate(5px,4px) rotate(3deg) scale(1.02)}77%{transform:translate(-4px,-3px) rotate(-2deg) scale(1.01)}88%{transform:translate(2px,2px) rotate(1deg)}100%{transform:translate(0,0) rotate(0deg) scale(1);opacity:1}}
+.dstar-launch{animation:lsDitherShootUp 1.3s cubic-bezier(.2,.7,.25,1) both}
+@media (prefers-reduced-motion:reduce){
+  svg[aria-label="Dithered star"]{animation:none!important;filter:none!important}
+  svg[aria-label="Dithered star"] circle{animation:none!important}
+  .dstar-launch,.dstar-head{animation:none!important}
+  .ls-hero-top{animation:none!important}
+}
+
+/* Responsive */
+@media (max-width:820px){
+  .ls-hero-nav{padding:14px 20px}
+  .ls-hero-top{grid-template-columns:1fr;gap:20px;min-height:auto;padding-top:44px;padding-bottom:52px}
+  .ls-hero-h1{font-size:34px;line-height:1.18}
+}
+@media (max-width:768px){
+  .ls-hero-top{padding-top:72px}
+}
+@media (max-width:520px){
+  .ls-hero-top{padding-left:22px;padding-right:22px}
+  .ls-hero-h1{font-size:29px}
+}

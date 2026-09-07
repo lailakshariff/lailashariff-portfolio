@@ -1,0 +1,24 @@
+<div class="pfui" role="img" aria-label="An agent workspace: a build toolbar and a grid of governed AI agents with live, in-review and draft states">
+<div class="pfui-rail">
+<span class="pfui-mark" aria-hidden="true"><svg viewBox="229 211 61 98" fill="none"><path d="M246.16 235.086C246.72 233.815 248.16 230.955 251.36 228.651C254.96 226.109 258.64 225.87 260 225.87C260 221.58 260 217.29 260 213C258.24 213 248.24 213 240.24 220.786C232.08 228.73 232 238.741 232 240.489V250.896C233.04 248.592 234.88 245.335 237.76 242.078C240.8 238.661 243.92 236.437 246.24 235.086H246.16Z" fill="#fff"></path><path d="M262.32 234.844V248.111C269.36 249.224 274.64 255.182 274.64 262.412C274.64 270.436 268.08 276.871 259.92 276.871C254.72 276.871 250.16 274.249 247.6 270.198V287.199C251.36 289.027 255.52 290.059 259.92 290.059C275.36 290.059 288 277.666 288 262.412C288 247.158 276.64 236.035 262.32 234.844Z" fill="#fff"></path><path d="M260 247.876V234.688C254.64 234.688 249.68 236.197 245.44 238.739C237.36 243.586 232 252.325 232 262.335V307.064C239.36 307.064 245.36 301.105 245.36 293.796V262.335C245.36 254.311 251.92 247.876 260.08 247.876H260Z" fill="#fff"></path></svg></span>
+<span class="pfui-nav is-on">Agents</span>
+<span class="pfui-nav">Library</span>
+<span class="pfui-nav">Policies</span>
+<span class="pfui-nav">Runs</span>
+<span class="pfui-nav">Data</span>
+</div>
+<div class="pfui-main">
+<div class="pfui-bar">
+<span class="pfui-seg"><i class="is-on">Agents</i><i>Teams</i><i>Workflows</i></span>
+<span class="pfui-btn">Build</span>
+</div>
+<div class="pfui-grid">
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3.5h6.5L18 8v12.5H7z"></path><path d="M13.2 3.7V8H18"></path><path d="M10 12.5h5M10 16h3.5"></path></svg></span><b>Credit memo drafter</b><p>Drafts memos from filings and internal notes.</p><span class="pfui-chip c-live">Live</span></div>
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.2l6.4 2.3v6c0 4-2.7 7.3-6.4 9.3-3.7-2-6.4-5.3-6.4-9.3v-6z"></path><path d="M9.3 12.1l2 2 3.5-3.7"></path></svg></span><b>KYC reviewer</b><p>Checks identity documents against sanctions lists.</p><span class="pfui-chip c-rev">In review</span></div>
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.6 7.6h7.2M3.6 12h5M3.6 16.4h7.2"></path><path d="M14.5 5.6l4.4 4.4-4.4 4.4"></path><path d="M18.9 10h-4.6a3 3 0 0 0-3 3v5.4"></path></svg></span><b>Claims triage</b><p>Routes incoming claims by severity and policy.</p><span class="pfui-chip c-live">Live</span></div>
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19.4h16"></path><path d="M7 19.4v-5.6M11.6 19.4V8.6M16.2 19.4v-8"></path></svg></span><b>Portfolio summary</b><p>Summarises holdings and exposure for review calls.</p><span class="pfui-chip c-draft">Draft</span></div>
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="10.2" r="5.4"></circle><path d="M9.7 10.3l1.7 1.7 3-3.2"></path><path d="M8.6 15.1L7.4 20.4l4.6-2.2 4.6 2.2-1.2-5.3"></path></svg></span><b>Policy checker</b><p>Flags answers that fall outside approved policy.</p><span class="pfui-chip c-live">Live</span></div>
+<div class="pfui-card"><span class="pfui-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.6 10.2A7.5 7.5 0 0 1 17.9 7.4"></path><path d="M18.4 4.2v3.4H15"></path><path d="M19.4 13.8A7.5 7.5 0 0 1 6.1 16.6"></path><path d="M5.6 19.8v-3.4H9"></path></svg></span><b>Trade reconciler</b><p>Matches trade breaks across settlement systems.</p><span class="pfui-chip c-rev">In review</span></div>
+</div>
+</div>
+</div></div>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-sans:'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --font-serif:'EB Garamond',Garamond,Georgia,serif;
+  --ink:#22201d; --body:#3f3b35; --body-2:#5b564f; --faint:#8a8478;
+  --page:#ffffff; --show:#f5f4f2; --card:#faf9f8; --line:rgba(34,32,29,.09);
+  --accent:#a8544a;
+}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--accent)}
+</style>
+</helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:56px 56px 90px">
+
+<div style="padding-bottom:22px;border-bottom:1px solid var(--line)">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Proposal · Case-study design system</div>
+<h1 style="margin:14px 0 0;max-width:22ch;font:400 42px/1.12 var(--font-serif);letter-spacing:-.008em">One neutral grammar for every case study.</h1>
+<p style="margin:16px 0 0;max-width:62ch;font:400 16.5px/1.62 var(--font-sans);color:var(--body-2);text-wrap:pretty">Components are shown with Purple Fabric's real content, taken from the existing page. Where the project has no such content, the slot is marked as empty rather than filled. Three surfaces, no project colour, no accent rules.</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:34px;margin-top:26px;padding-bottom:34px;border-bottom:1px solid var(--line)">
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Page</div>
+<div style="display:flex;align-items:center;gap:9px;margin-top:9px"><span style="width:26px;height:26px;border-radius:6px;background:var(--page);border:1px solid var(--line)"></span><span style="font:400 12.5px/1 var(--font-sans);color:var(--body-2)">#ffffff</span></div>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Showcase</div>
+<div style="display:flex;align-items:center;gap:9px;margin-top:9px"><span style="width:26px;height:26px;border-radius:6px;background:var(--show)"></span><span style="font:400 12.5px/1 var(--font-sans);color:var(--body-2)">#f5f4f2</span></div>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Card</div>
+<div style="display:flex;align-items:center;gap:9px;margin-top:9px"><span style="width:26px;height:26px;border-radius:6px;background:var(--card);border:1px solid var(--line)"></span><span style="font:400 12.5px/1 var(--font-sans);color:var(--body-2)">#faf9f8</span></div>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Ink</div>
+<div style="display:flex;align-items:center;gap:9px;margin-top:9px"><span style="width:26px;height:26px;border-radius:6px;background:var(--ink)"></span><span style="font:400 12.5px/1 var(--font-sans);color:var(--body-2)">#22201d</span></div>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Accent · hover only</div>
+<div style="display:flex;align-items:center;gap:9px;margin-top:9px"><span style="width:26px;height:26px;border-radius:6px;background:var(--accent)"></span><span style="font:400 12.5px/1 var(--font-sans);color:var(--body-2)">#a8544a</span></div>
+</div>
+</div>
+
+<div style="margin-top:76px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">01</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Hero</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Title, one line, then the real product at scale. Metadata below, not above.</span>
+</div>
+
+<div style="margin-top:40px">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Purple Fabric · 2026</div>
+<h2 style="margin:16px 0 0;max-width:30ch;font:500 40px/1.14 var(--font-sans);letter-spacing:-.018em;text-wrap:pretty">I rebuilt an enterprise AI homepage around the buyer's questions</h2>
+<p style="margin:16px 0 0;max-width:56ch;font:400 18px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">The homepage explained the platform's components before its value. I rebuilt it around the questions a first-time buyer has to get answered.</p>
+</div>
+
+<div style="margin-top:38px;padding:34px;border-radius:16px;background:var(--show)">
+<video src="assets/pf-proto-1.mp4" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" preload="metadata" style="display:block;width:100%;border-radius:10px;background:#fff"></video>
+</div>
+<p style="margin:16px 0 0;font:400 14px/1.5 var(--font-sans);color:var(--faint)">The rebuilt homepage scrolling — hero, impact numbers, operating model, into the eight disciplines.</p>
+
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:44px;padding-top:34px;border-top:1px solid var(--line)">
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Role</div>
+<p style="margin:11px 0 0;font:400 15px/1.5 var(--font-sans);color:var(--body)">UX &amp; Product Designer</p>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Company</div>
+<p style="margin:11px 0 0;font:400 15px/1.5 var(--font-sans);color:var(--body)">Intellect Design Arena</p>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Focus</div>
+<p style="margin:11px 0 0;font:400 15px/1.5 var(--font-sans);color:var(--body)">IA, messaging, visual design</p>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Tools</div>
+<p style="margin:11px 0 0;font:400 15px/1.5 var(--font-sans);color:var(--body)">Figma, Miro</p>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;margin-top:44px;padding-top:34px;border-top:1px solid var(--line)">
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Overview</div>
+<p style="margin:13px 0 0;max-width:46ch;font:400 16px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">Purple Fabric is an enterprise AI platform sold to financial institutions. Its homepage led with vocabulary and architecture, and named neither its audience nor the platform's function above the fold.</p>
+</div>
+<div>
+<div style="font:500 9.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">What I did</div>
+<ul style="margin:13px 0 0;padding-left:19px;font:400 16px/1.66 var(--font-sans);color:var(--body)">
+<li style="margin-bottom:5px">Audited the existing homepage section by section</li>
+<li style="margin-bottom:5px">Benchmarked seven enterprise AI platforms</li>
+<li style="margin-bottom:5px">Rebuilt the information architecture and wrote the copy deck</li>
+<li>Designed the full homepage across six sections</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">02</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Impact</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Purple Fabric has no measured results, so the honest form is qualitative.</span>
+</div>
+
+<div style="margin-top:40px">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Where it stands</div>
+<h3 style="margin:14px 0 0;max-width:44ch;font:500 27px/1.24 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Delivered, with measurement still to come</h3>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px">
+<div style="padding:28px 26px;border-radius:12px;background:var(--card)">
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">Delivered</div>
+<p style="margin:13px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">A new information architecture, a copy deck, and a full homepage design across six sections — hero, operating model, disciplines, governance, solutions and close.</p>
+</div>
+<div style="padding:28px 26px;border-radius:12px;background:var(--card)">
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">Comprehension</div>
+<p style="margin:13px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">The page now names the audience in the first five words and states the platform's function above the fold, where it previously named neither.</p>
+</div>
+<div style="padding:28px 26px;border-radius:12px;background:var(--card)">
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">Navigation</div>
+<p style="margin:13px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">A deep, custom nav with no equivalent on any competitor site, replaced with the five-item structure every benchmarked platform uses.</p>
+</div>
+<div style="padding:28px 26px;border-radius:12px;background:var(--card)">
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">Measurement</div>
+<p style="margin:13px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">Live metrics to be captured post-launch against the four success questions above.</p>
+</div>
+</div>
+
+<div style="margin-top:34px;padding-top:26px;border-top:1px solid var(--line)">
+<p style="margin:0;max-width:64ch;font:400 15px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Where a project does have measured numbers, the same slot takes the reference's metric form — a large figure, one line of meaning, and a provenance line naming the source. That provenance line stays empty rather than invented.</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px;max-width:620px">
+<div style="padding:26px 24px;border-radius:12px;background:var(--card)">
+<div style="font:500 34px/1 var(--font-sans);letter-spacing:-.022em;color:var(--faint)">00%</div>
+<p style="margin:12px 0 0;font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">Metric slot — filled only from a real measurement</p>
+<p style="margin:6px 0 0;font:italic 400 13.5px/1.45 var(--font-serif);color:var(--faint)">Provenance line, e.g. “Based on post-test interviews”</p>
+</div>
+<div style="padding:26px 24px;border-radius:12px;background:var(--card)">
+<div style="font:500 34px/1 var(--font-sans);letter-spacing:-.022em;color:var(--faint)">00</div>
+<p style="margin:12px 0 0;font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">Second metric slot</p>
+<p style="margin:6px 0 0;font:italic 400 13.5px/1.45 var(--font-serif);color:var(--faint)">Source named, or the card is not used</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">03</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Problem</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Statement and evidence side by side, then who it affects.</span>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px;align-items:start;margin-top:40px">
+<div>
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">The problem</div>
+<h3 style="margin:14px 0 0;max-width:24ch;font:500 28px/1.2 var(--font-sans);letter-spacing:-.014em;text-wrap:pretty">The homepage explained the platform's components before its value.</h3>
+<p style="margin:16px 0 0;max-width:42ch;font:400 16px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">A first-time viewer had to decode the platform's own vocabulary before finding a sentence about what it does, or who it is for.</p>
+</div>
+<div style="padding:30px 28px;border-radius:16px;background:var(--show)">
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Section order, before</div>
+<div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">1. Navigation + Talk to us CTA + Intellect logo</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">2. AI Agents. True Business Impact.</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">3. What is Purple Fabric</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">4. Four tech stacks</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">5. What is Business Impact AI</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">6. Open model</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">7. What sets us apart</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">8. Partners</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">9. Footer</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:52px">
+<h4 style="margin:0;font:500 19px/1.3 var(--font-sans);letter-spacing:-.008em">Why it matters</h4>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px">
+<div style="padding:26px 24px;border-radius:12px;background:var(--card)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--body-2)" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg>
+<div style="margin-top:14px;font:500 16px/1.3 var(--font-sans)">Buyer</div>
+<p style="margin:8px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">Has to decode the platform's vocabulary before deciding whether to keep reading.</p>
+</div>
+<div style="padding:26px 24px;border-radius:12px;background:var(--card)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--body-2)" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+<div style="margin-top:14px;font:500 16px/1.3 var(--font-sans)">Navigation</div>
+<p style="margin:8px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">A deep, custom structure with no equivalent on any competitor site.</p>
+</div>
+<div style="padding:26px 24px;border-radius:12px;background:var(--card)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--body-2)" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1M9 13h1m4 0h1M9 17h1m4 0h1"></path></svg>
+<div style="margin-top:14px;font:500 16px/1.3 var(--font-sans)">Positioning</div>
+<p style="margin:8px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">Without financial services framing, it reads as another generic enterprise AI platform.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">04</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Reframe &amp; principles</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">The one serif moment per case study, then the real principles. Three of five shown.</span>
+</div>
+
+<div style="margin-top:44px;padding:56px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">What success looks like</div>
+<p style="margin:20px 0 0;max-width:30ch;font:400 38px/1.24 var(--font-serif);letter-spacing:-.008em;text-wrap:pretty">Can a first-time visitor say what Purple Fabric does, and who it is for, without leaving the page?</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px;margin-top:44px">
+<div>
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;color:var(--faint)">01</div>
+<div style="margin-top:12px;font:500 18px/1.3 var(--font-sans);letter-spacing:-.006em">Lead with financial services positioning</div>
+<p style="margin:10px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">Without it, users might perceive Purple Fabric as just another generic enterprise AI platform.</p>
+</div>
+<div>
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;color:var(--faint)">02</div>
+<div style="margin-top:12px;font:500 18px/1.3 var(--font-sans);letter-spacing:-.006em">Simplify the navigation bar</div>
+<p style="margin:10px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">A simpler IA reduces cognitive load. Sticking to standard layouts helps users identify and navigate the site with ease.</p>
+</div>
+<div>
+<div style="font:500 11px/1 var(--font-sans);letter-spacing:.14em;color:var(--faint)">03</div>
+<div style="margin-top:12px;font:500 18px/1.3 var(--font-sans);letter-spacing:-.006em">Introduce a problem–solution section</div>
+<p style="margin:10px 0 0;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">It helps users identify where Purple Fabric comes in to help enterprises. People buy solutions to their problems.</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">05</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Iteration</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Two states compared in one showcase, with the reason above it.</span>
+</div>
+
+<div style="margin-top:40px">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Iteration</div>
+<h3 style="margin:14px 0 0;max-width:40ch;font:500 27px/1.24 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Nine sections in, nine sections out — reordered around the buyer</h3>
+<p style="margin:14px 0 0;max-width:62ch;font:400 16px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">Nothing was cut. The same nine sections were resequenced so the page names its audience and states the platform's function before it explains the architecture.</p>
+
+<div style="margin-top:28px;padding:44px;border-radius:16px;background:var(--show)">
+<div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:40px;align-items:start">
+<div>
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)">Current</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">1. Navigation + Talk to us CTA + Intellect logo</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">2. AI Agents. True Business Impact.</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">3. What is Purple Fabric</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">4. Four tech stacks</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">5. What is Business Impact AI</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">6. Open model</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">7. What sets us apart</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">8. Partners</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--body-2)">9. Footer</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:8px;margin-top:22px">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--faint);flex:0 0 auto;margin-top:2px" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="rgba(34,32,29,.1)" stroke="none"></circle><path d="M8 12h8"></path></svg>
+<span style="font:400 14px/1.45 var(--font-sans);color:var(--body-2)">Opens with the platform's own vocabulary</span>
+</div>
+</div>
+<div style="align-self:stretch;background:var(--line)"></div>
+<div>
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)">Proposed</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">1. Enterprise AI for financial institutions</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">2. See it in action + Explore real results</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">3. Impact numbers</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">4. Platform</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">5. Tech stacks</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">6. Agents</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">7. Testimonials</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">8. Awards and recognition</div>
+<div style="font:400 14.5px/1.5 var(--font-sans);color:var(--ink)">9. Footer</div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:8px;margin-top:22px">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--body-2);flex:0 0 auto;margin-top:2px" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="rgba(34,32,29,.14)" stroke="none"></circle><path d="M8.5 12.5l2.5 2.5 4.5-5"></path></svg>
+<span style="font:400 14px/1.45 var(--font-sans);color:var(--body-2)">Names the audience in the first five words</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">06</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Research insight</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">A quote in the page, not in a box. Purple Fabric has none — this slot stays empty.</span>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:56px;margin-top:44px">
+<div>
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">What we heard</div>
+</div>
+<div>
+<p style="margin:0;max-width:38ch;font:400 26px/1.42 var(--font-serif);letter-spacing:-.004em;color:var(--faint);text-wrap:pretty">Participant quote, verbatim, one or two sentences.</p>
+<p style="margin:18px 0 0;font:500 13px/1.4 var(--font-sans);letter-spacing:.03em;color:var(--faint)">Role, context</p>
+<p style="margin:22px 0 0;max-width:52ch;font:400 14.5px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Purple Fabric was an audit and benchmark project with no participant interviews, so this component would not appear on that page. It belongs to SayPlay and NutriHealth, which have real quotes from therapists, caregivers and students.</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">07</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Final design</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Full-bleed showcase, then a two-up exploration row. Alternating rhythm.</span>
+</div>
+
+<div style="margin-top:40px;padding:44px;border-radius:16px;background:var(--show)">
+<video src="assets/pf-proto-2.mp4" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" preload="metadata" style="display:block;width:100%;border-radius:10px;background:#fff"></video>
+</div>
+<p style="margin:16px 0 0;font:400 14px/1.5 var(--font-sans);color:var(--faint)">Opening a discipline card, and the lifecycle and governance sections that follow it.</p>
+
+<div style="margin-top:52px">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Design sandbox</div>
+<h3 style="margin:14px 0 0;max-width:40ch;font:500 25px/1.26 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Finding the balance between illustrative and technical</h3>
+<p style="margin:14px 0 0;max-width:62ch;font:400 16px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">The eight disciplines were the hardest part of the page to design. Literal weave imagery was beautiful but said little; a purely functional card grid scanned well and lost the brand. Both extremes failed for opposite reasons.</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:28px">
+<div>
+<div style="padding:16px;border-radius:12px;background:var(--show)">
+<img src="assets/pf-it-3.jpg" alt="Eight discipline cards in a grid with a detail panel below" style="display:block;width:100%;height:auto;border-radius:8px">
+</div>
+<p style="margin:14px 0 0;font:400 14px/1.55 var(--font-sans);color:var(--faint);text-wrap:pretty">Direction three: a functional card grid. Highly scannable, visually anonymous.</p>
+</div>
+<div>
+<div style="padding:16px;border-radius:12px;background:var(--show)">
+<img src="assets/pf-it-final.jpg" alt="Eight disciplines. One governed fabric." style="display:block;width:100%;height:auto;border-radius:8px">
+</div>
+<p style="margin:14px 0 0;font:400 14px/1.55 var(--font-sans);color:var(--faint);text-wrap:pretty">The direction that shipped — scannable structure, with the fabric metaphor carried by illustration and copy.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<span style="font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">08</span>
+<span style="font:500 13px/1 var(--font-sans);letter-spacing:.03em;color:var(--ink)">Reflection &amp; next</span>
+<span style="font:400 13px/1.4 var(--font-sans);color:var(--body-2)">Plain page, no card. Then the next project as a full-width row.</span>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:56px;margin-top:44px">
+<div>
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Reflection</div>
+</div>
+<div>
+<h3 style="margin:0;max-width:32ch;font:500 25px/1.28 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">The homepage is the entry point, not the whole job</h3>
+<p style="margin:16px 0 0;max-width:56ch;font:400 16px/1.68 var(--font-sans);color:var(--body);text-wrap:pretty">This heading is the real one from the existing page. Reflection copy carries over unchanged — the component only changes how it sits on the page, as plain type in a two-column measure rather than inside a bordered card.</p>
+</div>
+</div>
+
+<a href="#" style="display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:56px;padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<div>
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">Next project</div>
+<div style="margin-top:12px;font:500 26px/1.2 var(--font-sans);letter-spacing:-.014em">SayPlay</div>
+<p style="margin:8px 0 0;font:400 15.5px/1.5 var(--font-sans);color:var(--body-2)">An AAC platform for children with cerebral palsy</p>
+</div>
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+</div>
+
+<div style="margin-top:96px;padding-top:34px;border-top:1px solid var(--line)">
+<div style="font:500 10.5px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)">What this removes</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:22px">
+<div>
+<div style="font:500 32px/1 var(--font-sans);letter-spacing:-.02em">35 → 3</div>
+<p style="margin:11px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">Background values in SayPlay. Purple Fabric goes 8 → 3, NutriHealth 15 → 3.</p>
+</div>
+<div>
+<div style="font:500 32px/1 var(--font-sans);letter-spacing:-.02em">0</div>
+<p style="margin:11px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">Gradient heroes. Project colour survives only inside product screens.</p>
+</div>
+<div>
+<div style="font:500 32px/1 var(--font-sans);letter-spacing:-.02em">1</div>
+<p style="margin:11px 0 0;font:400 15px/1.55 var(--font-sans);color:var(--body)">Serif moment per case study — the reframe. Quotes and captions aside.</p>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    // React sets `muted` as a property only; the autoplay gate reads the ATTRIBUTE,
+    // so autoplay is blocked as unmuted until we set it for real.
+    this._start = () => {
+      document.querySelectorAll('video').forEach(v => {
+        v.setAttribute('muted', '');
+        v.muted = true;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => {});
+      });
+    };
+    this._start();
+    this._t = setTimeout(this._start, 400);
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+}
+</script>
+</body>
+</html>

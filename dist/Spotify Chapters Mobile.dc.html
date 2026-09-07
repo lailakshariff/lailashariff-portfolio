@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail" data-bg-color="#1ed760">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="600" cy="400" r="220" fill="#0a0a0a"/>
+    <circle cx="600" cy="400" r="40" fill="#1ed760"/>
+  </svg>
+</template>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  .smrx ::-webkit-scrollbar{display:none}
+  @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<div class="smrx" style="width:100%;height:{{ rootH }};background:#000;display:flex;justify-content:center;font-family:'Inter',-apple-system,'Helvetica Neue',Arial,sans-serif">
+<div style="width:430px;height:100%;background:#000;color:#fff;position:relative;overflow:hidden;flex-shrink:0">
+
+<!-- ============ HOME ============ -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="height:100%;display:flex;flex-direction:column">
+  <div style="flex:1;overflow-y:auto;background:linear-gradient(180deg,#242424 0%,#121212 220px)">
+    <div style="padding:20px 20px 4px;display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex;align-items:center;gap:8px">
+        <img src="assets/smr/spotify-logo.webp" style="width:24px;height:24px" />
+        <span style="font-size:19px;font-weight:800">Good evening</span>
+      </div>
+      <div style="width:30px;height:30px;border-radius:50%;background:url('assets/smr/profile-photo.jpg') center/cover no-repeat"></div>
+    </div>
+
+    <div onClick="{{ goToRecap }}" style="margin:14px 16px;border-radius:12px;overflow:hidden;background:linear-gradient(120deg,#3a2a1c,#1a1410);padding:20px;display:flex;align-items:center;justify-content:space-between;gap:14px">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#1ED760;margin-bottom:6px">CHAPTERS · AUG 2026</div>
+        <div style="font-size:20px;font-weight:800;margin-bottom:4px">Your August is ready</div>
+        <div style="font-size:12px;color:#c7c7c7">What did this month sound like?</div>
+      </div>
+      <div style="width:64px;height:64px;border-radius:50%;background:url('assets/smr/album-art/sz.jpg') center/cover no-repeat;flex-shrink:0;box-shadow:0 6px 18px rgba(0,0,0,0.5)"></div>
+    </div>
+
+    <div style="padding:8px 16px">
+      <div style="font-size:17px;font-weight:800;margin-bottom:10px">Recently played</div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px">
+        <sc-for list="{{ songs }}" as="s" hint-placeholder-count="5">
+          <div style="width:120px;flex-shrink:0;background:#181818;border-radius:8px;padding:10px">
+            <div style="width:100%;aspect-ratio:1;border-radius:6px;background:{{ s.gradient }};margin-bottom:8px"></div>
+            <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.title }}</div>
+            <div style="font-size:11px;color:#a7a7a7;margin-top:2px">{{ s.artist }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:18px 16px 8px">
+      <div style="font-size:17px;font-weight:800;margin-bottom:10px">Jump back in</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <sc-for list="{{ jumpBackIn }}" as="s" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:10px;background:#181818;border-radius:6px;overflow:hidden">
+            <div style="width:52px;height:52px;flex-shrink:0;background:{{ s.gradient }}"></div>
+            <div style="font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:8px">{{ s.title }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:18px 16px 8px">
+      <div style="font-size:17px;font-weight:800;margin-bottom:10px">Your top artists</div>
+      <div style="display:flex;gap:14px;overflow-x:auto;padding-bottom:8px">
+        <sc-for list="{{ topArtists }}" as="a" hint-placeholder-count="5">
+          <div style="width:96px;flex-shrink:0;text-align:center">
+            <div style="width:96px;height:96px;border-radius:50%;background:{{ a.gradient }};margin-bottom:8px"></div>
+            <div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ a.name }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding:18px 16px 24px">
+      <div style="font-size:17px;font-weight:800;margin-bottom:10px">Made for you</div>
+      <div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px">
+        <sc-for list="{{ madeForYou }}" as="m" hint-placeholder-count="3">
+          <div style="width:150px;flex-shrink:0">
+            <div style="width:100%;aspect-ratio:1;border-radius:6px;background:{{ m.gradient }};margin-bottom:8px"></div>
+            <div style="font-size:12px;font-weight:700">{{ m.title }}</div>
+            <div style="font-size:11px;color:#a7a7a7;margin-top:2px">{{ m.sub }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex-shrink:0;background:#000;border-top:1px solid #1e1e1e;display:flex;padding:8px 0 22px">
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-size:11px;font-weight:600">
+      <span style="font-size:20px;line-height:1;height:20px;display:flex;align-items:center;justify-content:center">⌂</span>Home
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#8a8a8a;font-size:11px;font-weight:600">
+      <span style="font-size:28px;line-height:1;height:20px;display:flex;align-items:center;justify-content:center">⌕</span>Search
+    </div>
+    <div onClick="{{ goToArchive }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#8a8a8a;font-size:11px;font-weight:600;cursor:pointer;position:relative">
+      <span style="font-size:20px;line-height:1;height:20px;display:flex;align-items:center;justify-content:center">▤</span>Chapters
+      <span style="position:absolute;top:0px;right:28px;width:6px;height:6px;border-radius:50%;background:#1ED760"></span>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ RECAP READY ============ -->
+<sc-if value="{{ isRecapReady }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;background:radial-gradient(ellipse at 50% 30%,#2a2015,#0c0c0c 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;text-align:center;padding:0 28px">
+  <div onClick="{{ goToHome }}" style="position:absolute;top:24px;left:20px;color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Home</div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#1ED760;margin-bottom:18px">CHAPTERS</div>
+  <div style="width:96px;height:96px;border-radius:50%;background:url('assets/smr/album-art/sz.jpg') center/cover no-repeat;margin-bottom:28px;box-shadow:0 16px 44px rgba(180,110,40,0.25)"></div>
+  <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:52px;line-height:0.95;text-transform:uppercase">Your August<br/>is ready</div>
+  <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:18px;color:#d8d0c4;margin-top:14px">What did this month sound like — and what did it feel like?</div>
+  <div onClick="{{ goToOverview }}" style="margin-top:32px;background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:15px 32px;border-radius:999px;cursor:pointer;width:100%">Open your August</div>
+</div>
+</sc-if>
+
+<!-- ============ OVERVIEW ============ -->
+<sc-if value="{{ isOverview }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;overflow-y:auto;background:#121212">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center">
+    <div onClick="{{ goToRecap }}" style="color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Back</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#1ED760">AUGUST 2026</div>
+  </div>
+  <div style="padding:16px 20px 4px">
+    <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:32px;text-transform:uppercase;line-height:1.05">This month in music</div>
+    <div style="color:#a7a7a7;font-size:13px;margin-top:4px">Spotify found the patterns. You decide what mattered.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:18px 20px 4px">
+    <div style="background:#181818;border-radius:10px;padding:16px">
+      <div style="font-size:26px;font-weight:800">361</div>
+      <div style="font-size:12px;color:#a7a7a7;margin-top:2px">songs played</div>
+    </div>
+    <div style="background:#181818;border-radius:10px;padding:16px">
+      <div style="font-size:26px;font-weight:800">3</div>
+      <div style="font-size:12px;color:#a7a7a7;margin-top:2px">new artists</div>
+    </div>
+    <div style="background:#181818;border-radius:10px;padding:16px;grid-column:span 2">
+      <div style="font-size:20px;font-weight:800">Late nights</div>
+      <div style="font-size:12px;color:#a7a7a7;margin-top:2px">your dominant listening pattern</div>
+    </div>
+  </div>
+
+  <div style="padding:18px 20px 0">
+    <div style="font-size:16px;font-weight:800;margin-bottom:8px">Most played</div>
+    <div style="display:flex;flex-direction:column">
+      <sc-for list="{{ mostPlayed }}" as="s" hint-placeholder-count="5">
+        <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6a6a6a;width:14px">{{ $index }}</div>
+          <div style="width:42px;height:42px;border-radius:4px;background:{{ s.gradient }};flex-shrink:0"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14px;font-weight:600">{{ s.title }}</div>
+            <div style="font-size:12px;color:#a7a7a7">{{ s.artist }}</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6a6a6a">{{ s.plays }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:24px 20px 36px">
+    <div onClick="{{ goToSongSelect }}" style="background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:15px;border-radius:999px;cursor:pointer;text-align:center">Which songs defined your month? →</div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ SONG SELECT ============ -->
+<sc-if value="{{ isSongSelect }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;display:flex;flex-direction:column;background:#121212">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+    <div onClick="{{ goToOverview }}" style="color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Back</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#1ED760">{{ meaningfulCount }} / 8</div>
+  </div>
+  <div style="padding:14px 20px 4px;flex-shrink:0">
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:26px;line-height:1.15">Which songs defined your month?</div>
+    <div style="color:#a7a7a7;font-size:13px;margin-top:8px">Pick 3–8 songs that felt like August — whether you played them once or fifty times.</div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;padding:14px 20px">
+    <sc-for list="{{ songs }}" as="s" hint-placeholder-count="10">
+      <div onClick="{{ toggleSong }}" data-id="{{ s.id }}" style="display:flex;align-items:center;gap:12px;padding:10px 0">
+        <div style="width:46px;height:46px;border-radius:5px;background:{{ s.gradient }};flex-shrink:0"></div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.title }}</div>
+          <div style="font-size:12px;color:#a7a7a7">{{ s.artist }} · {{ s.plays }} plays{{ s.newBadge }}</div>
+        </div>
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid {{ s.ringColor }};background:{{ s.checkBg }};flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#000;font-weight:800">{{ s.checkMark }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="padding:12px 20px 30px;flex-shrink:0">
+    <div onClick="{{ goToPhotoSelect }}" style="background:{{ continueBg }};color:{{ continueColor }};font-weight:800;font-size:15px;padding:15px;border-radius:999px;cursor:pointer;text-align:center">Add the moments →</div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ PHOTO SELECT ============ -->
+<sc-if value="{{ isPhotoSelect }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;display:flex;flex-direction:column;background:#121212">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+    <div onClick="{{ goToSongSelect }}" style="color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Back</div>
+    <div onClick="{{ goToChapterComplete }}" style="color:#1ED760;font-size:12px;cursor:pointer;font-weight:700">Skip →</div>
+  </div>
+  <div style="padding:14px 20px 4px;flex-shrink:0">
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:26px;line-height:1.15">Add the moments that went with them.</div>
+    <div style="color:#a7a7a7;font-size:13px;margin-top:8px">Photos from August. Pick a few, then tap a song to pair them.</div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;padding:14px 20px 0">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+      <sc-for list="{{ photos }}" as="p" hint-placeholder-count="12">
+        <div onClick="{{ togglePhoto }}" data-id="{{ p.id }}" style="aspect-ratio:1;border-radius:6px;background:{{ p.gradient }};position:relative;opacity:{{ p.dim }};outline:{{ p.outline }};outline-offset:2px">
+          <div style="position:absolute;bottom:4px;right:4px;width:16px;height:16px;border-radius:50%;background:{{ p.checkBg }};display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:800">{{ p.checkMark }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="padding:18px 0 20px">
+      <div style="font-size:12px;color:#a7a7a7;margin-bottom:8px">Tap a song, then a photo, to pair them</div>
+      <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:6px">
+        <sc-for list="{{ meaningfulSongs }}" as="s" hint-placeholder-count="5">
+          <div onClick="{{ openPairModal }}" data-id="{{ s.id }}" style="flex-shrink:0;width:120px;background:#1a1a1a;border-radius:8px;padding:8px;border:{{ s.pairBorder }}">
+            <div style="width:100%;aspect-ratio:1;border-radius:5px;background:{{ s.gradient }};margin-bottom:6px"></div>
+            <div style="font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.title }}</div>
+            <div style="font-size:10px;color:{{ s.pairStatusColor }};margin-top:2px">{{ s.pairStatus }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 20px 30px;flex-shrink:0">
+    <div onClick="{{ goToChapterComplete }}" style="background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:15px;border-radius:999px;cursor:pointer;text-align:center">Create my August Chapter</div>
+  </div>
+</div>
+
+<sc-if value="{{ pairModalOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:flex-end;z-index:20" onClick="{{ closePairModalBg }}">
+  <div style="background:#1a1a1a;border-radius:18px 18px 0 0;padding:24px 20px 34px;width:100%;display:flex;flex-direction:column;gap:14px" onClick="{{ stopProp }}">
+    <div style="width:36px;height:4px;background:#3a3a3a;border-radius:2px;margin:0 auto 6px"></div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="width:50px;height:50px;border-radius:6px;background:{{ pairSongGradient }}"></div>
+      <div>
+        <div style="font-size:14px;font-weight:700">{{ pairSongTitle }}</div>
+        <div style="font-size:12px;color:#a7a7a7">{{ pairSongArtist }}</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:#a7a7a7">Choose a photo for this song</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+      <sc-for list="{{ selectedPhotosForModal }}" as="p" hint-placeholder-count="5">
+        <div onClick="{{ pickPairPhoto }}" data-id="{{ p.id }}" style="aspect-ratio:1;border-radius:5px;background:{{ p.gradient }};outline:{{ p.outline }};outline-offset:2px"></div>
+      </sc-for>
+    </div>
+    <input value="{{ captionDraft }}" onChange="{{ setCaptionDraft }}" placeholder="Add a short memory (optional)" style="background:#0f0f0f;border:1px solid #333;border-radius:8px;padding:12px 14px;color:#fff;font-size:13px;font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;outline:none" />
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <div onClick="{{ closePairModal }}" style="flex:1;color:#a7a7a7;font-size:13px;font-weight:700;cursor:pointer;padding:12px;text-align:center">Cancel</div>
+      <div onClick="{{ savePairing }}" style="flex:1;background:#1ED760;color:#000;font-weight:800;font-size:13px;padding:12px;border-radius:999px;cursor:pointer;text-align:center">Save</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+</sc-if>
+
+<!-- ============ CHAPTER COMPLETE ============ -->
+<sc-if value="{{ isChapterComplete }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;overflow-y:auto;background:#0e0d0b;color:#f3eee3;position:relative">
+  <div style="position:absolute;inset:0;opacity:0.07;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);pointer-events:none"></div>
+
+  <div style="position:relative;padding:18px 20px 0;display:flex;justify-content:space-between;align-items:center;z-index:3">
+    <div onClick="{{ goToArchive }}" style="color:#9a9081;font-size:13px;cursor:pointer;font-weight:600">← Chapters</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:34px;height:1px;background:rgba(243,238,227,0.22)"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d1873f">CH. 08 / 2026</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:14px 20px 0;z-index:2">
+    <div style="position:relative">
+      <div style="position:relative">
+        <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:70px;line-height:0.84;text-transform:uppercase">August</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px">
+          <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:16px;color:#9a9081;white-space:nowrap">your soundtrack to this chapter</div>
+          <div style="height:1px;flex:1;background:rgba(243,238,227,0.16)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position:relative;width:100%;height:0;padding-bottom:37.4%;margin-top:26px">
+      <sc-for list="{{ chapterPhotos }}" as="p" hint-placeholder-count="5">
+        <div style="position:absolute;left:{{ p.x }};top:{{ p.y }};width:{{ p.w }};z-index:{{ p.z }};transform:rotate({{ p.rot }}deg)">
+          <div style="background:{{ p.gradient }};aspect-ratio:4/5;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,0.5),inset 0 0 0 1px rgba(255,255,255,0.08)"></div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-top:22px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;color:#d1873f;padding-top:5px;white-space:nowrap">THE MOMENT</div>
+      <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:16px;line-height:1.35;color:#a99e8d">{{ heroCaption }}</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-top:30px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d1873f">MOST MEANINGFUL</div>
+      <div style="height:1px;flex:1;background:rgba(243,238,227,0.14)"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;margin-top:4px">
+      <sc-for list="{{ meaningfulSongs }}" as="s" hint-placeholder-count="5">
+        <div onClick="{{ openSongMemory }}" data-id="{{ s.id }}" style="display:grid;grid-template-columns:24px minmax(0,1fr) 12px;gap:10px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(243,238,227,0.1);cursor:pointer">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#d1873f">{{ s.num }}</span>
+          <span style="min-width:0;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><span style="font-size:14.5px;font-weight:700;letter-spacing:-0.01em">{{ s.title }}</span><span style="font-size:11.5px;color:#9a9081;font-style:italic;margin-left:7px">{{ s.artist }}</span></span>
+          <span style="font-size:11px;color:#6f665b">↗</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-top:24px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#d1873f">MOST PLAYED</div>
+      <div style="height:1px;flex:1;background:rgba(243,238,227,0.14)"></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:12px">
+      <sc-for list="{{ mostPlayed }}" as="s" hint-placeholder-count="5">
+        <div style="font-size:11.5px;padding:6px 12px;border:1px solid rgba(243,238,227,0.22);border-radius:999px">{{ s.artist }}</div>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px;padding-top:18px;border-top:1px solid rgba(243,238,227,0.16)">
+      <div>
+        <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;line-height:1">361</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8a8074;margin-top:6px">SONGS</div>
+      </div>
+      <div>
+        <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;line-height:1">{{ meaningfulCount }}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8a8074;margin-top:6px">MEANINGFUL</div>
+      </div>
+      <div>
+        <div style="font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;line-height:1">{{ selectedPhotoCount }}</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:0.16em;color:#8a8074;margin-top:6px">MEMORIES</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:26px 20px 12px;display:flex;gap:10px;z-index:2">
+    <div onClick="{{ openRunItBack }}" style="flex:1;background:#f3eee3;color:#12100e;font-weight:700;font-size:14px;padding:16px 12px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">▶ Run It Back</div>
+    <div onClick="{{ openStory }}" style="flex:1;background:transparent;color:#f3eee3;font-weight:700;font-size:14px;padding:16px 12px;border-radius:2px;cursor:pointer;border:1.5px solid rgba(243,238,227,0.55);display:flex;align-items:center;justify-content:center;gap:8px">View as Story</div>
+  </div>
+  <div style="position:relative;padding:0 20px 40px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:#d1873f;text-align:center;z-index:2">TAP THROUGH YOUR AUGUST, ONE MEMORY AT A TIME</div>
+</div>
+</sc-if>
+
+<!-- ============ CHAPTER STORY ============ -->
+<sc-if value="{{ storyOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#000;z-index:60;overflow:hidden">
+  <div style="position:absolute;inset:0;background:{{ storyPhotoGradient }};filter:blur(1px) brightness(0.75)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,transparent 22%,transparent 68%,rgba(0,0,0,0.6) 100%)"></div>
+
+  <div style="position:absolute;top:14px;left:14px;right:14px;display:flex;gap:4px;z-index:3">
+    <sc-for list="{{ storyBars }}" as="b" hint-placeholder-count="5">
+      <div style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.3);overflow:hidden">
+        <div style="height:100%;width:{{ b.fill }};background:#fff"></div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="position:absolute;top:26px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;z-index:3">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:26px;height:26px;border-radius:50%;background:{{ storySongGradient }}"></div>
+      <div style="color:#fff;font-size:12px;font-weight:700">Your August</div>
+    </div>
+    <div onClick="{{ closeStory }}" style="color:#fff;font-size:18px;cursor:pointer;opacity:0.85">✕</div>
+  </div>
+
+  <div onClick="{{ storyTapPrev }}" style="position:absolute;left:0;top:0;width:32%;height:100%;z-index:2;cursor:pointer"></div>
+  <div onClick="{{ storyTapNext }}" style="position:absolute;right:0;top:0;width:68%;height:100%;z-index:2;cursor:pointer"></div>
+
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:0 22px 40px;z-index:3;text-align:left">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.4);border-radius:999px;padding:6px 12px 6px 6px;margin-bottom:14px">
+      <div style="width:26px;height:26px;border-radius:4px;background:{{ storySongGradient }}"></div>
+      <div>
+        <div style="color:#fff;font-size:12px;font-weight:700;line-height:1.1">{{ storySongTitle }}</div>
+        <div style="color:#d8d0c4;font-size:10px;line-height:1.1">{{ storySongArtist }}</div>
+      </div>
+      <span style="color:#fff;font-size:11px;margin-left:2px">♪</span>
+    </div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:19px;color:#fff;line-height:1.35;max-width:320px">"{{ storyCaption }}"</div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ SONG MEMORY ============ -->
+<sc-if value="{{ isSongMemory }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;overflow-y:auto;background:{{ activeSongMemoryBg }};color:#f3eee3">
+  <div style="padding:18px 20px 0">
+    <div onClick="{{ goToChapterComplete }}" style="color:#c9bfa8;font-size:13px;cursor:pointer;font-weight:600">← August</div>
+  </div>
+  <div style="padding:36px 24px 50px;text-align:center">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#c9bfa8;margin-bottom:16px">AUGUST 2026</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:34px;line-height:1.05">{{ activeSongMemoryTitle }}</div>
+    <div style="font-size:14px;color:#c9bfa8;margin-top:6px">{{ activeSongMemoryArtist }}</div>
+
+    <div style="margin:26px 0;border-radius:4px;overflow:hidden;box-shadow:0 16px 36px rgba(0,0,0,0.4)">
+      <div style="width:100%;aspect-ratio:4/5;background:{{ activeSongMemoryPhotoGradient }}"></div>
+    </div>
+
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#c9bfa8;margin-bottom:8px">YOUR MEMORY</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:19px;line-height:1.4">"{{ activeSongMemoryCaption }}"</div>
+
+    <div onClick="{{ openRunItBack }}" style="margin-top:32px;display:inline-flex;align-items:center;gap:8px;color:#f3eee3;border:1px solid rgba(243,238,227,0.35);padding:11px 22px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600">▶ Play from here</div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ ARCHIVE ============ -->
+<sc-if value="{{ isArchive }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;overflow-y:auto;background:#121212">
+  <div style="padding:20px 20px 0">
+    <div onClick="{{ goToHome }}" style="color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Home</div>
+  </div>
+  <div style="padding:14px 20px 4px">
+    <div style="font-size:26px;font-weight:800">Your Chapters</div>
+    <div style="color:#a7a7a7;font-size:13px;margin-top:3px">2026 — your year in music.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 20px 4px">
+    <sc-for list="{{ months }}" as="m" hint-placeholder-count="12">
+      <div onClick="{{ openMonth }}" data-id="{{ m.key }}" style="cursor:{{ m.cursor }};display:flex;flex-direction:column;gap:6px">
+        <div style="aspect-ratio:4/5;border-radius:6px;background:{{ m.gradient }};position:relative;overflow:hidden;opacity:{{ m.opacity }}">
+          <div style="position:absolute;bottom:8px;left:8px;font-family:'Oswald',sans-serif;font-weight:800;font-size:18px;color:#fff;text-transform:uppercase">{{ m.label }}</div>
+        </div>
+        <div style="font-size:10px;color:#a7a7a7">{{ m.sub }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="padding:14px 20px 36px">
+    <div onClick="{{ goToYearInChapters }}" style="background:linear-gradient(120deg,#1a1a1a,#0c0c0c);border:1px solid #2a2a2a;border-radius:12px;padding:18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#1ED760;margin-bottom:4px">YEAR IN CHAPTERS</div>
+        <div style="font-size:15px;font-weight:700">Walk back through 2026</div>
+      </div>
+      <div style="font-size:20px">→</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ YEAR IN CHAPTERS ============ -->
+<sc-if value="{{ isYearInChapters }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;background:#0b0b0b;display:flex;flex-direction:column">
+  <div style="padding:20px 20px 0;display:flex;justify-content:space-between;align-items:center">
+    <div onClick="{{ goToArchive }}" style="color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Chapters</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#a7a7a7">{{ yearMonthLabel }}</div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:20px">
+    <div style="width:200px;aspect-ratio:4/5;border-radius:10px;background:{{ yearCoverGradient }};box-shadow:0 20px 50px rgba(0,0,0,0.5)"></div>
+    <div style="text-align:center">
+      <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:38px;text-transform:uppercase;line-height:0.9">{{ yearMonthFull }}</div>
+      <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;color:#c9bfa8;font-size:15px;margin-top:8px">{{ yearMonthTopArtist }}</div>
+      <div style="display:flex;gap:18px;margin-top:14px;font-size:12px;color:#a7a7a7;justify-content:center">
+        <span>{{ yearMonthSongCount }} songs</span><span>{{ yearMonthMemoryCount }} memories</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:40px;margin-top:6px">
+      <div onClick="{{ yearPrev }}" style="font-size:24px;color:{{ yearPrevColor }};cursor:pointer;user-select:none">‹</div>
+      <div onClick="{{ yearNext }}" style="font-size:24px;color:{{ yearNextColor }};cursor:pointer;user-select:none">›</div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;gap:6px;padding:4px 0 20px">
+    <sc-for list="{{ yearDots }}" as="d" hint-placeholder-count="8">
+      <div style="width:6px;height:6px;border-radius:50%;background:{{ d.color }}"></div>
+    </sc-for>
+  </div>
+  <div style="display:flex;justify-content:center;padding-bottom:30px">
+    <div onClick="{{ goToPlayMyYear }}" style="color:#1ED760;font-size:13px;font-weight:700;cursor:pointer">Preview your year-end →</div>
+  </div>
+</div>
+</sc-if>
+
+<!-- ============ PLAY MY YEAR ============ -->
+<sc-if value="{{ isPlayMyYear }}" hint-placeholder-val="{{ false }}">
+<div style="height:100%;background:radial-gradient(ellipse at 50% 20%,#241a12,#0a0a0a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 28px">
+  <div onClick="{{ goToYearInChapters }}" style="position:absolute;top:24px;left:20px;color:#a7a7a7;font-size:13px;cursor:pointer;font-weight:600">← Back</div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#c9bfa8;margin-bottom:6px">YEAR-END PREVIEW</div>
+  <div style="font-family:'Oswald',sans-serif;font-weight:800;font-size:42px;margin-top:10px">2026</div>
+  <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:21px;color:#e8dcc4;margin-top:14px;line-height:1.5">12 months.<br/>84 songs.<br/>127 memories.<br/>One soundtrack.</div>
+  <div onClick="{{ openRunItBackYear }}" style="margin-top:32px;background:#1ED760;color:#000;font-weight:800;font-size:15px;padding:15px 36px;border-radius:999px;cursor:pointer">▶ Play My Year</div>
+</div>
+</sc-if>
+
+<!-- ============ RUN IT BACK ============ -->
+<sc-if value="{{ runItBackOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;background:#000;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+  <div style="position:absolute;inset:0;background:{{ ribBackdropGradient }};filter:blur(50px);opacity:0.6"></div>
+  <div onClick="{{ closeRunItBack }}" style="position:absolute;top:24px;right:24px;color:#fff;font-size:20px;cursor:pointer;z-index:2;opacity:0.7">✕</div>
+  <div style="position:absolute;top:24px;left:24px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#c9bfa8;z-index:2">{{ ribLabel }}</div>
+
+  <div style="position:relative;z-index:1;width:220px;aspect-ratio:4/5;border-radius:6px;background:{{ ribPhotoGradient }};box-shadow:0 24px 60px rgba(0,0,0,0.5);border:6px solid #111;margin-bottom:28px"></div>
+
+  <div style="position:relative;z-index:1;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3a3a,#0a0a0a 70%);box-shadow:0 16px 40px rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;animation:spin 6s linear infinite;margin-bottom:20px">
+    <div style="width:34px;height:34px;border-radius:50%;background:{{ ribSongGradient }}"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;text-align:center;color:#fff;padding:0 28px">
+    <div style="font-size:17px;font-weight:700">{{ ribSongTitle }}</div>
+    <div style="font-size:13px;color:#c9bfa8;margin-top:2px">{{ ribSongArtist }}</div>
+    <div style="font-family:'EB Garamond',Garamond,Georgia,serif;font-style:italic;font-size:15px;color:#e8dcc4;margin-top:12px">"{{ ribCaption }}"</div>
+  </div>
+
+  <div style="position:relative;z-index:1;margin-top:26px;display:flex;align-items:center;gap:20px">
+    <div onClick="{{ ribPrev }}" style="color:#fff;font-size:18px;cursor:pointer;opacity:0.7">⏮</div>
+    <div onClick="{{ ribToggle }}" style="width:48px;height:48px;border-radius:50%;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer">{{ ribPlayIcon }}</div>
+    <div onClick="{{ ribNext }}" style="color:#fff;font-size:18px;cursor:pointer;opacity:0.7">⏭</div>
+  </div>
+  <div style="position:relative;z-index:1;margin-top:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8a8a8a">{{ ribTrackPos }}</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":430,"height":900},"screen":{"editor":"enum","options":["home","recapReady","overview","songSelect","photoSelect","chapterComplete","songMemory","archive","yearInChapters","playMyYear"],"tsType":"string"},"rootH":{"editor":"text","default":"100vh","tsType":"string"}}'>
+const SONGS = [
+  {id:'pw', title:'Pink + White', artist:'Frank Ocean', gradient:"url('assets/smr/album-art/pw.jpg') center/cover no-repeat", plays:41, discovered:false},
+  {id:'sz', title:'Snooze', artist:'SZA', gradient:"url('assets/smr/album-art/sz.jpg') center/cover no-repeat", plays:63, discovered:false},
+  {id:'sf', title:'Sofia', artist:'Clairo', gradient:"url('assets/smr/album-art/sf.jpg') center/cover no-repeat", plays:22, discovered:true},
+  {id:'bl', title:'Blessed', artist:'Daniel Caesar', gradient:"url('assets/smr/album-art/bl.jpg') center/cover no-repeat", plays:35, discovered:false},
+  {id:'no', title:'No One Noticed', artist:'The Marías', gradient:"url('assets/smr/album-art/no.jpg') center/cover no-repeat", plays:58, discovered:false},
+  {id:'bh', title:'Bad Habit', artist:'Steve Lacy', gradient:"url('assets/smr/album-art/bh.jpg') center/cover no-repeat", plays:47, discovered:false},
+  {id:'sp', title:'Solar Power', artist:'Lorde', gradient:"url('assets/smr/album-art/sp.jpg') center/cover no-repeat", plays:19, discovered:true},
+  {id:'cc', title:'Champagne Coast', artist:'Blood Orange', gradient:"url('assets/smr/album-art/cc.jpg') center/cover no-repeat", plays:28, discovered:false},
+  {id:'sh', title:'Show Me How', artist:'Men I Trust', gradient:"url('assets/smr/album-art/sh.jpg') center/cover no-repeat", plays:33, discovered:false},
+  {id:'ki', title:'Kingston', artist:'Faye Webster', gradient:"url('assets/smr/album-art/ki.jpg') center/cover no-repeat", plays:15, discovered:true},
+];
+const PHOTOS = [
+  {id:'p1', gradient:"url('assets/smr/photos/01.jpg') center/cover no-repeat"},
+  {id:'p2', gradient:"url('assets/smr/photos/02.jpg') center/cover no-repeat"},
+  {id:'p3', gradient:"url('assets/smr/photos/03.jpg') center/cover no-repeat"},
+  {id:'p4', gradient:"url('assets/smr/photos/04.jpg') center/cover no-repeat"},
+  {id:'p5', gradient:"url('assets/smr/photos/05.jpg') center/cover no-repeat"},
+  {id:'p6', gradient:"url('assets/smr/photos/06.jpg') center/cover no-repeat"},
+  {id:'p7', gradient:"url('assets/smr/photos/07.jpg') center/cover no-repeat"},
+  {id:'p8', gradient:"url('assets/smr/photos/08.jpg') center/cover no-repeat"},
+  {id:'p9', gradient:"url('assets/smr/photos/09.jpg') center/cover no-repeat"},
+  {id:'p10', gradient:"url('assets/smr/photos/10.jpg') center/cover no-repeat"},
+  {id:'p11', gradient:"url('assets/smr/photos/11.jpg') center/cover no-repeat"},
+  {id:'p12', gradient:"url('assets/smr/photos/12.jpg') center/cover no-repeat"},
+];
+const MONTHS = [
+  {key:'jan', label:'JAN', gradient:'linear-gradient(160deg,#5a6a8a,#1a2030)', topArtist:'Men I Trust', songs:7, memories:9},
+  {key:'feb', label:'FEB', gradient:'linear-gradient(160deg,#8a5a7a,#2a1424)', topArtist:'SZA', songs:6, memories:11},
+  {key:'mar', label:'MAR', gradient:'linear-gradient(160deg,#7a9a6a,#1e2e18)', topArtist:'Clairo', songs:8, memories:14},
+  {key:'apr', label:'APR', gradient:'linear-gradient(160deg,#c98a5a,#3a2010)', topArtist:'Daniel Caesar', songs:5, memories:8},
+  {key:'may', label:'MAY', gradient:'linear-gradient(160deg,#d8b878,#4a3418)', topArtist:'Lorde', songs:9, memories:16},
+  {key:'jun', label:'JUN', gradient:'linear-gradient(160deg,#8a9ac0,#1c2440)', topArtist:'The Marías', songs:7, memories:13},
+  {key:'jul', label:'JUL', gradient:'linear-gradient(160deg,#c07a6a,#3a1814)', topArtist:'Steve Lacy', songs:8, memories:15},
+  {key:'aug', label:'AUG', gradient:'linear-gradient(160deg,#e8c789,#6a3f1e)', topArtist:'SZA', songs:10, memories:14, current:true},
+  {key:'sep', label:'SEP', gradient:'#1a1a1a', locked:true},
+  {key:'oct', label:'OCT', gradient:'#1a1a1a', locked:true},
+  {key:'nov', label:'NOV', gradient:'#1a1a1a', locked:true},
+  {key:'dec', label:'DEC', gradient:'#1a1a1a', locked:true},
+];
+const DEFAULT_MEANINGFUL = {pw:true, sz:true, sf:true, no:true, ki:true};
+const DEFAULT_PAIRINGS = {
+  pw: {photoId:'p12', caption:'walking home after dinner in SoHo'},
+  sz: {photoId:'p5', caption:'loudest night of the summer'},
+  sf: {photoId:'p3', caption:'she left these on my door'},
+  no: {photoId:'p6', caption:'every commute, on repeat'},
+  ki: {photoId:'p1', caption:'last light before fall'},
+};
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home',
+    meaningful: {...DEFAULT_MEANINGFUL},
+    selectedPhotos: {p12:true, p5:true, p3:true, p6:true, p1:true},
+    pairings: {...DEFAULT_PAIRINGS},
+    pairModal: {open:false, songId:null, photoId:null, caption:''},
+    activeSongMemoryId: 'pw',
+    runItBack: {open:false, mode:'month', index:0},
+    yearIndex: 7,
+    story: {open:false, index:0, progress:0},
+  };
+
+
+  _deepScreen() {
+    var ok = ['home','recapReady','overview','songSelect','photoSelect','chapterComplete','songMemory','archive','yearInChapters','playMyYear'];
+    if (this._navigated) return null;
+    var p = this.props && this.props.screen;
+    if (p && ok.indexOf(p) !== -1) return p;
+    if (this._deep === undefined) {
+      var h = '';
+      try { h = (location.hash || '').replace(/^#/, ''); } catch (e) {}
+      this._deep = ok.indexOf(h) !== -1 ? h : null;
+    }
+    return this._deep;
+  }
+  setState() { this._navigated = true; this._deep = null; return super.setState.apply(this, arguments); }
+  goTo = (s) => () => this.setState({screen:s});
+
+  toggleSong = (e) => {
+    const id = e.currentTarget.dataset.id;
+    this.setState(s => {
+      const cur = {...s.meaningful};
+      const count = Object.values(cur).filter(Boolean).length;
+      if (cur[id]) delete cur[id];
+      else if (count < 8) cur[id] = true;
+      return {meaningful: cur};
+    });
+  };
+
+  togglePhoto = (e) => {
+    const id = e.currentTarget.dataset.id;
+    this.setState(s => {
+      const cur = {...s.selectedPhotos};
+      if (cur[id]) delete cur[id]; else cur[id] = true;
+      return {selectedPhotos: cur};
+    });
+  };
+
+  openPairModal = (e) => {
+    const songId = e.currentTarget.dataset.id;
+    const existing = this.state.pairings[songId];
+    this.setState({pairModal:{open:true, songId, photoId: existing ? existing.photoId : null, caption: existing ? existing.caption : ''}});
+  };
+  closePairModal = () => this.setState({pairModal:{open:false, songId:null, photoId:null, caption:''}});
+  closePairModalBg = () => this.closePairModal();
+  stopProp = (e) => e.stopPropagation();
+  pickPairPhoto = (e) => {
+    const id = e.currentTarget.dataset.id;
+    this.setState(s => ({pairModal:{...s.pairModal, photoId:id}}));
+  };
+  setCaptionDraft = (e) => {
+    const val = e.target.value;
+    this.setState(s => ({pairModal:{...s.pairModal, caption:val}}));
+  };
+  savePairing = () => {
+    const {songId, photoId, caption} = this.state.pairModal;
+    if (!songId) return;
+    this.setState(s => ({
+      pairings: {...s.pairings, [songId]: {photoId, caption}},
+      pairModal: {open:false, songId:null, photoId:null, caption:''},
+    }));
+  };
+
+  openSongMemory = (e) => this.setState({screen:'songMemory', activeSongMemoryId: e.currentTarget.dataset.id});
+  openMonth = (e) => {
+    const m = MONTHS.find(x => x.key === e.currentTarget.dataset.id);
+    if (!m || m.locked) return;
+    this.setState({screen:'chapterComplete'});
+  };
+  openRunItBack = () => this.setState({runItBack:{open:true, mode:'month', index:0}});
+  openRunItBackYear = () => this.setState({runItBack:{open:true, mode:'year', index:0}});
+  closeRunItBack = () => this.setState(s => ({runItBack:{...s.runItBack, open:false}}));
+  ribToggle = () => this.setState(s => ({runItBack:{...s.runItBack, playing: !s.runItBack.playing}}));
+  ribPrev = () => this.setState(s => ({runItBack:{...s.runItBack, index: Math.max(0, s.runItBack.index-1)}}));
+  ribNext = () => this.setState(s => {
+    const list = this.meaningfulList(s);
+    return {runItBack:{...s.runItBack, index: Math.min(list.length-1, s.runItBack.index+1)}};
+  });
+
+  yearPrev = () => this.setState(s => ({yearIndex: Math.max(0, s.yearIndex-1)}));
+  yearNext = () => this.setState(s => ({yearIndex: Math.min(7, s.yearIndex+1)}));
+
+  storyDuration = 4000;
+  startStoryTimer() {
+    clearInterval(this._storyTimer);
+    this._storyTimer = setInterval(() => {
+      this.setState(s => {
+        const list = this.meaningfulList(s);
+        const next = s.story.progress + (100 / (this.storyDuration/80));
+        if (next >= 100) {
+          if (s.story.index >= list.length - 1) {
+            clearInterval(this._storyTimer);
+            return {story: {...s.story, open:false, progress:0}};
+          }
+          return {story: {...s.story, index: s.story.index+1, progress:0}};
+        }
+        return {story: {...s.story, progress: next}};
+      });
+    }, 80);
+  }
+  openStory = () => {
+    this.setState({story:{open:true, index:0, progress:0}});
+    this.startStoryTimer();
+  };
+  closeStory = () => {
+    clearInterval(this._storyTimer);
+    this.setState(s => ({story:{...s.story, open:false}}));
+  };
+  storyTapNext = () => {
+    this.setState(s => {
+      const list = this.meaningfulList(s);
+      if (s.story.index >= list.length - 1) {
+        clearInterval(this._storyTimer);
+        return {story:{...s.story, open:false, progress:0}};
+      }
+      return {story:{...s.story, index: s.story.index+1, progress:0}};
+    });
+    this.startStoryTimer();
+  };
+  storyTapPrev = () => {
+    this.setState(s => ({story:{...s.story, index: Math.max(0, s.story.index-1), progress:0}}));
+    this.startStoryTimer();
+  };
+  componentWillUnmount() {
+    clearInterval(this._storyTimer);
+  }
+
+  meaningfulList(s) {
+    return SONGS.filter(song => s.meaningful[song.id]);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const screen = this._deepScreen() || s.screen;
+    const rootH = this.props.rootH || '100vh';
+    const meaningfulList = this.meaningfulList(s);
+    const meaningfulCount = meaningfulList.length;
+    const mostPlayed = [...SONGS].sort((a,b) => b.plays - a.plays).slice(0,5);
+
+    const songsForSelect = SONGS.map(song => {
+      const checked = !!s.meaningful[song.id];
+      return {
+        ...song,
+        newBadge: song.discovered ? ' · new this month' : '',
+        ringColor: checked ? '#1ED760' : '#4a4a4a',
+        checkBg: checked ? '#1ED760' : 'transparent',
+        checkMark: checked ? '✓' : '',
+      };
+    });
+
+    const photosForSelect = PHOTOS.map(p => {
+      const sel = !!s.selectedPhotos[p.id];
+      return {...p, dim: sel ? 1 : 0.55, outline: sel ? '2px solid #1ED760' : 'none', checkBg: sel ? '#1ED760' : 'rgba(0,0,0,0.4)', checkMark: sel ? '✓' : ''};
+    });
+
+    const meaningfulForPairing = meaningfulList.map((song, i) => {
+      const pairing = s.pairings[song.id];
+      return {
+        ...song,
+        pairStatus: pairing ? 'Paired' : 'Tap to pair',
+        pairStatusColor: pairing ? '#1ED760' : '#6a6a6a',
+        pairBorder: s.pairModal.songId === song.id ? '1px solid #1ED760' : '1px solid transparent',
+        pairIcon: pairing ? '◆' : '',
+        num: String(i+1).padStart(2,'0'),
+      };
+    });
+
+    const selectedPhotosForModal = PHOTOS.filter(p => s.selectedPhotos[p.id]).map(p => ({
+      ...p, outline: s.pairModal.photoId === p.id ? '2px solid #1ED760' : 'none',
+    }));
+
+    const pairSong = SONGS.find(x => x.id === s.pairModal.songId);
+
+    const chapterPhotoIds = ['p12','p5','p3','p6','p1'];
+    const scatter = [
+      {x: '0%',    y: '13%',   w: '21.1%', rot: -6.5, z: 3},
+      {x: '18%',   y: '0%',    w: '24%',   rot: 3.5,  z: 5},
+      {x: '40.6%', y: '17.6%', w: '20%',   rot: -2.5, z: 4},
+      {x: '58.3%', y: '3%',    w: '24.9%', rot: 5.5,  z: 2},
+      {x: '78.9%', y: '24.4%', w: '18.9%', rot: -4.5, z: 6}
+    ];
+    const chapterPhotos = chapterPhotoIds.map((id, i) => {
+      const p = PHOTOS.find(x => x.id === id);
+      const g = scatter[i] || scatter[0];
+      return {...p, rot: g.rot, x: g.x, y: g.y, w: g.w, z: g.z};
+    });
+
+    const heroPairing = s.pairings.pw || {};
+    const heroCaption = heroPairing.caption ? `"${heroPairing.caption}"` : '';
+
+    const activeSong = SONGS.find(x => x.id === s.activeSongMemoryId) || SONGS[0];
+    const activePairing = s.pairings[activeSong.id] || {};
+    const activePhoto = PHOTOS.find(x => x.id === activePairing.photoId) || PHOTOS[0];
+
+    const months = MONTHS.map(m => ({
+      key: m.key, label: m.label,
+      gradient: m.locked ? '#161616' : m.gradient,
+      cursor: m.locked ? 'default' : 'pointer',
+      opacity: m.locked ? 0.4 : 1,
+      sub: m.locked ? 'Not started' : `${m.songs} songs · ${m.memories} memories`,
+    }));
+
+    const yearMonth = MONTHS[s.yearIndex];
+    const yearDots = MONTHS.slice(0,8).map((m,i) => ({color: i === s.yearIndex ? '#1ED760' : '#3a3a3a'}));
+
+    const ribMonth = s.runItBack.mode === 'year';
+    const ribList = meaningfulList.length ? meaningfulList : [SONGS[0]];
+    const ribIdx = Math.min(s.runItBack.index, ribList.length-1);
+    const ribSong = ribMonth ? mostPlayed[ribIdx % mostPlayed.length] : ribList[ribIdx];
+    const ribPairing = s.pairings[ribSong.id] || {};
+    const ribPhoto = PHOTOS.find(x => x.id === ribPairing.photoId) || PHOTOS[ribIdx % PHOTOS.length];
+
+    return {
+      rootH,
+      isHome: screen === 'home', isRecapReady: screen === 'recapReady', isOverview: screen === 'overview',
+      isSongSelect: screen === 'songSelect', isPhotoSelect: screen === 'photoSelect', isChapterComplete: screen === 'chapterComplete',
+      isSongMemory: screen === 'songMemory', isArchive: screen === 'archive', isYearInChapters: screen === 'yearInChapters',
+      isPlayMyYear: screen === 'playMyYear',
+
+      goToHome: this.goTo('home'), goToRecap: this.goTo('recapReady'), goToOverview: this.goTo('overview'),
+      goToSongSelect: this.goTo('songSelect'), goToPhotoSelect: this.goTo('photoSelect'), goToChapterComplete: this.goTo('chapterComplete'),
+      goToArchive: this.goTo('archive'), goToYearInChapters: this.goTo('yearInChapters'), goToPlayMyYear: this.goTo('playMyYear'),
+
+      jumpBackIn: [
+        {title:'Blue Dress', gradient:"url('assets/smr/album-art/alt1.jpg') center/cover no-repeat"},
+        {title:'Banana Grove', gradient:"url('assets/smr/album-art/alt2.jpg') center/cover no-repeat"},
+        {title:'Charm', gradient:"url('assets/smr/album-art/alt3.jpg') center/cover no-repeat"},
+        {title:'Parked', gradient:"url('assets/smr/album-art/alt4.jpg') center/cover no-repeat"},
+        {title:'I\'m the Problem', gradient:"url('assets/smr/album-art/alt5.jpg') center/cover no-repeat"},
+        {title:'Diamond Hand', gradient:"url('assets/smr/album-art/alt6.jpg') center/cover no-repeat"},
+      ],
+      topArtists: [
+        {name:'Frank Ocean', gradient:"url('assets/smr/album-art/alt6.jpg') center/cover no-repeat"}, {name:'SZA', gradient:"url('assets/smr/album-art/alt7.jpg') center/cover no-repeat"},
+        {name:'The Marías', gradient:"url('assets/smr/album-art/alt1.jpg') center/cover no-repeat"}, {name:'Steve Lacy', gradient:"url('assets/smr/album-art/alt8.jpg') center/cover no-repeat"},
+        {name:'Daniel Caesar', gradient:"url('assets/smr/album-art/alt4.jpg') center/cover no-repeat"},
+      ],
+      madeForYou: [
+        {title:'Daily Mix 1', sub:'Frank Ocean, SZA and more', gradient:"url('assets/smr/album-art/alt2.jpg') center/cover no-repeat"},
+        {title:'Daily Mix 2', sub:'Clairo, Faye Webster and more', gradient:"url('assets/smr/album-art/alt9.jpg') center/cover no-repeat"},
+        {title:'Release Radar', sub:'New music for you', gradient:"url('assets/smr/album-art/alt5.jpg') center/cover no-repeat"},
+      ],
+      songs: songsForSelect, mostPlayed, meaningfulCount,
+      meaningfulSongs: meaningfulForPairing,
+      toggleSong: this.toggleSong,
+      continueBg: meaningfulCount >= 3 ? '#1ED760' : '#2a2a2a',
+      continueColor: meaningfulCount >= 3 ? '#000' : '#6a6a6a',
+
+      photos: photosForSelect, togglePhoto: this.togglePhoto,
+      pairModalOpen: s.pairModal.open,
+      openPairModal: this.openPairModal, closePairModal: this.closePairModal, closePairModalBg: this.closePairModalBg,
+      stopProp: this.stopProp, pickPairPhoto: this.pickPairPhoto, setCaptionDraft: this.setCaptionDraft, savePairing: this.savePairing,
+      captionDraft: s.pairModal.caption,
+      pairSongGradient: pairSong ? pairSong.gradient : '#333', pairSongTitle: pairSong ? pairSong.title : '', pairSongArtist: pairSong ? pairSong.artist : '',
+      selectedPhotosForModal,
+
+      chapterPhotos, heroCaption, openSongMemory: this.openSongMemory, openRunItBack: this.openRunItBack, selectedPhotoCount: Object.keys(s.selectedPhotos).length,
+
+      activeSongMemoryTitle: activeSong.title, activeSongMemoryArtist: activeSong.artist,
+      activeSongMemoryBg: 'linear-gradient(160deg, #2a2015, #0c0c0c 65%)',
+      activeSongMemoryPhotoGradient: activePhoto.gradient, activeSongMemoryCaption: activePairing.caption || 'a memory not yet written',
+
+      months, openMonth: this.openMonth,
+
+      yearMonthLabel: `${yearMonth.label} 2026`, yearMonthFull: {jan:'January',feb:'February',mar:'March',apr:'April',may:'May',jun:'June',jul:'July',aug:'August'}[yearMonth.key],
+      yearMonthTopArtist: yearMonth.topArtist, yearMonthSongCount: yearMonth.songs, yearMonthMemoryCount: yearMonth.memories,
+      yearCoverGradient: yearMonth.gradient, yearDots, yearPrev: this.yearPrev, yearNext: this.yearNext,
+      yearPrevColor: s.yearIndex === 0 ? '#3a3a3a' : '#fff', yearNextColor: s.yearIndex === 7 ? '#3a3a3a' : '#fff',
+
+      openRunItBackYear: this.openRunItBackYear,
+
+      storyOpen: s.story.open, openStory: this.openStory, closeStory: this.closeStory,
+      storyTapNext: this.storyTapNext, storyTapPrev: this.storyTapPrev,
+      storyBars: meaningfulList.map((song, i) => ({
+        fill: i < s.story.index ? '100%' : i === s.story.index ? `${s.story.progress}%` : '0%',
+      })),
+      storyPhotoGradient: (PHOTOS.find(x => x.id === (s.pairings[(meaningfulList[s.story.index]||{}).id]||{}).photoId) || PHOTOS[0]).gradient,
+      storySongGradient: (meaningfulList[s.story.index] || SONGS[0]).gradient,
+      storySongTitle: (meaningfulList[s.story.index] || SONGS[0]).title,
+      storySongArtist: (meaningfulList[s.story.index] || SONGS[0]).artist,
+      storyCaption: (s.pairings[(meaningfulList[s.story.index]||{}).id] || {}).caption || 'a memory not yet written',
+
+      storyOpen: s.story.open, openStory: this.openStory, closeStory: this.closeStory,
+      storyTapNext: this.storyTapNext, storyTapPrev: this.storyTapPrev,
+      storyBars: meaningfulList.map((song, i) => ({
+        fill: i < s.story.index ? '100%' : i === s.story.index ? `${s.story.progress}%` : '0%',
+      })),
+      storyPhotoGradient: (PHOTOS.find(x => x.id === (s.pairings[(meaningfulList[s.story.index]||{}).id]||{}).photoId) || PHOTOS[0]).gradient,
+      storySongGradient: (meaningfulList[s.story.index] || SONGS[0]).gradient,
+      storySongTitle: (meaningfulList[s.story.index] || SONGS[0]).title,
+      storySongArtist: (meaningfulList[s.story.index] || SONGS[0]).artist,
+      storyCaption: (s.pairings[(meaningfulList[s.story.index]||{}).id] || {}).caption || 'a memory not yet written',
+
+      runItBackOpen: s.runItBack.open, closeRunItBack: this.closeRunItBack,
+      ribLabel: ribMonth ? 'YOUR 2026' : 'AUGUST 2026', ribBackdropGradient: ribSong.gradient,
+      ribSongGradient: ribSong.gradient, ribPhotoGradient: ribPhoto.gradient,
+      ribSongTitle: ribSong.title, ribSongArtist: ribSong.artist, ribCaption: ribPairing.caption || (ribMonth ? 'one year, scored by what you actually played' : 'a memory not yet written'),
+      ribToggle: this.ribToggle, ribPlayIcon: s.runItBack.playing === false ? '▶' : '❚❚',
+      ribPrev: this.ribPrev, ribNext: this.ribNext, ribTrackPos: `${ribIdx+1} / ${ribMonth ? mostPlayed.length : ribList.length}`,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

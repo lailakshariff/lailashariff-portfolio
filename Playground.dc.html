@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Playground — Laila Shariff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  a{color:var(--ink)}
+  a:hover{color:var(--accent)}
+  .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:22px 64px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(180%) blur(18px);font:400 12px/1 var(--font-sans);letter-spacing:.12em;text-transform:uppercase;color:#70707a}
+  .nav a{text-decoration:none}
+  .wrap{padding:0 64px}
+  .eyebrow{font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .sect{display:none}
+  .sect.live{display:block}
+  html[data-pg] .sect.live{display:none}
+  html[data-pg="glossier"] #glossier,
+  html[data-pg="nike"] #nike,
+  html[data-pg="book"] #book,
+  html[data-pg="glossier"] #glossier,
+  html[data-pg="nike"] #nike,
+  html[data-pg="book"] #book,
+  html[data-pg="graphic"] #graphic,
+  html[data-pg="research"] #research,
+  html[data-pg="photography"] #photography,
+  html[data-pg="craft"] #craft{display:block !important}
+  .sect{padding:96px 64px 0;scroll-margin-top:78px}
+  .sect h2{margin:14px 0 0;font:500 37.2px/1.1 var(--font-sans);letter-spacing:-.012em}
+  .lede{margin:14px 0 0;max-width:640px;font:400 18px/1.65 var(--font-sans);color:var(--body-2);text-wrap:pretty}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .tag{font:400 11px/1 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--body-2);display:inline-flex;align-items:center}
+  .tag + .tag::before{content:"·";margin:0 10px;color:rgba(var(--inkrgb),.35)}
+  .tags{display:flex;flex-wrap:wrap;align-items:center;gap:0}
+  .grid{display:grid;gap:16px;margin-top:32px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .shot{display:block;width:100%;border-radius:10px;border:1px solid rgba(var(--inkrgb),.09);background:#fff}
+  .rule{height:1px;background:rgba(var(--inkrgb),.1);margin:0 64px}
+  .note{margin-top:14px;font:400 12.5px/1.5 var(--font-sans);color:var(--muted)}
+  .egg{position:relative;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;vertical-align:-6px;color:var(--muted);text-decoration:none;transition:color .3s ease}
+  .egg:hover,.egg:focus-visible{color:var(--accent);outline:none}
+  .egg i{position:absolute;left:50%;bottom:128%;transform:translateX(-50%) translateY(5px);white-space:nowrap;font:400 italic 14px/1 var(--font-serif);color:var(--accent);opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease}
+  .egg:hover i,.egg:focus-visible i{opacity:1;transform:translateX(-50%)}
+  .invite{display:block;text-decoration:none;color:inherit;margin-top:96px;border-top:1px solid rgba(var(--inkrgb),.1)}
+  .invite > div{position:relative;overflow:hidden;padding:46px 0 50px;display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap}
+  .invite h2{margin:14px 0 0;font:400 clamp(26px,3.4vw,36px)/1.12 var(--font-serif);letter-spacing:-.012em;transition:color .3s ease}
+  .invite:hover h2{color:var(--accent)}
+  .invite p{margin:10px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)}
+  .invite .open{font:500 11px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:6px}
+  .invite svg{position:absolute;pointer-events:none;color:var(--muted);opacity:.42}
+
+  .ringwrap{position:relative;padding:64px 0 28px;overflow:hidden}
+  .ringstage{--h:min(94vw,760px);position:relative;width:100%;height:var(--h);display:grid;place-items:center}
+  .ring{--r:calc(var(--h) * 0.355);--w:calc(var(--h) * 0.084);position:absolute;left:50%;top:50%;width:0;height:0;transform:translate(-50%,-50%) rotate(var(--rot,0deg));will-change:transform}
+  .rcard{position:absolute;left:0;top:0;width:var(--w,84px);aspect-ratio:3/4;margin:calc(var(--w,84px) * -0.667) 0 0 calc(var(--w,84px) / -2);border:0;padding:0;background:none;cursor:pointer;transform:rotate(var(--a)) translateY(calc(-1 * var(--r,300px)));opacity:.9;transition:opacity .5s ease}
+  .rcard > span{position:absolute;inset:0;overflow:hidden;border-radius:4px;background:#efece5;box-shadow:0 6px 18px rgba(var(--inkrgb),.14);transition:transform .55s cubic-bezier(.2,.75,.2,1),box-shadow .55s ease}
+  .rcard img{display:block;width:100%;height:100%;object-fit:cover}
+  .rhub{pointer-events:none}
+  .rhub .go{pointer-events:auto}
+  .ring:hover .rcard{opacity:.4}
+  .ring:hover .rcard:hover{opacity:1}
+  .rcard:hover > span{transform:scale(1.18);box-shadow:0 16px 34px rgba(var(--inkrgb),.26)}
+  .rhub{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;max-width:calc(var(--h) * 0.44)}
+  .rhub .k{font:500 10.5px/1 var(--font-sans);letter-spacing:.28em;text-transform:uppercase;color:#a09889}
+  .rhub .t{font:500 clamp(24px,3.2vw,37.2px)/1.08 var(--font-sans);letter-spacing:-.015em;color:var(--ink)}
+  .rhub .d{font:400 15px/1.6 var(--font-sans);color:#6b6559;text-wrap:pretty;min-height:3.2em}
+  .rhub .go{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:500 11px/1 var(--font-sans);letter-spacing:.14em;text-transform:uppercase;transition:background .3s ease}
+  .rhub .go:hover{background:var(--accent);color:var(--bg)}
+  .rscroll{margin-top:8px;text-align:center;font:500 10px/1 var(--font-sans);letter-spacing:.26em;text-transform:uppercase;color:#b3aa9a}
+  .viewer{min-width:0}
+  .viewer .vnum{font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .viewer h2{margin:14px 0 0;font:500 37.2px/1.08 var(--font-sans);letter-spacing:-.012em}
+  .viewer p{margin:14px 0 0;max-width:460px;font:400 18px/1.65 var(--font-sans);color:var(--body-2);text-wrap:pretty}
+  .viewer .go{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:13px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font:400 12px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase}
+  .viewer .go:hover{color:var(--bg);background:var(--accent)}
+  .vfade{animation:vfade .5s ease both}
+  @keyframes vfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (max-width:980px){
+    .ringstage{--h:min(104vw,560px)}
+  }
+  @media (max-width:820px){
+    .ringstage{--h:min(96vw,520px)}
+    .ring{--w:calc(var(--h) * 0.092);--r:calc(var(--h) * 0.372)}
+    .rhub{max-width:calc(var(--h) * 0.40);gap:10px}
+    .rhub .d{font-size:14px;min-height:0}
+  }
+  @media (max-width:640px){
+    .ringstage{--h:min(108vw,440px)}
+    .ring{--w:max(30px,calc(var(--h) * 0.076));--r:calc(var(--h) * 0.376)}
+    .rhub{max-width:calc(var(--h) * 0.35);gap:9px}
+    .rhub .k{font-size:9.5px;letter-spacing:.22em}
+    .rhub .t{font-size:24px}
+    .rhub .d{font-size:12.5px;line-height:1.5}
+    .rhub .go{padding:10px 16px;font-size:10px}
+  }
+
+  @media (max-width:900px){
+    .nav,.wrap,.sect{padding-left:24px;padding-right:24px}
+    .rule{margin:0 24px}
+    .g2,.g3{grid-template-columns:1fr}
+  }
+/*resp*/
+@media (max-width:820px){
+.nav{padding:16px 20px !important}
+.grid,.g2,.g3{grid-template-columns:1fr !important;gap:18px !important}
+h1{font-size:34px !important}
+h2{font-size:26px !important}
+img{max-width:100% !important;height:auto !important}
+  .rcard img,.mreel img{width:100% !important;height:100% !important;object-fit:cover !important}.labbox img,#lab-gallery .ghost img{width:100% !important;height:100% !important;object-fit:cover !important}
+  .rcard > span{background:#241f1c}
+}
+@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:color-mix(in srgb,var(--bg) 92%,transparent);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(var(--inkrgb),.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(var(--inkrgb),.09);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-sheet a:last-child{border-bottom:0}.mnav-open .mnav-sheet a{opacity:1;transform:none}.mnav-open .mnav-sheet a:nth-child(1){transition-delay:.07s}.mnav-open .mnav-sheet a:nth-child(2){transition-delay:.12s}.mnav-open .mnav-sheet a:nth-child(3){transition-delay:.17s}.mnav-open .mnav-sheet a:nth-child(4){transition-delay:.22s}@media (min-width:769px){.mnav-sheet{display:none}}@media (prefers-reduced-motion:reduce){.mnav-sheet,.mnav-sheet a,.mnav-burger span::before,.mnav-burger span::after{transition:none}}/*gfix*/@media (max-width:768px){[style*=grid-template-columns]{grid-template-columns:minmax(0,1fr) !important}[style*=grid-template-columns] > *{min-width:0 !important}image-slot{display:block;width:100% !important;min-width:0 !important}h1,h2,h3,p{min-width:0;overflow-wrap:break-word}}/*tfix*/@media (max-width:768px){h1,h2,h3{text-wrap:balance;overflow-wrap:break-word;hyphens:none}h1{line-height:1.16 !important;letter-spacing:-.022em !important}h2{line-height:1.22 !important;letter-spacing:-.02em !important}h3{line-height:1.28 !important}p{font-size:16.5px !important;line-height:1.72 !important;text-wrap:pretty}p[style*=font-size:15],p[style*=font-size:16],li{font-size:15.5px !important;line-height:1.65 !important}figcaption{font-size:12.5px !important;line-height:1.5 !important}}@media (max-width:520px){p{font-size:16px !important;line-height:1.7 !important}h2{font-size:24px !important}h3{font-size:19.5px !important}}/*topgap*/@media (max-width:768px){.hero,[class*=hero]{padding-top:24px !important}main > *:first-child{margin-top:0 !important}}/*reelm*/@media (max-width:768px){.reelstage,.disc{display:none !important}.reelwrap{display:block !important}.mreel{display:flex !important}}.mreel{display:none;flex-wrap:wrap;gap:8px;margin:28px 0 26px;padding:0 28px;box-sizing:border-box}
+  @media (max-width:768px){.tags{display:none !important}}.mreel button{appearance:none;border:1px solid rgba(70,60,36,.22);background:transparent;color:#5c5647;border-radius:999px;padding:9px 14px;font:500 12.5px/1 'Outfit',system-ui,sans-serif;letter-spacing:.04em;cursor:pointer;min-height:38px;transition:background .2s,border-color .2s,color .2s}.mreel button[aria-current="true"]{background:#463a1c;border-color:#463a1c;color:#fbf6e8}/*reelm-adv*/@media (max-width:768px){.lever,#reel-next{display:none !important}}/*topgap2*/@media (max-width:768px){.wrap[style*="padding-top:88px"],.wrap{padding-top:8px !important}}/*craftm*/@media (max-width:768px){html[data-pg="craft"] #craft{display:flex !important;flex-direction:column !important}#craft > div[style*="margin-top:-140px"]{display:none !important}#craft .eyebrow{order:1}#craft h2{order:2}#craft .grid.g3{order:4}#craft > div[style*="margin-top:-140px"] svg{display:none !important}#craft > div[style*="margin-top:-140px"] span{margin-top:0 !important}#craft .grid.g3{display:flex !important;flex-direction:column !important;gap:16px !important}#craft .grid.g3 > *:last-child{order:2}}/*craftcrop*/@media (max-width:768px){#craft .grid.g3 > div{height:62vw !important;max-height:340px !important;aspect-ratio:auto !important;overflow:hidden !important;position:relative !important}#craft .grid.g3 > div > img{position:absolute !important;inset:0 !important;height:100% !important;width:100% !important;max-width:none !important;object-fit:cover !important;object-position:47% 60% !important;transform:scale(1.6) !important;transform-origin:47% 60% !important}}/*gutter*/@media (max-width:768px){.wrap,.sect,.nav{padding-left:28px !important;padding-right:28px !important}}@media (max-width:400px){.wrap,.sect,.nav{padding-left:22px !important;padding-right:22px !important}}</style><link rel="stylesheet" href="./responsive.css?v=2">
+<script>(function(){
+function boot(){
+  var ring=document.getElementById('ring'), stage=document.getElementById('ring-stage');
+  if(!ring||!stage) return false;
+  if(ring.dataset.wired) return true; ring.dataset.wired='1';
+  var cards=[].slice.call(ring.querySelectorAll('.rcard'));
+  var K=document.getElementById('r-k'),T=document.getElementById('r-t'),D=document.getElementById('r-d'),G=document.getElementById('r-go');
+  var base={k:K.textContent,t:T.textContent,d:D.textContent};
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var target=0,cur=0,raf=0;
+  function onScroll(){ target=window.scrollY*0.12; if(!raf) raf=requestAnimationFrame(tick); }
+  function tick(){ cur+=(target-cur)*0.09; ring.style.setProperty('--rot',cur.toFixed(2)+'deg');
+    if(Math.abs(target-cur)>0.05){ raf=requestAnimationFrame(tick); } else { raf=0; } }
+  if(!reduce){ window.addEventListener('scroll',onScroll,{passive:true}); onScroll(); }
+  function preview(c){ K.textContent=c.dataset.k; T.textContent=c.dataset.t; D.textContent=''; G.setAttribute('href','#'+c.dataset.id); G.style.visibility='visible'; }
+  cards.forEach(function(c){
+    c.addEventListener('mouseenter',function(){ preview(c); });
+    c.addEventListener('focus',function(){ preview(c); });
+  });
+  // Delegated, so the card under the pointer always resolves to its own
+  // project — touch never fires mouseenter, which used to leave the hub's
+  // link pointing at whatever was hovered last.
+  ring.addEventListener('click',function(e){
+    var c=e.target.closest&&e.target.closest('.rcard');
+    if(!c||!c.dataset.id) return;
+    preview(c);
+    show(c.dataset.id);
+  });
+  stage.addEventListener('mouseleave',function(){ K.textContent=base.k; T.textContent=base.t; D.textContent=base.d; G.style.visibility='hidden'; });
+  G.addEventListener('click',function(e){ e.preventDefault(); show((G.getAttribute('href')||'').slice(1)); });
+  function show(id){
+    var el=document.getElementById(id); if(!el) return;
+    document.documentElement.setAttribute('data-pg', id);
+    [].forEach.call(document.querySelectorAll('.sect'),function(x){ x.classList.remove('live'); });
+    el.classList.add('live');
+    var y=el.getBoundingClientRect().top+window.scrollY-78;
+    window.scrollTo({top:y,behavior:'smooth'});
+  }
+  return true;
+}
+var t=setInterval(function(){ if(boot()) clearInterval(t); },100);
+setTimeout(function(){ clearInterval(t); },12000);
+})();</script>
+<script>(function(){var QQ=String.fromCharCode(34);function build(){var sel='[style*='+QQ+'position:sticky'+QQ+'],[style*='+QQ+'position: sticky'+QQ+'],.nav';var bars=document.querySelectorAll(sel);var nav=null;for(var i=0;i<bars.length;i++){var b=bars[i];if(b.querySelectorAll('a').length>=2&&b.getBoundingClientRect().top<200){nav=b;break;}}if(!nav||nav.dataset.mnav)return false;var groups=nav.querySelectorAll('div');var group=null;for(var g=0;g<groups.length;g++){if(groups[g].querySelectorAll('a').length>=2){group=groups[g];break;}}if(!group)return false;nav.dataset.mnav='1';group.classList.add('mnav-hide');var btn=document.createElement('button');btn.className='mnav-burger';btn.type='button';btn.setAttribute('aria-label','Menu');btn.setAttribute('aria-expanded','false');btn.appendChild(document.createElement('span'));nav.appendChild(btn);var sheet=document.createElement('div');sheet.className='mnav-sheet';var cs=window.getComputedStyle(nav);sheet.style.font=cs.font;var links=group.querySelectorAll('a');var here=(location.pathname.split('/').pop()||'index.html').toLowerCase();function isHere(h){h=(h||'').split('#')[0].split('/').pop().toLowerCase();if(!h)return true;if(h===here)return true;var home={'index.html':1,'home.dc.html':1};return home[h]===1&&home[here]===1;}function close(){if(opened)set(false);}for(var k=0;k<links.length;k++){var a=document.createElement('a');a.href=links[k].getAttribute('href');a.textContent=links[k].textContent;if(isHere(links[k].getAttribute('href'))){a.className='mnav-on';a.setAttribute('aria-current','page');}a.addEventListener('click',close);sheet.appendChild(a);}nav.parentNode.insertBefore(sheet,nav.nextSibling);var opened=false;function set(v){opened=v;document.documentElement.classList.toggle('mnav-open',v);btn.setAttribute('aria-expanded',v?'true':'false');}btn.addEventListener('click',function(e){e.stopPropagation();set(!opened);});document.addEventListener('click',function(e){if(opened&&!sheet.contains(e.target)&&!btn.contains(e.target))close();});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});window.addEventListener('resize',function(){if(window.innerWidth>768)close();});return true;}var t=setInterval(function(){if(build())clearInterval(t);},150);setTimeout(function(){clearInterval(t);},12000);})();</script>
+
+<script src="./dot-cursor.js"></script><style>:root{--font-sans:'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;--font-serif:'EB Garamond',Garamond,Georgia,serif;--bg:#ffffff;--ink:#22201d;--body:#4b473f;--body-2:#5b564f;--muted:#8a8478;--surf:#f4f1eb;--accent:#a8544a;--navon:#a8544a;--inkrgb:34,32,29}
+html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#cdc7ba;--body-2:#b5aea1;--muted:#958f83;--surf:#211f18;--accent:#d98d7e;--dot:#ffffff;--navon:#d98d7e;--inkrgb:242,239,230}
+body{background:var(--bg);color:var(--ink)}@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}@media (max-width:640px){.sitefoot{padding-top:44px !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}}@media (max-width:768px){[data-mono] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}
+@keyframes lsfPop{0%{opacity:0;transform:scale(0)}62%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+.lsfmark circle{opacity:0}
+.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;
+  animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
+.lsfmark.is-in g circle:nth-child(1){animation-delay:0.100s}
+.lsfmark.is-in g circle:nth-child(2){animation-delay:0.172s}
+.lsfmark.is-in g circle:nth-child(3){animation-delay:0.244s}
+.lsfmark.is-in g circle:nth-child(4){animation-delay:0.316s}
+.lsfmark.is-in g circle:nth-child(5){animation-delay:0.388s}
+.lsfmark.is-in g circle:nth-child(6){animation-delay:0.460s}
+.lsfmark.is-in g circle:nth-child(7){animation-delay:0.532s}
+.lsfmark.is-in g circle:nth-child(8){animation-delay:0.604s}
+.lsfmark.is-in g circle:nth-child(9){animation-delay:0.676s}
+.lsfmark.is-in g circle:nth-child(10){animation-delay:0.748s}
+.lsfmark.is-in g circle:nth-child(11){animation-delay:0.820s}
+.lsfmark.is-in g circle:nth-child(12){animation-delay:0.892s}
+.lsfmark.is-in g circle:nth-child(13){animation-delay:0.964s}
+.lsfmark.is-in g circle:nth-child(14){animation-delay:1.036s}
+@media (prefers-reduced-motion:reduce){.lsfmark circle{opacity:1}.lsfmark.is-in circle{animation:none !important}}
+
+.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;
+  font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--body-2);white-space:nowrap}
+.pnav-clock i{font-style:normal;font-variant-numeric:tabular-nums}
+.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round}
+@media (max-width:640px){.pnav-clock{display:none}}
+</style>
+<link rel="stylesheet" href="./theme.css?v=5">
+<link rel="stylesheet" href="./pill-nav.css?v=2">
+<link rel="stylesheet" href="./lab.css?v=17">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab.js?v=17" defer></script><script data-lsfmark="1">(function(){
+function go(){var el=document.querySelector('.lsfmark');if(!el)return false;
+ if(!('IntersectionObserver' in window)){el.classList.add('is-in');return true;}
+ new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);
+ return true;}
+if(!go()){var t=setInterval(function(){if(go())clearInterval(t);},140);setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+<script data-pnavclock="1">(function(){
+function tick(){var el=document.getElementById('pnav-time');if(!el)return;
+ var d=new Date(),hh=d.getHours(),mm=d.getMinutes();
+ var ap=hh<12?'AM':'PM';hh=hh%12;if(hh===0)hh=12;
+ el.textContent=hh+':'+(mm<10?'0':'')+mm+' '+ap;}
+function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
+ setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
+<script data-lsfclock="1">(function(){if(window.__lsfClock)return;window.__lsfClock=1;
+var TZ='America/New_York';
+function tick(){var el=document.getElementById('lsf-time');if(!el)return;
+ var s;try{s=new Date().toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'});}
+ catch(e){s=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+ el.textContent=s;}
+function start(){if(!document.getElementById('lsf-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},140);
+ setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+</helmet>
+
+<div class="pnav">
+<a href="Home.dc.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="Home.dc.html#work">Work</a>
+<a href="Playground.dc.html" aria-current="page">Playground</a>
+<a href="About.dc.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+</div>
+</div>
+<div class="pnav-space" aria-hidden="true"></div>
+
+<div class="wrap" style="padding-top:88px">
+  <div class="eyebrow">Everything else</div>
+  <h1 style="margin:22px 0 0;max-width:900px;font:500 55.8px/1.08 var(--font-sans);letter-spacing:-.015em">Playground</h1>
+  <p style="margin:22px 0 0;max-width:660px;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">The work that doesn't fit in a case study: brand campaigns, marketing strategy, a children's book, research, film photographs, and things I make with my hands.</p>
+  <div class="tags" style="margin-top:26px">
+    <span class="tag">Brand &amp; Marketing</span>
+    <span class="tag">Strategy</span>
+    <span class="tag">Research</span>
+    <span class="tag">Photography</span>
+    <span class="tag">Craft</span>
+  </div>
+</div>
+
+
+<div class="labhead">
+  <div class="row">
+    <div>
+      <div class="k">Built with code + AI</div>
+      <h2>Ten small experiments</h2>
+    </div>
+    <div>
+      <p>Interface effects I wanted to understand, so I built them. Each started as a small curiosity and was developed with AI as a creative coding partner. Every one is live code rather than a recording: the grain, characters, swatches, and interactions are computed while you look at them.</p>
+      <div class="hint">Some run on their own. Others wake when you touch them.</div>
+    </div>
+  </div>
+</div>
+
+<div class="labgrid">
+
+<div class="labtile">
+  <div class="labbox h-l" id="lab-dither" data-src="assets/pg-ph-13.jpg"><canvas></canvas></div>
+  <div class="labcap"><b>Halftone dither</b><span>A reflecting pool in Marrakech &middot; move up and down to change the pitch</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-ascii" data-src="assets/pg-ph-1.jpg"><canvas></canvas></div>
+  <div class="labcap"><b>ASCII on hover</b><span>Brooklyn Flea &middot; characters resolve under the cursor</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-blur" data-cap="Dubrovnik, from a taxi windshield"><img src="assets/pg-ph-4.jpg" alt="A hillside in Dubrovnik seen through a windshield"></div>
+  <div class="labcap"><b>Progressive blur</b><span>Four masked layers, stacking upward</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-elastic" data-text="pull me apart"><div class="line"></div></div>
+  <div class="labcap"><b>Elastic type</b><span>EB Garamond, struck like a string</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-l" id="lab-gallery" data-srcs="assets/pg-ph-2.jpg,assets/pg-ph-5.jpg,assets/pg-ph-9.jpg,assets/pg-ph-11.jpg,assets/pg-ph-3.jpg,assets/pg-ph-12.jpg,assets/pg-ph-7.jpg,assets/pg-ph-10.jpg"><div class="idle">Move here</div></div>
+  <div class="labcap"><b>Cursor gallery</b><span>A travel log, dropped along the trail</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-glass">
+    <img class="bed" src="assets/pg-ph-6.jpg" alt="">
+    <div class="pill">
+      <a class="app" href="Home.dc.html#work" style="background:linear-gradient(160deg,#b76b5f,#8f4038)">W<em>Work</em></a>
+      <a class="app" href="Playground.dc.html" style="background:linear-gradient(160deg,#8fa2c0,#657899)">P<em>Playground</em></a>
+      <a class="app" href="About.dc.html" style="background:linear-gradient(160deg,#7f9c86,#4f6b58)">A<em>About</em></a>
+      <a class="app" href="mailto:lailashariff@gmail.com" style="background:linear-gradient(160deg,#d9b27a,#b08442)">@<em>Email</em></a>
+    </div>
+  </div>
+  <div class="labcap"><b>Glass pill</b><span>Backdrop blur, with dock magnification</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-stitch"><canvas></canvas><button class="again" type="button">New pattern</button></div>
+  <div class="labcap"><b>Stitch generator</b><span>Crochet rows, turning at each end</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-m" id="lab-palette" data-srcs="assets/pg-ph-12.jpg,assets/pg-ph-8.jpg,assets/pg-ph-2.jpg,assets/pg-ph-11.jpg"><img class="ph" alt="A photograph the palette is measured from"><div class="sw"></div></div>
+  <div class="labcap"><b>Palette extractor</b><span>Click for another photograph</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-marker">
+    <p>The best interfaces <mark style="--mk:#f2d9c4">disappear</mark>. What stays is <mark style="--mk:#cfe0dd">the thing</mark> you came to do.</p>
+  </div>
+  <div class="labcap"><b>Marker highlight</b><span>Drawing itself as it enters view</span></div>
+</div>
+
+<div class="labtile">
+  <div class="labbox h-s" id="lab-type">
+    <div class="spec">
+      <span class="g">Product designer creating clear, human-centered experiences.</span>
+      <span class="s">Product designer creating clear, human-centered experiences.</span>
+    </div>
+    <div class="ctl"><b>Garamond</b><input type="range" min="0" max="100" value="30" aria-label="Blend between EB Garamond and Satoshi"><b>Satoshi</b></div>
+  </div>
+  <div class="labcap"><b>Type pairing</b><span>Drag to cross the two faces</span></div>
+</div>
+
+</div>
+
+<div class="ringwrap" style="margin-top:56px">
+  <div class="ringstage" id="ring-stage">
+    <div class="ring" id="ring" style="--rot:0deg">
+      <button class="rcard" style="--a:0.000deg" data-id="glossier" data-k="01 · Brand Design" data-t="Made to Melt" aria-label="Made to Melt"><span><img src="assets/pg-gloss-10.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:20.000deg" data-id="nike" data-k="02 · Marketing Strategy" data-t="Air Force 1, in a mature market" aria-label="Air Force 1, in a mature market"><span><img src="assets/pg-nk-af1.png" alt=""></span></button>
+      <button class="rcard" style="--a:40.000deg" data-id="book" data-k="03 · Writing" data-t="The Map Inside of Me" aria-label="The Map Inside of Me"><span><img src="assets/book-cover.png" alt=""></span></button>
+      <button class="rcard" style="--a:60.000deg" data-id="graphic" data-k="04 · Graphic Design" data-t="Posters, layouts, type" aria-label="Posters, layouts, type"><span><img src="assets/pg-gd-collage1.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:80.000deg" data-id="research" data-k="05 · Research" data-t="Communication &amp; Speech Emergence Lab" aria-label="Communication &amp; Speech Emergence Lab"><span><img src="assets/pg-res-card2.png" alt=""></span></button>
+      <button class="rcard" style="--a:100.000deg" data-id="photography" data-k="06 · Photography" data-t="A travel log" aria-label="A travel log"><span><img src="assets/pg-ph-1.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:120.000deg" data-id="craft" data-k="07 · Craft" data-t="Crochet" aria-label="Crochet"><span><img src="assets/pg-craft-a.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:140.000deg" data-id="glossier" data-k="01 · Brand Design" data-t="Made to Melt" aria-label="Made to Melt"><span><img src="assets/pg-gloss-28.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:160.000deg" data-id="nike" data-k="02 · Marketing Strategy" data-t="Air Force 1, in a mature market" aria-label="Air Force 1, in a mature market"><span><img src="assets/pg-nk-mark.png" alt=""></span></button>
+      <button class="rcard" style="--a:180.000deg" data-id="graphic" data-k="04 · Graphic Design" data-t="Posters, layouts, type" aria-label="Posters, layouts, type"><span><img src="assets/pg-gd-mandala.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:200.000deg" data-id="research" data-k="05 · Research" data-t="Communication &amp; Speech Emergence Lab" aria-label="Communication &amp; Speech Emergence Lab"><span><img src="assets/pg-res-team.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:220.000deg" data-id="photography" data-k="06 · Photography" data-t="A travel log" aria-label="A travel log"><span><img src="assets/pg-ph-3.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:240.000deg" data-id="craft" data-k="07 · Craft" data-t="Crochet" aria-label="Crochet"><span><img src="assets/pg-craft-c.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:260.000deg" data-id="glossier" data-k="01 · Brand Design" data-t="Made to Melt" aria-label="Made to Melt"><span><img src="assets/pg-gloss-7.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:280.000deg" data-id="graphic" data-k="04 · Graphic Design" data-t="Posters, layouts, type" aria-label="Posters, layouts, type"><span><img src="assets/pg-gd-collage2.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:300.000deg" data-id="photography" data-k="06 · Photography" data-t="A travel log" aria-label="A travel log"><span><img src="assets/pg-ph-5.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:320.000deg" data-id="graphic" data-k="04 · Graphic Design" data-t="Posters, layouts, type" aria-label="Posters, layouts, type"><span><img src="assets/pg-gd-zebra.jpg" alt=""></span></button>
+      <button class="rcard" style="--a:340.000deg" data-id="photography" data-k="06 · Photography" data-t="A travel log" aria-label="A travel log"><span><img src="assets/pg-ph-6.jpg" alt=""></span></button>
+    </div>
+    <div class="rhub">
+      <span class="k" id="r-k">Seven projects</span>
+      <span class="t" id="r-t">Playground</span>
+      <span class="d" id="r-d">Hover a frame to see where it comes from. Click to open the project.</span>
+      <a class="go" id="r-go" href="#glossier" style="visibility:hidden">View project ↓</a>
+    </div>
+  </div>
+  <div class="rscroll">Scroll to turn</div>
+</div>
+
+<div class="sect live" id="glossier">
+  <div class="eyebrow">01 · Brand Design</div>
+  <h2>Made to Melt</h2>
+  <div class="tags">
+    <span class="tag">Campaign Concept</span>
+    <span class="tag">Art Direction</span>
+    <span class="tag">Packaging</span>
+    <span class="tag">Experiential</span>
+  </div>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">Beyond the campaign imagery, I developed the products and mockups for both brands and designed <strong style="font-weight:500">The Melt Bar</strong> — a live pop-up with a gloss try-on station and scannable QR cups that unlock a shade matched to your flavour.</p>
+  <div class="grid g2">
+    <img class="shot" src="assets/pg-gloss-10.jpg" alt="Made to Melt beauty portrait — glossed lip and mint shimmer">
+    <img class="shot" src="assets/pg-gloss-28.jpg" alt="Made to melt — gloss dripping onto a strawberry scoop, orange field">
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <img class="shot" src="assets/pg-gloss-7.jpg" alt="Made to melt — the same scoop on a soft mint field">
+    <img class="shot" src="assets/pg-gloss-6.jpg" alt="Glossier Cloud Puff packaging render">
+  </div>
+</div>
+
+<div class="sect" id="nike">
+  <div class="eyebrow">02 · Marketing Strategy</div>
+  <h2>Air Force 1, in a mature market</h2>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">For my Marketing Management class I analysed Nike's brand marketing for the Air Force 1 — how a performance basketball shoe became a cultural icon — and built a strategy for defending that position against hype fatigue and shifting Gen Z values.</p>
+  <div class="tags">
+    <span class="tag">Marketing Strategy</span>
+    <span class="tag">Brand Evolution</span>
+    <span class="tag">Cultural Analysis</span>
+  </div>
+  <div class="grid g2">
+    <img class="shot" src="assets/pg-nk-2.jpg" alt="The Challenge — Air Force 1 in a mature market">
+    <img class="shot" src="assets/pg-nk-8.jpg" alt="Strategic Recommendations — five moves to defend and extend AF1">
+  </div>
+</div>
+
+<div class="sect" id="book">
+  <div class="eyebrow">03 · Writing</div>
+  <h2>The Map Inside of Me</h2>
+  <div class="tags">
+    <span class="tag">Storytelling</span>
+    <span class="tag">Accessibility</span>
+  </div>
+  <div class="grid g2" style="align-items:center">
+    <a href="assets/the-map-inside-of-me.pdf" target="_blank" rel="noopener" style="display:block;border-radius:10px;overflow:hidden;box-shadow:0 18px 44px rgba(var(--inkrgb),.16);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s">
+      <img src="assets/book-cover.png" alt="The Map Inside of Me — front cover" style="display:block;width:100%">
+    </a>
+    <div>
+      <p style="margin:0;font:400 19px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">While designing SayPlay through my work with United Cerebral Palsy, I kept thinking about how design and storytelling could make complex ideas around cerebral palsy more approachable for children. For my Creativity in Business class, I explored that idea through a completely different medium: a children’s book. The Map Inside of Me uses storytelling and illustration to help explain the relationship between the brain and movement in a way that feels imaginative, gentle, and accessible.</p>
+      <a href="assets/the-map-inside-of-me.pdf" target="_blank" rel="noopener" style="display:inline-block;margin-top:22px;font:400 13px/1 var(--font-sans);padding:14px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none">Read the book ↗</a>
+      <p class="note">Opens the first five pages in a new tab.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sect" id="graphic">
+  <div class="eyebrow">04 · Graphic Design</div>
+  <h2>Posters, layouts, type</h2>
+  <p style="margin:0 0 26px;max-width:660px;font:400 18px/1.65 var(--font-sans);color:var(--body);text-wrap:pretty">Part of my minor in Visual Design, alongside Design and Color, Graphic Design, New Media Arts, and Introduction to AR and VR.</p>
+  <div class="grid g3">
+    <img class="shot" src="assets/pg-gd-nike1.jpg" alt="Nike AIR Collection poster with cut-paper collage and Just Do It lockup">
+    <img class="shot" src="assets/pg-gd-collage1.jpg" alt="Photo collage — astronaut, skyline, Saturn and a grapefruit planet">
+    <img class="shot" src="assets/pg-gd-mandala.jpg" alt="Hand-drawn digital mandala in neon pastels on black">
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <img class="shot" src="assets/pg-gd-collage2.jpg" alt="Photo collage — figure with mountains, florals and eyes for a head">
+    <img class="shot" src="assets/pg-gd-nike2.jpg" alt="Nike poster — sneakers on a wire, grain and repeated Just Do It">
+  </div>
+  <img class="shot" src="assets/pg-gd-zebra.jpg" alt="Zebra study — graphite drawing beside its scratchboard counterpart" style="margin-top:16px">
+  <img class="shot" src="assets/pg-gd-linework.jpg" alt="Ink linework study of a canyon at the drawing table, beside its reference photograph" style="margin-top:16px">
+</div>
+
+<div class="sect" id="research">
+  <div class="eyebrow">05 · Research</div>
+  <h2>Communication &amp; Speech Emergence Lab</h2>
+  <div class="tags">
+    <span class="tag">Qualitative Analysis</span>
+    <span class="tag">Transcript Coding</span>
+    <span class="tag">Speech Development</span>
+  </div>
+  <div class="grid g2" style="align-items:start">
+    <div style="display:flex;align-items:flex-start;justify-content:center">
+      <img src="assets/pg-res-logo.jpg" alt="CASE Lab — Communication and Speech Emergence Lab" style="display:block;width:250px;max-width:100%">
+    </div>
+    <div style="padding:30px 32px;border-radius:14px;background:var(--surf)">
+      <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font:400 18px/1.6 var(--font-sans);color:var(--body)">
+        <li>Analyzed 100+ pages of qualitative transcripts, identifying recurring communication and engagement patterns.</li>
+        <li>Synthesized findings into structured insights and applied qualitative coding to strengthen rigour in ongoing research.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <img class="shot" src="assets/pg-res-team.jpg" alt="The CASE Lab team with a Cerebral Palsy Awareness award" style="aspect-ratio:16/9;object-fit:cover">
+    <img class="shot" src="assets/pg-res-zoom.jpg" alt="A CASE Lab meeting over video" style="aspect-ratio:16/9;object-fit:cover">
+  </div>
+</div>
+
+<div class="sect" id="photography">
+  <div class="eyebrow">06 · Photography</div>
+  <h2>A travel log</h2>
+  <div class="plog" id="plog">
+    <div class="plog-stick">
+      <div class="plog-stage" id="plog-stage">
+      <figure class="pfig" data-cap="Brooklyn Flea · New York"><img src="assets/pg-ph-1.jpg" alt="Brooklyn Flea under the Manhattan Bridge archway"></figure>
+      <figure class="pfig" data-cap="Above Dubrovnik"><img src="assets/pg-ph-4.jpg" alt="Dubrovnik hillside seen through a taxi windshield"></figure>
+      <figure class="pfig" data-cap="Boulder Turnpike · Colorado"><img src="assets/pg-ph-14.jpg" alt="The Boulder Turnpike with the Flatirons in the distance"></figure>
+      <figure class="pfig" data-cap="Marrakech"><img src="assets/pg-ph-11.jpg" alt="A terrace overlooking cypress gardens in Marrakech"></figure>
+      <figure class="pfig" data-cap="The Adriatic"><img src="assets/pg-ph-6.jpg" alt="Umbrellas over a seaside terrace on the Adriatic"></figure>
+      <figure class="pfig" data-cap="Royal Gorge · Colorado"><img src="assets/pg-ph-10.jpg" alt="A canyon walkway looking down into the gorge"></figure>
+      <figure class="pfig" data-cap="West Village · New York"><img src="assets/pg-ph-2.jpg" alt="A red West Village café patio with striped awning and umbrellas"></figure>
+      <figure class="pfig" data-cap="Garden of the Gods · Colorado"><img src="assets/pg-ph-16.jpg" alt="Red rock spires at Garden of the Gods"></figure>
+      <figure class="pfig" data-cap="Marrakech"><img src="assets/pg-ph-13.jpg" alt="A reflecting pool framed by an arch in Marrakech"></figure>
+      </div>
+      <div class="plog-cap" id="plog-cap"></div>
+      <div class="plog-hint">Scroll to turn &middot; &larr; &rarr; arrow keys</div>
+    </div>
+  </div>
+</div>
+
+<div class="sect" id="craft" style="padding-bottom:96px">
+  <div class="eyebrow">07 · Off the screen</div>
+  <h2>Crochet</h2>
+  <div class="grid g3">
+    <img class="shot" src="assets/pg-craft-a.jpg" alt="Finished crochet tops laid out — teal, cream, striped and ruffled">
+    <img class="shot" src="assets/pg-craft-b.jpg" alt="Wearing the cream and raspberry crochet top">
+    <div style="overflow:hidden;border-radius:10px;aspect-ratio:9/16"><img src="assets/pg-craft-c.jpg" alt="Wearing the sage green crochet top" style="display:block;width:100%;height:100%;object-fit:cover;object-position:47% 66%;transform:scale(1.55);transform-origin:47% 66%"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:-140px;align-items:start;position:relative;z-index:2">
+    <div style="display:flex;align-items:flex-start;gap:10px;justify-content:center">
+      <svg width="42" height="28" viewBox="0 0 42 28" fill="none" aria-hidden="true" style="flex:0 0 auto">
+        <path d="M36 24 C30 26 16 22 7 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M14 7 L6.5 4 L9 12" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span style="font:400 17px/1.4 var(--font-sans);color:#6b6355;margin-top:12px">me in my pieces</span>
+      <svg width="42" height="28" viewBox="0 0 42 28" fill="none" aria-hidden="true" style="flex:0 0 auto;margin-top:6px">
+        <path d="M6 24 C12 26 26 22 35 5" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M28 7 L35.5 4 L33 12" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
+
+<div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:30px;max-width:560px">
+<svg class="lsfmark" viewBox="0 0 250 150" width="112" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;overflow:visible;color:var(--ink)"><defs><filter id="gooFootnddchtml" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootnddchtml)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootnddchtml)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+<p style="margin:18px 0 0;font:400 12.5px/1 var(--font-sans);color:var(--muted)">Currently in New York, <i id="lsf-time" style="font-style:normal;font-variant-numeric:tabular-nums">--:--</i></p>
+</div>
+</div>
+
+<div style="display:flex;gap:64px">
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
+</div>
+</div>
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="Home.dc.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="About.dc.html" style="text-decoration:none;color:var(--body-2)">About</a>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<span>Made with ♥ by Laila · 2026</span>
+<a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surf)">↑ Back to top</a>
+</div>
+
+</div>
+
+</x-dc>
+</body>
+</html>

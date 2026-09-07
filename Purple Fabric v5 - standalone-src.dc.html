@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="./assets/pf-it-2.jpg" data-resource-id="sb1" />
+<meta name="ext-resource-dependency" content="./assets/pf-it-1.jpg" data-resource-id="sb2" />
+<meta name="ext-resource-dependency" content="./assets/pf-it-3.jpg" data-resource-id="sb3" />
+<meta name="ext-resource-dependency" content="./assets/pf-it-4.jpg" data-resource-id="sb4" />
+<meta name="ext-resource-dependency" content="./assets/pf-it-5.jpg" data-resource-id="sb5" />
+<template id="__bundler_thumbnail" data-bg-color="#ffffff">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#ffffff"/>
+<g transform="translate(360,240)" fill="none" stroke="#4b1d7a" stroke-width="26" stroke-linecap="round">
+<path d="M0 80 H480"/><path d="M0 160 H480"/><path d="M0 240 H480"/>
+</g>
+<g transform="translate(360,240)" fill="none" stroke="#a8544a" stroke-width="26" stroke-linecap="round">
+<path d="M80 0 V320"/><path d="M240 0 V320"/><path d="M400 0 V320"/>
+</g>
+</svg>
+</template>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./responsive.css">
+<style>
+body{margin:0;background:var(--bg);color:var(--ink)}
+html{scroll-behavior:smooth}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+::selection{background:rgba(168,84,74,.16)}
+@keyframes pfUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.pfrail{position:fixed;left:34px;top:50%;transform:translateY(-50%);z-index:12;display:flex;flex-direction:column;gap:2px}
+.pfrail a{display:block;padding:7px 0;text-decoration:none;font:400 13px/1.35 var(--font-sans);color:var(--muted);transition:color .28s}
+@media (max-width:1340px){.pfrail{display:none}}
+.wrap{max-width:1240px;margin:0 auto;padding:0 64px}
+.narrow{max-width:1240px;margin:0 auto;padding:0 64px}
+@media (max-width:900px){.wrap,.narrow{padding:0 24px}}
+.jargon{font:400 clamp(28px,4.4vw,56px)/1.16 var(--font-sans);letter-spacing:-.02em;color:var(--ghost)}
+.stair{border-top:1px solid var(--line)}
+@media (max-width:900px){
+.split{grid-template-columns:minmax(0,1fr) !important;gap:22px !important}
+.mig{grid-template-columns:minmax(0,1fr) !important;gap:26px !important}
+.migsvg{display:none !important}
+.pair{grid-template-columns:minmax(0,1fr) !important;gap:34px !important}
+.stairrow{margin-left:0 !important}
+.thumbs{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+h1{font-size:clamp(30px,8vw,46px) !important}
+}
+@media (max-width:620px){.thumbs{grid-template-columns:minmax(0,1fr) !important}}
+</style>
+<script src="./dot-cursor.js"></script><style>:root{--font-sans:'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;--font-serif:'EB Garamond',Garamond,Georgia,serif;--bg:#ffffff;--ink:#22201d;--body:#3f3b35;--body-2:#5b564f;--muted:#6f6a62;--surf:#faf9f8;--show:#f5f4f2;--line:rgba(34,32,29,.09);--line-2:rgba(34,32,29,.2);--ghost:rgba(34,32,29,.44);--accent:#a8544a;--inkrgb:34,32,29;--hover:#f5f4f2}
+html[data-theme="dark"]{--bg:#121110;--ink:#f2f0ec;--body:#cfcac2;--body-2:#a8a29a;--muted:#8e8880;--surf:#1a1917;--show:#1c1b19;--line:rgba(242,240,236,.11);--line-2:rgba(242,240,236,.26);--ghost:rgba(242,240,236,.5);--accent:#d98b7f;--dot:#ffffff;--inkrgb:242,240,236;--hover:#232220}
+@media (max-width:768px){.mnav-burger{display:flex !important}.mnav-hide{display:flex !important;gap:14px !important}.mnav-hide > a{display:none !important}[data-mnav="1"]{justify-content:flex-start !important;gap:14px !important}[data-mnav="1"] .mnav-hide{order:2}[data-mnav="1"] .mnav-burger{order:3;margin-left:auto !important}}.mnav-burger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}.mnav-burger span{display:block;position:relative;width:20px;height:1.5px;background:currentColor;transition:background .2s ease}.mnav-burger span::before,.mnav-burger span::after{content:"";position:absolute;left:0;width:20px;height:1.5px;background:currentColor;transition:transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-burger span::before{top:-6px}.mnav-burger span::after{top:6px}.mnav-open .mnav-burger span{background:transparent}.mnav-open .mnav-burger span::before{transform:translateY(6px) rotate(45deg)}.mnav-open .mnav-burger span::after{transform:translateY(-6px) rotate(-45deg)}.mnav-sheet{background:color-mix(in srgb,var(--bg) 92%,transparent);position:fixed;left:0;right:0;top:0;z-index:19;display:flex;flex-direction:column;padding:88px 22px 26px;-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);box-shadow:0 18px 40px rgba(var(--inkrgb),.08);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .3s ease,transform .38s cubic-bezier(.2,.7,.2,1),visibility .38s}.mnav-open .mnav-sheet{opacity:1;visibility:visible;transform:none}.mnav-sheet a.mnav-on{color:var(--navon,var(--accent))}.mnav-sheet a{color:var(--ink);display:block;padding:15px 2px;text-decoration:none;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid rgba(var(--inkrgb),.09);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .34s cubic-bezier(.2,.7,.2,1)}.mnav-open .mnav-sheet a{opacity:1;transform:none}</style>
+<link rel="stylesheet" href="./theme.css">
+<link rel="stylesheet" href="./pill-nav.css">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script>
+</helmet>
+
+<div style="background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased;overflow-x:hidden">
+
+<div class="pnav">
+<a href="Home.dc.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="Home.dc.html#work" aria-current="page">Work</a>
+<a href="Playground.dc.html">Playground</a>
+<a href="About.dc.html">About</a>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+</div>
+</div>
+<div class="pnav-space" aria-hidden="true"></div>
+
+<nav class="pfrail" aria-label="Sections">
+<sc-for list="{{ toc }}" as="t" hint-placeholder-count="7">
+<a href="{{ t.href }}" data-toc="{{ t.id }}">{{ t.label }}</a>
+</sc-for>
+</nav>
+
+<div class="wrap" style="padding-top:64px;animation:pfUp .9s cubic-bezier(.2,.7,.2,1) both">
+<div style="display:flex;align-items:center;gap:13px">
+<img src="assets/inline/purple-fabric-1.png" alt="" style="display:block;width:26px;height:26px;border-radius:6px">
+<h1 style="margin:0;font:500 15px/1 var(--font-sans);letter-spacing:.01em">Purple Fabric</h1>
+<span style="font:400 15px/1 var(--font-sans);color:var(--muted)">2026</span>
+</div>
+<p style="margin:26px 0 0;max-width:34ch;font:400 clamp(20px,2.4vw,28px)/1.38 var(--font-sans);letter-spacing:-.014em;color:var(--ink);text-wrap:pretty">A homepage redesign for an enterprise AI platform sold to financial institutions.</p>
+</div>
+
+<div style="margin-top:44px;padding:0 0 0">
+<video src="assets/pf-proto-1.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="display:block;width:100%;height:auto;background:var(--show)"></video>
+</div>
+
+<div class="wrap" style="padding-top:22px">
+<div style="display:flex;flex-wrap:wrap;gap:8px 42px;padding-bottom:20px;border-bottom:1px solid var(--line)">
+<sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+<div style="font:400 13px/1.5 var(--font-sans);color:var(--muted)"><span style="color:var(--ink)">{{ m.k }}</span> {{ m.v }}</div>
+</sc-for>
+</div>
+</div>
+
+<div id="overview" data-sec="overview" class="wrap" style="scroll-margin-top:110px;padding-top:140px">
+<p style="margin:0;max-width:44ch;font:400 clamp(17px,1.8vw,19.5px)/1.72 var(--font-sans);color:var(--body);text-wrap:pretty">Purple Fabric is Intellect Design Arena's enterprise AI platform. Its homepage led with internal vocabulary: Enterprise OS, Knowledge Garden, Digital Experts, Business Impact AI, so a first-time visitor had to learn the company's language before learning what the product does.</p>
+<p style="margin:28px 0 0;max-width:44ch;font:400 clamp(17px,1.8vw,19.5px)/1.72 var(--font-sans);color:var(--body);text-wrap:pretty">I came to the product as a newcomer. Even after a certification course, it only began making sense once I'd been walked through the concepts over several days.</p>
+</div>
+
+<div class="wrap" style="padding-top:clamp(120px,17vw,220px);padding-bottom:clamp(120px,17vw,220px)">
+<p style="margin:0;max-width:17ch;font:400 clamp(46px,8.6vw,108px)/1.04 var(--font-serif);letter-spacing:-.018em;color:var(--ink);text-wrap:pretty">A first-time visitor gets seconds, not days.</p>
+</div>
+
+<div id="problem" data-sec="problem" class="wrap" style="scroll-margin-top:110px">
+<div class="split" style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:72px;align-items:start">
+<div>
+<h2 style="margin:0;max-width:26ch;font:500 clamp(26px,3.1vw,37px)/1.16 var(--font-sans);letter-spacing:-.016em;text-wrap:pretty">The page explained its own components before its value</h2>
+<div class="jargon" style="margin-top:44px">
+<sc-for list="{{ jargon }}" as="j" hint-placeholder-count="6">
+<div>{{ j }}</div>
+</sc-for>
+</div>
+<p style="margin:30px 0 0;max-width:40ch;font:400 15px/1.66 var(--font-sans);color:var(--muted);text-wrap:pretty">Six proprietary terms, none of them defined above the fold.</p>
+</div>
+<div style="padding-top:8px">
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">The audit</div>
+<div style="margin-top:20px;border-top:1px solid var(--line)">
+<sc-for list="{{ audit }}" as="a" hint-placeholder-count="4">
+<div style="padding:20px 0;border-bottom:1px solid var(--line)">
+<div style="font:500 14.5px/1.4 var(--font-sans);color:var(--ink)">{{ a.k }}</div>
+<p style="margin:7px 0 0;font:400 14.5px/1.62 var(--font-sans);color:var(--body);text-wrap:pretty">{{ a.v }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+
+<div id="benchmark" data-sec="benchmark" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(110px,14vw,180px)">
+<p style="margin:0;max-width:24ch;font:500 clamp(30px,4.2vw,54px)/1.1 var(--font-sans);letter-spacing:-.022em;text-wrap:pretty">Every platform I benchmarked led with outcomes. Ours led with vocabulary.</p>
+
+<div style="margin-top:56px;border-top:1px solid var(--ink)">
+<sc-for list="{{ matrix }}" as="r" hint-placeholder-count="8">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:24px;padding:15px 0;border-bottom:1px solid var(--line)">
+<div style="font:400 15.5px/1.4 var(--font-sans);color:var(--muted)">{{ r.name }}</div>
+<div style="font:400 15.5px/1.4 var(--font-sans);color:var(--body)">{{ r.leads }}</div>
+</div>
+</sc-for>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:24px;padding:19px 0;border-bottom:1px solid var(--ink);background:var(--show)">
+<div style="font:500 15.5px/1.4 var(--font-sans);color:var(--ink);padding-left:14px">Purple Fabric</div>
+<div style="font:500 15.5px/1.4 var(--font-sans);color:var(--ink)">Enterprise OS · Knowledge Garden · Digital Experts</div>
+</div>
+</div>
+<p style="margin:14px 0 0;font:400 13.5px/1.6 var(--font-sans);color:var(--muted)">What each homepage leads with, above the fold.</p>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px;margin-top:72px">
+<sc-for list="{{ findings }}" as="f" hint-placeholder-count="3">
+<div>
+<div style="font:400 15px/1 var(--font-serif);color:var(--muted)">{{ f.n }}</div>
+<p style="margin:14px 0 0;font:400 16px/1.6 var(--font-sans);color:var(--ink);text-wrap:pretty">{{ f.t }}</p>
+</div>
+</sc-for>
+</div>
+<p style="margin:22px 0 0;font:400 13.5px/1.6 var(--font-sans);color:var(--muted)">The three findings that changed the design.</p>
+</div>
+
+<div class="wrap" style="padding-top:clamp(110px,15vw,200px)">
+<div style="padding:clamp(54px,7vw,86px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<p style="margin:0;max-width:26ch;font:400 clamp(28px,4.2vw,58px)/1.18 var(--font-serif);letter-spacing:-.012em;text-wrap:pretty">How do we make a first-time visitor understand what Purple Fabric does, who it's for, and why to trust it, without teaching them our vocabulary first?</p>
+</div>
+</div>
+
+<div id="journey" data-sec="journey" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(100px,13vw,160px)">
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)">The order a decision gets made in</div>
+<div style="margin-top:40px">
+<sc-for list="{{ spine }}" as="s" hint-placeholder-count="6">
+<div class="stairrow stair" style="margin-left:{{ s.indent }};padding:22px 0 20px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap">
+<span style="font:400 clamp(20px,2.5vw,29px)/1.24 var(--font-sans);letter-spacing:-.014em;color:var(--ink)">{{ s.q }}</span>
+<span style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ s.sec }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="ia" data-sec="ia" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(110px,14vw,180px)">
+<h2 style="margin:0;max-width:22ch;font:500 clamp(26px,3.1vw,37px)/1.16 var(--font-sans);letter-spacing:-.016em;text-wrap:pretty">Nothing was cut. Everything moved.</h2>
+<p style="margin:18px 0 0;max-width:46ch;font:400 16px/1.68 var(--font-sans);color:var(--body);text-wrap:pretty">The same nine sections, resequenced so the page names its audience and states its function before it explains its architecture.</p>
+
+<div class="mig" style="display:grid;grid-template-columns:minmax(0,1fr) 132px minmax(0,1fr);gap:0;margin-top:60px;align-items:start">
+<div>
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:14px">Current</div>
+<sc-for list="{{ iaBefore }}" as="i" hint-placeholder-count="9">
+<div style="box-sizing:border-box;height:56px;display:flex;align-items:center;border-top:1px solid var(--line);font:400 14px/1.35 var(--font-sans);color:var(--muted);padding-right:14px">{{ i }}</div>
+</sc-for>
+</div>
+<div class="migsvg" style="padding-top:24px">
+<svg viewBox="0 0 132 504" preserveAspectRatio="none" style="display:block;width:100%;height:504px;overflow:visible" aria-hidden="true">
+<g fill="none" stroke="rgba(var(--inkrgb),.28)" stroke-width="1">
+<path d="M0,84 C66,84 66,28 132,28"></path>
+<path d="M0,140 C66,140 66,196 132,196"></path>
+<path d="M0,196 C66,196 66,252 132,252"></path>
+<path d="M0,252 C66,252 66,140 132,140"></path>
+<path d="M0,308 C66,308 66,308 132,308"></path>
+<path d="M0,364 C66,364 66,420 132,420"></path>
+<path d="M0,420 C66,420 66,364 132,364"></path>
+<path d="M0,476 C66,476 66,476 132,476"></path>
+</g>
+</svg>
+</div>
+<div>
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);padding-bottom:14px">Proposed</div>
+<sc-for list="{{ iaAfter }}" as="i" hint-placeholder-count="9">
+<div style="box-sizing:border-box;height:56px;display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);font:400 14px/1.35 var(--font-sans);color:var(--ink);padding-left:14px">
+<span>{{ i.t }}</span>
+<sc-if value="{{ i.isNew }}" hint-placeholder-val="{{ false }}">
+<span style="flex:0 0 auto;padding:3px 7px;border-radius:3px;background:var(--ink);color:var(--bg);font:500 9px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase">New</span>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+<p style="margin:22px 0 0;max-width:52ch;font:400 13.5px/1.65 var(--font-sans);color:var(--muted);text-wrap:pretty">The architecture sections fall. Audience and impact rise. The navigation, separately, went from a deep custom structure to the five-item pattern all seven competitors use.</p>
+</div>
+
+<div id="principles" data-sec="principles" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(110px,14vw,180px)">
+<div style="max-width:640px">
+<sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:74px minmax(0,1fr);gap:8px;padding:30px 0;border-bottom:1px solid var(--line)">
+<div style="font:400 clamp(40px,5vw,62px)/.86 var(--font-serif);color:var(--ghost)">{{ p.n }}</div>
+<div style="padding-top:6px">
+<h3 style="margin:0;font:500 clamp(19px,2.1vw,23px)/1.28 var(--font-sans);letter-spacing:-.01em;color:var(--ink);text-wrap:pretty">{{ p.t }}</h3>
+<p style="margin:9px 0 0;max-width:44ch;font:400 15.5px/1.6 var(--font-sans);color:var(--body);text-wrap:pretty">{{ p.b }}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="design" data-sec="design" style="scroll-margin-top:110px;padding-top:clamp(120px,16vw,200px)">
+
+<div class="wrap">
+<p style="margin:0;max-width:20ch;font:500 clamp(30px,4.6vw,60px)/1.06 var(--font-sans);letter-spacing:-.024em;text-wrap:pretty">The homepage, rebuilt.</p>
+</div>
+
+<div style="margin-top:56px">
+<img src="assets/b/10eebd1b-1ba7-471a-841a-cf25aed21491.jpg" alt="Redesigned hero: Enterprise AI for Financial Institutions, with a connected-systems diagram, three impact metrics and client logos" loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+</div>
+<div class="wrap" style="padding-top:18px">
+<p style="margin:0;max-width:52ch;font:400 15px/1.6 var(--font-sans);color:var(--muted);text-wrap:pretty">The headline names its audience in five words. Below it, the systems Purple Fabric connects to, then three outcome metrics and client logos: <span style="color:var(--ink)">enterprise knowledge, grounded in trusted data.</span></p>
+</div>
+
+<div class="wrap" style="padding-top:clamp(90px,11vw,150px)">
+<div class="split" style="display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:52px;align-items:center">
+<div>
+<h3 style="margin:0;max-width:20ch;font:500 clamp(22px,2.5vw,29px)/1.2 var(--font-sans);letter-spacing:-.014em;text-wrap:pretty">One platform, eight disciplines</h3>
+<p style="margin:14px 0 0;max-width:34ch;font:400 15.5px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">The single-platform argument the whole category makes, stated plainly, carried by one isometric visual instead of a paragraph. <span style="color:var(--ink)">No fragmented AI stack.</span></p>
+</div>
+<img src="assets/b/a124ed6c-2301-4ba3-8a2d-5abe7687d5f4.jpg" alt="One Platform. Eight Enterprise AI Disciplines." loading="lazy" style="display:block;width:100%;height:auto;border-radius:2px;background:var(--show)">
+</div>
+</div>
+
+<div style="margin-top:clamp(90px,11vw,150px)">
+<img src="assets/b/4b1c0284-781d-4f85-8315-3e96ee2f56d3.jpg" alt="Eight expandable discipline cards, numbered, each with an isometric icon" loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+</div>
+<div class="wrap" style="padding-top:26px">
+<p style="margin:0;max-width:52ch;font:400 15px/1.6 var(--font-sans);color:var(--muted);text-wrap:pretty">The text-heavy tech stack section became eight cards that open on demand. A visitor sees the shape of the platform in one pass and reads only what's relevant: <span style="color:var(--ink)">the depth is there without the wall of copy.</span></p>
+</div>
+
+<div class="wrap" style="padding-top:clamp(90px,11vw,150px)">
+<h3 style="margin:0;max-width:24ch;font:500 clamp(22px,2.5vw,29px)/1.2 var(--font-sans);letter-spacing:-.014em;text-wrap:pretty">Governance shown, not claimed</h3>
+<p style="margin:14px 0 0;max-width:44ch;font:400 15.5px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">Six lifecycle stages, an agent blueprint, and a checkpoint that makes compliance concrete: roles defined, failure modes documented, data boundaries approved. <span style="color:var(--ink)">Built-in from day one.</span></p>
+</div>
+<div style="margin-top:32px;padding-left:clamp(24px,10vw,140px)">
+<img src="assets/b/fa7147a7-8869-4e3c-994e-7f33312eaeac.jpg" alt="Six lifecycle stages beside an agent blueprint with a governance checkpoint" loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+</div>
+
+<div class="wrap" style="padding-top:clamp(90px,11vw,150px)">
+<div class="pair" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:end">
+<div>
+<img src="assets/b/61cff4f2-e907-4e6d-8d4f-9f0f287b27f0.png" alt="PF Credit, PF Wealth and PF Trade solution cards" loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+<p style="margin:16px 0 0;max-width:34ch;font:400 15px/1.62 var(--font-sans);color:var(--body);text-wrap:pretty">An entry point by financial function, for visitors who arrive knowing their problem. <span style="color:var(--ink)">Designed for financial institutions.</span></p>
+</div>
+<div>
+<img src="assets/b/28be4993-72ab-4561-8bd3-e6f977d8ca39.jpg" alt="Awards and recognition cards" loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+<p style="margin:16px 0 0;max-width:34ch;font:400 15px/1.62 var(--font-sans);color:var(--body);text-wrap:pretty">Third-party validation before the final ask, so the claim comes from outside the company.</p>
+</div>
+</div>
+</div>
+
+<div class="wrap" style="padding-top:clamp(90px,11vw,150px)">
+<div style="max-width:660px">
+<img src="assets/b/8549b1c0-f1e9-442a-b547-52b7129a09b4.jpg" alt="Final call to action: One operating model. Infinite enterprise possibility." loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+<img src="assets/b/5f4452e2-b454-44ea-b077-e9ca8a363e39.jpg" alt="Restructured footer with AI Platform, AI Solutions, Partners, Resources and Explore columns" loading="lazy" style="display:block;width:100%;height:auto;margin-top:14px;background:var(--show)">
+<p style="margin:16px 0 0;font:400 15px/1.62 var(--font-sans);color:var(--muted);text-wrap:pretty">One unmistakable ask instead of a lone button in the corner, and a footer that holds the depth a visitor might want next.</p>
+</div>
+</div>
+
+<div style="margin-top:clamp(100px,13vw,170px)">
+<video src="assets/pf-proto-2.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="display:block;width:100%;height:auto;background:var(--show)"></video>
+</div>
+<div class="wrap" style="padding-top:18px">
+<p style="margin:0;font:400 15px/1.6 var(--font-sans);color:var(--muted)">Opening a discipline, and the lifecycle and governance sections that follow it.</p>
+</div>
+</div>
+
+<div id="search" data-sec="search" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(110px,14vw,180px)">
+<div class="split" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:52px;align-items:end">
+<div>
+<h2 style="margin:0;max-width:22ch;font:500 clamp(24px,2.8vw,33px)/1.18 var(--font-sans);letter-spacing:-.016em;text-wrap:pretty">Five directions that failed for opposite reasons</h2>
+<p style="margin:16px 0 0;max-width:42ch;font:400 15.5px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">The fabric metaphor pulled toward literal weave imagery: beautiful, and silent about what the platform does. A functional card grid pulled the other way: easy to scan, and anonymous.</p>
+</div>
+<div></div>
+</div>
+
+<div class="thumbs" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:44px">
+<sc-for list="{{ sandbox }}" as="s" hint-placeholder-count="5">
+<figure style="margin:0">
+<div style="aspect-ratio:4/3;overflow:hidden;background:var(--show)">
+<img src="{{ s.img }}" alt="{{ s.alt }}" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.35) opacity(.72)">
+</div>
+<figcaption style="margin-top:10px;font:400 12.5px/1.5 var(--font-sans);color:var(--muted);text-wrap:pretty">{{ s.cap }}</figcaption>
+</figure>
+</sc-for>
+</div>
+
+<div style="margin-top:56px">
+<img src="assets/pf-it-final.jpg" alt="Eight disciplines. One governed fabric." loading="lazy" style="display:block;width:100%;height:auto;background:var(--show)">
+<p style="margin:16px 0 0;max-width:52ch;font:400 15px/1.62 var(--font-sans);color:var(--body);text-wrap:pretty">What shipped keeps the weave in the language rather than the layout: a grid that scans in one pass, with the metaphor carried by illustration.</p>
+</div>
+</div>
+
+<div id="outcome" data-sec="outcome" class="wrap" style="scroll-margin-top:110px;padding-top:clamp(110px,15vw,190px)">
+<div style="max-width:700px;border-top:1px solid var(--line)">
+<sc-for list="{{ outcomes }}" as="o" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:132px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line)">
+<div style="font:500 10px/1.5 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">{{ o.cat }}</div>
+<div style="font:400 15.5px/1.62 var(--font-sans);color:var(--ink);text-wrap:pretty">{{ o.v }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div class="wrap" style="padding-top:clamp(110px,15vw,190px)">
+<p style="margin:0;max-width:22ch;font:400 clamp(34px,5.4vw,68px)/1.1 var(--font-serif);letter-spacing:-.014em;text-wrap:pretty">Being new to the product was the research.</p>
+<p style="margin:32px 0 0;max-width:44ch;font:400 16.5px/1.7 var(--font-sans);color:var(--body);text-wrap:pretty">My own confusion mapped almost exactly onto the first-time visitor's. Documenting it early, before I learned the internal vocabulary, was the most valuable input I had.</p>
+<div class="split" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:52px;margin-top:64px;padding-top:34px;border-top:1px solid var(--line)">
+<sc-for list="{{ reflections }}" as="r" hint-placeholder-count="2">
+<div>
+<h4 style="margin:0;max-width:30ch;font:500 17px/1.34 var(--font-sans);letter-spacing:-.006em;color:var(--ink);text-wrap:pretty">{{ r.t }}</h4>
+<p style="margin:9px 0 0;max-width:40ch;font:400 15px/1.66 var(--font-sans);color:var(--body);text-wrap:pretty">{{ r.b }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div class="wrap" style="padding-top:clamp(90px,12vw,150px)">
+<p style="margin:0;max-width:64ch;font:400 15px/1.7 var(--font-sans);color:var(--muted);text-wrap:pretty"><span style="color:var(--ink)">Next.</span> Industry sub-pages for lending, payments, risk and insurance · an interactive platform walkthrough · customer stories with named outcomes · usability testing with banking teams.</p>
+</div>
+
+<div style="margin-top:clamp(100px,13vw,160px);border-top:1px solid var(--line)">
+<div class="wrap" style="padding-top:52px;padding-bottom:52px;display:flex;align-items:baseline;justify-content:space-between;gap:32px;flex-wrap:wrap">
+<a href="SayPlay%20v2.dc.html" style="font:500 clamp(24px,3vw,35px)/1.1 var(--font-sans);letter-spacing:-.014em;text-decoration:none;color:var(--ink);transition:color .25s" style-hover="color:var(--accent)">SayPlay →</a>
+<a href="Home.dc.html#work" style="font:500 10.5px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--muted)" style-hover="color:var(--accent)">All work</a>
+</div>
+<div class="wrap" style="padding-bottom:44px;font:400 12px/1 var(--font-sans);color:var(--muted)">Laila Shariff · 2026</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    let queued = false;
+    this._spy = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const secs = Array.from(document.querySelectorAll('[data-sec]'));
+        const links = Array.from(document.querySelectorAll('[data-toc]'));
+        if (!secs.length || !links.length) return;
+        const line = window.innerHeight * 0.34;
+        let active = secs[0].getAttribute('data-sec');
+        secs.forEach(s => { if (s.getBoundingClientRect().top <= line) active = s.getAttribute('data-sec'); });
+        links.forEach(a => {
+          a.style.color = a.getAttribute('data-toc') === active ? 'var(--ink)' : 'var(--muted)';
+        });
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spyTimer = setInterval(this._spy, 400);
+    this._spy();
+
+    // React sets `muted` as a property only; the autoplay gate reads the ATTRIBUTE.
+    this._vids = () => {
+      document.querySelectorAll('video').forEach(v => {
+        v.setAttribute('muted', '');
+        v.muted = true;
+        if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      });
+    };
+    this._vidTimer = setInterval(this._vids, 900);
+    this._vids();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._spy);
+    window.removeEventListener('resize', this._spy);
+    clearInterval(this._spyTimer);
+    clearInterval(this._vidTimer);
+  }
+
+  renderVals() {
+    return {
+      meta: [
+        { k: 'Role', v: 'UX & Product Designer' },
+        { k: 'Company', v: 'Intellect Design Arena' },
+        { k: 'Focus', v: 'IA, messaging, visual design' },
+        { k: 'Tools', v: 'Figma, Miro' }
+      ],
+
+      toc: [
+        { id: 'overview', href: '#overview', label: 'Overview' },
+        { id: 'problem', href: '#problem', label: 'The problem' },
+        { id: 'benchmark', href: '#benchmark', label: 'The benchmark' },
+        { id: 'journey', href: '#journey', label: 'The journey' },
+        { id: 'ia', href: '#ia', label: 'What moved' },
+        { id: 'principles', href: '#principles', label: 'Principles' },
+        { id: 'design', href: '#design', label: 'The design' },
+        { id: 'search', href: '#search', label: 'The search' },
+        { id: 'outcome', href: '#outcome', label: 'Outcome' }
+      ],
+
+      jargon: ['Enterprise OS', 'Knowledge Garden', 'Digital Experts', 'Agentic AI', 'Business Impact AI', 'Solution suites'],
+
+      audit: [
+        { k: 'Hero', v: 'The messaging could describe any enterprise AI platform. Nothing said this was built for financial services.' },
+        { k: 'Navigation', v: 'Far more complex than any site I studied. Standard patterns cost a visitor nothing to learn.' },
+        { k: 'Four tech stacks', v: 'Very text heavy. As a Build \u2192 Scale \u2192 Govern progression it becomes graspable in 15 to 30 seconds.' },
+        { k: 'Who we serve', v: 'Absent. There was no problem section either, so nothing told a visitor where Purple Fabric comes in.' }
+      ],
+
+      matrix: [
+        { name: 'Kore.ai', leads: 'Accelerating time to value' },
+        { name: 'ServiceNow', leads: 'Business transformation, one platform' },
+        { name: 'Glean', leads: 'What employees accomplish' },
+        { name: 'Domino', leads: 'Work that matters, with ROI attached' },
+        { name: 'C3.ai', leads: 'Three anchor KPIs for decision-makers' },
+        { name: 'Dataiku', leads: 'Running enterprise AI as one platform' },
+        { name: 'Palantir', leads: 'Operational outcomes' }
+      ],
+
+      findings: [
+        { n: '01', t: 'Seven of seven use a five-item navigation. Ours was deep and custom.' },
+        { n: '02', t: 'Governance is given a section, not a sentence. It is a reason to buy.' },
+        { n: '03', t: 'Outcomes appear before architecture, every time. Numbers above the fold.' }
+      ],
+
+      spine: [
+        { q: 'Is this for me?', sec: 'Hero', indent: '0%' },
+        { q: 'Can it solve my problem?', sec: 'Problem', indent: '7%' },
+        { q: 'How does it solve it?', sec: 'Platform', indent: '14%' },
+        { q: 'Can I trust it?', sec: 'Governance', indent: '21%' },
+        { q: 'Does it work?', sec: 'Results', indent: '28%' },
+        { q: "What's next?", sec: 'Demo', indent: '35%' }
+      ],
+
+      iaBefore: [
+        '1. Navigation + Talk to us CTA',
+        '2. AI Agents. True Business Impact.',
+        '3. What is Purple Fabric',
+        '4. Four tech stacks',
+        '5. What is Business Impact AI',
+        '6. Open model',
+        '7. What sets us apart',
+        '8. Partners',
+        '9. Footer'
+      ],
+      iaAfter: [
+        { t: '1. Enterprise AI for financial institutions' },
+        { t: '2. See it in action', isNew: true },
+        { t: '3. Impact numbers' },
+        { t: '4. Platform' },
+        { t: '5. Tech stacks' },
+        { t: '6. Agents' },
+        { t: '7. Testimonials' },
+        { t: '8. Awards and recognition' },
+        { t: '9. Footer' }
+      ],
+
+      principles: [
+        { n: '1', t: 'Lead with financial services positioning', b: 'Without it, Purple Fabric reads as another generic enterprise AI platform.' },
+        { n: '2', t: 'Simplify the navigation', b: 'A standard pattern costs the visitor nothing to learn. A custom one costs attention.' },
+        { n: '3', t: 'Introduce a problem\u2013solution section', b: 'People buy solutions to problems, not platforms.' },
+        { n: '4', t: 'Make the business outcomes visual', b: 'The numbers already existed: 40% faster documenting, 60% less manual work, 3\u00d7 faster deployment. They were stated, not shown.' },
+        { n: '5', t: 'Show capability through interaction', b: 'A static screenshot asks for trust. Something a visitor can open earns it.' }
+      ],
+
+      sandbox: [
+        { img: (window.__resources && window.__resources.sb1) || 'assets/pf-it-2.jpg', alt: 'Braided purple strands beside the One Platform headline', cap: 'Literal woven strands. Brand present, information absent.' },
+        { img: (window.__resources && window.__resources.sb2) || 'assets/pf-it-1.jpg', alt: 'Woven lattice with eight discipline nodes around the edge', cap: 'A lattice with disciplines orbiting it. Structure, but hard to scan.' },
+        { img: (window.__resources && window.__resources.sb3) || 'assets/pf-it-3.jpg', alt: 'Eight discipline cards in a grid with a detail panel below', cap: 'A functional card grid. Scannable, anonymous.' },
+        { img: (window.__resources && window.__resources.sb4) || 'assets/pf-it-4.jpg', alt: 'The same grid with the second discipline selected', cap: 'The selected state held detail well, and felt like nobody.' },
+        { img: (window.__resources && window.__resources.sb5) || 'assets/pf-it-5.jpg', alt: 'Eight tiles on the diagonals of a woven diamond', cap: 'The weave as architecture. Elegant, and a puzzle to read.' }
+      ],
+
+      outcomes: [
+        { cat: 'Delivered', v: 'A new information architecture, a copy deck, and a full homepage design across six sections: hero, operating model, disciplines, governance, solutions and close.' },
+        { cat: 'Comprehension', v: 'The page now names its audience in the first five words and states the platform\u2019s function above the fold, where it previously named neither.' },
+        { cat: 'Measurement', v: 'Live metrics to be captured post-launch against the four questions the page has to answer.' }
+      ],
+
+      reflections: [
+        { t: 'Information architecture is a messaging problem.', b: 'Reordering sections only worked once I had written the question each one answers. The structure followed the story.' },
+        { t: 'In enterprise, trust is a design surface.', b: 'Governance and audit trails are not fine print for this audience. They are a reason to buy, and they deserve their own section.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

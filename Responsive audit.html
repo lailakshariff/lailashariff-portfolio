@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Responsive audit</title>
+<style>
+  html,body{margin:0;background:#e9e7e2;font:400 12px/1.5 'Space Mono',ui-monospace,monospace;color:#4b4740}
+  .bar{padding:12px 16px;background:#fff;border-bottom:1px solid rgba(34,32,29,.14);position:sticky;top:0;z-index:2}
+  #log{padding:12px 16px;white-space:pre-wrap}
+  #stage{display:block;border:0;margin:0 auto;background:#fff}
+</style>
+</head>
+<head></head>
+<body>
+<div class="bar"><span id="status">idle</span></div>
+<iframe id="stage" width="390" height="760" title="stage"></iframe>
+<div id="log"></div>
+<script>
+window.PAGES = [
+  ['Home', 'Home.dc.html'],
+  ['About', 'About.dc.html'],
+  ['Playground', 'Playground.dc.html'],
+  ['Purple Fabric', 'Purple Fabric v2.dc.html'],
+  ['SayPlay', 'SayPlay v2.dc.html'],
+  ['NutriHealth', 'NutriHealth v2.dc.html'],
+  ['Spotify', 'Spotify Monthly Recap.dc.html']
+];
+window.SIZES = [320, 390, 430, 768, 1024, 1440];
+
+window.audit = async function () {
+  var stage = document.getElementById('stage');
+  var status = document.getElementById('status');
+  var findings = [];
+  for (var p = 0; p < PAGES.length; p++) {
+    for (var s = 0; s < SIZES.length; s++) {
+      var w = SIZES[s];
+      stage.width = w;
+      status.textContent = PAGES[p][0] + ' @ ' + w;
+      await new Promise(function (res) {
+        stage.onload = function () { res(); };
+        stage.src = encodeURI(PAGES[p][1]);
+      });
+      /* DC pages build asynchronously — wait for real content, not just load */
+      for (var i = 0; i < 48; i++) {
+        var dd = stage.contentDocument;
+        if (dd && dd.body && dd.body.querySelectorAll('*').length > 120) break;
+        await new Promise(function (r) { setTimeout(r, 250); });
+      }
+      await new Promise(function (r) { setTimeout(r, 900); });
+      try {
+        var d = stage.contentDocument, win = stage.contentWindow;
+        var iw = win.innerWidth, sw = d.documentElement.scrollWidth;
+        if (sw > iw + 2) {
+          var bad = [];
+          d.body.querySelectorAll('*').forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.width > 1 && r.right > iw + 2) {
+              var cls = (el.className && typeof el.className === 'string') ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.') : '';
+              bad.push({ sel: el.tagName.toLowerCase() + cls, right: Math.round(r.right), w: Math.round(r.width) });
+            }
+          });
+          bad.sort(function (a, b) { return b.right - a.right; });
+          var seen = {}, top = [];
+          bad.forEach(function (b) { if (!seen[b.sel]) { seen[b.sel] = 1; top.push(b); } });
+          findings.push({ page: PAGES[p][0], w: w, over: sw - iw, top: top.slice(0, 3) });
+        }
+        if (d.body.querySelectorAll('*').length < 120) findings.push({ page: PAGES[p][0], w: w, note: 'did not render' });
+      } catch (e) { findings.push({ page: PAGES[p][0], w: w, err: String(e).slice(0, 80) }); }
+    }
+  }
+  status.textContent = 'done — ' + findings.length + ' problem view(s)';
+  document.getElementById('log').textContent = JSON.stringify(findings, null, 1);
+  window.__findings = findings;
+  return findings;
+};
+</script>
+</body>
+</html>

@@ -420,3 +420,167 @@
     setTimeout(function () { clearInterval(t); }, 12000);
   }
 })();
+
+/* Travel log. A scroll-driven pile: the section is tall, its inner frame is
+   sticky, and scroll position maps to a continuous index. Each photograph's
+   distance from that index (u) places it on a diagonal path — u = 0 is centred
+   and full size, u > 0 is still arriving from the lower right, u < 0 has left
+   toward the upper left. Every photograph eases toward the target index at its
+   own rate, so the pile trails the scroll and is dragged back when you reverse.
+
+   The host re-renders this page and replaces nodes, so nothing is cached on
+   the DOM: a watchdog re-adopts whatever .pfig nodes are current. */
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var STEP = 300;                                   // scroll px per photograph
+  // Shorter travel on small screens: the same nine photographs shouldn't cost
+  // a phone visitor two and a half screens more scrolling than a desktop one.
+  function stepPx() { var w = window.innerWidth; return w < 560 ? 210 : w < 900 ? 255 : 300; }
+  var figs = [], strip = null, stage = null, capEl = null, raf = 0, until = 0, active = -1;
+
+  function adopt() {
+    var el = document.getElementById('plog');
+    if (!el) return;
+    strip = el; stage = document.getElementById('plog-stage'); capEl = document.getElementById('plog-cap');
+    if (reduce) { el.classList.add('plain'); return; }
+    var nodes = [].slice.call(el.querySelectorAll('.pfig'));
+    if (!nodes.length) return;
+    if (figs.length === nodes.length && figs[0].el === nodes[0] && nodes[0].isConnected) return;
+    // Seed every photograph at the CURRENT progress, so a re-render mid-pile
+    // resumes where the visitor is instead of snapping back to the first one.
+    var top0 = el.getBoundingClientRect().top,
+        p0 = Math.max(0, Math.min(nodes.length - 1, -top0 / STEP));
+    figs = nodes.map(function (n, i) {
+      return {
+        el: n, cur: p0,
+        k: 0.085 + (i % 3) * 0.022,
+        tilt: (i % 3 === 1 ? -1 : 1) * (1.1 + (i % 4) * 0.35)
+      };
+    });
+    measure();
+    wake(1200);
+  }
+
+  function measure() {
+    if (!strip || reduce) return;
+    STEP = stepPx();
+    strip.style.height = (window.innerHeight + (figs.length - 1) * STEP) + 'px';
+    // Publish the real photo height so the caption and hint sit just under it
+    // at every breakpoint. The section is display:none when this first runs, so
+    // offsetHeight is 0 — fall back to the intrinsic ratio against the CSS caps,
+    // which is correct even while hidden.
+    var img = figs.length && figs[0].el.querySelector('img');
+    if (!img) return;
+    var h = img.offsetHeight;
+    if (!h && img.naturalWidth) {
+      // Resolve the caps ourselves: a computed max-width can be a percentage
+      // or 'none', which parseFloat turns into nonsense.
+      var vw = strip.clientWidth || window.innerWidth, vh = window.innerHeight,
+          maxW = vw < 560 ? vw * 0.88
+               : vw <= 820 ? Math.min(vw * 0.84, 420)
+               : vw <= 1024 ? Math.min(vw * 0.78, 560)
+               : Math.min(vw * 0.66, 700),
+          maxH = vw < 560 ? Math.min(vh * 0.38, 300)
+               : vw <= 820 ? Math.min(vh * 0.42, 340)
+               : vw <= 1024 ? Math.min(vh * 0.46, 420)
+               : Math.min(vh * 0.5, 460);
+      h = Math.min(maxH, maxW * img.naturalHeight / img.naturalWidth);
+    }
+    if (h) strip.style.setProperty('--pht', Math.round(h) + 'px');
+    if (!img.complete) img.addEventListener('load', measure, { once: true });
+  }
+
+  function frame() {
+    if (!strip || !figs.length) { raf = 0; return; }
+    var vw = strip.clientWidth || window.innerWidth,
+        vh = strip.clientHeight || window.innerHeight,
+        top = strip.getBoundingClientRect().top,
+        n = figs.length - 1,
+        p = Math.max(0, Math.min(n, -top / STEP));
+
+    // Arrivals swing in from low right on a long, steep path; departures only
+    // tuck a short way to the left and fade. Distance is compressed (^0.7) so
+    // far photographs nest behind the centre instead of marching off in a line.
+    var narrow = vw < 560,
+        inX = Math.min(vw * (narrow ? 0.44 : 0.30), 380),
+        inY = Math.min(vh * (narrow ? 0.36 : 0.42), 400),
+        outX = Math.min(vw * (narrow ? 0.24 : 0.15), 180),
+        outY = Math.min(vh * 0.06, 54),
+        busy = false, near = 1e9, idx = 0;
+
+    for (var i = 0; i < figs.length; i++) {
+      var f = figs[i];
+      f.cur += (p - f.cur) * f.k;
+      if (Math.abs(p - f.cur) > 0.0015) busy = true;
+      var u = i - f.cur, au = Math.abs(u);
+      if (au > 2.6) { if (f.el.style.opacity !== '0') f.el.style.opacity = '0'; continue; }
+
+      var d = Math.pow(au, 0.7) * (u < 0 ? -1 : 1),
+          sx = u > 0 ? inX : outX,
+          sy = u > 0 ? inY : outY,
+          s = u > 0 ? Math.max(0.24, 1 - au * 0.5) : Math.max(0.2, 1 - au * 0.6),
+          o = au <= 0.9 ? 1 : Math.max(0, 1 - (au - 0.9) / (u > 0 ? 1.3 : 0.85)),
+          rot = d * f.tilt;
+
+      f.el.style.opacity = o.toFixed(3);
+      f.el.style.zIndex = String(200 - Math.round(au * 40));
+      f.el.style.transform = 'translate3d(calc(-50% + ' + (d * sx).toFixed(1) + 'px), calc(-50% + ' +
+        (d * sy).toFixed(1) + 'px), 0) scale(' + s.toFixed(4) + ') rotate(' + rot.toFixed(2) + 'deg)';
+
+      if (au < near) { near = au; idx = i; }
+    }
+
+    if (capEl) {
+      if (idx !== active) {
+        active = idx;
+        capEl.textContent = figs[idx].el.getAttribute('data-cap') || '';
+      }
+      capEl.style.opacity = near < 0.42 ? '1' : '0';
+    }
+    raf = (busy || Date.now() < until) ? requestAnimationFrame(frame) : 0;
+  }
+
+  function wake(ms) {
+    until = Date.now() + (ms || 700);
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  // The Playground shows one section at a time, so the pile is usually
+  // display:none at init; a size change is the signal it became visible.
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function () { measure(); wake(900); });
+    setTimeout(function () { if (stage) ro.observe(stage); }, 300);
+  }
+  window.addEventListener('scroll', function () { wake(700); }, { passive: true });
+  window.addEventListener('resize', function () { measure(); wake(700); }, { passive: true });
+  // rAF is paused in a hidden tab; repaint on return rather than sit on a stale frame.
+  document.addEventListener('visibilitychange', function () { wake(900); });
+  // Arrow keys step to the NEXT photograph rather than adding a raw 300px, so
+  // repeated presses stay aligned. Active whenever the pinned frame covers the
+  // middle of the viewport; capture phase so nothing else swallows the key.
+  // The committed target survives the smooth scroll, so rapid taps queue up
+  // instead of each re-reading a position that is still animating.
+  var keyIdx = null, keyAt = 0;
+  function stepTo(dir) {
+    var docTop = strip.getBoundingClientRect().top + window.scrollY, now = Date.now();
+    if (keyIdx === null || now - keyAt > 700) keyIdx = Math.round((window.scrollY - docTop) / STEP);
+    var next = Math.max(0, Math.min(figs.length - 1, keyIdx + dir));
+    if (next === keyIdx && (next === 0 || next === figs.length - 1)) return false;  // let the page scroll
+    keyIdx = next; keyAt = now;
+    window.scrollTo({ top: docTop + keyIdx * STEP, behavior: 'smooth' });
+    return true;
+  }
+  document.addEventListener('keydown', function (e) {
+    if (!strip || reduce || !figs.length) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!dir) return;
+    var t = e.target;
+    if (t && t.closest && t.closest('input,textarea,select,[contenteditable]')) return;
+    var b = strip.getBoundingClientRect(), mid = window.innerHeight / 2;
+    if (b.top > mid || b.bottom < mid) return;
+    if (stepTo(dir)) e.preventDefault();
+  }, true);
+  adopt();
+  setInterval(adopt, 600);
+})();

@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<style>/* Minimal cross-document view transition experiment. Nothing else added:
+   one existing .pnav per page, no placeholder, observer, timer, prerender,
+   entrance animation or JS. */
+@view-transition{navigation:auto}
+.pnav{view-transition-name:site-nav}</style>
+</head>
+<body>
+</div>
+<x-dc>
+<helmet><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./theme.css?v=5">
+<link rel="stylesheet" href="./case-theme.css?v=5">
+<script src="./theme.js"></script>
+<link rel="stylesheet" href="./pill-nav.css">
+<style>:root{--bg:#ffffff;--ink:#1a1a1a;--body:#555555;--body-2:#6e6a64;--muted:#a8a49c;--faint:#c9c9c9;--line:#ececec;--line-2:#e6e4e0;--surface:#f6f6f7;--card:#ffffff;--tint-a:100%;--inkrgb:26,26,26;--dot:#1a1a1a;--accent:#3d7d7a;--brand:#3d7d7a;--brand-deep:#2f6b68;--mark:#cfe6e2;--tint-bg:#f4f8f7;--tint-line:#d9e6e4;--hero-grad:radial-gradient(ellipse 118% 250% at 50% 50%, #ffffff 0%, #f7fbfa 34%, #e8f3f1 62%, #d3e7e4 86%, #bcd9d5 100%)}
+html[data-theme="dark"]{--bg:#17160f;--ink:#f2efe6;--body:#c2bcae;--body-2:#aaa39a;--muted:#8b8479;--faint:#4b463d;--line:rgba(255,255,255,.11);--line-2:rgba(255,255,255,.15);--surface:#211f17;--card:#1d1b14;--tint-a:22%;--inkrgb:242,239,230;--dot:#f2efe6;--accent:#79c3bd;--brand:#79c3bd;--brand-deep:#8fd0ca;--mark:rgba(121,195,189,.28);--tint-bg:rgba(121,195,189,.07);--tint-line:rgba(121,195,189,.20);--hero-grad:radial-gradient(ellipse 118% 250% at 50% 50%, #f7f5ef 0%, #eef4f2 34%, #e2efec 62%, #d3e7e4 86%, #bcd9d5 100%)}
+body{margin:0;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--body)}
+::selection{background:rgba(61,125,122,.16)}
+.mono{font-family:var(--font-sans);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.splabel{font-family:var(--font-sans);font-size:15px;font-weight:600;letter-spacing:0.06em;color:var(--faint);margin-bottom:14px}
+.sprail{position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow-y:auto;padding:24px 0}
+.sprail a{position:relative;transition:color .28s,font-weight .28s}
+.spscroll{scrollbar-width:none}
+.spscroll::-webkit-scrollbar{display:none}
+.spnext{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:14px;padding:22px 24px 24px;border:1px solid var(--line-2);border-radius:16px;background:var(--card);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1),border-color .4s ease,background .4s ease}
+.spnhead{display:flex;align-items:center;gap:12px}
+.spnhead .spnmascot{margin-left:auto}
+.spnext::before{content:"";position:absolute;right:-14%;bottom:-38%;width:62%;aspect-ratio:1;border-radius:50%;background:var(--tint);opacity:0;transform:scale(.7);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.spnext:hover{transform:translateY(-5px);border-color:var(--ring);background:var(--tint);box-shadow:0 22px 40px -24px rgba(26,26,26,.42)}
+.spnext:hover::before{opacity:.55;transform:scale(1)}
+.spnext > *{position:relative;z-index:1}
+.spnstage{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:6px 12px;border-radius:99px;border:1px solid var(--ring);font:600 10px/1 var(--font-sans);letter-spacing:.07em;text-transform:uppercase;color:var(--dot)}
+.spnstage i{display:block;width:6px;height:6px;border-radius:50%;background:var(--dot)}
+.spnmascot{position:relative;flex:0 0 auto;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;background:var(--tint);border:1px solid var(--ring);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.spnext:hover .spnmascot{transform:translateY(-7px) rotate(-6deg) scale(1.07)}
+.spnmascot [role=img]{display:block;width:74%;height:74%}
+.spnum{font:600 11.5px/1 var(--font-sans);letter-spacing:.07em;color:var(--faint);transition:color .4s ease}
+.spnext:hover .spnum{color:var(--dot)}
+@media (prefers-reduced-motion:reduce){.spnext,.spnmascot,.spnext::before{transition:none}.spnext:hover{transform:none}}
+@media (max-width:900px){.spnmascot{width:50px;height:50px}}
+.splift{transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s cubic-bezier(.2,.7,.3,1)}
+.splift:hover{transform:translateY(-3px);box-shadow:0 12px 28px -14px rgba(61,125,122,.34)}
+@media (max-width:1100px){.spmain{padding:48px 40px 100px 40px !important}}
+@media (max-width:1150px){
+.sprail{display:none !important}
+.sprailcol{display:none !important}
+.g4auto{grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) !important}
+.g4{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:26px !important}
+.g3{grid-template-columns:minmax(0,1fr) !important}
+.g2{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
+.grow{grid-template-columns:minmax(0,1fr) !important;gap:8px !important}
+}
+@media (max-width:620px){.takerow{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width:1080px){.prinrow{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media (max-width:700px){.prinrow{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+.spshot{position:relative;display:inline-block;line-height:0;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease}
+figure:hover .spshot{transform:scale(1.028);box-shadow:0 22px 44px -26px rgba(26,26,26,.5)}
+#sp6-final-track figure{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+#sp6-final-track figure:hover{transform:translateY(-4px)}
+#sp6-final-track{scrollbar-width:none}
+#sp6-final-track::-webkit-scrollbar{display:none}
+.spcur{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:3;visibility:hidden}
+.spcur0,.spcur1,.spcur2,.spcur3,.spcur4{visibility:visible}
+.spcur i{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--ink);border:2px solid var(--bg);box-shadow:0 3px 9px rgba(34,32,29,.42);box-sizing:border-box}
+.spcur b{position:absolute;left:-17px;top:-17px;width:34px;height:34px;border-radius:50%;border:2px solid var(--brand-deep);opacity:0;box-sizing:border-box}
+.spcur0{animation:spCur0 9s cubic-bezier(.55,.06,.3,.98) infinite}
+.spcur1{animation:spCur1 9s cubic-bezier(.55,.06,.3,.98) infinite}
+.spcur2{animation:spCur2 9s cubic-bezier(.55,.06,.3,.98) infinite}
+.spcur3{animation:spCur3 9s cubic-bezier(.55,.06,.3,.98) infinite}
+.spcur4{animation:spCur4 9s cubic-bezier(.55,.06,.3,.98) infinite}
+.spcur0 b,.spcur4 b{animation:spTap0 9s linear infinite}
+.spcur1 b{animation:spTap1 9s linear infinite}
+.spcur2 b{animation:spTap2 9s linear infinite}
+.spcur3 b{animation:spTap3 9s linear infinite}
+@keyframes spCur0{0%{left:34%;top:22%}10%,20%{left:34%;top:22%}30%,40%{left:14%;top:44%}50%,60%{left:44%;top:68%}70%,80%{left:72%;top:84%}92%,100%{left:34%;top:22%}}
+@keyframes spCur1{0%,14%{left:28%;top:32%}24%,38%{left:28%;top:48%}48%,62%{left:78%;top:44%}72%,86%{left:78%;top:86%}96%,100%{left:28%;top:32%}}
+@keyframes spCur2{0%,16%{left:38%;top:56%}26%,44%{left:60%;top:56%}54%,72%{left:88%;top:88%}82%,100%{left:38%;top:56%}}
+@keyframes spCur3{0%,15%{left:42%;top:38%}25%,42%{left:88%;top:52%}52%,68%{left:88%;top:70%}78%,100%{left:42%;top:38%}}
+@keyframes spCur4{0%,20%{left:52%;top:62%}30%,40%{left:8%;top:34%}50%,60%{left:74%;top:46%}70%,80%{left:33%;top:22%}92%,100%{left:52%;top:62%}}
+@keyframes spTap0{0%,12%{opacity:0;scale:.5}14%{opacity:.85;scale:.6}20%{opacity:0;scale:1.5}32%{opacity:0;scale:.5}34%{opacity:.85;scale:.6}40%{opacity:0;scale:1.5}52%{opacity:0;scale:.5}54%{opacity:.85;scale:.6}60%{opacity:0;scale:1.5}72%{opacity:0;scale:.5}74%{opacity:.85;scale:.6}80%{opacity:0;scale:1.5}100%{opacity:0}}
+@keyframes spTap1{0%,16%{opacity:0;scale:.5}18%{opacity:.85;scale:.6}24%{opacity:0;scale:1.5}40%{opacity:0;scale:.5}42%{opacity:.85;scale:.6}48%{opacity:0;scale:1.5}64%{opacity:0;scale:.5}66%{opacity:.85;scale:.6}72%{opacity:0;scale:1.5}88%{opacity:0;scale:.5}90%{opacity:.85;scale:.6}96%{opacity:0;scale:1.5}100%{opacity:0}}
+@keyframes spTap2{0%,18%{opacity:0;scale:.5}20%{opacity:.85;scale:.6}26%{opacity:0;scale:1.5}46%{opacity:0;scale:.5}48%{opacity:.85;scale:.6}54%{opacity:0;scale:1.5}74%{opacity:0;scale:.5}76%{opacity:.85;scale:.6}82%{opacity:0;scale:1.5}100%{opacity:0}}
+@keyframes spTap3{0%,17%{opacity:0;scale:.5}19%{opacity:.85;scale:.6}25%{opacity:0;scale:1.5}44%{opacity:0;scale:.5}46%{opacity:.85;scale:.6}52%{opacity:0;scale:1.5}70%{opacity:0;scale:.5}72%{opacity:.85;scale:.6}78%{opacity:0;scale:1.5}100%{opacity:0}}
+.sptick{position:absolute;display:grid;place-items:center;width:7.5%;aspect-ratio:1;border-radius:50%;background:var(--brand-deep);color:#fff;font:600 12px/1 var(--font-sans);opacity:0;scale:.4;pointer-events:none;z-index:2;box-shadow:0 4px 12px rgba(42,102,96,.5)}
+.sptick1{left:38%;top:26%;animation:spTick1 9s linear infinite}
+.sptick2{left:38%;top:42%;animation:spTick2 9s linear infinite}
+@keyframes spTick1{0%,17%{opacity:0;scale:.4}20%,96%{opacity:1;scale:1}100%{opacity:0;scale:.4}}
+@keyframes spTick2{0%,41%{opacity:0;scale:.4}44%,96%{opacity:1;scale:1}100%{opacity:0;scale:.4}}
+.spsel{position:absolute;left:26.5%;top:32%;width:23%;height:46%;border-radius:4%;border:3px solid #59C0B2;background:rgba(89,192,178,.16);opacity:0;pointer-events:none;z-index:2;animation:spSel 9s linear infinite}
+@keyframes spSel{0%,19%{opacity:0}22%,94%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.spcur,.sptick,.spsel{display:none}.spshot{transition:none}}
+@media (hover:none){.procbody{opacity:1 !important}.prochint{display:none !important}}
+@media (max-width:560px){.procrow{grid-template-columns:repeat(3,minmax(0,1fr)) !important;margin-left:10px !important;max-width:none !important;gap:0 !important}
+.prochint{display:none !important}
+.procrow > div > div:first-child{margin-left:-10px !important;padding:5px !important;max-width:none !important;max-height:none !important}
+.procrow > div > div:first-child .mono{font-size:9px !important;letter-spacing:.03em !important;margin-bottom:2px !important}
+.procbody{opacity:1 !important;min-height:0 !important;padding:14px 3px 0 3px !important}
+.procbody > div{gap:5px !important}
+.procbody > div > div{font-size:11.5px !important;line-height:1.35 !important}}
+@media (max-width:760px){
+h1{font-size:32px !important}
+h2{font-size:28px !important}
+}
+@media (max-width:620px){.takerow{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width:1080px){.prinrow{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media (max-width:700px){.prinrow{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (max-width:640px){.spmain{padding:40px 24px 80px 24px !important}.g4{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width:560px){.sphero-shot{height:88% !important;max-width:94% !important}.sphero-logo{width:46px !important;height:46px !important;top:26px !important}.spucp{height:46px !important;top:26px !important}}
+
+@media (max-width:600px){
+h1{font-size:25px !important;line-height:1.2 !important}
+h2{font-size:22px !important;line-height:1.3 !important}
+[style*="--font-serif"]{font-size:23px !important;line-height:1.32 !important}
+}
+@media (max-width:400px){
+h1{font-size:23px !important}
+h2{font-size:20px !important}
+[style*="--font-serif"]{font-size:21px !important}
+}
+
+.metarow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media (max-width:900px){.metarow{gap:18px}}
+@media (max-width:600px){.metarow{gap:12px}
+.metarow .mono{font-size:9px !important;letter-spacing:.05em !important;margin-bottom:7px !important}
+.metarow > div > div:last-child{font-size:11.5px !important;line-height:1.35 !important}}
+@media (max-width:600px){.metarow{margin-bottom:26px !important}
+.metarow + div[style*="border-top"]{margin-bottom:26px !important}}
+@media (max-width:400px){.metarow{gap:9px}
+.metarow .mono{font-size:8px !important}
+.metarow > div > div:last-child{font-size:10.5px !important}}
+
+@media (max-width:900px){.scoperow{gap:18px !important}}
+@media (max-width:600px){.scoperow{gap:10px !important}
+.scoperow > div > div:first-child{font-size:17px !important;letter-spacing:-0.02em !important}
+.scoperow > div > div:last-child{font-size:10.5px !important;line-height:1.35 !important;margin-top:5px !important}}
+@media (max-width:400px){.scoperow{gap:8px !important}
+.scoperow > div > div:first-child{font-size:15px !important}
+.scoperow > div > div:last-child{font-size:9.5px !important}}
+
+@media (max-width:900px){.avarow{gap:16px !important}}
+@media (max-width:600px){.avarow{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important;margin-top:28px !important}
+.avarow > div{border-radius:14px !important}}
+
+@media (max-width:600px){
+[style*="margin-top:96px"]{margin-top:52px !important}
+[style*="margin-top:104px"]{margin-top:56px !important}
+[style*="margin-top:120px"]{margin-top:58px !important}
+[style*="margin-top:72px"]{margin-top:42px !important}
+[style*="margin-bottom:-56px"]{margin-bottom:-30px !important}
+}
+
+@media (min-width:601px) and (max-width:1000px){
+[style*="margin-top:96px"]{margin-top:70px !important}
+[style*="margin-top:104px"]{margin-top:74px !important}
+[style*="margin-top:120px"]{margin-top:80px !important}
+}
+@media (max-width:600px){
+[style*="margin-top:56px"]{margin-top:36px !important}
+[style*="margin-top:44px"]{margin-top:30px !important}
+[style*="margin-top:48px"]{margin-top:32px !important}
+[style*="margin-top:40px"]{margin-top:28px !important}
+[style*="margin-bottom:48px"]{margin-bottom:30px !important}
+[style*="margin-bottom:44px"]{margin-bottom:28px !important}
+}
+
+.sitefoot{margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)}
+@media (max-width:820px){.sitefoot > div:last-child{display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;flex-wrap:nowrap !important;gap:12px}.sitefoot > div:last-child a{flex:0 0 auto;white-space:nowrap}}
+@media (max-width:900px){.sitefoot{padding-left:40px !important;padding-right:40px !important}}
+@media (max-width:640px){.sitefoot{padding:44px 24px 0 !important;margin-top:36px !important}.sitefoot > div:first-child{gap:26px !important}.sitefoot h2{font-size:28px !important}.sitefoot p{margin-top:10px !important;font-size:16px !important}.sitefoot a{min-height:0 !important;padding:5px 0 !important}.sitefoot [style*="flex-direction:column"]{gap:0 !important}.sitefoot [style*="gap:64px"]{gap:52px !important}.sitefoot > div:last-child{padding:24px 0 22px !important;margin-top:24px !important;gap:12px}.sitefoot > div:last-child span{font-size:10px !important;letter-spacing:.06em !important}.sitefoot > div:last-child a{flex:0 0 auto;font-size:10px !important;letter-spacing:.06em !important;padding:8px 13px !important;white-space:nowrap}.sitefoot svg[role="img"]{width:64px !important}}
+@media (max-width:768px){.sitefoot [data-mono] > a{display:inline-flex !important;align-items:center !important;min-height:34px !important;padding:0 !important}}
+
+@keyframes lsfPop{0%{opacity:0;transform:scale(0)}62%{opacity:1;transform:scale(1.14)}100%{opacity:1;transform:scale(1)}}
+.lsfmark circle{opacity:0}
+.lsfmark.is-in circle{transform-box:fill-box;transform-origin:50% 50%;
+  animation:lsfPop .62s cubic-bezier(.2,.8,.25,1) both}
+.lsfmark.is-in g circle:nth-child(1){animation-delay:0.100s}
+.lsfmark.is-in g circle:nth-child(2){animation-delay:0.172s}
+.lsfmark.is-in g circle:nth-child(3){animation-delay:0.244s}
+.lsfmark.is-in g circle:nth-child(4){animation-delay:0.316s}
+.lsfmark.is-in g circle:nth-child(5){animation-delay:0.388s}
+.lsfmark.is-in g circle:nth-child(6){animation-delay:0.460s}
+.lsfmark.is-in g circle:nth-child(7){animation-delay:0.532s}
+.lsfmark.is-in g circle:nth-child(8){animation-delay:0.604s}
+.lsfmark.is-in g circle:nth-child(9){animation-delay:0.676s}
+.lsfmark.is-in g circle:nth-child(10){animation-delay:0.748s}
+.lsfmark.is-in g circle:nth-child(11){animation-delay:0.820s}
+.lsfmark.is-in g circle:nth-child(12){animation-delay:0.892s}
+.lsfmark.is-in g circle:nth-child(13){animation-delay:0.964s}
+.lsfmark.is-in g circle:nth-child(14){animation-delay:1.036s}
+@media (prefers-reduced-motion:reduce){.lsfmark circle{opacity:1}.lsfmark.is-in circle{animation:none !important}}
+
+.pnav-clock{display:inline-flex;align-items:center;gap:6px;padding:0 4px 0 0;
+  font:400 12px/1 var(--font-sans);letter-spacing:.02em;color:var(--body-2);white-space:nowrap}
+.pnav-clock i{font-style:normal;font-variant-numeric:tabular-nums}
+.pnav-clock svg{display:block;width:12.5px;height:12.5px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round}
+@media (max-width:640px){.pnav-clock{display:none}}
+</style>
+<script src="./pill-nav.js"></script>
+<script src="./dot-cursor.js"></script>
+<script data-lsfmark="1">(function(){
+function go(){var el=document.querySelector('.lsfmark');if(!el)return false;
+ if(!('IntersectionObserver' in window)){el.classList.add('is-in');return true;}
+ new IntersectionObserver(function(es,o){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){es[i].target.classList.add('is-in');o.unobserve(es[i].target);}}},{threshold:.45}).observe(el);
+ return true;}
+if(!go()){var t=setInterval(function(){if(go())clearInterval(t);},140);setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+<script data-pnavclock="1">(function(){
+function tick(){var el=document.getElementById('pnav-time');if(!el)return;
+ var d=new Date(),hh=d.getHours(),mm=d.getMinutes();
+ var ap=hh<12?'AM':'PM';hh=hh%12;if(hh===0)hh=12;
+ el.textContent=hh+':'+(mm<10?'0':'')+mm+' '+ap;}
+function start(){if(!document.getElementById('pnav-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},120);
+ setTimeout(function(){clearInterval(t);},12000);}
+})();</script>
+<script data-lsfclock="1">(function(){if(window.__lsfClock)return;window.__lsfClock=1;
+var TZ='America/New_York';
+function tick(){var el=document.getElementById('lsf-time');if(!el)return;
+ var s;try{s=new Date().toLocaleTimeString('en-US',{timeZone:TZ,hour:'numeric',minute:'2-digit'});}
+ catch(e){s=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+ el.textContent=s;}
+function start(){if(!document.getElementById('lsf-time'))return false;tick();setInterval(tick,15000);return true;}
+if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},140);
+ setTimeout(function(){clearInterval(t);},14000);}
+})();</script>
+</helmet>
+
+<div style="font-family:var(--font-sans); color:var(--ink); background:var(--bg); min-height:100vh; overflow-x:hidden;">
+
+<div class="pnav">
+<a href="index-vt.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="index-vt.html#work" aria-current="page">Work</a>
+<a href="playground-vt.html">Playground</a>
+<a href="about-vt.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+</div>
+</div>
+<div class="pnav-space" aria-hidden="true"></div>
+
+<div style="box-sizing:border-box; position:relative; width:100%; height:clamp(290px,38vw,460px); background:var(--hero-grad); overflow:hidden;">
+<img class="sphero-logo" src="assets/inline/sayplay-1.png" alt="SayPlay logo" style="position:absolute; top:38px; right:clamp(24px,4vw,64px); width:62px; height:62px; border-radius:14px;">
+<img class="spucp" src="assets/logos/ucp.png" alt="United Cerebral Palsy" style="position:absolute; top:38px; left:clamp(24px,4vw,64px); height:62px; width:auto;">
+<img class="sphero-shot" src="assets/sp-scr-learning.png" alt="SayPlay Learning screen" style="position:absolute; left:50%; transform:translateX(-50%); bottom:-4%; height:96%; width:auto; max-width:88%; object-fit:contain; object-position:top center; border-radius:16px 16px 0 0; box-shadow:0 36px 76px -24px rgba(20,52,50,.44); background:#fff;">
+</div>
+
+<div style="display:flex;">
+
+<div class="sprailcol" style="width:200px; flex-shrink:0; padding-left:48px;">
+<div class="sprail">
+<div style="font:500 10px/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:auto 0 18px">Contents</div>
+<div style="display:flex;flex-direction:column;margin-bottom:auto">
+<sc-for list="{{ toc }}" as="t" hint-placeholder-count="16">
+<a href="{{ t.href }}" data-toc="{{ t.id }}" style="display:block;padding:8px 0;text-decoration:none;font:400 13.5px/1.4 var(--font-sans);color:var(--muted);transition:color .28s">{{ t.label }}</a>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="flex:1; max-width:1400px; min-width:0;">
+<div class="spmain" style="padding:48px 80px 100px 80px;">
+
+<div id="overview" data-sec="overview" data-screen-label="Overview" style="scroll-margin-top:110px;">
+<div style="display:flex; align-items:center; gap:14px; margin-bottom:28px;">
+<img src="assets/inline/sayplay-1.png" alt="SayPlay logo" style="display:block; width:40px; height:40px; border-radius:9px;">
+<div class="mono">Case study &middot; 2025</div>
+</div>
+<h1 style="font-size:40px; font-weight:500; margin:0 0 52px 0; color:var(--ink); line-height:1.2; max-width:34ch;">A digital AAC experience that helps children with cerebral palsy communicate through play</h1>
+
+<div class="metarow" style="margin-bottom:48px;">
+<sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+<div>
+<div class="mono" style="margin-bottom:12px;">{{ m.k }}</div>
+<div style="font-size:16px; color:var(--ink); line-height:1.4;">{{ m.v }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="border-top:1px solid var(--line); margin-bottom:48px;"></div>
+
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 48px 0; max-width:40ch;">Designing communication around the way children actually play, feel, and connect</h2>
+
+<sc-if value="{{ showAacNote }}" hint-placeholder-val="{{ true }}">
+<div style="margin-bottom:44px; padding:20px 22px; background:var(--tint-bg); border:1px solid var(--tint-line); border-radius:14px; max-width:760px;">
+<div style="font-size:15px; color:var(--body); line-height:1.6;"><b style="font-weight:600; color:var(--brand-deep); background:linear-gradient(transparent 60%, var(--mark) 60%);">AAC</b>, Augmentative and Alternative Communication, supports people who cannot rely on speech alone to communicate.</div>
+</div>
+</sc-if>
+
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px;">
+<div>
+<div class="mono" style="margin-bottom:16px;">Overview</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6;">SayPlay is an AAC experience designed for young children with cerebral palsy. Over eight weeks working with <b style="color:var(--ink);">UCP</b>, I explored how existing communication tools could better account for cognitive load, motor accessibility, emotional expression, and social interaction.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; margin-top:20px;">Those insights shaped a platform that makes communication feel less like completing a clinical task and more like something a child can use naturally throughout their day.</div>
+</div>
+
+<div>
+<div class="mono" style="margin-bottom:16px;">What I did</div>
+<ul style="list-style:none; margin:0; padding:0; display:grid; gap:14px;">
+<sc-for list="{{ didList }}" as="d" hint-placeholder-count="4">
+<li style="display:flex; gap:12px; font-size:16px; color:var(--body); line-height:1.6;"><span style="flex:0 0 auto; color:var(--brand);">&bull;</span><span>{{ d }}</span></li>
+</sc-for>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="impact" data-sec="impact" data-screen-label="My impact" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">My impact</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 44px 0; max-width:44ch;">From giving children more vocabulary to reducing the effort it takes to use it.</h2>
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px;">
+<sc-for list="{{ impact }}" as="i" hint-placeholder-count="2">
+<div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.3;">{{ i.t }}</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; margin-top:12px;">{{ i.b }}</div>
+</div>
+</sc-for>
+</div>
+
+<div class="scoperow" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:32px; margin-top:40px;">
+<sc-for list="{{ scope }}" as="s" hint-placeholder-count="3">
+<div>
+<div style="font-size:30px; font-weight:500; letter-spacing:-0.025em; color:var(--ink); line-height:1.1; white-space:nowrap;">{{ s.n }}</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.5; margin-top:8px;">{{ s.l }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="process" data-sec="process" data-screen-label="Design process" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Design process</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 14px 0; max-width:44ch;">Research, design, evaluate.</h2>
+<div class="prochint" style="display:flex; align-items:center; gap:8px; margin-bottom:40px;">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11.5V6a1.8 1.8 0 013.6 0v5"></path><path d="M12.6 11V9.2a1.8 1.8 0 013.6 0V11"></path><path d="M16.2 11.4v-1a1.8 1.8 0 013.6 0V15a6 6 0 01-6 6h-1.6a5 5 0 01-3.8-1.8L5 14.6a1.9 1.9 0 012.9-2.4L9 13.4"></path></svg>
+<span style="font-size:14px; color:var(--muted); line-height:1.5;">Hover a stage to see what it involved</span>
+</div>
+<div class="procrow" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:0; max-width:840px; margin-left:22px;">
+<sc-for list="{{ process }}" as="p" hint-placeholder-count="3">
+<div onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" onFocus="{{ p.enter }}" onBlur="{{ p.leave }}" tabindex="0" style="outline:none;">
+<div style="position:relative; margin-left:-22px; aspect-ratio:1; max-width:280px; max-height:280px; border-radius:50%; border:1px solid var(--brand); background:var(--tint-bg); display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; box-shadow:0 10px 26px -18px rgba(20,52,50,.4);">
+<div>
+<div class="mono" style="color:var(--muted); margin-bottom:6px;">{{ p.n }}</div>
+<div class="mono" style="color:var(--brand-deep); font-size:13px;">{{ p.title }}</div>
+</div>
+</div>
+<div class="procbody" style="opacity:{{ p.op }}; transition:opacity .22s ease; padding:22px 12px 0 12px; min-height:150px; display:flex; justify-content:center;">
+<div style="display:grid; gap:7px; text-align:left;">
+<sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4">
+<div style="font-size:15px; color:var(--body-2); line-height:1.45;">{{ it }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="context" data-sec="context" data-screen-label="The context" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">The context</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 24px 0; max-width:44ch;">For children with cerebral palsy, communication can require navigating both language and motor barriers.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">Children with cerebral palsy may experience speech and motor impairments that make verbal communication difficult or impossible. AAC can provide another route to expression through symbols, words, and speech-generating interfaces.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:20px;">But for a young child, simply providing more vocabulary does not necessarily make communication more accessible. The interface itself can become part of the barrier.</div>
+</div>
+
+<div id="problem" data-sec="problem" data-screen-label="The problem" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">The problem</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 20px 0; max-width:40ch;">Existing AAC tools weren't built around how young children with cerebral palsy actually think and move</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">Many existing AAC experiences present children with dense symbol grids, layered navigation, and interfaces that require precise interaction. For a child already navigating cognitive or motor constraints, finding the right symbol can become a task of its own.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:20px;">And another gap kept appearing: existing tools were often better at helping children ask for something than helping them express themselves.</div>
+
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:48px; align-items:center; margin-top:48px;">
+<div>
+<img src="assets/sp-ill-dense-board.png" alt="A tablet showing a typical AAC board: around ninety small symbol tiles in a dense grid" loading="lazy" style="display:block; width:100%; height:auto;">
+<div style="font-size:15px; color:var(--body); line-height:1.55; margin-top:12px;">A typical AAC board: roughly ninety tiles, each one a possible answer.</div>
+</div>
+<div>
+<img src="assets/sp-ill-caregiver.png" alt="A caregiver holding a tablet while a child in a wheelchair reaches toward it" loading="lazy" style="display:block; width:100%; height:auto;">
+<div style="font-size:15px; color:var(--body); line-height:1.55; margin-top:12px;">And an adult holding it, often the one who navigates to the right page.</div>
+</div>
+</div>
+
+<div style="margin-top:56px;">
+<h2 style="font-size:24px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 32px 0;">Why does it matter?</h2>
+<div class="g4" style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:20px;">
+<sc-for list="{{ frictions }}" as="f" hint-placeholder-count="4">
+<div class="splift" style="background:var(--surface); border:1px solid var(--tint-line); border-radius:16px; padding:24px 22px; box-shadow:0 2px 6px -2px rgba(61,125,122,.10);">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px;" aria-hidden="true"><path d="{{ f.icon }}"></path></svg>
+<div style="font-size:16px; font-weight:500; color:var(--ink); line-height:1.35;">{{ f.t }}</div>
+<div style="font-size:15px; color:var(--body); line-height:1.5; margin-top:10px;">{{ f.b }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div id="researchphase" data-sec="researchphase" style="margin-top:96px; margin-bottom:-56px; scroll-margin-top:110px;">
+<span style="font-size:22px; font-weight:500; color:var(--ink); line-height:1.3; background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 4px;">Research phase</span>
+</div>
+
+<div id="market" data-sec="market" data-screen-label="Market research" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Market research</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 20px 0; max-width:40ch;">Five leading AAC apps revealed the same tension: more vocabulary often meant more complexity</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">I studied five existing AAC platforms to understand how they approached vocabulary, navigation, customization, motor planning, caregiver involvement, and emotional expression.</div>
+
+<div class="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:44px; align-items:stretch;">
+<sc-for list="{{ competitors }}" as="c" hint-placeholder-count="5">
+<div style="background:var(--surface); border-radius:20px; padding:28px; display:flex; gap:22px; align-items:flex-start;">
+<sc-if value="{{ c.logo }}" hint-placeholder-val="{{ true }}">
+<img class="monologo" src="{{ c.logo }}" alt="{{ c.name }} logo" loading="lazy" style="flex:0 0 auto; display:block; width:48px; height:48px; object-fit:contain;">
+</sc-if>
+<div style="min-width:0;">
+<div style="font-size:16px; font-weight:500; color:var(--ink);">{{ c.name }}</div>
+<ul style="list-style:none; margin:12px 0 0 0; padding:0; display:grid; gap:8px;">
+<sc-for list="{{ c.notes }}" as="n" hint-placeholder-count="2">
+<li style="display:flex; gap:10px; font-size:15px; color:var(--body); line-height:1.55;"><span style="flex:0 0 auto; color:var(--brand);">&bull;</span><span>{{ n }}</span></li>
+</sc-for>
+</ul>
+</div>
+</div>
+</sc-for>
+</div>
+
+<button type="button" onClick="{{ toggleTable }}" style="margin-top:36px; display:inline-flex; align-items:center; gap:10px; background:none; border:0; border-bottom:1px solid var(--tint-line); padding:0 2px 8px 2px; cursor:pointer; font-family:inherit; font-size:15px; color:var(--brand-deep);" style-hover="borderBottomColor:var(--brand)">
+<span>{{ tableLabel }}</span>
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate({{ tableRot }}); transition:transform .22s ease;" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<sc-if value="{{ tableOpen }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:28px; overflow-x:auto;">
+<table style="border-collapse:collapse; width:100%; min-width:900px; table-layout:fixed;">
+<thead>
+<tr>
+<th style="width:118px; border-bottom:1px solid var(--line-2); padding:0 14px 14px 0;"></th>
+<sc-for list="{{ matrixCols }}" as="c" hint-placeholder-count="5">
+<th style="border-bottom:1px solid var(--line-2); border-left:1px solid var(--line); padding:0 14px 14px 14px; text-align:left; vertical-align:bottom;">
+<img class="monologo" src="{{ c.logo }}" alt="{{ c.name }} logo" loading="lazy" style="display:block; width:26px; height:26px; object-fit:contain; margin-bottom:10px;">
+<div style="font-size:14.5px; font-weight:500; color:var(--ink); line-height:1.35;">{{ c.name }}</div>
+</th>
+</sc-for>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{ matrixRows }}" as="r" hint-placeholder-count="5">
+<tr>
+<th class="mono" style="border-bottom:1px solid var(--line); padding:16px 14px 16px 0; text-align:left; vertical-align:top; color:var(--muted); font-weight:400;">{{ r.label }}</th>
+<sc-for list="{{ r.cells }}" as="cell" hint-placeholder-count="5">
+<td style="border-bottom:1px solid var(--line); border-left:1px solid var(--line); padding:16px 14px; vertical-align:top;">
+<div style="display:grid; gap:5px;">
+<sc-for list="{{ cell }}" as="line" hint-placeholder-count="2">
+<div style="font-size:14px; color:var(--body-2); line-height:1.5;">{{ line }}</div>
+</sc-for>
+</div>
+</td>
+</sc-for>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</sc-if>
+
+</div>
+
+<div id="research" data-sec="research" data-screen-label="Research" style="margin-top:96px; scroll-margin-top:110px;">
+<div style="display:flex; align-items:center; justify-content:space-between; gap:32px; margin-bottom:16px;">
+<div class="mono">Research</div>
+<img src="assets/logos/ucp.png" alt="United Cerebral Palsy" style="display:block; height:44px; width:auto;">
+</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 20px 0; max-width:40ch;">Eight weeks at UCP helped me understand what accessibility looked like beyond the screen</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">Working around therapists, caregivers, and children exposed patterns that weren't obvious from looking at AAC interfaces alone.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:20px;">Perspectives across speech-language pathology, occupational therapy, and physical therapy repeatedly converged around four barriers: cognitive overload, emotional expression, social engagement, and adult dependence.</div>
+
+<sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+<div class="g3" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-top:44px;">
+<sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+<div style="background:var(--surface); border-radius:20px; padding:28px;">
+<div style="font-size:44px; font-weight:500; letter-spacing:-0.03em; color:var(--ink); line-height:1;">{{ s.n }}</div>
+<div class="mono" style="margin-top:12px; color:var(--body-2);">{{ s.l }}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+
+<div style="margin-top:56px;">
+<div class="mono" style="margin-bottom:8px; color:var(--muted);">Data collection</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:60ch; margin-bottom:28px;">Every session was logged on site: activity, location, structure, duration, participants, and a support note for each clinician involved. Blurred here, because the log holds participant identifiers and clinician names.</div>
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px;">
+<figure style="margin:0;">
+<div style="overflow:hidden; border-radius:10px; border:1px solid var(--line);">
+<img src="assets/sp-log-sheet.png" alt="A blurred session log: seven activities with location, structure, duration and participant identifiers" loading="lazy" style="display:block; width:100%; height:auto;">
+</div>
+<figcaption style="font-size:15px; color:var(--body); line-height:1.55; margin-top:12px;">One week of sessions: seven activities, each with structure and duration.</figcaption>
+</figure>
+<figure style="margin:0;">
+<div style="overflow:hidden; border-radius:10px; border:1px solid var(--line);">
+<img src="assets/sp-log-clinicians.png" alt="A blurred column of clinician support notes, one per activity" loading="lazy" style="display:block; width:100%; height:auto;">
+</div>
+<figcaption style="font-size:15px; color:var(--body); line-height:1.55; margin-top:12px;">A support note per clinician, per activity: the column that made adult dependence impossible to miss.</figcaption>
+</figure>
+</div>
+</div>
+
+<div style="margin-top:56px;">
+<div class="mono" style="margin-bottom:8px; color:var(--muted);">Affinity map</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:60ch; margin-bottom:36px;">Clustered from the session log kept on site: what each activity actually required before a child could take part.</div>
+<div class="g4" style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:20px;">
+<sc-for list="{{ affinity }}" as="col" hint-placeholder-count="4">
+<div>
+<div style="font-size:15px; font-weight:600; color:var(--ink); line-height:1.4; padding-bottom:12px; border-bottom:1px solid var(--line-2); margin-bottom:16px;">{{ col.theme }}</div>
+<div style="display:grid; gap:12px;">
+<sc-for list="{{ col.notes }}" as="n" hint-placeholder-count="3">
+<div style="background:{{ col.tint }}; border-radius:4px; padding:14px 15px; box-shadow:0 2px 5px -2px rgba(26,26,26,.16); font-size:13.5px; color:#3c3a35; line-height:1.5;">{{ n }}</div>
+</sc-for>
+</div>
+<div class="mono" style="margin-top:14px; color:var(--muted);">{{ col.tag }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="insights" data-sec="insights" data-screen-label="Key research insights" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Key research insights</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 44px 0; max-width:44ch;">The moments where the interface demanded the most effort were often the moments when the child had the least to spare.</h2>
+
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:24px;">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="4">
+<div class="splift" style="border:1px solid var(--line-2); border-radius:14px; padding:28px 28px 26px 28px; background:var(--card);">
+<div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto;" aria-hidden="true"><path d="{{ t.icon }}"></path></svg>
+<span style="font-size:17px; font-weight:500; color:var(--ink); line-height:1.3; background:linear-gradient(transparent 62%, color-mix(in srgb, {{ t.tint }} var(--tint-a), transparent) 62%); padding:0 3px;">{{ t.k }}</span>
+<span class="mono" style="margin-left:auto; color:var(--faint);">{{ t.n }}</span>
+</div>
+<div style="font-family:var(--font-serif); font-size:25px; color:var(--ink); line-height:1.35; letter-spacing:-0.004em;">{{ t.q }}</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.6; margin-top:16px;">{{ t.v }}</div>
+<div style="display:flex; gap:10px; align-items:flex-start; margin-top:20px; padding-top:16px; border-top:1px solid var(--line);">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--brand-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto; margin-top:3px;" aria-hidden="true"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"></path></svg>
+<span style="font-size:15.5px; font-weight:500; color:var(--brand-deep); line-height:1.5;">{{ t.imp }}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="designphase" data-sec="designphase" style="margin-top:96px; margin-bottom:-56px; scroll-margin-top:110px;">
+<span style="font-size:22px; font-weight:500; color:var(--ink); line-height:1.3; background:linear-gradient(transparent 58%, var(--mark) 58%); padding:0 4px;">Design phase</span>
+</div>
+
+<div id="reframe" data-sec="reframe" data-screen-label="Reframe" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">We reframe the challenge</div>
+<h2 style="font-family:var(--font-serif); font-size:38px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 44px 0; max-width:38ch;">How might we design an AAC experience that feels less like operating a tool and more like communicating through play?</h2>
+
+<div class="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px;">
+<div style="background:var(--surface); border-radius:20px; padding:28px;">
+<div class="mono" style="margin-bottom:16px; color:var(--body-2);">From</div>
+<div style="font-size:17px; color:var(--body-2); line-height:1.45;">How do I make an AAC board easier to use?</div>
+</div>
+<div style="background:var(--tint-bg); border:1px solid var(--tint-line); border-radius:20px; padding:28px;">
+<div class="mono" style="margin-bottom:16px; color:var(--brand-deep);">To</div>
+<div style="font-size:17px; font-weight:500; color:var(--brand-deep); line-height:1.45;">How do I make communication itself easier to access?</div>
+</div>
+</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; margin-top:24px; max-width:64ch;">That distinction shaped the rest of SayPlay.</div>
+</div>
+
+<div id="principles" data-sec="principles" data-screen-label="Design principles" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Design principles</div>
+<div class="prinrow" style="display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:40px 28px; margin-top:36px;">
+<sc-for list="{{ principles }}" as="p" hint-placeholder-count="5">
+<div style="border-top:2px solid var(--brand); padding-top:20px;">
+<div style="font-size:52px; font-weight:500; color:var(--faint); line-height:.9; letter-spacing:-0.03em; margin-bottom:14px;">{{ p.n }}</div>
+<div style="font-size:18px; font-weight:500; color:var(--ink); line-height:1.35;">{{ p.t }}</div>
+<div style="font-size:15px; color:var(--body-2); line-height:1.6; margin-top:10px;">{{ p.b }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top:56px; padding:0 0 0 32px; border-left:3px solid var(--brand); max-width:70ch;">
+<div class="mono" style="margin-bottom:16px;">Design goal</div>
+<div style="font-family:var(--font-serif); font-size:32px; font-weight:400; color:var(--ink); line-height:1.26; letter-spacing:-0.005em;">Help children communicate more independently by reducing the effort between what they want to express and how they express it.</div>
+</div>
+</div>
+
+<div id="ideation" data-sec="ideation" data-screen-label="Ideation" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Ideation</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 20px 0; max-width:44ch;">Mapping every screen before adding a single colour</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">Low-fidelity screens for all three roles: the child's communication board and story builder, the co-play activity flows, and the parent and therapist dashboards. Working in grey kept the focus on hierarchy, button size, and how few taps it takes to say something.</div>
+<img src="assets/sp-wireframes.jpg" alt="SayPlay wireframes: set-up, role selection, avatar, co-play home, group activity, story builder, parent and therapist dashboards" loading="lazy" style="display:block; width:100%; height:auto; border-radius:12px; background:var(--surface); margin-top:32px;">
+</div>
+
+<div id="explorations" data-sec="explorations" data-screen-label="Design explorations" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Design explorations</div>
+
+<div style="margin-top:40px;">
+<div class="splabel">INSIGHT 01</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 16px 0; max-width:40ch;">Children were spending too much effort finding language.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">The research repeatedly pointed to cognitive overload: dense boards and layered navigation could make locating a symbol more difficult than the act of communicating itself. That raised the first design question: <b style="color:var(--ink);">how much should SayPlay show at once?</b></div>
+
+<div style="margin-top:36px; padding-left:32px; border-left:1px solid var(--line);">
+<div class="mono" style="margin-bottom:14px;">Iteration</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">Trade-off: maximum vocabulary visible vs fewer, larger targets</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">I explored ways to simplify the board while keeping essential vocabulary immediately accessible. Rather than maximizing the number of symbols visible at once, SayPlay prioritizes larger targets, predictable locations, and a smaller set of contextually relevant choices.</div>
+</div>
+
+<div style="margin-top:36px;">
+<div class="mono" style="margin-bottom:14px;">The direction I carried forward</div>
+<h2 style="font-size:26px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 16px 0;"><span style="background:linear-gradient(transparent 62%, var(--tint-line) 62%);">Fewer choices. Faster communication.</span></h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">The final board keeps primary navigation fixed and reduces the amount of visual searching required to move between common communication areas.</div>
+<img src="assets/sp-scr-board.png" alt="The SayPlay board: a fixed rail of boards on the left and a grid of large animal tiles building a sentence" loading="lazy" style="display:block; width:100%; height:auto; border-radius:16px; background:var(--surface); margin-top:32px;">
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; margin-top:36px;">
+<div>
+<div class="mono" style="margin-bottom:20px;">Before &middot; existing AAC</div>
+<div style="display:grid; gap:16px;">
+<sc-for list="{{ beforeNotes }}" as="n" hint-placeholder-count="2">
+<div style="display:flex; gap:12px; align-items:flex-start;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="flex:0 0 auto; margin-top:4px;" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+<div style="font-size:16px; color:var(--body); line-height:1.55;">{{ n }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div>
+<div class="mono" style="margin-bottom:20px; color:var(--brand-deep);">After &middot; SayPlay</div>
+<div style="display:grid; gap:16px;">
+<sc-for list="{{ afterNotes }}" as="n" hint-placeholder-count="3">
+<div style="display:flex; gap:12px; align-items:flex-start;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto; margin-top:4px;" aria-hidden="true"><path d="M5 13l4.5 4.5L19 7"></path></svg>
+<div style="font-size:16px; color:var(--body); line-height:1.55;">{{ n }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="margin-top:96px;">
+<div class="splabel">INSIGHT 02</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 16px 0; max-width:40ch;">Requesting something isn't the same as expressing yourself.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">One clinician observation captured a gap I kept seeing across the research.</div>
+<div style="margin-top:28px; padding:0 0 0 32px; border-left:3px solid var(--brand); max-width:40ch;">
+<div style="font-family:var(--font-serif); font-size:30px; font-weight:400; color:var(--ink); line-height:1.3;">“She can ask for juice, but she can't tell me she's frustrated.”</div>
+</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch; margin-top:28px;">That became more than a vocabulary problem. It changed what I thought the product needed to support.</div>
+
+<div style="margin-top:36px; padding-left:32px; border-left:1px solid var(--line);">
+<div class="mono" style="margin-bottom:14px;">Iteration</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">Trade-off: emotions as a category inside the board vs a board of their own</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Instead of treating feelings as a secondary category buried within the board, SayPlay brings emotional vocabulary into the child's everyday communication experience: a board of its own, alongside Food and Actions.</div>
+</div>
+
+<div style="margin-top:36px;">
+<div class="mono" style="margin-bottom:14px;">The design decision</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 16px 0;">Feeling is vocabulary, not decoration.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Children can communicate emotional states alongside needs, choices, and activities, expanding AAC beyond functional requests.</div>
+<img src="assets/sp-scr-learning.png" alt="SayPlay Learning screen: search bar with mic, three mode cards, and a grid of category tiles" loading="lazy" style="display:block; width:100%; height:auto; border-radius:16px; background:var(--surface); margin-top:32px;">
+</div>
+</div>
+
+<div style="margin-top:96px;">
+<div class="splabel">INSIGHT 03</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 16px 0; max-width:40ch;">Communication doesn't become natural if it only happens during therapy.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Research also highlighted a social gap. AAC could become something a child used with a therapist rather than something they reached for spontaneously with another child. So I asked: <b style="color:var(--ink);">what if practicing communication felt more like playing together?</b></div>
+
+<div style="margin-top:36px; padding-left:32px; border-left:1px solid var(--line);">
+<div class="mono" style="margin-bottom:14px;">Iteration</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:14px;">Trade-off: practice separated from play vs communication inside the interaction</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Let's Talk introduces shared communication experiences with peers and caregivers. Instead of separating practice from social interaction, the feature creates opportunities to use AAC inside the interaction itself.</div>
+</div>
+
+<div style="margin-top:36px;">
+<div class="mono" style="margin-bottom:14px;">The design decision</div>
+<h2 style="font-size:26px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 16px 0;">AAC as connection, not just communication.</h2>
+<img src="assets/sp-scr-talk.png" alt="SayPlay Let's Talk screen: a list of people with presence indicators and a start action" loading="lazy" style="display:block; width:100%; height:auto; border-radius:16px; background:var(--surface); margin-top:24px;">
+</div>
+</div>
+
+<div style="margin-top:96px;">
+<div class="splabel">INSIGHT 04</div>
+<h2 style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 16px 0; max-width:42ch;">Independence for the child still requires flexibility for the adults supporting them.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">Every child communicates differently, and needs can change across settings and over time. Caregivers and therapists therefore need meaningful control over the experience, without turning everyday communication back into something that depends on them.</div>
+
+<div style="margin-top:36px;">
+<div class="mono" style="margin-bottom:14px;">Iteration</div>
+<div style="font-size:20px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:32px;">Trade-off: adult controls inside the child's interface vs a separate caregiver surface</div>
+<div class="mono" style="margin-bottom:14px;">Design strategy</div>
+<h2 style="font-size:26px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 16px 0; max-width:44ch;">Give adults control behind the experience, not inside every interaction.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:62ch;">SayPlay separates configuration from everyday communication. Caregivers can adjust communication style, text size, contrast, tile count, speech rate, and access settings while the child's primary experience remains consistent and predictable.</div>
+<div class="g2" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:32px;">
+<img src="assets/sp-scr-profile.png" alt="SayPlay profile setup: a five-step flow asking how old the child is" loading="lazy" style="display:block; width:100%; height:auto; border-radius:16px; background:var(--surface);">
+<img src="assets/sp-scr-access.png" alt="SayPlay accessibility settings: display, voice and input controls" loading="lazy" style="display:block; width:100%; height:auto; border-radius:16px; background:var(--surface);">
+</div>
+</div>
+</div>
+</div>
+
+<div id="system" data-sec="system" data-screen-label="Design system" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Design system</div>
+<h2 style="font-size:28px; font-weight:500; color:var(--ink); line-height:1.35; margin:0 0 20px 0; max-width:44ch;">One system, designed for different hands.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">The component library was built around large interaction targets, clear hierarchy, high contrast, and adaptable layouts. Rather than treating accessibility as a final compliance check, these constraints shaped the components from the beginning.</div>
+
+<div class="g4 g4auto" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:28px; margin-top:44px;">
+<sc-for list="{{ systemNotes }}" as="s" hint-placeholder-count="4">
+<div>
+<div style="font-size:16px; font-weight:500; color:var(--ink); line-height:1.4;">{{ s.t }}</div>
+<div style="font-size:15px; color:var(--body); line-height:1.55; margin-top:8px;">{{ s.b }}</div>
+</div>
+</sc-for>
+</div>
+
+<div style="display:flex; flex-wrap:wrap; gap:16px; margin-top:56px;">
+<sc-for list="{{ palette }}" as="p" hint-placeholder-count="8">
+<div style="display:flex; flex-direction:column; gap:10px;">
+<div style="width:96px; height:96px; border-radius:14px; border:1px solid var(--line-2); background:{{ p.hex }};"></div>
+<div class="mono" style="color:var(--body-2);">{{ p.hex }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="visual" data-sec="visual" data-screen-label="Visual language" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Visual language</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 20px 0; max-width:38ch;">A communication tool for children should feel like it belongs to them</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">SayPlay uses warm color, illustration, and four original avatar characters to move away from the clinical feeling common to assistive technology.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:20px;">The goal wasn't to make accessibility look childish. It was to make the experience feel inviting enough that a child might choose to return to it.</div>
+
+<div class="avarow" style="display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:24px; margin-top:44px;">
+<sc-for list="{{ avatars }}" as="a" hint-placeholder-count="4">
+<div style="display:grid; place-items:center; aspect-ratio:1; border-radius:20px; background:var(--surface);">
+<img src="{{ a.img }}" alt="{{ a.alt }}" loading="lazy" style="display:block; width:70%; height:70%; object-fit:contain;">
+</div>
+</sc-for>
+</div>
+</div>
+
+<div id="final" data-sec="final" data-screen-label="Final design" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Final design</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 20px 0; max-width:38ch;">Bringing communication, play, and independence into one experience</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">The final prototype brings together the communication board, emotional vocabulary, social interaction, caregiver controls, and accessibility settings in one system.</div>
+<div style="margin-top:44px; padding:0 0 0 32px; border-left:3px solid var(--brand); max-width:52ch;">
+<div style="font-family:var(--font-serif); font-size:33px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em;">“I'm frustrated” matters as much as “I want juice.”</div>
+</div>
+
+<div style="display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:56px;">
+<div style="display:inline-flex; align-items:center; gap:8px; padding:7px 13px; border-radius:99px; background:var(--tint-bg); border:1px solid var(--tint-line); font-size:12.5px; font-weight:600; letter-spacing:.02em; color:var(--brand-deep);">
+<span style="display:block; width:6px; height:6px; border-radius:50%; background:var(--brand);"></span>
+<span>Auto-playing. Hover to take over</span>
+</div>
+<div style="display:flex; gap:8px;">
+<button type="button" onClick="{{ slidePrev }}" aria-label="Previous screen" style="width:44px; height:44px; border-radius:50%; border:1px solid var(--line-2); background:var(--card); color:var(--ink); font-family:inherit; font-size:17px; cursor:pointer; transition:background .22s, border-color .22s;" style-hover="borderColor:var(--brand)">&lsaquo;</button>
+<button type="button" onClick="{{ slideNext }}" aria-label="Next screen" style="width:44px; height:44px; border-radius:50%; border:1px solid var(--line-2); background:var(--card); color:var(--ink); font-family:inherit; font-size:17px; cursor:pointer; transition:background .22s, border-color .22s;" style-hover="borderColor:var(--brand)">&rsaquo;</button>
+</div>
+</div>
+
+<div id="sp6-final-track" style="display:flex; gap:16px; margin-top:20px; overflow-x:auto; scroll-snap-type:x proximity; padding-bottom:6px;">
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="5">
+<figure style="margin:0; flex:0 0 clamp(260px,44%,380px); scroll-snap-align:start;">
+<div style="background:#fdf7e8; border:1px solid #f0e6cf; border-radius:14px; padding:20px; display:flex; align-items:center; justify-content:center;">
+<span class="spshot" style="width:88%">
+<span role="img" aria-label="{{ s.alt }}" style="display:block; width:100%; aspect-ratio:1388/959; border-radius:8px; background-image:url({{ s.img }}); background-size:contain; background-repeat:no-repeat; background-position:center;"></span>
+<sc-if value="{{ s.tick }}"><span class="sptick sptick1">✓</span><span class="sptick sptick2">✓</span></sc-if>
+<sc-if value="{{ s.sel }}"><span class="spsel"></span></sc-if>
+<span class="spcur {{ s.cur }}"><b></b><i></i></span>
+</span>
+</div>
+<figcaption style="margin-top:14px; font-size:14.5px; color:var(--body-2); line-height:1.6;">{{ s.cap }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</div>
+
+<div id="reflection" data-sec="reflection" data-screen-label="Reflection" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">Reflection</div>
+<h2 style="font-family:var(--font-serif); font-size:44px; font-weight:400; color:var(--ink); line-height:1.18; letter-spacing:-0.008em; margin:0 0 28px 0; max-width:30ch;">The best interfaces disappear.</h2>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch;">This project changed how I think about accessibility. It wasn't one requirement I could solve through target sizes, contrast ratios, or reduced navigation alone. Every decision changed the amount of effort required between a child having something to say and actually being able to say it.</div>
+<div style="font-size:16px; color:var(--body); line-height:1.6; max-width:64ch; margin-top:20px;">And that ultimately became the standard I cared about most.</div>
+
+<div class="takerow" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin-top:56px; align-items:stretch;">
+<sc-for list="{{ takeaways }}" as="t" hint-placeholder-count="3">
+<div class="splift" style="border:1px solid var(--line-2); border-radius:14px; padding:22px 20px 20px 20px; background:var(--card);">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:block; margin-bottom:14px;" aria-hidden="true"><path d="{{ t.icon }}"></path></svg>
+<div style="font-size:15.5px; font-weight:500; color:var(--ink); line-height:1.35;">{{ t.t }}</div>
+<div style="font-size:13.5px; color:var(--body-2); line-height:1.6; margin-top:9px;">{{ t.b }}</div>
+</div>
+</sc-for>
+</div>
+
+
+<div style="margin-top:44px; padding:0 0 0 32px; border-left:3px solid var(--brand); max-width:70ch;">
+<div style="font-family:var(--font-serif); font-size:32px; font-weight:400; color:var(--ink); line-height:1.26; letter-spacing:-0.005em;">The technology shouldn't be the experience. The child's voice should be.</div>
+</div>
+</div>
+
+<div id="next" data-sec="next" data-screen-label="What's next" style="margin-top:96px; scroll-margin-top:110px;">
+<div class="mono" style="margin-bottom:16px;">What's next</div>
+<h2 style="font-family:var(--font-serif); font-size:35px; font-weight:400; color:var(--ink); line-height:1.24; letter-spacing:-0.005em; margin:0 0 32px 0; max-width:36ch;">A prototype is not a product in a child's hands</h2>
+
+<div class="g2" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; margin-top:36px;">
+<sc-for list="{{ next }}" as="n" hint-placeholder-count="4">
+<div class="spnext" style="--tint:{{ n.tint }}; --ring:{{ n.ring }}; --dot:{{ n.dot }};">
+<div class="spnhead">
+<span class="spnum">{{ n.n }}</span>
+<span class="spnstage"><i></i>{{ n.stage }}</span>
+<span class="spnmascot"><span role="img" aria-label="{{ n.alt }}" style="background-image:url({{ n.img }}); background-size:contain; background-repeat:no-repeat; background-position:center;"></span></span>
+</div>
+<h3 style="margin:0; font-size:21px; font-weight:500; color:var(--ink); line-height:1.24; letter-spacing:-0.009em;">{{ n.t }}</h3>
+<p style="margin:0; font-size:14.5px; color:var(--body-2); line-height:1.6;">{{ n.b }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
+
+<div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:30px;max-width:560px">
+<svg class="lsfmark" viewBox="0 0 250 150" width="112" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;overflow:visible;color:var(--ink)"><defs><filter id="gooFootsp" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootsp)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootsp)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+<p style="margin:18px 0 0;font:400 12.5px/1 var(--font-sans);color:var(--muted)">Currently in New York, <i id="lsf-time" style="font-style:normal;font-variant-numeric:tabular-nums">--:--</i></p>
+</div>
+</div>
+
+<div style="display:flex;gap:64px">
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
+</div>
+</div>
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="index-vt.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="about-vt.html" style="text-decoration:none;color:var(--body-2)">About</a>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<span>Made with ♥ by Laila · 2026</span>
+<a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surface)">↑ Back to top</a>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showAacNote&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { stage: null, tableOpen: false };
+  _slide(dir) {
+    const el = document.getElementById('sp6-final-track');
+    if (!el) return;
+    const card = el.firstElementChild;
+    const w = card ? card.getBoundingClientRect().width + 16 : el.clientWidth * 0.7;
+    el.scrollTo({ left: Math.max(0, Math.min(el.scrollLeft + dir * w, el.scrollWidth - el.clientWidth)), behavior: 'auto' });
+  }
+  componentDidMount() {
+    const ROLLUP = {
+      process: 'impact',
+      market: 'researchphase', research: 'researchphase', insights: 'researchphase',
+      reframe: 'designphase', principles: 'designphase', ideation: 'designphase',
+      explorations: 'designphase', system: 'designphase', visual: 'designphase',
+      next: 'reflection'
+    };
+    let queued = false;
+    this._spy = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        const secs = Array.from(document.querySelectorAll('[data-sec]'));
+        const links = Array.from(document.querySelectorAll('.sprail a[data-toc]'));
+        if (!secs.length || !links.length) return;
+        const line = window.innerHeight * 0.32;
+        let active = secs[0].getAttribute('data-sec');
+        secs.forEach(sec => {
+          if (sec.getBoundingClientRect().top <= line) active = sec.getAttribute('data-sec');
+        });
+        const id = ROLLUP[active] || active;
+        links.forEach(a => {
+          const on = a.getAttribute('data-toc') === id;
+          a.style.color = on ? 'var(--ink)' : 'var(--muted)';
+          a.style.fontWeight = on ? '500' : '400';
+        });
+      });
+    };
+    window.addEventListener('scroll', this._spy, { passive: true });
+    window.addEventListener('resize', this._spy, { passive: true });
+    this._spyTimer = setInterval(this._spy, 400);
+    this._spy();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._spy);
+    window.removeEventListener('resize', this._spy);
+    clearInterval(this._spyTimer);
+  }
+
+  renderVals() {
+    const stages = [
+      { n: '01', title: 'RESEARCH', items: ['On-site observation at UCP', 'Session logging', 'Clinician interviews', 'Competitive analysis', 'Affinity mapping'] },
+      { n: '02', title: 'DESIGN', items: ['Information architecture', 'Board explorations', 'Component library', 'High-fidelity prototypes'] },
+      { n: '03', title: 'EVALUATE', items: ['Clinician feedback', 'Accessibility checks', 'Target size and contrast review', 'Pilot with families (planned)'] }
+    ];
+    const tableOpen = !!this.state.tableOpen;
+    return {
+      tableOpen,
+      slidePrev: () => this._slide(-1),
+      slideNext: () => this._slide(1),
+      tableLabel: tableOpen ? 'Hide the full analysis' : 'Read the full analysis',
+      tableRot: tableOpen ? '180deg' : '0deg',
+      toggleTable: () => this.setState(st => ({ tableOpen: !st.tableOpen })),
+      process: stages.map((st, i) => ({
+        ...st,
+        op: this.state.stage === i ? 1 : 0,
+        enter: () => this.setState({ stage: i }),
+        leave: () => this.setState({ stage: null })
+      })),
+      showAacNote: this.props.showAacNote ?? true,
+      showStats: this.props.showStats ?? true,
+
+      meta: [
+        { k: 'Role', v: 'Project Lead' },
+        { k: 'Partner', v: 'United Cerebral Palsy Center of Greater Cleveland' },
+        { k: 'Timeline', v: 'May – Aug 2025' },
+        { k: 'Team', v: 'Solo, research & product design' }
+      ],
+
+      toc: [
+        { id: 'overview', href: '#overview', label: 'Overview' },
+        { id: 'impact', href: '#impact', label: 'My impact' },
+        { id: 'context', href: '#context', label: 'The context' },
+        { id: 'problem', href: '#problem', label: 'The problem' },
+        { id: 'researchphase', href: '#researchphase', label: 'Research phase' },
+        { id: 'designphase', href: '#designphase', label: 'Design phase' },
+        { id: 'final', href: '#final', label: 'Final design' },
+        { id: 'reflection', href: '#reflection', label: 'Reflection' }
+      ],
+
+      didList: [
+        '60 hours of research with children, therapists and parents, generating 26 accessibility insights',
+        'Benchmarked 5 existing AAC platforms to define hierarchy and interaction patterns',
+        'Designed the end-to-end prototype across 4 feature areas, plus a reusable component system',
+        'Funded by a $4,500 SOURCE grant, selected from 70 applicants'
+      ],
+
+      frictions: [
+        { t: 'Cognitive', b: 'More choices can mean more time searching instead of communicating.', icon: 'M4.4 4.4h6v6h-6zM13.6 4.4h6v6h-6zM4.4 13.6h6v6h-6zM13.6 13.6h6v6h-6z' },
+        { t: 'Physical', b: 'Small targets and deep navigation increase the motor effort required to say something.', icon: 'M8.5 12.4V6.2a1.8 1.8 0 0 1 3.6 0v5M12.1 11.4V5.4a1.8 1.8 0 0 1 3.6 0v6M15.7 12V8.2a1.8 1.8 0 0 1 3.6 0v6.2a6 6 0 0 1-6 6h-1.8a5.4 5.4 0 0 1-4.2-2l-2.6-3.3a1.9 1.9 0 0 1 2.9-2.4l1.3 1.4' },
+        { t: 'Emotional', b: "Request-based vocabulary doesn't fully support feelings, storytelling, or self-expression.", icon: 'M12 3.4a8.6 8.6 0 1 0 0 17.2 8.6 8.6 0 0 0 0-17.2M8.8 9.9h.01M15.2 9.9h.01M8.6 15h6.8' },
+        { t: 'Social', b: 'When AAC is primarily used with an adult during therapy, it can struggle to become part of spontaneous play and connection.', icon: 'M8.6 15.2H5.4a1.9 1.9 0 0 1-1.9-1.9V6.8A1.9 1.9 0 0 1 5.4 4.9h8.4a1.9 1.9 0 0 1 1.9 1.9v1.4M20.5 12.3v5.2a1.9 1.9 0 0 1-1.9 1.9h-6.5l-3.2 2.5v-2.5' }
+      ],
+
+      competitors: [
+        { name: 'Proloquo2Go', logo: 'assets/logos/avaz.png', notes: ['Deep vocabulary and customization', 'Dense grids can require significant adult configuration'] },
+        { name: 'TouchChat HD', logo: 'assets/logos/touchchat.png', notes: ['Strong symbol libraries', 'Reaching the right page can require several deliberate interactions'] },
+        { name: 'LAMP Words for Life', logo: 'assets/logos/lamp.png', notes: ['A rigorous motor-planning model with consistent symbol locations', 'Little emphasis on emotional or social communication'] },
+        { name: 'CoughDrop', logo: 'assets/logos/coughdrop.png', notes: ['Strong caregiver and therapist collaboration', 'Cloud-based sharing across a support team'] },
+        { name: 'Avaz AAC', logo: 'assets/logos/proloquo2go.png', notes: ['A warmer, more child-friendly interface with graded vocabulary', 'Still largely centered around functional communication'] }
+      ],
+
+      stats: [
+        { n: '8', l: 'Weeks' },
+        { n: '3', l: 'Clinician disciplines' },
+        { n: '4', l: 'Recurring themes' }
+      ],
+
+      takeaways: [
+        { t: 'Accessibility takes empathy and iteration.', icon: 'M20 11.5A8 8 0 006.3 6.3L4 8.5M4 12.5a8 8 0 0013.7 5.2L20 15.5M4 5v3.5h3.5M20 19v-3.5h-3.5',
+          b: "It's never one-size-fits-all. Every detail matters, from button size to contrast to the cognitive load of a single tap." },
+        { t: 'Collaboration with real users is everything.', icon: 'M9.2 10.4a2.6 2.6 0 100-5.2 2.6 2.6 0 000 5.2zM3.6 19.5v-1.9a4.2 4.2 0 014.2-4.2h2.8a4.2 4.2 0 014.2 4.2v1.9M16.4 5.6a2.6 2.6 0 010 5.05M18.4 13.6a4.2 4.2 0 012 3.6v2.3',
+          b: 'Partnering with therapists, families, and children at UCP grounded every decision in lived experience.' },
+        { t: 'Play is a powerful entry point for language.', icon: 'M4 7.4A2.4 2.4 0 016.4 5h11.2A2.4 2.4 0 0120 7.4v6.2a2.4 2.4 0 01-2.4 2.4H9l-5 3.5zM8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01',
+          b: "Emotional expression and storytelling aren't extras. They're building blocks for confidence and language development." }
+      ],
+
+      matrixCols: [
+        { name: 'Proloquo2Go', logo: 'assets/logos/avaz.png' },
+        { name: 'TouchChat HD w/ WordPower', logo: 'assets/logos/touchchat.png' },
+        { name: 'LAMP Words for Life', logo: 'assets/logos/lamp.png' },
+        { name: 'CoughDrop', logo: 'assets/logos/coughdrop.png' },
+        { name: 'Avaz AAC', logo: 'assets/logos/proloquo2go.png' }
+      ],
+
+      matrixRows: [
+        { label: 'Description', cells: [
+          ['A robust symbol-based AAC app with grammar support and extensive vocabulary customization.'],
+          ['A dynamic display AAC app using core vocabulary with smart word prediction.'],
+          ['An AAC app based on motor planning with consistent symbol placement.'],
+          ['Cloud-based AAC with collaborative tools for SLPs and caregivers.'],
+          ['Beginner-friendly AAC with visual vocabulary and parent tutorials.']
+        ] },
+        { label: 'Platform', cells: [['iOS only'], ['iOS only'], ['iOS only'], ['iOS, Android, Web'], ['iOS, Android']] },
+        { label: 'Feature overview', cells: [
+          ['Core + fringe vocabulary', 'Grammar and verb conjugation', 'Highly customizable grid layouts'],
+          ['WordPower vocabulary sets', 'Customizable pages and buttons', 'Synthesized speech'],
+          ['Consistent symbol layout', 'Spontaneous communication', 'Vocabulary grows with use'],
+          ['Speech boards', 'Dashboard & tracking', 'Collaborative editing'],
+          ['Picture-based interface', 'Training modules', 'Multilingual support']
+        ] },
+        { label: 'Strengths', cells: [
+          ['Powerful and flexible', 'Clinical research-based', 'Long-term language building'],
+          ['Strong word prediction', 'Clinically adopted', 'Effective for teens'],
+          ['Structured & consistent', 'Great for independence', 'Autism & CP friendly'],
+          ['Cloud-sync', 'Budget-friendly', 'Data-driven tools'],
+          ['Friendly onboarding', 'Inclusive visuals', 'Parent-supportive']
+        ] },
+        { label: 'Weaknesses', cells: [
+          ['High learning curve', 'Cognitive overload', 'Lacks play/social features'],
+          ['Overwhelming for kids', 'Flat visuals', 'Low emotional engagement'],
+          ['Not intuitive', 'Training required', 'Not customizable for play'],
+          ['Dated UI', 'Limited visuals', 'No playful scenes'],
+          ['Less advanced', 'Static layout', 'Emotionally flat']
+        ] }
+      ],
+
+      affinity: [
+        { theme: 'Setup came before speech', tint: '#fdf1cf', tag: 'Cognitive load',
+          notes: [
+            'SLPs spent time adjusting the positioning and distance of the devices to ensure they could be utilized effectively.',
+            'Snacks provided to support self-regulation before a self-introduction.',
+            'An alternative activity of interest (coloring) provided throughout introductions.'
+          ] },
+        { theme: 'Adults held the vocabulary', tint: '#e6eed2', tag: 'Adult dependence',
+          notes: [
+            'Modeled relevant vocabulary on the AAC device: “rain,” “bird,” “plant,” “flower.”',
+            'Supported participant with eye-gaze AAC by modeling on the device for name and things they like.',
+            'Each child was supported by a clinician or volunteer to communicate through their device.'
+          ] },
+        { theme: 'The body came first', tint: '#dfe6f2', tag: 'Motor access',
+          notes: [
+            'Adapted stands were used to place the soil into the pots.',
+            'Held an adapted switch to their head to cue the adapted arm to pour soil and seeds.',
+            'A clinician or volunteer pushed their wheelchairs to the playground and around for one lap.'
+          ] },
+        { theme: 'Communication was social', tint: '#f9e0d3', tag: 'Social engagement',
+          notes: [
+            'Engaged socially by asking questions and commenting on the participant’s self-introduction.',
+            'Children took turns introducing themselves, sharing a name and something they like.',
+            'Presented animal sounds and asked participants to express what they heard.'
+          ] }
+      ],
+
+      themes: [
+        { n: '01', tint: '#f7dfa8', icon: 'M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6', k: 'Cognitive overload', q: '\u201CThere\u2019s too much on the screen. He spends longer hunting for the symbol than saying the thing.\u201D', v: 'Dense boards made finding language part of the communication task itself.', imp: 'Reduce unnecessary choice and make common communication easier to locate.' },
+        { n: '02', tint: '#f2c4a6', icon: 'M12 20s-7-4.4-7-9.2A3.9 3.9 0 0112 8a3.9 3.9 0 017 2.8C19 15.6 12 20 12 20z', k: 'Emotional expression', q: '\u201CShe can ask for juice, but she can\u2019t tell me she\u2019s frustrated.\u201D', v: 'AAC supported functional requests much more consistently than emotional expression.', imp: 'Treat feelings as first-class vocabulary.' },
+        { n: '03', tint: '#c8d9a4', icon: 'M7 8a2.2 2.2 0 100-4.4A2.2 2.2 0 007 8zM3.5 20v-5a3.5 3.5 0 017 0v5M16.5 12a1.7 1.7 0 100-3.4 1.7 1.7 0 000 3.4zM13.8 20v-3.4a2.7 2.7 0 015.4 0V20M9.5 13.5h3', k: 'Adult dependence', q: '\u201CHe can\u2019t get to the page he wants on his own, so he waits for an adult to do it for him.\u201D', v: 'Navigation could quietly turn communication into a mediated experience.', imp: 'Design common paths so a child can reach them independently.' },
+        { n: '04', tint: '#b8c8e4', icon: 'M3 6.8A1.8 1.8 0 014.8 5h7.4A1.8 1.8 0 0114 6.8v4.4a1.8 1.8 0 01-1.8 1.8H7.5L4 16v-3H4.8A1.8 1.8 0 013 11.2zM17 9.5h2.2A1.8 1.8 0 0121 11.3v4.4a1.8 1.8 0 01-1.8 1.8H18.5L15 20.5V17.5h-1', k: 'Social engagement', q: '\u201CIt\u2019s something they do with me in a session. It never becomes something they do with each other.\u201D', v: 'AAC could function well as a therapeutic tool without becoming something a child naturally reached for during play.', imp: 'Create reasons to communicate with someone, not just at an interface.' }
+      ],
+
+      principles: [
+        { n: '01', t: 'Fewer choices than the child can hold', b: 'Time spent searching for a symbol is time not spent communicating.' },
+        { n: '02', t: 'Feeling is vocabulary, not decoration', b: 'Being able to request something is only one part of having a voice.' },
+        { n: '03', t: "Design for the child's own hand", b: 'Targets, spacing, contrast, and interactions need to account for varying motor control.' },
+        { n: '04', t: 'The child should be able to get there alone', b: 'If an adult is required to navigate to the right page, navigation itself has become an accessibility barrier.' },
+        { n: '05', t: 'Make it something to do with someone', b: 'Communication becomes meaningful through interaction, not simply through completing an exercise.' }
+      ],
+
+      impact: [
+        { t: 'Four recurring barriers, named', b: 'Cognitive overload, emotional expression, adult dependence and social engagement, surfaced across three clinician disciplines during eight weeks at UCP.' },
+        { t: 'Four feature areas, designed end to end', b: 'Translated into a communication board, emotional vocabulary, social communication and caregiver controls, on an accessible component library.' }
+      ],
+
+      beforeNotes: [
+        'Dense boards made finding language part of the communication task itself.',
+        'Reaching the right page often depended on an adult navigating there first.'
+      ],
+
+      afterNotes: [
+        'Large targets, designed around limited fine-motor control.',
+        'Fixed navigation keeps common destinations in predictable locations.',
+        'Reduced density prioritizes what is useful now over exposing everything at once.'
+      ],
+
+      boardNotes: [
+        { t: 'Large targets', b: 'Designed around limited fine-motor control.' },
+        { t: 'Fixed navigation', b: 'Common destinations remain in predictable locations.' },
+        { t: 'Reduced density', b: 'The board prioritizes what is useful now rather than exposing everything at once.' }
+      ],
+
+      systemNotes: [
+        { t: 'Large targets', b: 'Support varying fine-motor control.' },
+        { t: 'High contrast', b: 'Color combinations were checked before entering the system.' },
+        { t: 'Flexible density', b: 'Tile counts can adapt without changing the underlying interaction model.' },
+        { t: 'Predictable patterns', b: 'Common actions behave consistently across the experience.' }
+      ],
+
+      palette: [
+        { hex: '#FDF8E2' }, { hex: '#A3B565' }, { hex: '#E85B2A' }, { hex: '#FCDD9D' },
+        { hex: '#364C84' }, { hex: '#FEC200' }, { hex: '#D9D9D9' }, { hex: 'var(--ink)' }
+      ],
+
+      avatars: [
+        { img: 'assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png', alt: 'Fox avatar' },
+        { img: 'assets/b/a91dbc09-2e8a-43ef-accb-16af804a0e35.png', alt: 'Snail avatar' },
+        { img: 'assets/b/1cc9b918-0028-4fe3-9f39-4895ac874a5f.png', alt: 'Bee avatar' },
+        { img: 'assets/b/152a50e9-063a-412d-a523-7251cfed07cc.png', alt: 'Star avatar' }
+      ],
+
+      screens: [
+        { k: 'Learning', cur: 'spcur0', img: 'assets/sp-scr-learning.png', alt: 'SayPlay Learning screen: search bar with mic, three mode cards, and a grid of category tiles', cap: 'A personalized home experience surfaces familiar activities and commonly used communication tools.' },
+        { k: 'Communicating', cur: 'spcur4', img: 'assets/sp-scr-board.png', alt: 'The SayPlay board: a fixed rail of boards on the left and a grid of large animal tiles building a sentence', cap: 'Predictable navigation and accessible boards reduce the effort required to reach common vocabulary, including a Feelings board alongside Food and Actions.' },
+        { k: 'Connecting', cur: 'spcur1', tick: true, img: 'assets/sp-scr-talk.png', alt: "SayPlay Let's Talk screen: a list of people with presence indicators and a start action", cap: "Let's Talk creates opportunities to use AAC socially with peers and caregivers." },
+        { k: 'Adapting', cur: 'spcur3', sel: true, img: 'assets/sp-scr-profile.png', alt: 'SayPlay profile setup: a five-step flow asking how old the child is', cap: "Caregivers and therapists can personalize the experience around a child's communication needs." },
+        { k: 'Accessibility', cur: 'spcur2', img: 'assets/sp-scr-access.png', alt: 'SayPlay accessibility settings: display, voice and input controls', cap: 'Display, voice and input settings apply straight away, so a therapist can adjust mid-session.' }
+      ],
+
+      scope: [
+        { n: '1', l: 'accessible component library' },
+        { n: '4', l: 'original avatar characters' },
+        { n: '8 weeks', l: 'of research on site at UCP' }
+      ],
+
+      next: [
+        { n: '01', stage: 'Up next', t: 'Pilot testing with families', b: 'Put the board in real homes over several weeks, so it is judged by ordinary days rather than a single clinic session.', img: 'assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png', alt: 'Fox avatar', tint: '#fdf1e8', ring: '#e6c3a8', dot: '#c9743c' },
+        { n: '02', stage: 'In build', t: 'Develop a no-code MVP', b: 'A working version a therapist can reconfigure themselves, with new boards and new symbols, without waiting on a release.', img: 'assets/b/1cc9b918-0028-4fe3-9f39-4895ac874a5f.png', alt: 'Bee avatar', tint: '#fbf5e2', ring: '#e8d49a', dot: '#a8811f' },
+        { n: '03', stage: 'Ongoing', t: 'Explore research and publishing', b: 'Write up what eight weeks of sessions showed, so the findings outlive this project and other teams can build on them.', img: 'assets/b/a91dbc09-2e8a-43ef-accb-16af804a0e35.png', alt: 'Snail avatar', tint: '#eef5ec', ring: '#bcd6b6', dot: '#5c8a4e' },
+        { n: '04', stage: 'Always', t: 'Advocate for child-centred AAC', b: 'Keep arguing for tools shaped around how children actually play, rather than around what is convenient to administer.', img: 'assets/b/152a50e9-063a-412d-a523-7251cfed07cc.png', alt: 'Star avatar', tint: '#eef3f5', ring: '#b6d0d4', dot: 'var(--brand)' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

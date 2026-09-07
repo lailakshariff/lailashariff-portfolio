@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#12110d;font-family:'Satoshi',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.mpwrap{display:flex;gap:40px;padding:44px;overflow-x:auto;align-items:flex-start}
+.mpcol{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:16px}
+.mpphone{position:relative;box-sizing:border-box;width:390px;height:844px;padding:7px;border-radius:46px;background:linear-gradient(142deg,#6e6e74 0%,#3a3a3f 9%,#151518 34%,#0d0d0f 58%,#26262b 80%,#5c5c63 100%);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.mpphone::after{content:'';position:absolute;inset:0;border-radius:46px;pointer-events:none;z-index:4;box-shadow:inset 0 0 0 1px rgba(255,255,255,.24),inset 0 0 0 3px rgba(0,0,0,.5)}
+.mpnotch{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:96px;height:27px;border-radius:99px;background:#000;z-index:6}
+.mpscreen{width:100%;height:100%;border:0;border-radius:39px;background:#fff;display:block}
+.mplabel{font-size:13px;font-weight:500;letter-spacing:.02em;color:#8b8479}
+.mplabel b{color:#f2efe6;font-weight:500}
+@media (max-width:820px){.mpwrap{padding:24px;gap:28px}}
+</style>
+</helmet>
+
+<div class="mpwrap">
+<sc-for list="{{ screens }}" as="s" hint-placeholder-count="4">
+<div class="mpcol">
+<div class="mpphone">
+<div class="mpnotch"></div>
+<iframe class="mpscreen" src="{{ s.src }}" title="{{ s.name }}" loading="lazy"></iframe>
+</div>
+<div class="mplabel"><b>{{ s.name }}</b> &middot; 390 &times; 844</div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      screens: [
+        { name: 'SayPlay', src: 'SayPlay%20v6.dc.html' },
+        { name: 'Purple Fabric', src: 'Purple%20Fabric%20v6.dc.html' },
+        { name: 'NutriHealth', src: 'NutriHealth%20v6.dc.html' },
+        { name: 'Spotify Chapters', src: 'Spotify%20Chapters%20v6.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
