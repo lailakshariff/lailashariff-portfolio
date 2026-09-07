@@ -24,7 +24,7 @@ document.documentElement.setAttribute('data-theme',s||((h>=19||h<7)?'dark':'ligh
 .pnav-boot{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;
   justify-content:space-between;gap:24px;padding:22px 64px;
   font:500 12px/1 'Satoshi',system-ui,-apple-system,Helvetica,Arial,sans-serif;
-  letter-spacing:.12em;text-transform:uppercase;color:#22201d;view-transition-name:ls-nav}
+  letter-spacing:.12em;text-transform:uppercase;color:#22201d}
 html[data-theme="dark"] .pnav-boot{color:#f2efe6}
 .pnav-boot a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;min-height:24px}
 .pnav-boot .w{white-space:nowrap}
@@ -718,7 +718,7 @@ var h=new Date().getHours();
 root.setAttribute('data-theme', saved || ((h>=19||h<7) ? 'dark' : 'light'));
 if(!window.__lsThemeWired){window.__lsThemeWired=1;document.addEventListener('click',function(e){ var b=e.target.closest&&e.target.closest('#ls-theme-toggle,#tmode,.ls-theme-toggle,.tmode'); if(!b) return; set(root.getAttribute('data-theme')==='dark'?'light':'dark'); },true);}
 })();</script>
-<link rel="stylesheet" href="./pill-nav.css?v=3">
+<link rel="stylesheet" href="./pill-nav.css?v=4">
 <style>
 /* ---- Site footer, small screens -------------------------------------------
    The desktop footer is a two-column row with the monogram beside the
