@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>SayPlay · Interactive prototype · Laila Shariff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#FFFDF5;-webkit-font-smoothing:antialiased}
+a{color:#31706B}a:hover{color:#E85B2A}
+button,input,select,textarea{font-family:Outfit,system-ui,sans-serif}
+button:disabled{cursor:default !important}
+*:focus{outline:none}
+*:focus-visible{outline:3px solid #1F1C17;outline-offset:3px}
+header *:focus-visible{outline-color:#F6F1E2}
+[data-reduce="1"] *{transition:none !important;animation:none !important}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</helmet>
+<div data-reduce="{{ reduce }}" ref="{{ rootRef }}" style="height:{{ rootH }};position:relative;overflow:hidden;display:flex;flex-direction:column;background:#FFFDF5;font-family:Outfit,system-ui,sans-serif;color:#3A362D">
+
+<sc-if value="{{ notEmbed }}" hint-placeholder-val="{{ true }}"><header aria-label="Prototype controls" style="flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 16px;background:#2B2822;color:#F6F1E2">
+<div style="display:flex;align-items:center;gap:10px;min-width:0"><img src="assets/inline/sayplay-1.png" alt="" style="display:block;width:28px;height:28px;border-radius:8px"><b style="font:600 15px/1 Outfit,sans-serif">SayPlay prototype</b><span style="font:400 13px/1.2 Outfit,sans-serif;color:#C9C1AE">Post-research iteration · 2026 · refined build · demo data only</span></div>
+<div role="group" aria-label="View as" style="margin-left:auto;display:flex;align-items:center;gap:4px;padding:3px;border-radius:99px;background:#3A362D">
+<span style="padding:0 6px 0 10px;font:500 11px/1 Outfit,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#C9C1AE">View as</span>
+<sc-for list="{{ roles }}" as="r" hint-placeholder-count="3"><button type="button" aria-pressed="{{ r.pressed }}" onClick="{{ r.onClick }}" style="height:32px;padding:0 14px;border:0;border-radius:99px;background:{{ r.bg }};color:{{ r.color }};font:500 14px/1 Outfit,sans-serif;cursor:pointer">{{ r.label }}</button></sc-for>
+</div>
+<a href="sayplay.html" style="font:500 14px/1 Outfit,sans-serif;color:#F6F1E2;text-underline-offset:3px">← Case study</a>
+<button type="button" onClick="{{ onRestart }}" style="height:32px;padding:0 14px;border-radius:99px;border:1px solid #6C6555;background:transparent;color:#F6F1E2;font:500 13px/1 Outfit,sans-serif;cursor:pointer">First-run flow</button>
+<button type="button" onClick="{{ onReset }}" style="height:32px;padding:0 14px;border-radius:99px;border:1px solid #6C6555;background:transparent;color:#F6F1E2;font:500 13px/1 Outfit,sans-serif;cursor:pointer">Reset demo</button>
+</header></sc-if>
+
+<sc-if value="{{ isStart }}">
+<div style="flex:1;min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:32px;box-sizing:border-box;background:#FFFCF3">
+<sc-if value="{{ start.welcome }}">
+<div style="width:100%;max-width:1200px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center">
+<img src="{{ start.fox }}" alt="SayPlay fox waving" style="display:block;width:100%;max-width:520px;height:auto;justify-self:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:56px"><h1 style="margin:0;font:700 clamp(72px,10vw,150px)/1 Outfit,sans-serif;letter-spacing:-.02em;color:#3F7F78">SayPlay!</h1><button type="button" onClick="{{ start.onBegin }}" style="min-width:300px;height:84px;padding:0 40px;border:0;border-radius:99px;background:#D9561C;box-shadow:0 8px 18px -8px rgba(178,72,25,.7);color:#FFF8EC;font:500 26px/1 Outfit,sans-serif;cursor:pointer">Let’s Begin!</button></div>
+</div>
+</sc-if>
+<sc-if value="{{ start.who }}">
+<div style="width:100%;max-width:1100px;display:flex;flex-direction:column;align-items:center;gap:36px">
+<h1 style="margin:0;font:700 48px/1.1 Outfit,sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#3F7F78;text-align:center">Who’s using SayPlay?</h1>
+<div style="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px"><sc-for list="{{ start.roles }}" as="r" hint-placeholder-count="3"><button type="button" onClick="{{ r.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:32px 24px;border-radius:32px;background:#fff;border:1.5px solid #F1E0CB;cursor:pointer"><span style="display:grid;place-items:center;width:150px;height:150px;border-radius:50%;background:{{ r.bg }};overflow:hidden"><img src="{{ r.img }}" alt="" style="display:block;width:80%;height:80%;object-fit:contain"></span><span style="font:600 28px/1.1 Outfit,sans-serif;color:#3A362D">{{ r.title }}</span><span style="font:400 17px/1.4 Outfit,sans-serif;color:#6C6555;text-align:center">{{ r.sub }}</span></button></sc-for></div>
+<button type="button" onClick="{{ start.onBack }}" style="height:52px;padding:0 22px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 17px/1 Outfit,sans-serif;cursor:pointer">← Back</button>
+</div>
+</sc-if>
+<sc-if value="{{ start.avatar }}">
+<div style="width:100%;max-width:1200px;display:flex;flex-direction:column;align-items:center;gap:36px">
+<h1 style="margin:0;max-width:12ch;font:700 60px/1.15 Outfit,sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#3F7F78;text-align:center">Choose your avatar!</h1>
+<div role="radiogroup" aria-label="Avatar" style="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px"><sc-for list="{{ start.avatars }}" as="a" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{ a.sel }}" onClick="{{ a.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;border-radius:32px;background:{{ a.bg }};border:{{ a.border }};cursor:pointer;transition:{{ ui.trans }}"><img src="{{ a.img }}" alt="" style="display:block;width:100%;max-width:240px;aspect-ratio:1;object-fit:contain"><span style="font:600 22px/1 Outfit,sans-serif;color:#3A362D">{{ a.label }}</span><span style="min-height:16px;font:600 15px/1 Outfit,sans-serif;color:#3F7F78">{{ a.mark }}</span></button></sc-for></div>
+<div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center">
+<button type="button" onClick="{{ start.onBack }}" style="height:60px;padding:0 24px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 18px/1 Outfit,sans-serif;cursor:pointer">← Back</button>
+<div aria-label="Step 1 of 2" role="img" style="display:flex;gap:8px"><span style="width:16px;height:16px;border-radius:50%;background:#D9561C"></span><span style="width:16px;height:16px;border-radius:50%;background:#DCD8D2"></span></div>
+<button type="button" onClick="{{ start.onNext }}" disabled="{{ start.noAvatar }}" style="height:60px;padding:0 36px;border:0;border-radius:99px;background:{{ start.nextBg }};color:#FFF8EC;font:600 20px/1 Outfit,sans-serif;cursor:pointer">Next →</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ start.profile }}">
+<div style="width:100%;max-width:1040px;display:flex;flex-direction:column;align-items:center;gap:26px">
+<h1 style="margin:0;font:700 56px/1.1 Outfit,sans-serif;letter-spacing:.02em;text-transform:uppercase;color:#3F7F78;text-align:center">Set up profile</h1>
+<span style="display:grid;place-items:center;width:200px;height:200px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ start.img }}" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></span>
+<div style="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><label for="st-name" style="flex:0 0 220px;font:500 24px/1.2 Outfit,sans-serif;text-transform:uppercase;color:#1F1C17">Name</label><input id="st-name" type="text" maxlength="20" placeholder="Type a name" value="{{ start.name }}" onChange="{{ start.onName }}" style="flex:1;min-width:180px;height:60px;padding:0 18px;border-radius:16px;border:1.5px solid #E2D8C1;background:#fff;font:500 22px/1 Outfit,sans-serif;color:#3A362D"></div>
+<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap"><span id="st-size" style="flex:0 0 220px;font:500 24px/1.2 Outfit,sans-serif;text-transform:uppercase;color:#1F1C17">Button size</span><span aria-live="polite" style="min-width:150px;font:600 20px/1.2 Outfit,sans-serif;color:#3A362D">{{ start.sizeText }}</span><div role="group" aria-labelledby="st-size" style="display:flex;border-radius:14px;background:#EFEDE8;overflow:hidden"><button type="button" aria-label="Smaller buttons" onClick="{{ start.onSmaller }}" disabled="{{ start.minSize }}" style="width:60px;height:56px;border:0;border-right:1px solid #D6D1C8;background:transparent;font:500 26px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer;opacity:{{ start.minOp }}">−</button><button type="button" aria-label="Larger buttons" onClick="{{ start.onLarger }}" disabled="{{ start.maxSize }}" style="width:60px;height:56px;border:0;background:transparent;font:500 26px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer;opacity:{{ start.maxOp }}">+</button></div></div>
+<button type="button" role="switch" aria-checked="{{ start.contrast }}" onClick="{{ start.onContrast }}" style="display:flex;align-items:center;gap:20px;padding:0;border:0;background:transparent;cursor:pointer;text-align:left"><span style="flex:0 0 220px;font:500 24px/1.2 Outfit,sans-serif;text-transform:uppercase;color:#1F1C17">High contrast</span><span aria-hidden="true" style="display:flex;justify-content:{{ start.knob }};align-items:center;width:120px;height:66px;padding:6px;box-sizing:border-box;border-radius:99px;background:{{ start.togBg }}"><span style="display:block;width:54px;height:54px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span><span style="font:500 18px/1 Outfit,sans-serif;color:#6C6555">{{ start.contrastText }}</span></button>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><button type="button" onClick="{{ start.onFinish }}" style="min-width:300px;height:120px;padding:0 40px;border:0;border-radius:32px;background:#D9561C;box-shadow:0 8px 18px -8px rgba(178,72,25,.7);color:#FFF8EC;font:500 40px/1 Outfit,sans-serif;cursor:pointer">Main Page</button><span style="font:400 15px/1.4 Outfit,sans-serif;color:#8E8672;text-align:center">A grown-up can change these later in settings.</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:20px"><button type="button" onClick="{{ start.onBack }}" style="height:52px;padding:0 20px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 17px/1 Outfit,sans-serif;cursor:pointer">← Back</button><div aria-label="Step 2 of 2" role="img" style="display:flex;gap:8px"><span style="width:16px;height:16px;border-radius:50%;background:#DCD8D2"></span><span style="width:16px;height:16px;border-radius:50%;background:#D9561C"></span></div></div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ fromCg }}"><div style="flex:0 0 auto;display:flex;align-items:center;gap:12px;padding:10px 20px;background:#EAF6F2;border-bottom:1px solid #CFE7E1;font:500 15px/1.3 Outfit,sans-serif;color:#2A6660"><span>Caregiver preview of {{ childName }}’s experience</span><button type="button" onClick="{{ onBackCg }}" style="margin-left:auto;height:38px;padding:0 18px;border-radius:99px;border:1.5px solid #31706B;background:#fff;color:#31706B;font:600 14px/1 Outfit,sans-serif;cursor:pointer">Back to settings</button></div></sc-if>
+
+<sc-if value="{{ notStart }}" hint-placeholder-val="{{ true }}">
+<div style="flex:1;min-height:0;display:flex">
+<nav aria-label="{{ navLabel }}" style="flex:0 0 96px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 0;box-sizing:border-box;background:#F6F1E2;border-right:1px solid #EDE4CE;overflow-y:auto">
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="6"><button type="button" aria-current="{{ n.current }}" onClick="{{ n.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:7px;width:82px;min-height:64px;padding:11px 0;border:0;border-radius:16px;background:{{ n.bg }};cursor:pointer"><img src="{{ n.icon }}" alt="" style="display:block;width:26px;height:26px"><span style="font:{{ n.weight }} 13px/1.15 Outfit,sans-serif;color:{{ n.color }};text-align:center">{{ n.label }}</span></button></sc-for>
+<div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:12px">
+<span style="display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#F6E2D6;border:3px solid #fff;overflow:hidden"><img src="{{ childImg }}" alt="" style="display:block;width:86%;height:86%;object-fit:contain"></span>
+<span style="font:500 12px/1.2 Outfit,sans-serif;color:#6C6555;text-align:center;max-width:92px">{{ footLabel }}</span>
+</div>
+</nav>
+
+<main style="flex:1;min-width:0;overflow:auto;padding:{{ mainPad }};box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+<sc-if value="{{ showHead }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="min-width:0;flex:1 1 320px"><h1 style="margin:0;font:600 32px/1.1 Outfit,sans-serif;letter-spacing:-.02em;color:#3A362D">{{ head.title }}</h1><p style="margin:6px 0 0;font:400 17px/1.35 Outfit,sans-serif;color:#8E8672">{{ head.sub }}</p></div>
+<sc-if value="{{ isChild }}"><span style="display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 8px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 16px/1 Outfit,sans-serif;color:#6C6555"><span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#F6E2D6;overflow:hidden"><img src="{{ childImg }}" alt="" style="display:block;width:88%;height:88%;object-fit:contain"></span>{{ childName }}</span></sc-if>
+<sc-if value="{{ isCg }}"><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<span aria-live="polite" style="font:500 14px/1 Outfit,sans-serif;color:{{ cgBar.statusColor }}">{{ cgBar.status }}</span>
+<button type="button" onClick="{{ onRestore }}" style="height:48px;padding:0 18px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;color:#3A362D;font:500 15px/1 Outfit,sans-serif;cursor:pointer">Restore defaults</button>
+<button type="button" onClick="{{ onCancel }}" disabled="{{ cgBar.clean }}" style="height:48px;padding:0 18px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;color:{{ cgBar.cancelInk }};font:500 15px/1 Outfit,sans-serif;cursor:pointer">Cancel</button>
+<button type="button" onClick="{{ onSave }}" disabled="{{ cgBar.clean }}" style="height:48px;padding:0 22px;border:0;border-radius:99px;background:{{ cgBar.saveBg }};color:{{ cgBar.saveInk }};font:600 15px/1 Outfit,sans-serif;cursor:pointer">Save changes</button>
+</div></sc-if>
+<sc-if value="{{ isTh }}"><span style="display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:99px;background:#EEF2F8;border:1px solid #D5DEEC;font:500 14px/1 Outfit,sans-serif;color:#3B4F70">Therapist view</span></sc-if>
+</div></sc-if>
+
+<sc-if value="{{ v.cHome }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px 14px 26px;border-radius:24px;background:#fff;border:{{ ui.barBorder }}">
+<span style="font:400 22px/1 Outfit,sans-serif;color:#8E8672">I want to…</span>
+<span style="width:1px;height:34px;background:#EFE6D2"></span>
+<sc-for list="{{ quick }}" as="q" hint-placeholder-count="4"><button type="button" aria-label="{{ q.aria }}" onClick="{{ q.onClick }}" style="height:54px;padding:0 22px;border-radius:99px;background:{{ q.bg }};border:{{ q.border }};font:500 {{ ui.chipPx }}/1 Outfit,sans-serif;color:#3A362D;cursor:pointer">{{ q.label }}</button></sc-for>
+<span aria-live="polite" style="margin-left:auto;font:400 15px/1.3 Outfit,sans-serif;color:#2A6660">{{ quickNote }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px">
+<sc-for list="{{ homeCards }}" as="c" hint-placeholder-count="5"><button type="button" onClick="{{ c.onClick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:220px;padding:22px;box-sizing:border-box;border-radius:28px;background:{{ c.bg }};border:{{ c.border }};cursor:pointer;text-align:left">
+<span style="display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ c.img }}" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></span>
+<span style="margin-top:auto;font:600 26px/1.1 Outfit,sans-serif;color:{{ c.ink }}">{{ c.title }}</span>
+<span style="font:400 16px/1.35 Outfit,sans-serif;color:#6C6555">{{ c.sub }}</span>
+</button></sc-for>
+</div>
+<section aria-labelledby="h-boards" style="display:flex;flex-direction:column;gap:12px">
+<h2 id="h-boards" style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Go straight to a board</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{ homeCats }}" as="c" hint-placeholder-count="6"><button type="button" onClick="{{ c.onClick }}" style="display:flex;align-items:center;gap:12px;height:68px;padding:0 22px 0 8px;border-radius:20px;background:#fff;border:{{ ui.tileBorderSoft }};font:500 17px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer"><span aria-hidden="true" style="display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;border:2px solid {{ c.dot }};overflow:hidden"><img src="{{ c.icon }}" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></span>{{ c.name }}</button></sc-for></div>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.cBoard }}">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:12px">
+<div style="flex:0 0 auto;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap;min-height:96px;padding:10px;box-sizing:border-box;border-radius:26px;background:#fff;border:{{ ui.barBorder }};box-shadow:0 12px 26px -20px rgba(58,54,45,.45)">
+<div aria-live="polite" aria-label="Sentence" style="flex:1 1 300px;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:6px 12px;border-radius:18px;background:#FFFDF5">
+<sc-if value="{{ bar.empty }}"><span style="font:500 20px/1.25 Outfit,sans-serif;color:#7D7663">Tap a picture to start a sentence</span></sc-if>
+<sc-for list="{{ bar.chips }}" as="c" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:8px;height:60px;padding:0 18px 0 {{ c.padL }};box-sizing:border-box;border-radius:16px;background:#fff;border:{{ c.border }};box-shadow:0 2px 0 {{ c.edge }};font:600 {{ ui.chipPx }}/1 Outfit,sans-serif;color:#2B2822"><sc-if value="{{ c.hasImg }}"><img src="{{ c.img }}" alt="" style="display:block;width:42px;height:42px;object-fit:contain"></sc-if>{{ c.label }}</span></sc-for>
+</div>
+<div style="flex:0 0 auto;display:flex;align-items:center;gap:14px;margin-left:auto">
+<div role="group" aria-label="Edit sentence" style="display:flex;align-items:center;gap:6px">
+<button type="button" onClick="{{ bar.onClear }}" disabled="{{ bar.empty }}" aria-label="Clear sentence" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:68px;height:72px;box-sizing:border-box;border-radius:18px;background:{{ bar.clearB.bg }};border:{{ bar.clearB.border }};color:{{ bar.clearB.ink }};cursor:pointer;transition:{{ ui.trans }}" style-active="transform:scale(.95)"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg><span style="font:600 13px/1 Outfit,sans-serif">Clear</span></button>
+<span aria-hidden="true" style="width:2px;height:40px;margin:0 6px;border-radius:2px;background:#EFE6D2"></span>
+<button type="button" onClick="{{ bar.onUndo }}" disabled="{{ bar.noUndo }}" aria-label="Undo" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:68px;height:72px;box-sizing:border-box;border-radius:18px;background:{{ bar.undoB.bg }};border:{{ bar.undoB.border }};color:{{ bar.undoB.ink }};cursor:pointer;transition:{{ ui.trans }}" style-active="transform:scale(.95)"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 0 12h-3"></path></svg><span style="font:600 13px/1 Outfit,sans-serif">Undo</span></button>
+<button type="button" onClick="{{ bar.onBack }}" disabled="{{ bar.empty }}" aria-label="Delete last word" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:68px;height:72px;box-sizing:border-box;border-radius:18px;background:{{ bar.delB.bg }};border:{{ bar.delB.border }};color:{{ bar.delB.ink }};cursor:pointer;transition:{{ ui.trans }}" style-active="transform:scale(.95)"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H9l-6 7 6 7h12z"></path><path d="m17 9-5 6M12 9l5 6"></path></svg><span style="font:600 13px/1 Outfit,sans-serif">Delete</span></button>
+</div>
+<button type="button" onClick="{{ bar.onSpeak }}" disabled="{{ bar.empty }}" style="display:flex;align-items:center;justify-content:center;gap:12px;min-width:184px;height:76px;padding:0 28px;box-sizing:border-box;border:0;border-radius:22px;background:{{ bar.speak.bg }};box-shadow:{{ bar.speak.shadow }};color:{{ bar.speak.ink }};font:700 24px/1 Outfit,sans-serif;letter-spacing:.01em;cursor:pointer;transition:{{ ui.trans }}" style-active="transform:translateY(3px)"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg>{{ bar.speakLabel }}</button>
+</div>
+</div>
+<div style="flex:1;min-height:{{ ui.areaMin }};display:grid;grid-template-columns:{{ lay.boardCols }};grid-template-rows:{{ lay.boardRows }};gap:12px">
+<div role="group" aria-label="Boards" style="display:flex;flex-direction:{{ lay.catDir }};gap:6px;min-height:0;min-width:0;overflow:auto;padding:2px;scrollbar-width:thin">
+<sc-for list="{{ cats }}" as="c" hint-placeholder-count="7"><button type="button" aria-pressed="{{ c.on }}" onClick="{{ c.onClick }}" style="display:flex;align-items:center;gap:12px;flex:0 0 auto;min-height:60px;padding:6px 16px 6px 6px;box-sizing:border-box;border-radius:18px;background:{{ c.bg }};border:{{ c.border }};font:{{ c.weight }} 16px/1.15 Outfit,sans-serif;color:{{ c.ink }};cursor:pointer;text-align:left;white-space:nowrap;transition:{{ ui.trans }}"><span aria-hidden="true" style="flex:0 0 auto;display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:{{ c.plate }};overflow:hidden"><img src="{{ c.icon }}" alt="" style="display:block;width:80%;height:80%;object-fit:contain"></span>{{ c.name }}</button></sc-for>
+</div>
+<div style="min-height:0;min-width:0;display:flex;flex-direction:column;gap:10px;padding:12px;box-sizing:border-box;border-radius:26px;background:{{ panel.bg }};border:1px solid {{ panel.edge }}">
+<div style="flex:0 0 auto;display:flex;align-items:center;gap:12px;min-height:56px;flex-wrap:wrap;padding:0 4px">
+<sc-if value="{{ follow.hide }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:12px;min-width:0;flex:1 1 auto"><span aria-hidden="true" style="flex:0 0 auto;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#fff;border:2px solid {{ panel.dot }};overflow:hidden"><img src="{{ panel.icon }}" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></span><h1 style="margin:0;font:700 24px/1.1 Outfit,sans-serif;letter-spacing:-.01em;color:#2B2822">{{ panel.title }}</h1><span style="font:500 16px/1.2 Outfit,sans-serif;color:#6C6555">{{ panel.meta }}</span></div></sc-if>
+<sc-if value="{{ follow.show }}"><div role="group" aria-label="Want to say more?" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 auto;min-width:0"><span style="font:600 17px/1.2 Outfit,sans-serif;color:#6B4E0E">Want to say more?</span><sc-for list="{{ follow.chips }}" as="c" hint-placeholder-count="4"><button type="button" onClick="{{ c.onClick }}" style="height:48px;padding:0 18px;border-radius:99px;background:#fff;border:1.5px solid #E6C866;font:600 16px/1 Outfit,sans-serif;color:#2B2822;cursor:pointer" style-active="transform:scale(.97)">{{ c.label }}</button></sc-for><button type="button" onClick="{{ follow.onDismiss }}" style="height:48px;padding:0 12px;border:0;background:transparent;font:500 15px/1 Outfit,sans-serif;color:#6B4E0E;cursor:pointer;text-decoration:underline;text-underline-offset:3px">No thanks</button></div></sc-if>
+<sc-if value="{{ pager.multi }}"><div style="flex:0 0 auto;display:flex;align-items:center;gap:8px;margin-left:auto"><div aria-hidden="true" style="display:flex;gap:5px;align-items:center;margin-right:6px"><sc-for list="{{ pager.dots }}" as="d"><span style="display:block;width:{{ d.w }};height:8px;border-radius:99px;background:{{ d.bg }}"></span></sc-for></div><button type="button" onClick="{{ pager.onPrev }}" disabled="{{ pager.noPrev }}" aria-label="Previous page" style="height:52px;padding:0 18px;box-sizing:border-box;border-radius:16px;background:{{ pager.prevB.bg }};border:{{ pager.prevB.border }};color:{{ pager.prevB.ink }};font:600 16px/1 Outfit,sans-serif;cursor:pointer">← Back</button><button type="button" onClick="{{ pager.onNext }}" disabled="{{ pager.noNext }}" aria-label="Next page" style="height:52px;padding:0 18px;box-sizing:border-box;border-radius:16px;background:{{ pager.nextB.bg }};border:{{ pager.nextB.border }};color:{{ pager.nextB.ink }};font:600 16px/1 Outfit,sans-serif;cursor:pointer">More →</button></div></sc-if>
+</div>
+<div role="group" aria-label="{{ boardAria }}" data-cols="{{ ui.cols }}" onKeyDown="{{ gridKey }}" style="flex:1;min-height:0;display:grid;grid-template-columns:repeat({{ ui.cols }},minmax(0,1fr));grid-template-rows:repeat({{ ui.rows }},minmax({{ ui.rowMin }},1fr));gap:{{ ui.gap }}">
+<sc-for list="{{ grid }}" as="t" hint-placeholder-count="15">
+<sc-if value="{{ t.empty }}"><div aria-hidden="true" style="border-radius:20px;border:2px dashed {{ panel.emptyEdge }}"></div></sc-if>
+<sc-if value="{{ t.real }}"><button type="button" data-tile="{{ t.i }}" aria-label="{{ t.label }}" onClick="{{ t.onClick }}" style="position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px;min-width:0;min-height:0;padding:7px 7px 9px;box-sizing:border-box;border-radius:20px;background:{{ t.bg }};border:{{ t.border }};box-shadow:{{ t.shadow }};cursor:pointer;transition:{{ t.trans }}" style-active="transform:translateY(2px) scale(.98)">
+<span style="position:relative;display:block;min-height:0;border-radius:14px;background:{{ t.plate }};overflow:hidden"><sc-if value="{{ t.hasImg }}"><img src="{{ t.img }}" alt="" style="position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain"></sc-if><sc-if value="{{ t.isWord }}"><span style="position:absolute;inset:0;display:grid;place-items:center;padding:4px;font:700 {{ t.wordPx }}/1.05 Outfit,sans-serif;letter-spacing:-.01em;color:{{ t.ink }};text-align:center">{{ t.label }}</span></sc-if></span>
+<sc-if value="{{ t.hasImg }}"><span style="display:block;min-width:0;font:600 {{ t.labelPx }}/1.15 Outfit,sans-serif;color:{{ t.ink }};text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.label }}</span></sc-if>
+<sc-if value="{{ t.flash }}"><span style="position:absolute;top:6px;right:6px;padding:3px 9px;border-radius:99px;background:#31706B;color:#fff;font:600 12px/1.4 Outfit,sans-serif">✓ Added</span></sc-if>
+</button></sc-if>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.cTalk }}">
+<sc-if value="{{ talk.pPartner }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:24px;align-items:start">
+<section aria-labelledby="h-partner" style="display:flex;flex-direction:column;gap:14px;min-width:0">
+<h2 id="h-partner" style="margin:0;font:500 30px/1.2 Outfit,sans-serif;color:#C24E1A">Choose a friend to play with…</h2>
+<label style="display:flex;align-items:center;gap:12px;height:56px;padding:0 20px;border-radius:99px;background:#EFEDE8"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6C6555" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"></circle><path d="m15 15 5 5"></path></svg><input type="search" aria-label="Search friends by name" placeholder="Search name" value="{{ talk.query }}" onChange="{{ talk.onQuery }}" style="flex:1;min-width:0;height:100%;border:0;background:transparent;font:500 18px/1 Outfit,sans-serif;color:#3A362D"></label>
+<sc-if value="{{ talk.noMatch }}"><p style="margin:0;padding:18px 22px;border-radius:22px;border:1.5px dashed #F0C9A0;font:400 16px/1.45 Outfit,sans-serif;color:#8A3A14">No friends match “{{ talk.query }}”. Check the spelling, or add them as a new friend.</p></sc-if>
+<sc-for list="{{ talk.partners }}" as="p" hint-placeholder-count="3"><button type="button" aria-pressed="{{ p.sel }}" onClick="{{ p.onClick }}" style="display:flex;align-items:center;gap:22px;padding:12px 18px 12px 14px;border-radius:28px;background:#FFEDC7;border:{{ p.border }};cursor:pointer;text-align:left">
+<span style="flex:0 0 auto;display:grid;place-items:center;width:92px;height:84px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ p.img }}" alt="" style="display:block;width:78%;height:86%;object-fit:contain"></span>
+<span style="flex:1;min-width:0;font:500 28px/1.15 Outfit,sans-serif;color:#C24E1A">{{ p.name }}</span>
+<span aria-hidden="true" style="flex:0 0 auto;display:grid;place-items:center;width:84px;height:76px;border-radius:18px;background:{{ p.dotBg }};color:#fff;font:600 32px/1 Outfit,sans-serif">{{ p.mark }}</span>
+</button></sc-for>
+<sc-if value="{{ talk.adding }}">
+<form onSubmit="{{ talk.onAddSubmit }}" style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:24px;background:#fff;border:1.5px solid #F0C9A0">
+<label for="nf-name" style="font:600 16px/1 Outfit,sans-serif;color:#8A3A14">New friend’s name</label>
+<input id="nf-name" type="text" maxlength="30" value="{{ talk.newName }}" onChange="{{ talk.onNewName }}" placeholder="First and last name" style="height:54px;padding:0 16px;border-radius:14px;border:1.5px solid #E2D8C1;background:#FFFDF5;font:500 18px/1 Outfit,sans-serif;color:#3A362D">
+<span id="nf-av" style="font:600 16px/1 Outfit,sans-serif;color:#8A3A14">Avatar</span>
+<div role="radiogroup" aria-labelledby="nf-av" style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{ talk.newAvatars }}" as="a" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{ a.sel }}" aria-label="{{ a.label }}" onClick="{{ a.onClick }}" style="display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:#FFFCF3;border:{{ a.border }};cursor:pointer"><img src="{{ a.img }}" alt="" style="display:block;width:78%;height:78%;object-fit:contain"></button></sc-for></div>
+<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" onClick="{{ talk.onAddCancel }}" style="height:52px;padding:0 20px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 16px/1 Outfit,sans-serif;cursor:pointer">Cancel</button><button type="submit" disabled="{{ talk.noNewName }}" style="height:52px;padding:0 24px;border:0;border-radius:99px;background:{{ talk.addBg }};color:#FFF8EC;font:600 16px/1 Outfit,sans-serif;cursor:pointer">Add friend</button></div>
+</form>
+</sc-if>
+<p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#8E8672">Friend names are demo examples, saved only on this device.</p>
+</section>
+<div style="display:flex;flex-direction:column;gap:18px">
+<button type="button" onClick="{{ talk.onAddOpen }}" style="min-height:120px;padding:18px 24px;border:0;border-radius:28px;background:#D9561C;box-shadow:0 6px 14px -6px rgba(178,72,25,.6);color:#FFF8EC;font:600 30px/1.2 Outfit,sans-serif;cursor:pointer">Add New Friend</button>
+<button type="button" onClick="{{ talk.onNext }}" disabled="{{ talk.noNext }}" aria-describedby="games-hint" style="min-height:120px;padding:18px 24px;border:0;border-radius:28px;background:{{ talk.nextBg }};box-shadow:0 6px 14px -6px rgba(178,72,25,.6);color:#FFF8EC;font:600 38px/1.1 Outfit,sans-serif;cursor:pointer">Games</button>
+<p id="games-hint" style="margin:-6px 4px 0;font:500 15px/1.4 Outfit,sans-serif;color:#8A3A14">{{ talk.nextHint }}</p>
+<div style="display:flex;flex-direction:column;gap:8px;padding:20px;border-radius:22px;background:#EAF6F2;border:1px solid #CFE7E1"><span style="font:600 12px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2A6660">Guided co-play</span><p style="margin:0;font:400 15px/1.45 Outfit,sans-serif;color:#2A6660">You take turns on this tablet using the same pictures. SayPlay doesn’t connect to another device.</p></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ talk.pAct }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:12px"><span style="font:500 17px/1 Outfit,sans-serif;color:#6C6555">Talking with <b style="color:#3A362D">{{ talk.partnerName }}</b></span><button type="button" onClick="{{ talk.onChangePartner }}" style="height:40px;padding:0 14px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;font:500 14px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer">Change</button></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<sc-for list="{{ talk.acts }}" as="a" hint-placeholder-count="3"><button type="button" onClick="{{ a.onClick }}" style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:290px;padding:26px;box-sizing:border-box;border-radius:28px;background:{{ a.bg }};border:1px solid rgba(58,54,45,.08);cursor:pointer;text-align:left">
+<span style="display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ a.img }}" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></span>
+<span style="margin-top:auto;font:600 26px/1.15 Outfit,sans-serif;color:{{ a.ink }}">{{ a.title }}</span>
+<span style="font:400 16px/1.4 Outfit,sans-serif;color:#6C6555">{{ a.blurb }}</span>
+<span style="font:500 12px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:{{ a.ink }}">3 questions · take turns</span>
+</button></sc-for>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ talk.pTurn }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,300px);gap:18px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+<span style="font:500 15px/1 Outfit,sans-serif;color:#6C6555">{{ talk.actTitle }} · {{ talk.progressText }}</span>
+<div aria-hidden="true" style="display:flex;gap:6px"><sc-for list="{{ talk.steps }}" as="d"><span style="display:block;width:36px;height:8px;border-radius:99px;background:{{ d.bg }}"></span></sc-for></div>
+<button type="button" onClick="{{ talk.onExit }}" style="margin-left:auto;height:40px;padding:0 16px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;font:500 14px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer">End activity</button>
+</div>
+<div style="display:flex;align-items:center;gap:20px;padding:18px 22px;border-radius:26px;background:{{ talk.turnBg }};border:{{ talk.turnBorder }}">
+<span style="flex:0 0 auto;display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ talk.turnImg }}" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></span>
+<div style="flex:1;min-width:0"><span aria-live="polite" style="display:block;font:600 14px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:{{ talk.turnInk }}">{{ talk.turnLabel }}</span><p style="margin:8px 0 0;font:600 28px/1.15 Outfit,sans-serif;color:#3A362D;text-wrap:pretty">{{ talk.q }}</p></div>
+<button type="button" onClick="{{ talk.onHear }}" aria-label="Hear the question" style="flex:0 0 auto;display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:#fff;border:1.5px solid #D9CFB8;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#31706B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg></button>
+</div>
+<div style="display:flex;align-items:center;gap:10px;min-height:76px;padding:10px 10px 10px 18px;box-sizing:border-box;border-radius:22px;background:#fff;border:{{ ui.barBorder }}">
+<div aria-live="polite" aria-label="Answer" style="flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<sc-if value="{{ talk.empty }}"><span style="font:400 18px/1.2 Outfit,sans-serif;color:#A79E8B">{{ talk.emptyText }}</span></sc-if>
+<sc-for list="{{ talk.chips }}" as="c" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:8px;height:50px;padding:0 14px 0 {{ c.padL }};box-sizing:border-box;border-radius:14px;background:#FBF7EA;border:{{ c.border }};font:500 {{ ui.chipPx }}/1 Outfit,sans-serif;color:#3A362D"><sc-if value="{{ c.hasImg }}"><img src="{{ c.img }}" alt="" style="display:block;width:34px;height:34px;object-fit:contain"></sc-if>{{ c.label }}</span></sc-for>
+</div>
+<button type="button" onClick="{{ talk.onBack }}" disabled="{{ talk.empty }}" aria-label="Delete last word" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:64px;height:60px;box-sizing:border-box;border-radius:18px;background:{{ talk.delB.bg }};border:{{ talk.delB.border }};color:{{ talk.delB.ink }};cursor:pointer;transition:{{ ui.trans }}" style-active="transform:scale(.95)"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H9l-6 7 6 7h12z"></path><path d="m17 9-5 6M12 9l5 6"></path></svg><span style="font:600 13px/1 Outfit,sans-serif">Delete</span></button>
+<button type="button" onClick="{{ talk.onSpeak }}" disabled="{{ talk.empty }}" style="display:flex;align-items:center;gap:10px;height:60px;padding:0 24px;border:0;border-radius:20px;background:{{ talk.speakBg }};box-shadow:{{ talk.speakShadow }};color:{{ talk.speakInk }};font:700 19px/1 Outfit,sans-serif;cursor:pointer" style-active="transform:translateY(3px)"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg>Speak</button>
+</div>
+<div role="group" aria-label="Answer pictures" data-cols="6" onKeyDown="{{ gridKey }}" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:140px;gap:10px;padding:12px;border-radius:24px;background:#F8F3E6;border:1px solid #F1E6CC">
+<sc-for list="{{ talk.tiles }}" as="t" hint-placeholder-count="12"><sc-if value="{{ t.empty }}"><div aria-hidden="true" style="border-radius:20px;border:2px dashed {{ panel.emptyEdge }}"></div></sc-if>
+<sc-if value="{{ t.real }}"><button type="button" data-tile="{{ t.i }}" aria-label="{{ t.label }}" onClick="{{ t.onClick }}" style="position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:6px;min-width:0;min-height:0;padding:7px 7px 9px;box-sizing:border-box;border-radius:20px;background:{{ t.bg }};border:{{ t.border }};box-shadow:{{ t.shadow }};cursor:pointer;transition:{{ t.trans }}" style-active="transform:translateY(2px) scale(.98)">
+<span style="position:relative;display:block;min-height:0;border-radius:14px;background:{{ t.plate }};overflow:hidden"><sc-if value="{{ t.hasImg }}"><img src="{{ t.img }}" alt="" style="position:absolute;left:8%;top:8%;width:84%;height:84%;object-fit:contain"></sc-if><sc-if value="{{ t.isWord }}"><span style="position:absolute;inset:0;display:grid;place-items:center;padding:4px;font:700 {{ t.wordPx }}/1.05 Outfit,sans-serif;letter-spacing:-.01em;color:{{ t.ink }};text-align:center">{{ t.label }}</span></sc-if></span>
+<sc-if value="{{ t.hasImg }}"><span style="display:block;min-width:0;font:600 {{ t.labelPx }}/1.15 Outfit,sans-serif;color:{{ t.ink }};text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.label }}</span></sc-if>
+<sc-if value="{{ t.flash }}"><span style="position:absolute;top:6px;right:6px;padding:3px 9px;border-radius:99px;background:#31706B;color:#fff;font:600 12px/1.4 Outfit,sans-serif">✓ Added</span></sc-if>
+</button></sc-if></sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+<sc-if value="{{ talk.isChildTurn }}"><button type="button" onClick="{{ talk.onPass }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;color:#3A362D;font:500 17px/1 Outfit,sans-serif;cursor:pointer">Skip this one</button><button type="button" onClick="{{ talk.onDone }}" disabled="{{ talk.empty }}" style="height:58px;padding:0 26px;border:0;border-radius:99px;background:{{ talk.speakBg }};color:{{ talk.speakInk }};font:600 17px/1 Outfit,sans-serif;cursor:pointer">{{ talk.doneLabel }}</button></sc-if>
+<sc-if value="{{ talk.isPartnerTurn }}"><button type="button" onClick="{{ talk.onAloud }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;color:#3A362D;font:500 17px/1 Outfit,sans-serif;cursor:pointer">{{ talk.aloudLabel }}</button><button type="button" onClick="{{ talk.onDone }}" disabled="{{ talk.empty }}" style="height:58px;padding:0 26px;border:0;border-radius:99px;background:{{ talk.speakBg }};color:{{ talk.speakInk }};font:600 17px/1 Outfit,sans-serif;cursor:pointer">{{ talk.doneLabel }}</button></sc-if>
+</div>
+</div>
+<aside aria-label="Conversation" style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:24px;background:#fff;border:1px solid #EDE4CE;max-height:680px;overflow:auto">
+<h2 style="margin:0 0 4px;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Conversation</h2>
+<sc-if value="{{ talk.logEmpty }}"><p style="margin:0;font:400 15px/1.45 Outfit,sans-serif;color:#8E8672">What you both say will show here.</p></sc-if>
+<sc-for list="{{ talk.log }}" as="l" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;align-items:{{ l.align }};gap:4px"><span style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">{{ l.who }}</span><span style="max-width:92%;padding:10px 14px;border-radius:16px;background:{{ l.bg }};font:{{ l.weight }} 16px/1.35 Outfit,sans-serif;color:{{ l.ink }}">{{ l.text }}</span></div></sc-for>
+</aside>
+</div>
+</sc-if>
+
+<sc-if value="{{ talk.pDone }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,320px);gap:18px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:18px;padding:40px;border-radius:28px;background:#EAF6F2;border:1px solid #CFE7E1">
+<div aria-hidden="true" style="display:flex"><span style="display:grid;place-items:center;width:110px;height:110px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ childImg }}" alt="" style="display:block;width:80%;height:80%;object-fit:contain"></span><span style="display:grid;place-items:center;width:92px;height:92px;margin-left:-18px;align-self:flex-end;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ talk.partnerImg }}" alt="" style="display:block;width:80%;height:80%;object-fit:contain"></span></div>
+<h2 style="margin:0;font:600 36px/1.15 Outfit,sans-serif;color:#2A6660;text-wrap:pretty">{{ talk.summary }}</h2>
+<p style="margin:0;font:400 17px/1.5 Outfit,sans-serif;color:#2F6F69">Keep going, try another activity, or go back to your board.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" onClick="{{ talk.onAgain }}" style="height:58px;padding:0 26px;border:0;border-radius:99px;background:#31706B;color:#fff;font:600 17px/1 Outfit,sans-serif;cursor:pointer">Talk again</button><button type="button" onClick="{{ talk.onOtherAct }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #9AD0C6;background:#fff;color:#2A6660;font:500 17px/1 Outfit,sans-serif;cursor:pointer">Another activity</button><button type="button" onClick="{{ talk.onBoard }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #9AD0C6;background:#fff;color:#2A6660;font:500 17px/1 Outfit,sans-serif;cursor:pointer">My board</button></div>
+</div>
+<aside aria-label="Conversation" style="display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:24px;background:#fff;border:1px solid #EDE4CE">
+<h2 style="margin:0 0 4px;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Conversation</h2>
+<sc-for list="{{ talk.log }}" as="l" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;align-items:{{ l.align }};gap:4px"><span style="font:500 12px/1 Outfit,sans-serif;color:#8E8672">{{ l.who }}</span><span style="max-width:92%;padding:10px 14px;border-radius:16px;background:{{ l.bg }};font:{{ l.weight }} 16px/1.35 Outfit,sans-serif;color:{{ l.ink }}">{{ l.text }}</span></div></sc-for>
+</aside>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ v.cPlay }}">
+<sc-if value="{{ game.active }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:18px 22px;border-radius:26px;background:#EFEEF8;border:1px solid #E1DFF2">
+<span style="flex:0 0 auto;display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ game.mascot }}" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></span>
+<div style="flex:1;min-width:200px"><span style="display:block;font:600 14px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#4B4A86">Find it · {{ game.progressText }}</span><p style="margin:8px 0 0;font:600 30px/1.15 Outfit,sans-serif;color:#3A362D">{{ game.prompt }}</p></div>
+<div aria-hidden="true" style="display:flex;gap:6px"><sc-for list="{{ game.dots }}" as="d"><span style="display:block;width:28px;height:8px;border-radius:99px;background:{{ d.bg }}"></span></sc-for></div>
+<button type="button" onClick="{{ game.onHear }}" aria-label="Hear the question" style="display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:#fff;border:1.5px solid #D2CFEA;cursor:pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4B4A86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg></button>
+</div>
+<div role="group" aria-label="Pictures" data-cols="3" onKeyDown="{{ gridKey }}" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:190px;gap:14px;padding:14px;border-radius:24px;background:#F8F3E6;border:1px solid #F1E6CC">
+<sc-for list="{{ game.tiles }}" as="t" hint-placeholder-count="6"><button type="button" data-tile="{{ t.i }}" aria-label="{{ t.label }}" onClick="{{ t.onClick }}" style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;box-sizing:border-box;border-radius:22px;background:#fff;border:{{ t.border }};cursor:pointer;opacity:{{ t.op }};transition:{{ ui.trans }}"><img src="{{ t.img }}" alt="" style="display:block;height:120px;max-width:80%;object-fit:contain"><span style="font:500 {{ ui.labelPx }}/1 Outfit,sans-serif;color:#3A362D">{{ t.label }}</span><sc-if value="{{ t.hasNote }}"><span style="position:absolute;top:10px;right:10px;padding:4px 10px;border-radius:99px;background:{{ t.noteBg }};color:{{ t.noteInk }};font:600 13px/1.3 Outfit,sans-serif">{{ t.note }}</span></sc-if></button></sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap">
+<p aria-live="polite" style="flex:1;margin:0;font:500 20px/1.35 Outfit,sans-serif;color:{{ game.fbInk }}">{{ game.fb }}</p>
+<sc-if value="{{ game.canNext }}"><button type="button" onClick="{{ game.onNext }}" style="height:58px;padding:0 26px;border:0;border-radius:99px;background:#4B4A86;color:#fff;font:600 17px/1 Outfit,sans-serif;cursor:pointer">{{ game.nextLabel }}</button></sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ game.done }}">
+<div style="display:flex;flex-direction:column;align-items:flex-start;gap:18px;padding:44px;border-radius:28px;background:#EFEEF8;border:1px solid #E1DFF2">
+<span style="display:grid;place-items:center;width:110px;height:110px;border-radius:50%;background:#fff;overflow:hidden"><img src="{{ game.mascot }}" alt="" style="display:block;width:82%;height:82%;object-fit:contain"></span>
+<h2 style="margin:0;font:600 36px/1.15 Outfit,sans-serif;color:#4B4A86">That was fun to play together.</h2>
+<p style="margin:0;font:400 17px/1.5 Outfit,sans-serif;color:#5B5A8E">You looked at five pictures. Want to play again?</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" onClick="{{ game.onAgain }}" style="height:58px;padding:0 26px;border:0;border-radius:99px;background:#4B4A86;color:#fff;font:600 17px/1 Outfit,sans-serif;cursor:pointer">Play again</button><button type="button" onClick="{{ game.onHome }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #D2CFEA;background:#fff;color:#4B4A86;font:500 17px/1 Outfit,sans-serif;cursor:pointer">Home</button></div>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{ v.cStory }}">
+<div style="display:flex;flex-direction:column;gap:16px">
+<ol aria-label="Story steps" style="display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none">
+<sc-for list="{{ story.steps }}" as="st" hint-placeholder-count="5"><li><button type="button" onClick="{{ st.onClick }}" disabled="{{ st.disabled }}" aria-current="{{ st.current }}" style="display:flex;align-items:center;gap:10px;height:50px;padding:0 18px 0 8px;border-radius:99px;background:{{ st.bg }};border:{{ st.border }};color:{{ st.ink }};font:500 16px/1 Outfit,sans-serif;cursor:pointer;opacity:{{ st.op }}"><span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:{{ st.numBg }};color:{{ st.numInk }};font:600 14px/1 Outfit,sans-serif">{{ st.num }}</span>{{ st.label }}<sc-if value="{{ st.hasPick }}"><span style="opacity:.75">· {{ st.pick }}</span></sc-if></button></li></sc-for>
+</ol>
+<sc-if value="{{ story.isPick }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:18px;align-items:start">
+<section style="display:flex;flex-direction:column;gap:14px;padding:22px;border-radius:28px;background:#FBEFE2;border:1px solid #F1E0CB">
+<div style="display:flex;align-items:center;gap:14px"><h2 style="margin:0;flex:1;font:600 28px/1.15 Outfit,sans-serif;color:#7A5320">{{ story.pickTitle }}</h2><sc-if value="{{ story.canBack }}"><button type="button" onClick="{{ story.onBackStep }}" style="height:46px;padding:0 18px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#7A5320;font:500 15px/1 Outfit,sans-serif;cursor:pointer">← Back</button></sc-if></div>
+<div role="group" aria-label="{{ story.pickTitle }}" data-cols="4" onKeyDown="{{ gridKey }}" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:170px;gap:12px">
+<sc-for list="{{ story.options }}" as="o" hint-placeholder-count="8"><button type="button" data-tile="{{ o.i }}" aria-pressed="{{ o.sel }}" onClick="{{ o.onClick }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;box-sizing:border-box;border-radius:22px;background:#fff;border:{{ o.border }};cursor:pointer"><img src="{{ o.img }}" alt="" style="display:block;height:96px;max-width:85%;object-fit:contain"><span style="font:500 {{ ui.labelPx }}/1.1 Outfit,sans-serif;color:#3A362D;text-align:center">{{ o.label }}</span></button></sc-for>
+</div>
+</section>
+<aside aria-labelledby="h-stories" style="display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:24px;background:#fff;border:1px solid #EDE4CE">
+<h2 id="h-stories" style="margin:0 0 4px;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">My stories</h2>
+<sc-if value="{{ story.savedEmpty }}"><p style="margin:0;font:400 15px/1.45 Outfit,sans-serif;color:#8E8672">Stories you save will show here.</p></sc-if>
+<sc-for list="{{ story.saved }}" as="x" hint-placeholder-count="0"><div style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px;border-radius:16px;background:#FBF7EA"><button type="button" onClick="{{ x.onOpen }}" style="flex:1;min-width:0;min-height:44px;padding:0;border:0;background:transparent;text-align:left;font:500 15px/1.3 Outfit,sans-serif;color:#3A362D;cursor:pointer">{{ x.title }}</button><button type="button" onClick="{{ x.onDelete }}" aria-label="{{ x.delAria }}" style="width:44px;height:44px;border-radius:12px;border:1px solid #EDE4CE;background:#fff;color:#8E8672;font:500 18px/1 Outfit,sans-serif;cursor:pointer">×</button></div></sc-for>
+</aside>
+</div>
+</sc-if>
+<sc-if value="{{ story.isStory }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<sc-for list="{{ story.panels }}" as="p" hint-placeholder-count="3"><figure style="margin:0;display:flex;flex-direction:column;gap:14px;padding:18px;border-radius:26px;background:#fff;border:{{ p.border }};box-shadow:{{ p.shadow }}">
+<div style="position:relative;display:grid;place-items:center;height:220px;border-radius:18px;background:{{ p.bg }}"><img src="{{ p.img }}" alt="" style="display:block;max-height:160px;max-width:78%;object-fit:contain"><span style="position:absolute;left:12px;bottom:12px;display:grid;place-items:center;width:66px;height:66px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(58,54,45,.18);overflow:hidden"><img src="{{ p.charImg }}" alt="" style="display:block;width:84%;height:84%;object-fit:contain"></span></div>
+<figcaption style="font:600 24px/1.25 Outfit,sans-serif;color:#3A362D;text-wrap:pretty">{{ p.line }}</figcaption>
+<button type="button" onClick="{{ p.onEdit }}" style="align-self:flex-start;height:44px;padding:0 16px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#7A5320;font:500 15px/1 Outfit,sans-serif;cursor:pointer">Change {{ p.what }}</button>
+</figure></sc-for>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<button type="button" onClick="{{ story.onPlay }}" style="display:flex;align-items:center;gap:10px;height:60px;padding:0 28px;border:0;border-radius:99px;background:#7A5320;color:#fff;font:600 18px/1 Outfit,sans-serif;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"></path><path d="M15.5 9a4 4 0 0 1 0 6"></path></svg>{{ story.playLabel }}</button>
+<button type="button" onClick="{{ story.onSave }}" disabled="{{ story.savedThis }}" style="height:60px;padding:0 24px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#7A5320;font:500 17px/1 Outfit,sans-serif;cursor:pointer;opacity:{{ story.saveOp }}">{{ story.saveLabel }}</button>
+<button type="button" onClick="{{ story.onNew }}" style="height:60px;padding:0 24px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#7A5320;font:500 17px/1 Outfit,sans-serif;cursor:pointer">New story</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCg }}">
+<div style="display:grid;grid-template-columns:{{ cgCols }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+
+<sc-if value="{{ v.gSetup }}">
+<section aria-labelledby="ob-q" style="display:flex;flex-direction:column;gap:22px;padding:28px 32px 32px;border-radius:32px;background:#FFFCF3;border:1px solid #F1E6CC">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+<span style="font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">{{ ob.stepText }}</span>
+<div aria-hidden="true" style="display:flex;gap:6px"><sc-for list="{{ ob.dots }}" as="d" hint-placeholder-count="6"><span style="display:block;width:28px;height:8px;border-radius:99px;background:{{ d.bg }}"></span></sc-for></div>
+<sc-if value="{{ ob.isQ }}"><button type="button" onClick="{{ ob.onSkip }}" style="margin-left:auto;height:44px;padding:0 16px;border:0;background:transparent;font:500 15px/1 Outfit,sans-serif;color:#8E8672;text-decoration:underline;cursor:pointer">Skip this question</button></sc-if>
+</div>
+<div style="display:grid;grid-template-columns:minmax(110px,200px) minmax(0,1fr);gap:28px;align-items:start">
+<img src="{{ ob.fox }}" alt="SayPlay fox" style="display:block;width:100%;max-width:200px;height:auto;object-fit:contain">
+<div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+<div style="position:relative;align-self:flex-start;max-width:600px;margin-bottom:30px;padding:22px 34px;box-sizing:border-box;border:6px solid #C4531F;border-radius:30px;background:#fff">
+<h2 id="ob-q" style="margin:0;font:600 30px/1.25 Outfit,sans-serif;color:#1F1C17;text-align:center;text-wrap:balance">{{ ob.q }}</h2>
+<svg aria-hidden="true" width="60" height="44" viewBox="0 0 60 44" style="position:absolute;left:40px;bottom:-42px;overflow:visible"><path d="M8 -2 H50 L4 40 Z" fill="#fff"></path><path d="M12 0 L4 40 L48 2" fill="none" stroke="#C4531F" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+</div>
+<sc-if value="{{ ob.isQ }}">
+<p style="margin:0;font:400 15px/1.4 Outfit,sans-serif;color:#8E8672">{{ ob.hint }}</p>
+<div role="{{ ob.role }}" aria-labelledby="ob-q" style="display:grid;grid-template-columns:{{ ob.cols }};gap:14px">
+<sc-for list="{{ ob.opts }}" as="o" hint-placeholder-count="4"><button type="button" role="{{ o.role }}" aria-checked="{{ o.sel }}" onClick="{{ o.onClick }}" style="display:flex;align-items:center;justify-content:center;gap:12px;min-height:{{ ob.h }};padding:14px 24px;box-sizing:border-box;border-radius:28px;background:{{ o.bg }};border:{{ o.border }};font:600 {{ ob.px }}/1.2 Outfit,sans-serif;color:{{ o.ink }};cursor:pointer;text-align:center;transition:{{ ui.trans }}"><sc-if value="{{ o.sel }}"><span aria-hidden="true">✓</span></sc-if>{{ o.label }}</button></sc-for>
+</div>
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+<sc-if value="{{ ob.canBack }}"><button type="button" onClick="{{ ob.onBack }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 17px/1 Outfit,sans-serif;cursor:pointer">← Back</button></sc-if>
+<button type="button" onClick="{{ ob.onNext }}" disabled="{{ ob.noNext }}" style="margin-left:auto;height:60px;padding:0 44px;border:0;border-radius:99px;background:{{ ob.nextBg }};color:#fff;font:600 22px/1 Outfit,sans-serif;cursor:pointer">Continue</button>
+</div>
+</sc-if>
+<sc-if value="{{ ob.isSummary }}">
+<div style="display:flex;flex-direction:column;gap:10px"><sc-for list="{{ ob.rows }}" as="r" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:4px 16px;padding:16px 20px;border-radius:20px;background:#FFEFCC"><span style="font:600 17px/1.3 Outfit,sans-serif;color:#8A3A14">{{ r.label }}</span><b style="font:600 17px/1.3 Outfit,sans-serif;color:#1F1C17">{{ r.value }}</b><span style="grid-column:1 / -1;font:400 15px/1.45 Outfit,sans-serif;color:#6C4A2E">{{ r.why }}</span></div></sc-for></div>
+<p style="margin:0;font:400 15px/1.5 Outfit,sans-serif;color:#6C6555">These are a starting point, not a clinical recommendation. Review them with your child’s therapist. Nothing changes for the child until you press Save changes.</p>
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+<button type="button" onClick="{{ ob.onEdit }}" style="height:58px;padding:0 22px;border-radius:99px;border:1.5px solid #E6CFAE;background:#fff;color:#8A3A14;font:500 17px/1 Outfit,sans-serif;cursor:pointer">Edit answers</button>
+<button type="button" onClick="{{ ob.onApply }}" disabled="{{ ob.applied }}" style="margin-left:auto;height:60px;padding:0 32px;border:0;border-radius:99px;background:{{ ob.applyBg }};color:#fff;font:600 19px/1 Outfit,sans-serif;cursor:pointer">{{ ob.applyLabel }}</button>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ v.gProfile }}">
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<label for="cg-name" style="font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Child’s name</label>
+<input id="cg-name" type="text" maxlength="20" value="{{ cgP.name }}" onChange="{{ cgP.onName }}" style="height:58px;padding:0 18px;border-radius:16px;border:1.5px solid #E2D8C1;background:#fff;font:500 20px/1 Outfit,sans-serif;color:#3A362D">
+<p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#8E8672">Shown on the child’s home screen, in Let’s Talk and in stories.</p>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Avatar</h2>
+<div role="radiogroup" aria-label="Avatar" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+<sc-for list="{{ cgP.avatars }}" as="a" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{ a.sel }}" onClick="{{ a.onClick }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 8px 12px;border-radius:20px;background:{{ a.bg }};border:{{ a.border }};cursor:pointer"><img src="{{ a.img }}" alt="" style="display:block;width:84px;height:84px;object-fit:contain"><span style="font:500 16px/1 Outfit,sans-serif;color:#3A362D">{{ a.label }}</span><span style="min-height:14px;font:600 12px/1 Outfit,sans-serif;color:#31706B">{{ a.mark }}</span></button></sc-for>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<label for="cg-age" style="font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Age</label>
+<select id="cg-age" value="{{ cgP.age }}" onChange="{{ cgP.onAge }}" style="height:56px;padding:0 14px;border-radius:16px;border:1.5px solid #E2D8C1;background:#fff;font:500 18px/1 Outfit,sans-serif;color:#3A362D"><sc-for list="{{ cgP.ages }}" as="o" hint-placeholder-count="5"><option value="{{ o.value }}">{{ o.label }}</option></sc-for></select>
+<p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#8E8672">Also asked in Set-up. Used only to suggest a starting board size.</p>
+</section>
+<section style="display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:24px;background:#FFFDF5;border:1.5px dashed #D9CFB8">
+<div style="display:flex;align-items:center;gap:8px"><b style="font:600 17px/1.2 Outfit,sans-serif;color:#3A362D">Settings PIN</b><span style="margin-left:auto;padding:4px 10px;border-radius:99px;background:#F1E9D6;color:#6C6555;font:600 12px/1.2 Outfit,sans-serif">Concept</span></div>
+<p style="margin:0;font:400 14px/1.45 Outfit,sans-serif;color:#6C6555">A grown-up PIN would keep children out of settings. Not built in this prototype, so switching roles is open for the demo.</p>
+</section>
+</sc-if>
+
+<sc-if value="{{ v.gAccess }}">
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Display</h2>
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid #EDE4CE"><span style="flex:1;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">Text size</span><div role="group" aria-label="Text size" style="display:flex;gap:8px"><sc-for list="{{ cgA.sizes }}" as="z" hint-placeholder-count="3"><button type="button" aria-pressed="{{ z.sel }}" aria-label="{{ z.aria }}" onClick="{{ z.onClick }}" style="width:64px;height:56px;border-radius:14px;border:{{ z.border }};background:{{ z.bg }};color:{{ z.ink }};font:600 {{ z.px }}/1 Outfit,sans-serif;cursor:pointer">A</button></sc-for></div></div>
+<sc-for list="{{ cgA.display }}" as="t" hint-placeholder-count="2"><button type="button" role="switch" aria-checked="{{ t.on }}" onClick="{{ t.onClick }}" style="display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;box-sizing:border-box;border-radius:18px;background:#fff;border:1px solid #EDE4CE;text-align:left;cursor:pointer"><span style="flex:1;min-width:0"><span style="display:block;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">{{ t.title }}</span><span style="display:block;margin-top:4px;font:400 14px/1.35 Outfit,sans-serif;color:#8E8672">{{ t.sub }}</span></span><span style="width:30px;font:500 14px/1 Outfit,sans-serif;color:#6C6555">{{ t.state }}</span><span aria-hidden="true" style="display:flex;justify-content:{{ t.knob }};align-items:center;width:60px;height:34px;padding:4px;box-sizing:border-box;border-radius:99px;background:{{ t.bg }}"><span style="display:block;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span></button></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Voice</h2>
+<div style="display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><label for="cg-voice" style="flex:1;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">Voice</label><select id="cg-voice" value="{{ cgA.voiceValue }}" onChange="{{ cgA.onVoice }}" disabled="{{ cgA.voiceDisabled }}" style="min-width:240px;max-width:100%;height:50px;padding:0 14px;border-radius:14px;border:1.5px solid #E2D8C1;background:#FFFDF5;font:500 15px/1 Outfit,sans-serif;color:#3A362D"><sc-for list="{{ cgA.voiceOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.value }}">{{ o.label }}</option></sc-for></select></div>
+<p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#8E8672">{{ cgA.voiceNote }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:14px"><label for="cg-rate" style="flex:1;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">Speech rate</label><span style="font:600 16px/1 Outfit,sans-serif;color:#31706B">{{ cgA.rateText }}</span></div>
+<input id="cg-rate" type="range" min="0.6" max="1.4" step="0.1" value="{{ cgA.rate }}" onChange="{{ cgA.onRate }}" style="width:100%;height:32px;accent-color:#31706B">
+<div style="display:flex;justify-content:space-between;font:400 13px/1 Outfit,sans-serif;color:#8E8672"><span>Slower</span><span>Faster</span></div>
+<button type="button" onClick="{{ cgA.onTest }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:1.5px solid #9AD0C6;background:#EAF6F2;color:#2A6660;font:600 15px/1 Outfit,sans-serif;cursor:pointer">Test voice</button>
+</div>
+<sc-for list="{{ cgA.sliders }}" as="r" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:10px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:14px"><label for="{{ r.id }}" style="flex:1;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">{{ r.label }}</label><span style="font:600 16px/1 Outfit,sans-serif;color:#31706B">{{ r.text }}</span></div>
+<input id="{{ r.id }}" type="range" min="{{ r.min }}" max="{{ r.max }}" step="0.1" value="{{ r.value }}" onChange="{{ r.onChange }}" style="width:100%;height:32px;accent-color:#31706B">
+<div style="display:flex;justify-content:space-between;font:400 13px/1 Outfit,sans-serif;color:#8E8672"><span>{{ r.lo }}</span><span>{{ r.hi }}</span></div>
+</div></sc-for>
+<sc-for list="{{ cgA.voiceToggles }}" as="t" hint-placeholder-count="1"><button type="button" role="switch" aria-checked="{{ t.on }}" onClick="{{ t.onClick }}" style="display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;box-sizing:border-box;border-radius:18px;background:#fff;border:1px solid #EDE4CE;text-align:left;cursor:pointer"><span style="flex:1;min-width:0"><span style="display:block;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">{{ t.title }}</span><span style="display:block;margin-top:4px;font:400 14px/1.35 Outfit,sans-serif;color:#8E8672">{{ t.sub }}</span></span><span style="width:30px;font:500 14px/1 Outfit,sans-serif;color:#6C6555">{{ t.state }}</span><span aria-hidden="true" style="display:flex;justify-content:{{ t.knob }};align-items:center;width:60px;height:34px;padding:4px;box-sizing:border-box;border-radius:99px;background:{{ t.bg }}"><span style="display:block;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span></button></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Input</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:18px;background:#fff;border:2.5px solid #31706B"><div style="display:flex;align-items:center;gap:8px"><b style="font:600 17px/1.2 Outfit,sans-serif;color:#3A362D">Touch</b><span style="margin-left:auto;padding:4px 10px;border-radius:99px;background:#31706B;color:#fff;font:600 12px/1.2 Outfit,sans-serif">✓ In use</span></div><p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#6C6555">Tap a picture to choose it. Works on tablets, and with a mouse or keyboard on desktop.</p></div>
+<sc-for list="{{ cgA.concepts }}" as="c" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:18px;background:#FFFDF5;border:1.5px dashed #D9CFB8"><div style="display:flex;align-items:center;gap:8px"><b style="font:600 17px/1.2 Outfit,sans-serif;color:#3A362D">{{ c.title }}</b><span style="margin-left:auto;padding:4px 10px;border-radius:99px;background:#F1E9D6;color:#6C6555;font:600 12px/1.2 Outfit,sans-serif">Concept</span></div><p style="margin:0;font:400 14px/1.4 Outfit,sans-serif;color:#6C6555">{{ c.sub }}</p></div></sc-for>
+</div>
+<p style="margin:0;font:400 14px/1.45 Outfit,sans-serif;color:#8E8672">Concept cards show how SayPlay could support other ways to select. They aren’t built in this prototype.</p>
+</section>
+</sc-if>
+
+<sc-if value="{{ v.gVocab }}">
+<p style="margin:0;max-width:820px;font:400 16px/1.5 Outfit,sans-serif;color:#6C6555">These are prototype settings, not clinical recommendations. The right amount depends on the child, and is best chosen with their therapist.</p>
+<div role="radiogroup" aria-label="Symbols per page" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+<sc-for list="{{ cgV.cards }}" as="c" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{ c.sel }}" onClick="{{ c.onClick }}" style="display:flex;flex-direction:column;gap:14px;padding:20px;box-sizing:border-box;border-radius:24px;background:{{ c.bg }};border:{{ c.border }};box-shadow:{{ c.shadow }};text-align:left;cursor:pointer;transition:{{ ui.trans }}">
+<div style="display:flex;align-items:flex-start;gap:12px;width:100%"><div style="flex:1;min-width:0"><span style="display:block;font:700 44px/1 Outfit,sans-serif;letter-spacing:-.02em;color:#2B2822">{{ c.count }}</span><span style="display:block;margin-top:8px;font:600 18px/1.2 Outfit,sans-serif;color:#2B2822">{{ c.title }}</span><span style="display:block;margin-top:4px;font:500 14px/1.3 Outfit,sans-serif;color:#6C6555">{{ c.dims }} grid · {{ c.targetText }} targets</span></div><span aria-hidden="true" style="flex:0 0 auto;display:grid;place-items:center;width:32px;height:32px;box-sizing:border-box;border-radius:50%;border:{{ c.radioBorder }};background:{{ c.radioBg }};color:#fff;font:700 16px/1 Outfit,sans-serif">{{ c.tick }}</span></div>
+<div style="width:100%"><div aria-hidden="true" style="display:grid;grid-template-columns:repeat({{ c.mini.cols }},minmax(0,1fr));gap:{{ c.mini.gap }};padding:{{ c.mini.pad }};border-radius:14px;background:#F8F3E6"><sc-for list="{{ c.mini.cells }}" as="x"><span style="display:grid;place-items:center;aspect-ratio:1 / .82;box-sizing:border-box;border-radius:{{ c.mini.r }};background:{{ x.bg }};border:{{ x.border }};font:700 {{ c.mini.px }}/1 Outfit,sans-serif;color:{{ x.ink }};overflow:hidden">{{ x.label }}</span></sc-for></div></div>
+<p style="margin:0;font:400 14px/1.45 Outfit,sans-serif;color:#5C5648">{{ c.desc }}</p>
+<sc-if value="{{ c.isNow }}"><span style="align-self:flex-start;padding:5px 10px;border-radius:99px;background:#F1E9D6;font:600 12px/1.2 Outfit,sans-serif;color:#5C5648">Current saved setting</span></sc-if>
+</button></sc-for>
+</div>
+<sc-if value="{{ cgV.warn }}">
+<section aria-labelledby="ba-h" style="display:flex;flex-direction:column;gap:18px;padding:22px 24px;border-radius:26px;background:#FFF8EE;border:1.5px solid #F0C9A0">
+<div><h2 id="ba-h" style="margin:0;font:700 20px/1.25 Outfit,sans-serif;color:#7A3B1E">Before and after: symbols move when you save</h2><p style="margin:6px 0 0;max-width:760px;font:400 15px/1.5 Outfit,sans-serif;color:#7A3B1E">{{ cgV.warnText }}</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:start">
+<figure style="margin:0;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:20px;background:#fff;border:1.5px solid #E6DCC4"><figcaption style="display:flex;flex-direction:column;gap:4px"><b style="font:600 12px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#6C6555">Now</b><span style="font:600 17px/1.2 Outfit,sans-serif;color:#2B2822">{{ cgV.beforeLabel }}</span></figcaption><div aria-hidden="true" style="display:grid;grid-template-columns:repeat({{ cgV.before.cols }},minmax(0,1fr));gap:{{ cgV.before.gap }};padding:{{ cgV.before.pad }};border-radius:14px;background:#F8F3E6"><sc-for list="{{ cgV.before.cells }}" as="x"><span style="display:grid;place-items:center;aspect-ratio:1 / .82;box-sizing:border-box;border-radius:{{ cgV.before.r }};background:{{ x.bg }};border:{{ x.border }};font:700 {{ cgV.before.px }}/1 Outfit,sans-serif;color:{{ x.ink }};overflow:hidden">{{ x.label }}</span></sc-for></div><span style="font:500 14px/1.35 Outfit,sans-serif;color:#5C5648">{{ cgV.beforePos }}</span></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:20px;background:#fff;border:2.5px solid #31706B"><figcaption style="display:flex;flex-direction:column;gap:4px"><b style="font:600 12px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#2A6660">After you save</b><span style="font:600 17px/1.2 Outfit,sans-serif;color:#2B2822">{{ cgV.afterLabel }}</span></figcaption><div aria-hidden="true" style="display:grid;grid-template-columns:repeat({{ cgV.after.cols }},minmax(0,1fr));gap:{{ cgV.after.gap }};padding:{{ cgV.after.pad }};border-radius:14px;background:#F8F3E6"><sc-for list="{{ cgV.after.cells }}" as="x"><span style="display:grid;place-items:center;aspect-ratio:1 / .82;box-sizing:border-box;border-radius:{{ cgV.after.r }};background:{{ x.bg }};border:{{ x.border }};font:700 {{ cgV.after.px }}/1 Outfit,sans-serif;color:{{ x.ink }};overflow:hidden">{{ x.label }}</span></sc-for></div><span style="font:500 14px/1.35 Outfit,sans-serif;color:#2A6660">{{ cgV.afterPos }}</span></figure>
+</div>
+</section>
+</sc-if>
+<sc-if value="{{ notEmbed }}"><section style="display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC"><h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Stable positions</h2><p style="margin:0;font:400 15px/1.5 Outfit,sans-serif;color:#3A362D">Within a setting, every symbol keeps its place on every page. SayPlay never reorders symbols by how often they’re used, so a child can rely on where words are.</p></section></sc-if>
+</sc-if>
+
+<sc-if value="{{ v.gActs }}">
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">On the home screen</h2>
+<sc-for list="{{ cgX.acts }}" as="t" hint-placeholder-count="3"><button type="button" role="switch" aria-checked="{{ t.on }}" onClick="{{ t.onClick }}" style="display:flex;align-items:center;gap:14px;width:100%;padding:16px 20px;box-sizing:border-box;border-radius:18px;background:#fff;border:1px solid #EDE4CE;text-align:left;cursor:pointer"><span style="flex:1;min-width:0"><span style="display:block;font:500 18px/1.2 Outfit,sans-serif;color:#3A362D">{{ t.title }}</span><span style="display:block;margin-top:4px;font:400 14px/1.35 Outfit,sans-serif;color:#8E8672">{{ t.sub }}</span></span><span style="width:30px;font:500 14px/1 Outfit,sans-serif;color:#6C6555">{{ t.state }}</span><span aria-hidden="true" style="display:flex;justify-content:{{ t.knob }};align-items:center;width:60px;height:34px;padding:4px;box-sizing:border-box;border-radius:99px;background:{{ t.bg }}"><span style="display:block;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span></button></sc-for>
+<p style="margin:0;font:400 14px/1.45 Outfit,sans-serif;color:#8E8672">Talk and Feelings are always on, so the child can always reach their words.</p>
+</section>
+</sc-if>
+</div>
+
+<sc-if value="{{ v.showPreview }}">
+<aside aria-label="Live preview" style="position:sticky;top:0;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:26px;background:#F6F1E2;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:8px"><span style="font:500 12px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Live preview</span><span style="margin-left:auto;padding:5px 10px;border-radius:99px;background:{{ prev.badgeBg }};font:600 12px/1 Outfit,sans-serif;color:{{ prev.badgeInk }}">{{ prev.badge }}</span></div>
+<div aria-hidden="true" style="display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:#FFFDF5;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:8px"><span style="display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#F6E2D6;overflow:hidden"><img src="{{ prev.img }}" alt="" style="display:block;width:86%;height:86%;object-fit:contain"></span><b style="font:600 15px/1 Outfit,sans-serif;color:#3A362D">{{ prev.title }}</b></div>
+<div style="display:flex;gap:4px;align-items:center;padding:7px;border-radius:12px;background:#fff;border:{{ prev.barBorder }}"><sc-for list="{{ prev.chips }}" as="c"><span style="padding:5px 8px;border-radius:8px;background:#FBF7EA;border:{{ prev.chipBorder }};font:500 {{ prev.chipPx }}/1 Outfit,sans-serif;color:#3A362D">{{ c.label }}</span></sc-for><span style="margin-left:auto;padding:6px 10px;border-radius:99px;background:#31706B;color:#fff;font:600 10px/1 Outfit,sans-serif">Speak</span></div>
+<div aria-hidden="true" style="display:grid;grid-template-columns:repeat({{ prev.mini.cols }},minmax(0,1fr));gap:{{ prev.mini.gap }};padding:{{ prev.mini.pad }};border-radius:14px;background:#F8F3E6"><sc-for list="{{ prev.mini.cells }}" as="x"><span style="display:grid;place-items:center;aspect-ratio:1 / .82;box-sizing:border-box;border-radius:{{ prev.mini.r }};background:{{ x.bg }};border:{{ x.border }};font:700 {{ prev.mini.px }}/1 Outfit,sans-serif;color:{{ x.ink }};overflow:hidden">{{ x.label }}</span></sc-for></div>
+<div style="display:flex;gap:4px;flex-wrap:wrap"><sc-for list="{{ prev.acts }}" as="a"><span style="padding:5px 9px;border-radius:99px;background:#fff;border:1px solid #EDE4CE;font:500 11px/1 Outfit,sans-serif;color:#6C6555">{{ a.label }}</span></sc-for></div>
+</div>
+<p style="margin:0;font:400 13px/1.45 Outfit,sans-serif;color:#6C6555">{{ prev.note }}</p>
+</aside>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.tOverview }}">
+<div role="note" style="padding:14px 18px;border-radius:16px;background:#EEF2F8;border:1px solid #D5DEEC;font:400 15px/1.45 Outfit,sans-serif;color:#3B4F70">This view shows the child’s saved set-up and your session plan. The prototype doesn’t track progress or store clinical data.</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px"><sc-for list="{{ thO.cards }}" as="c" hint-placeholder-count="8"><div style="padding:18px 20px;border-radius:20px;background:#fff;border:1px solid #EDE4CE"><span style="display:block;font:500 12px/1 Outfit,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8E8672">{{ c.label }}</span><span style="display:block;margin-top:10px;font:600 21px/1.25 Outfit,sans-serif;color:#3A362D">{{ c.value }}</span></div></sc-for></div>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<div style="display:flex;align-items:center;gap:12px"><h2 style="margin:0;flex:1;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Next session plan</h2><button type="button" onClick="{{ thO.onPlan }}" style="height:44px;padding:0 18px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;font:500 15px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer">Edit plan</button></div>
+<sc-if value="{{ thO.planEmpty }}"><p style="margin:0;font:400 15px/1.45 Outfit,sans-serif;color:#8E8672">No activities planned yet.</p></sc-if>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px"><sc-for list="{{ thO.plan }}" as="p" hint-placeholder-count="3"><li style="display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid #EDE4CE;font:500 16px/1.3 Outfit,sans-serif;color:#3A362D"><span style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#EEF2F8;color:#3B4F70;font:600 14px/1 Outfit,sans-serif">{{ p.n }}</span>{{ p.label }}</li></sc-for></ol>
+</section>
+</sc-if>
+
+<sc-if value="{{ v.tPlan }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;align-items:start">
+<section style="display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:24px;background:#FBF7EA;border:1px solid #F1E6CC">
+<h2 style="margin:0 0 4px;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Activities in SayPlay</h2>
+<sc-for list="{{ thP.catalog }}" as="c" hint-placeholder-count="6"><div style="display:flex;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-radius:16px;background:#fff;border:1px solid #EDE4CE"><div style="flex:1;min-width:0"><b style="display:block;font:600 16px/1.25 Outfit,sans-serif;color:#3A362D">{{ c.label }}</b><span style="display:block;margin-top:3px;font:400 14px/1.3 Outfit,sans-serif;color:#8E8672">{{ c.sub }}</span></div><button type="button" onClick="{{ c.onAdd }}" disabled="{{ c.inPlan }}" style="height:44px;padding:0 16px;border-radius:99px;border:1.5px solid {{ c.addBorder }};background:#fff;color:{{ c.addInk }};font:600 14px/1 Outfit,sans-serif;cursor:pointer">{{ c.addLabel }}</button></div></sc-for>
+</section>
+<section style="display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:24px;background:#fff;border:1px solid #EDE4CE">
+<div style="display:flex;align-items:center;gap:10px"><h2 style="margin:0;flex:1;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Plan</h2><span style="padding:4px 10px;border-radius:99px;background:#F1E9D6;font:600 12px/1.2 Outfit,sans-serif;color:#6C6555">Example content</span></div>
+<sc-if value="{{ thP.planEmpty }}"><p style="margin:0;padding:18px;border-radius:14px;border:1.5px dashed #D9CFB8;font:400 15px/1.45 Outfit,sans-serif;color:#8E8672">No activities yet. Add one from the list.</p></sc-if>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px"><sc-for list="{{ thP.plan }}" as="p" hint-placeholder-count="0"><li style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 12px;border-radius:14px;background:#FBF7EA"><span style="display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:#EEF2F8;color:#3B4F70;font:600 14px/1 Outfit,sans-serif">{{ p.n }}</span><span style="flex:1;min-width:0;font:500 15px/1.3 Outfit,sans-serif;color:#3A362D">{{ p.label }}</span><button type="button" aria-label="{{ p.upAria }}" onClick="{{ p.onUp }}" disabled="{{ p.noUp }}" style="width:44px;height:44px;border-radius:12px;border:1px solid #EDE4CE;background:#fff;font:500 16px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer;opacity:{{ p.upOp }}">↑</button><button type="button" aria-label="{{ p.downAria }}" onClick="{{ p.onDown }}" disabled="{{ p.noDown }}" style="width:44px;height:44px;border-radius:12px;border:1px solid #EDE4CE;background:#fff;font:500 16px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer;opacity:{{ p.downOp }}">↓</button><button type="button" aria-label="{{ p.rmAria }}" onClick="{{ p.onRemove }}" style="height:44px;padding:0 12px;border-radius:12px;border:1px solid #EDE4CE;background:#fff;font:500 14px/1 Outfit,sans-serif;color:#8E8672;cursor:pointer">Remove</button></li></sc-for></ol>
+<label for="th-notes" style="margin-top:6px;font:500 13px/1 Outfit,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E8672">Notes for this session</label>
+<textarea id="th-notes" rows="4" value="{{ thP.notes }}" onChange="{{ thP.onNotes }}" placeholder="For example: model “I feel” before each question." style="padding:14px 16px;border-radius:14px;border:1.5px solid #E2D8C1;background:#FFFDF5;font:400 16px/1.45 Outfit,sans-serif;color:#3A362D;resize:vertical"></textarea>
+<div style="display:flex;align-items:center;gap:12px"><span aria-live="polite" style="flex:1;font:500 14px/1.3 Outfit,sans-serif;color:{{ thP.statusInk }}">{{ thP.status }}</span><button type="button" onClick="{{ thP.onSave }}" disabled="{{ thP.clean }}" style="height:50px;padding:0 22px;border:0;border-radius:99px;background:{{ thP.saveBg }};color:#fff;font:600 15px/1 Outfit,sans-serif;cursor:pointer">Save plan</button></div>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ v.tPrefs }}">
+<section style="display:flex;flex-direction:column;padding:8px 22px 22px;border-radius:24px;background:#fff;border:1px solid #EDE4CE">
+<sc-for list="{{ thR.rows }}" as="r" hint-placeholder-count="7"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px 16px;padding:16px 0;border-bottom:1px solid #EDE4CE;align-items:baseline"><span style="font:500 13px/1.2 Outfit,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#8E8672">{{ r.label }}</span><b style="font:600 17px/1.3 Outfit,sans-serif;color:#3A362D">{{ r.value }}</b><span style="font:400 15px/1.4 Outfit,sans-serif;color:#6C6555">{{ r.why }}</span></div></sc-for>
+<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:18px"><p style="flex:1 1 300px;margin:0;font:400 15px/1.45 Outfit,sans-serif;color:#6C6555">The caregiver changes these settings, so the child’s board stays the same at home and in therapy.</p><button type="button" onClick="{{ thR.onEdit }}" style="height:50px;padding:0 20px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;font:500 15px/1 Outfit,sans-serif;color:#3A362D;cursor:pointer">Open caregiver settings</button></div>
+</section>
+</sc-if>
+</main>
+</div>
+</sc-if>
+
+<sc-if value="{{ dlg.show }}">
+<div onClick="{{ dlg.onClose }}" style="position:{{ fixPos }};inset:0;z-index:50;display:grid;place-items:center;padding:24px;background:rgba(43,40,34,.5)">
+<div role="dialog" aria-modal="true" aria-labelledby="dlg-t" onClick="{{ stop }}" style="width:100%;max-width:680px;max-height:90vh;overflow:auto;box-sizing:border-box;padding:30px;border-radius:28px;background:#FFFDF5;box-shadow:0 30px 80px -20px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:18px">
+<h2 id="dlg-t" style="margin:0;font:600 28px/1.15 Outfit,sans-serif;color:#3A362D">{{ dlg.title }}</h2>
+<p style="margin:0;font:400 17px/1.5 Outfit,sans-serif;color:#6C6555">{{ dlg.body }}</p>
+<sc-if value="{{ dlg.density }}"><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px"><sc-for list="{{ dlg.compare }}" as="c" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:18px;background:#fff;border:{{ c.border }}"><span style="font:600 15px/1.2 Outfit,sans-serif;color:#2B2822">{{ c.label }}</span><div aria-hidden="true" style="display:grid;grid-template-columns:repeat({{ c.mini.cols }},minmax(0,1fr));gap:{{ c.mini.gap }};padding:{{ c.mini.pad }};border-radius:14px;background:#F8F3E6"><sc-for list="{{ c.mini.cells }}" as="x"><span style="display:grid;place-items:center;aspect-ratio:1 / .82;box-sizing:border-box;border-radius:{{ c.mini.r }};background:{{ x.bg }};border:{{ x.border }};font:700 {{ c.mini.px }}/1 Outfit,sans-serif;color:{{ x.ink }};overflow:hidden">{{ x.label }}</span></sc-for></div><span style="font:500 14px/1.35 Outfit,sans-serif;color:#5C5648">{{ c.pos }}</span></div></sc-for></div></sc-if>
+<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+<button type="button" onClick="{{ dlg.onSecondary }}" style="height:54px;padding:0 22px;border-radius:99px;border:1.5px solid #D9CFB8;background:#fff;color:#3A362D;font:500 16px/1 Outfit,sans-serif;cursor:pointer">{{ dlg.secondary }}</button>
+<button type="button" onClick="{{ dlg.onPrimary }}" style="height:54px;padding:0 24px;border:0;border-radius:99px;background:#31706B;color:#fff;font:600 16px/1 Outfit,sans-serif;cursor:pointer">{{ dlg.primary }}</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<div role="status" aria-live="polite" style="position:{{ fixPos }};left:50%;bottom:24px;transform:translateX(-50%);z-index:60;pointer-events:none;width:max-content;max-width:calc(100vw - 48px)">
+<sc-if value="{{ toast.show }}"><div style="padding:14px 22px;border-radius:16px;background:{{ toast.bg }};color:#fff;font:500 16px/1.4 Outfit,sans-serif;box-shadow:0 12px 30px -10px rgba(0,0,0,.35)">{{ toast.msg }}</div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  KEY = 'sayplay-proto-v1';
+  ASSET_LIST = ['assets/sp-an-elephant.png', 'assets/sp-an-lion.png', 'assets/sp-an-panda.png', 'assets/sp-an-peacock.png', 'assets/sp-ic-anteater.png', 'assets/sp-ic-cheetah.png', 'assets/sp-ic-duck.png', 'assets/sp-ic-duckling.png', 'assets/sp-ic-elephant.png', 'assets/sp-ic-giraffe.png', 'assets/sp-ic-goose.png', 'assets/sp-ic-gorilla.png', 'assets/sp-ic-kangaroo.png', 'assets/sp-ic-koala.png', 'assets/sp-ic-lion.png', 'assets/sp-ic-lion2.png', 'assets/sp-ic-lizard.png', 'assets/sp-ic-mouse.png', 'assets/sp-ic-panda.png', 'assets/sp-ic-peacock.png', 'assets/sp-sy2-apple.png', 'assets/sp-sy2-archery.png', 'assets/sp-sy2-banana.png', 'assets/sp-sy2-clap.png', 'assets/sp-sy2-drink.png', 'assets/sp-sy2-good.png', 'assets/sp-sy2-grapes.png', 'assets/sp-sy2-medal.png', 'assets/sp-sy2-orange.png', 'assets/sp-sy2-run.png', 'assets/sp-sy2-skate.png', 'assets/sp-sy2-strawberry.png', 'assets/sp-sy2-swim.png', 'assets/sp-sy2-walk-dog.png', 'assets/sp-sy2-wash.png', 'assets/sp2t-actions-1.png', 'assets/sp2t-actions-10.png', 'assets/sp2t-actions-11.png', 'assets/sp2t-actions-12.png', 'assets/sp2t-actions-13.png', 'assets/sp2t-actions-14.png', 'assets/sp2t-actions-15.png', 'assets/sp2t-actions-2.png', 'assets/sp2t-actions-3.png', 'assets/sp2t-actions-4.png', 'assets/sp2t-actions-5.png', 'assets/sp2t-actions-6.png', 'assets/sp2t-actions-7.png', 'assets/sp2t-actions-8.png', 'assets/sp2t-actions-9.png', 'assets/sp2t-food-1.png', 'assets/sp2t-food-10.png', 'assets/sp2t-food-11.png', 'assets/sp2t-food-12.png', 'assets/sp2t-food-13.png', 'assets/sp2t-food-14.png', 'assets/sp2t-food-15.png', 'assets/sp2t-food-2.png', 'assets/sp2t-food-3.png', 'assets/sp2t-food-4.png', 'assets/sp2t-food-5.png', 'assets/sp2t-food-6.png', 'assets/sp2t-food-7.png', 'assets/sp2t-food-8.png', 'assets/sp2t-food-9.png', 'assets/sp2t-sports-1.png', 'assets/sp2t-sports-10.png', 'assets/sp2t-sports-11.png', 'assets/sp2t-sports-12.png', 'assets/sp2t-sports-13.png', 'assets/sp2t-sports-14.png', 'assets/sp2t-sports-15.png', 'assets/sp2t-sports-2.png', 'assets/sp2t-sports-3.png', 'assets/sp2t-sports-4.png', 'assets/sp2t-sports-5.png', 'assets/sp2t-sports-6.png', 'assets/sp2t-sports-7.png', 'assets/sp2t-sports-8.png', 'assets/sp2t-sports-9.png'];
+  AV = { fox: 'assets/b/2677e09e-07ba-4650-9f78-4f451bfba1ed.png', snail: 'assets/b/a91dbc09-2e8a-43ef-accb-16af804a0e35.png', bee: 'assets/b/1cc9b918-0028-4fe3-9f39-4895ac874a5f.png', star: 'assets/b/152a50e9-063a-412d-a523-7251cfed07cc.png' };
+  ABOUT0 = { age: null, challenges: [], motivates: [], goals: [], style: null, strengths: [] };
+  DEF = { name: 'Angie', avatar: 'fox', density: 15, textSize: 'm', contrast: false, motion: false, voiceURI: '', rate: 1, pitch: 1, volume: 1, speakOnTap: false, acts: { talk: true, play: true, story: true }, about: { age: null, challenges: [], motivates: [], goals: [], style: null, strengths: [] } };
+  FRIENDS0 = [{ id: 'f1', name: 'Anna Keith', av: 'snail' }, { id: 'f2', name: 'Jacob Miller', av: 'bee' }, { id: 'f3', name: 'Miles Johnson', av: 'star' }];
+  OBQ = [
+    { key: 'age', q: 'How old is your child?', opts: ['0-5', '6-10', '11-15', '16-20'], grid: true },
+    { key: 'challenges', multi: true, q: 'What challenges does your child face?', opts: ['Easily frustrated', 'Difficulty focusing', 'Struggles with fine motor skills', 'Limited expressive language'] },
+    { key: 'motivates', multi: true, q: 'What motivates your child?', opts: ['Games and rewards', 'Stories and animations', 'Physical play and movement', 'Music and sounds'] },
+    { key: 'goals', multi: true, q: 'What social-emotional goals matter to you?', opts: ['Expressing needs and feelings', 'Building confidence', 'Managing emotions', 'Playing with others', 'Following instructions'] },
+    { key: 'style', q: 'What best describes your child’s communication styles?', opts: ['Speaks in full sentences', 'Uses words or phrases', 'Uses gestures or phrases', 'Nonverbal, uses AAC or gestures'] },
+    { key: 'strengths', multi: true, q: 'What are your child’s learning strengths?', opts: ['Great with visuals', 'Learns through repetition', 'Likes stories and pretend play', 'Problem solver'] }
+  ];
+  ICONS = {
+    home: 'M3.5 11 12 4l8.5 7M6 9.5V20h12V9.5',
+    grid: 'M4 4h6.5v6.5H4zM13.5 4H20v6.5h-6.5zM4 13.5h6.5V20H4zM13.5 13.5H20V20h-6.5z',
+    face: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8.5 14.5c.9 1.3 2.1 2 3.5 2s2.6-.7 3.5-2M9 9.5v.5M15 9.5v.5',
+    chat: 'M4 5.5h11v8H8.5L4 16.5zM15 9.5h5v8.5l-3.5-2.5H11v-2',
+    star: 'M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z',
+    book: 'M12 6.5C10 5 7 4.5 4 5.5v13c3-1 6-.5 8 1 2-1.5 5-2 8-1v-13c-3-1-6-.5-8 1zM12 6.5v13',
+    user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20.5c1.2-3.7 4-5.5 7.5-5.5s6.3 1.8 7.5 5.5',
+    sliders: 'M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4',
+    eye: 'M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+    list: 'M9 6h11M9 12h11M9 18h11M4.5 6h.5M4.5 12h.5M4.5 18h.5',
+    cal: 'M4 6h16v14H4zM4 10.5h16M8.5 3.5v4M15.5 3.5v4',
+    ask: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.5'
+  };
+  TINT = { core: { plate: '#F6F1E2', edge: '#D9CFB8' }, feelings: { plate: '#FFF1C7', edge: '#E8C45E' }, food: { plate: '#FCE8DC', edge: '#EBAE8C' }, sports: { plate: '#E0F2EE', edge: '#94CDC3' }, actions: { plate: '#EEE8F7', edge: '#BFAEE0' }, people: { plate: '#E5EDF8', edge: '#A9BFE2' }, animals: { plate: '#ECF4E0', edge: '#B6D194' } };
+  TRACK = 7;
+  _sTok = 0;
+  D = this.data();
+  state = this.init();
+
+  clone(o) { return JSON.parse(JSON.stringify(o)); }
+  svg(inner, vb) { return 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + (vb || '0 0 100 100') + '">' + inner + '</svg>'); }
+  icon(d, c) { return this.svg('<path d="' + d + '" fill="none" stroke="' + c + '" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>', '0 0 24 24'); }
+  initial(l, c) { return this.svg('<circle cx="50" cy="50" r="44" fill="' + c + '"/><text x="50" y="' + (l.length > 1 ? 62 : 64) + '" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="' + (l.length > 1 ? 32 : 40) + '" fill="#3A362D">' + l + '</text>'); }
+  face(k) {
+    this._faces = this._faces || {};
+    if (this._faces[k]) return this._faces[k];
+    const ink = '#3A362D', st = 'stroke="' + ink + '" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+    const m = d => '<path d="' + d + '" ' + st + '/>';
+    const dots = '<circle cx="36" cy="42" r="4.5" fill="' + ink + '"/><circle cx="64" cy="42" r="4.5" fill="' + ink + '"/>';
+    const wide = '<circle cx="36" cy="42" r="8" fill="#fff" stroke="' + ink + '" stroke-width="3.5"/><circle cx="64" cy="42" r="8" fill="#fff" stroke="' + ink + '" stroke-width="3.5"/><circle cx="36" cy="43" r="3.5" fill="' + ink + '"/><circle cx="64" cy="43" r="3.5" fill="' + ink + '"/>';
+    const F = {
+      happy: ['#FFD66B', dots + m('M32 60 Q50 76 68 60')],
+      sad: ['#B5D0EC', dots + m('M35 70 Q50 59 65 70') + '<path d="M33 52 Q29 59 33 63 Q37 59 33 52 Z" fill="#4F8FD0"/>'],
+      frustrated: ['#F4AE8A', dots + m('M27 31 L42 37 M73 31 L58 37') + m('M36 67 Q43 62 50 67 Q57 72 64 67')],
+      excited: ['#FFC44F', wide + '<path d="M31 58 Q50 86 69 58 Z" fill="' + ink + '"/>'],
+      scared: ['#D4C8EE', wide + '<ellipse cx="50" cy="68" rx="7" ry="9" fill="' + ink + '"/>'],
+      tired: ['#DDD5C4', m('M29 44 L43 44 M57 44 L71 44') + m('M41 66 L59 66') + '<text x="70" y="28" font-family="Arial" font-weight="700" font-size="18" fill="' + ink + '">z</text>'],
+      calm: ['#C3E6D9', m('M29 41 Q36 47 43 41 M57 41 Q64 47 71 41') + m('M40 63 Q50 69 60 63')],
+      angry: ['#EE8E7E', dots + m('M27 30 L43 38 M73 30 L57 38') + m('M35 70 Q50 60 65 70')],
+      worried: ['#EADFAE', dots + m('M28 35 L42 30 M72 35 L58 30') + m('M36 68 Q43 63 50 67 Q57 71 64 66')],
+      silly: ['#FFD66B', '<circle cx="36" cy="42" r="4.5" fill="' + ink + '"/>' + m('M57 42 L71 42') + m('M32 60 Q50 74 68 60') + '<path d="M45 66 Q50 80 57 66 Z" fill="#E86D6D" stroke="' + ink + '" stroke-width="3"/>'],
+      proud: ['#F8C96A', m('M29 44 Q36 37 43 44 M57 44 Q64 37 71 44') + m('M32 60 Q50 76 68 60')],
+      okay: ['#F1E3BE', dots + m('M37 65 L63 65')],
+      sick: ['#CFE2A6', dots + m('M35 68 Q42 63 50 68 Q58 73 65 68')],
+      hurt: ['#F3C6B8', dots + m('M36 69 Q50 61 64 69') + '<rect x="58" y="22" width="22" height="9" rx="4" transform="rotate(-25 69 26)" fill="#F7D9B5" stroke="' + ink + '" stroke-width="2.5"/>']
+    };
+    const f = F[k] || F.okay;
+    return (this._faces[k] = this.svg('<circle cx="50" cy="50" r="40" fill="' + f[0] + '" stroke="' + ink + '" stroke-width="4"/>' + f[1]));
+  }
+
+  data() {
+    const AV = this.AV, ic = n => n === 'lion' ? 'assets/sp-ic-lion2.png' : 'assets/sp-ic-' + n + '.png', sy = n => 'assets/sp-sy2-' + n + '.png', s2 = (set, i) => 'assets/sp2t-' + set + '-' + i + '.png';
+    const w = l => ({ label: l, say: l }), p = (l, img, say) => ({ label: l, img, say: say || l });
+    const set = (name, labels) => labels.map((l, i) => p(l, s2(name, i + 1)));
+    const feel = ['happy', 'sad', 'frustrated', 'excited', 'scared', 'tired', 'calm', 'angry', 'worried', 'silly', 'proud', 'okay', 'sick', 'hurt'];
+    const cats = [
+      { id: 'core', name: 'Core words', dot: '#3A362D', icon: this.svg('<path d="M14 22h72a8 8 0 0 1 8 8v36a8 8 0 0 1-8 8H44L26 88V74H14a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#FFF4D6" stroke="#3A362D" stroke-width="5" stroke-linejoin="round"/><text x="50" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="28" fill="#3A362D">I want</text>'), items: ['I', 'you', 'want', 'to', 'play', 'feel', 'like', 'go', 'stop', 'more', 'help', 'yes', 'no', 'all done', 'eat', 'drink', 'see', 'with', 'my', 'not', 'it', 'that', 'again', 'look'].map(w) },
+      { id: 'feelings', name: 'Feelings', dot: '#E3A72F', icon: this.face('happy'), items: [w('I feel')].concat(feel.map(k => p(k, this.face(k)))) },
+      { id: 'food', name: 'Food', dot: '#E07A4F', icon: s2('food', 10), items: set('food', ['green grapes', 'apricot', 'plums', 'avocado', 'pomegranate', 'strawberry', 'lettuce', 'coconut', 'banana', 'apple', 'eggplant', 'peach', 'kiwi', 'pumpkin', 'beet']).concat([w('water'), w('juice'), w('milk'), w('snack'), w('crackers'), w('pizza'), w('yogurt')]) },
+      { id: 'sports', name: 'Sports & play', dot: '#3E9C8F', icon: s2('sports', 11), items: set('sports', ['kickball', 'walk', 'archery', 'badminton', 'swing', 'horse riding', 'soccer', 'skiing', 'race', 'volleyball', 'swim', 'walk the dog', 'skateboard', 'ice skating', 'win a medal']).concat([w('outside'), w('inside'), w('blocks'), w('music'), w('draw'), w('read'), w('bubbles'), w('dance')]) },
+      { id: 'actions', name: 'Actions', dot: '#8A6FB8', icon: s2('actions', 1), items: set('actions', ['good', 'wash face', 'wash hands', 'shoulders', 'press', 'bad', 'leg', 'come here', 'toes', 'brush hair', 'cut nails', 'lips', 'brush teeth', 'clap', 'drink']) },
+      { id: 'people', name: 'People', dot: '#5D7FB5', icon: AV.star, items: [p('Mom', this.initial('M', '#F2B7A0')), p('Dad', this.initial('D', '#A9C8E8')), p('Anna', AV.snail), p('Jacob', AV.bee), p('Miles', AV.star), p('teacher', this.initial('T', '#BFE3D6')), p('therapist', this.initial('Th', '#E7D9A8')), p('friend', this.initial('F', '#CFC3EA')), p('me', AV.fox)] },
+      { id: 'animals', name: 'Animals', dot: '#7FA650', icon: ic('lion'), items: ['elephant', 'cheetah', 'peacock', 'panda', 'lion', 'kangaroo', 'koala', 'anteater', 'lizard', 'mouse', 'giraffe', 'gorilla', 'goose', 'duckling', 'duck'].map(k => p(k, ic(k))) }
+    ];
+    const T = {};
+    cats.forEach(c => c.items.forEach(t => { t.id = c.id + ':' + t.label; t.cat = c.id; if (!T[t.label]) T[t.label] = t; }));
+    const talk = [
+      { id: 'like', title: 'What do you like?', blurb: 'Share favourite animals, food and things to do.', img: AV.fox, bg: '#EAF6F2', ink: '#2A6660', starters: ['I', 'like', 'you', 'yes', 'no', 'more'],
+        qs: [{ q: 'What animal do you like?', o: ['lion', 'panda', 'elephant', 'giraffe', 'duck', 'koala'] }, { q: 'What food do you like?', o: ['apple', 'banana', 'strawberry', 'peach', 'kiwi', 'pizza'] }, { q: 'What do you like to do?', o: ['swim', 'swing', 'skateboard', 'horse riding', 'music', 'draw'] }] },
+      { id: 'feel', title: 'How are you today?', blurb: 'Check in with each other about feelings.', img: AV.star, bg: '#FBF3DE', ink: '#7A5A12', starters: ['I feel', 'I', 'want', 'to', 'see', 'yes'],
+        qs: [{ q: 'How do you feel right now?', o: ['happy', 'sad', 'tired', 'excited', 'calm', 'frustrated'] }, { q: 'What do you want to do next?', o: ['play', 'eat', 'drink', 'help', 'outside', 'music'] }, { q: 'Who do you want to see?', o: ['Mom', 'Dad', 'Anna', 'Jacob', 'Miles', 'teacher'] }] },
+      { id: 'plan', title: 'What should we play?', blurb: 'Make a plan for playtime together.', img: AV.bee, bg: '#EFEEF8', ink: '#4B4A86', starters: ['I', 'want', 'to', 'play', 'with', 'yes'],
+        qs: [{ q: 'Should we play inside or outside?', o: ['inside', 'outside', 'swing', 'blocks', 'bubbles', 'dance'] }, { q: 'Who should play with us?', o: ['Mom', 'Dad', 'Anna', 'Jacob', 'Miles', 'friend'] }, { q: 'What snack should we have after?', o: ['apple', 'banana', 'crackers', 'yogurt', 'juice', 'water'] }] }
+    ];
+    const story = {
+      chars: [['Fox', AV.fox], ['Bee', AV.bee], ['Snail', AV.snail], ['Star', AV.star], ['Lion', 'assets/sp-an-lion.png'], ['Panda', 'assets/sp-an-panda.png'], ['Elephant', 'assets/sp-an-elephant.png']],
+      places: [['the pool', sy('swim'), '#E3F1F6'], ['the park', sy('walk-dog'), '#EDF4E8'], ['the playground', s2('sports', 5), '#FBF3DE'], ['the skate park', s2('sports', 13), '#EFEEF8'], ['the kitchen', s2('food', 10), '#FBEBE0'], ['the zoo', ic('giraffe'), '#F6EEDC'], ['the snowy hill', s2('sports', 8), '#E3F1F6'], ['the farm', s2('sports', 6), '#EDF4E8']],
+      actions: [['swim', sy('swim'), 'swim'], ['swing', s2('sports', 5), 'swing high'], ['skateboard', s2('sports', 13), 'skateboard'], ['clap', sy('clap'), 'clap and sing'], ['eat apples', s2('food', 10), 'eat apples'], ['ride a horse', s2('sports', 6), 'ride a horse'], ['shoot arrows', sy('archery'), 'shoot arrows'], ['walk the dog', sy('walk-dog'), 'walk the dog']],
+      feels: ['happy', 'excited', 'calm', 'silly', 'proud', 'tired', 'scared', 'okay']
+    };
+    const rounds = [{ t: 'panda', o: ['lion', 'panda', 'duck', 'koala', 'giraffe', 'mouse'] }, { t: 'lion', o: ['elephant', 'koala', 'lion', 'cheetah', 'duck', 'panda'] }, { t: 'duck', o: ['goose', 'duckling', 'mouse', 'duck', 'lizard', 'lion'] }, { t: 'giraffe', o: ['giraffe', 'kangaroo', 'gorilla', 'peacock', 'koala', 'elephant'] }, { t: 'koala', o: ['panda', 'mouse', 'anteater', 'gorilla', 'koala', 'cheetah'] }];
+    const catalog = [
+      { id: 'board', label: 'Free talk on the board', sub: 'Core words and categories' },
+      { id: 'talk-like', label: 'Let’s Talk · What do you like?', sub: 'Turn-taking, 3 questions' },
+      { id: 'talk-feel', label: 'Let’s Talk · How are you today?', sub: 'Feelings check-in, 3 questions' },
+      { id: 'talk-plan', label: 'Let’s Talk · What should we play?', sub: 'Planning together, 3 questions' },
+      { id: 'play', label: 'Let’s Play · Find it', sub: '5 picture rounds, no scoring' },
+      { id: 'story', label: 'Story Builder', sub: 'Who, where, what, feeling' }
+    ];
+    return { cats, T, talk, story, rounds, catalog, follow: ['I want help', 'I need a break', 'I want a hug', 'I’m okay'] };
+  }
+
+  start0() { return { step: 'welcome', avatar: null, name: '', density: 15, contrast: false }; }
+  talk0(keep) { const k = keep || {}; return { phase: k.partner ? 'act' : 'partner', partner: k.partner || null, act: null, q: 0, turn: 'child', sent: [], log: [], query: '', adding: false, newName: '', newAv: 'bee' }; }
+  story0() { return { step: 0, c: null, p: null, a: null, f: null, playing: -1, savedId: null }; }
+  init() {
+    let sv = {};
+    const pe = this.props && this.props.embed;
+    const em = pe || (typeof location !== 'undefined' ? new URLSearchParams(location.search).get('embed') : null);
+    this.EMBED = em; this.FIG = !!pe; this.rootRef = this.rootRef || React.createRef();
+    if (!em) { try { sv = JSON.parse(localStorage.getItem(this.KEY) || '{}') || {}; } catch (e) { sv = {}; } }
+    const base = sv.settings || {};
+    const st = Object.assign(this.clone(this.DEF), base);
+    st.acts = Object.assign({}, this.DEF.acts, base.acts || {});
+    st.about = Object.assign(this.clone(this.ABOUT0), base.about || {});
+    const S0 = {
+      role: sv.onboarded ? 'child' : 'start', onboarded: !!sv.onboarded, start: this.start0(),
+      route: 'home', cat: 'core', page: 0, sentence: [], history: [], flashId: null, followUp: false, quickSaid: '',
+      settings: st, draft: this.clone(st), cg: st.about.age ? 'profile' : 'setup', th: 'overview', fromCg: false, ob: 0, obApplied: false,
+      toast: null, dialog: null, vw: this.FIG ? 1180 : (typeof window !== 'undefined' ? window.innerWidth : 1200), voices: [], vstate: 'loading', speaking: false,
+      friends: sv.friends || this.clone(this.FRIENDS0),
+      talk: this.talk0(), story: this.story0(), stories: sv.stories || [],
+      game: { r: 0, picked: null, correct: false, done: false },
+      plan: sv.plan || ['talk-feel', 'play', 'board'], notes: sv.notes || '', planDirty: false
+    };
+    return em ? this.embedState(S0, em) : S0;
+  }
+  embedState(s, em) {
+    const t = l => this.tok(this.D.T[l]);
+    s.role = 'child'; s.onboarded = true; s.route = 'board'; s.cat = 'core';
+    if (em === 'board') s.sentence = ['I', 'want', 'to'].map(t);
+    if (em === 'now') s.sentence = ['I', 'want', 'to', 'play'].map(t);
+    if (em === 'feelings') { s.cat = 'feelings'; s.sentence = [t('I feel')]; }
+    if (em === 'vocab' || em === 'vocabba') { s.role = 'caregiver'; s.cg = 'vocab'; s.draft = Object.assign({}, s.draft, { density: 24 }); }
+    if (em === 'home') s.route = 'home';
+    if (em === 'cover') { s.cat = 'animals'; s.sentence = [t('I'), t('like'), t('panda')]; }
+    if (em === 'feelfollow') { s.cat = 'feelings'; s.sentence = [t('I feel'), t('frustrated')]; s.followUp = true; }
+    if (em === 'talk') { s.route = 'talk'; s.talk = Object.assign(this.talk0(), { phase: 'turn', partner: 'f1', act: 'like', q: 0, turn: 'child', sent: [t('I'), t('like'), t('panda')] }); }
+    if (em === 'setup') { s.role = 'caregiver'; s.cg = 'setup'; s.ob = 1; s.draft = Object.assign({}, s.draft, { about: Object.assign({}, s.draft.about, { age: '0-5', challenges: ['Struggles with fine motor skills', 'Limited expressive language'] }) }); }
+    if (em === 'profile') { s.role = 'caregiver'; s.cg = 'profile'; }
+    if (em === 'access') { s.role = 'caregiver'; s.cg = 'access'; }
+    const dens = (d, cat) => { s.settings = Object.assign({}, s.settings, { density: d }); s.draft = this.clone(s.settings); s.cat = cat; };
+    if (em === 'empty') s.sentence = [];
+    if (em === 'tap') { s.sentence = ['I', 'want', 'to'].map(t); s.flashId = 'core:to'; }
+    if (em === 'spoken') { s.sentence = ['I', 'want', 'to', 'play'].map(t); s.speaking = true; }
+    if (em === 'd9' || em === 'd15' || em === 'd24') { dens(+em.slice(1), 'animals'); s.sentence = [t('I'), t('like')]; }
+    if (em === 'core15') { dens(15, 'core'); s.sentence = []; }
+    if (em === 'core24') { dens(24, 'core'); s.sentence = []; }
+    if (em === 'confirm') { s.role = 'caregiver'; s.cg = 'vocab'; s.draft = Object.assign({}, s.draft, { density: 24 }); s.dialog = { kind: 'density' }; }
+    if (em === 'summary') { s.role = 'caregiver'; s.cg = 'setup'; s.ob = this.OBQ.length; s.draft = Object.assign({}, s.draft, { about: { age: '6-10', challenges: ['Struggles with fine motor skills'], motivates: ['Games and rewards'], goals: ['Expressing needs and feelings', 'Playing with others'], style: 'Uses gestures or phrases', strengths: ['Great with visuals'] } }); }
+    if (em === 'accessdirty') { s.role = 'caregiver'; s.cg = 'access'; s.draft = Object.assign({}, s.draft, { contrast: true, textSize: 'l' }); }
+    if (em === 'contrast') { s.settings = Object.assign({}, s.settings, { contrast: true, textSize: 'l' }); s.draft = this.clone(s.settings); s.sentence = ['I', 'want', 'to'].map(t); }
+    if (em.indexOf('start-') === 0) { s.role = 'start'; s.onboarded = false; s.start = Object.assign(this.start0(), { step: em.slice(6) }, em === 'start-profile' ? { avatar: 'bee', name: 'Angie' } : em === 'start-avatar' ? { avatar: 'bee' } : {}); }
+    if (em.indexOf('cat-') === 0) { s.cat = em.slice(4); s.sentence = ({ food: ['I', 'want', 'apple'], sports: ['I', 'want', 'to', 'swim'], actions: ['I', 'want', 'to', 'clap'], people: ['I', 'want', 'to', 'see', 'Mom'], animals: ['I', 'like', 'panda'] })[s.cat] ? ({ food: ['I', 'want', 'apple'], sports: ['I', 'want', 'to', 'swim'], actions: ['I', 'want', 'to', 'clap'], people: ['I', 'want', 'to', 'see', 'Mom'], animals: ['I', 'like', 'panda'] })[s.cat].map(t) : []; }
+    if (em === 'talkact') { s.route = 'talk'; s.talk = Object.assign(this.talk0(), { phase: 'act', partner: 'f1' }); }
+    if (em === 'talkpartner') { s.route = 'talk'; s.talk = Object.assign(this.talk0(), { phase: 'turn', partner: 'f1', act: 'like', q: 0, turn: 'partner', sent: [], log: [{ who: s.settings.name, text: 'I like panda', child: true }] }); }
+    if (em === 'play') s.route = 'play';
+    if (em === 'playright') { s.route = 'play'; s.game = { r: 0, picked: 'panda', correct: true, done: false }; }
+    if (em === 'playdone') { s.route = 'play'; s.game = { r: 4, picked: null, correct: false, done: true }; }
+    if (em === 'story0') s.route = 'story';
+    if (em === 'story2') { s.route = 'story'; s.story = Object.assign(this.story0(), { step: 2, c: 'Fox', p: 'the park' }); }
+    if (em === 'storydone') { s.route = 'story'; s.story = Object.assign(this.story0(), { step: 4, c: 'Fox', p: 'the park', a: 'walk the dog', f: 'happy' }); }
+    if (em === 'acts') { s.role = 'caregiver'; s.cg = 'acts'; }
+    if (em === 'preview') { s.route = 'home'; s.fromCg = true; s.cg = 'access'; }
+    if (em.indexOf('th-') === 0) { s.role = 'therapist'; s.th = em.slice(3); }
+    if (em === 'unsaved') { s.role = 'caregiver'; s.cg = 'access'; s.draft = Object.assign({}, s.draft, { contrast: true, textSize: 'l' }); s.dialog = { kind: 'unsaved', next: { r: 'child' } }; }
+    if (em === 'talkpick') { s.route = 'talk'; s.talk = Object.assign(this.talk0(), { phase: 'partner', partner: 'f1' }); }
+    if (em === 'talkdone') { s.route = 'talk'; s.talk = Object.assign(this.talk0(), { phase: 'done', partner: 'f1', act: 'feel', q: 2, log: [{ who: s.settings.name, text: 'I feel happy', child: true }, { who: 'Anna', text: 'I feel tired', child: false }, { who: s.settings.name, text: 'I want to play', child: true }, { who: 'Anna', text: 'answered out loud', child: false, muted: true }, { who: s.settings.name, text: 'I want to see Mom', child: true }, { who: 'Anna', text: 'I want to see Jacob', child: false }] }); }
+    return s;
+  }
+  persist() {
+    if (this.EMBED) return;
+    try { const s = this.state; localStorage.setItem(this.KEY, JSON.stringify({ settings: s.settings, stories: s.stories, plan: s.plan, notes: s.notes, friends: s.friends, onboarded: s.onboarded })); } catch (e) {}
+  }
+
+  componentDidMount() {
+    this._key = e => { if (e.key === 'Escape' && this.state.dialog) this.setState({ dialog: null }); };
+    window.addEventListener('keydown', this._key);
+    if (this.EMBED === 'vocabba') setTimeout(() => { const R = this.rootRef.current || document, m = R.querySelector('main'), el = R.querySelector('#ba-h'); if (m && el) m.scrollTop = el.getBoundingClientRect().top - m.getBoundingClientRect().top + m.scrollTop - 20; }, 600);
+    this._rs = () => { if (this.FIG) return; clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ vw: window.innerWidth }), 80); };
+    window.addEventListener('resize', this._rs);
+    const ss = window.speechSynthesis;
+    if (!ss || typeof SpeechSynthesisUtterance === 'undefined') { this.setState({ vstate: 'none' }); return; }
+    const load = () => { const v = ss.getVoices(); if (v && v.length) this.setState({ voices: v, vstate: 'ready' }); };
+    load();
+    try { ss.addEventListener('voiceschanged', load); } catch (e) { ss.onvoiceschanged = load; }
+    this._vt = setTimeout(() => { if (this.state.vstate === 'loading') this.setState({ vstate: 'ready' }); }, 2500);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); window.removeEventListener('resize', this._rs); clearTimeout(this._rt); clearTimeout(this._tt); clearTimeout(this._ft); clearTimeout(this._vt); clearTimeout(this._sfb); }
+
+  toast(msg, kind) { clearTimeout(this._tt); this.setState({ toast: { msg, kind } }); this._tt = setTimeout(() => this.setState({ toast: null }), 3400); }
+  speak(text, o) {
+    o = o || {};
+    const set = o.set || this.state.settings, ss = window.speechSynthesis;
+    if (!text) return;
+    if (!ss || typeof SpeechSynthesisUtterance === 'undefined') { if (!o.quiet) this.toast('Speech isn’t available in this browser. The words stay on screen to show your partner.', 'warn'); return; }
+    try {
+      ss.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      const v = this.state.voices.find(x => x.voiceURI === set.voiceURI);
+      if (v) { u.voice = v; u.lang = v.lang; }
+      u.rate = set.rate || 1; u.pitch = set.pitch || 1; u.volume = set.volume == null ? 1 : set.volume;
+      u.onend = () => { this.setState({ speaking: false }); if (o.onend) o.onend(); };
+      u.onerror = e => { this.setState({ speaking: false }); if (e && e.error && e.error !== 'interrupted' && e.error !== 'canceled' && !o.quiet) this.toast('Couldn’t play the voice. Check the volume, or pick another voice in settings.', 'warn'); };
+      this.setState({ speaking: true });
+      ss.speak(u);
+    } catch (err) { this.toast('Couldn’t play the voice on this device.', 'warn'); }
+  }
+  stopAll() { this._sTok++; clearTimeout(this._sfb); try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {} if (this.state.story.playing >= 0) this.setStory({ playing: -1 }); }
+  flash(id) { clearTimeout(this._ft); this.setState({ flashId: id }); this._ft = setTimeout(() => this.setState({ flashId: null }), 750); }
+  tok(t) { return { k: t.id + '#' + Math.random().toString(36).slice(2, 7), label: t.label, say: t.say, img: t.img || null }; }
+
+  add(t) {
+    const s = this.state;
+    this.setState({ history: s.history.concat([s.sentence]).slice(-40), sentence: s.sentence.concat([this.tok(t)]), followUp: (t.cat === 'feelings' && !!t.img) ? true : s.followUp });
+    this.flash(t.id);
+    if (s.settings.speakOnTap) this.speak(t.say, { quiet: true });
+  }
+  addPhrase(text) { const s = this.state; this.setState({ history: s.history.concat([s.sentence]).slice(-40), sentence: s.sentence.concat([{ k: 'ph' + Date.now(), label: text, say: text, img: null }]), followUp: false }); }
+  back() { const s = this.state; if (!s.sentence.length) return; this.setState({ history: s.history.concat([s.sentence]).slice(-40), sentence: s.sentence.slice(0, -1) }); }
+  clear() { const s = this.state; if (!s.sentence.length) return; this.setState({ history: s.history.concat([s.sentence]).slice(-40), sentence: [], followUp: false }); }
+  undo() { const s = this.state; if (!s.history.length) return; this.setState({ sentence: s.history[s.history.length - 1], history: s.history.slice(0, -1) }); }
+  setCat(id) { this.setState({ cat: id, page: 0, followUp: false }); }
+  goChild(k) {
+    this.stopAll();
+    if (k === 'board') this.setState(z => ({ route: 'board', cat: z.cat === 'feelings' ? 'core' : z.cat, page: z.cat === 'feelings' ? 0 : z.page, followUp: false }));
+    else if (k === 'feelings') this.setState({ route: 'board', cat: 'feelings', page: 0 });
+    else this.setState({ route: k });
+  }
+  gridKey = e => {
+    const k = e.key, cols = parseInt(e.currentTarget.getAttribute('data-cols'), 10) || 1;
+    const d = k === 'ArrowRight' ? 1 : k === 'ArrowLeft' ? -1 : k === 'ArrowDown' ? cols : k === 'ArrowUp' ? -cols : 0;
+    if (!d) return;
+    const el = document.activeElement, i = el && el.getAttribute ? parseInt(el.getAttribute('data-tile'), 10) : NaN;
+    if (isNaN(i)) return;
+    const n = e.currentTarget.querySelector('[data-tile="' + (i + d) + '"]');
+    if (n) { e.preventDefault(); n.focus(); }
+  };
+  stop = e => e.stopPropagation();
+
+  setTalk(p) { this.setState(z => ({ talk: Object.assign({}, z.talk, p) })); }
+  friend(id) { return this.state.friends.find(f => f.id === id); }
+  first(id) { const f = this.friend(id); return f ? f.name.split(' ')[0] : 'Partner'; }
+  addT(t) { const s = this.state; this.setTalk({ sent: s.talk.sent.concat([this.tok(t)]) }); this.flash(t.id); if (s.settings.speakOnTap) this.speak(t.say, { quiet: true }); }
+  talkText() { return this.state.talk.sent.map(x => x.say).join(' '); }
+  talkDone(how) {
+    const s = this.state, t = s.talk, child = t.turn === 'child', who = child ? s.settings.name : this.first(t.partner);
+    const text = how === 'pass' ? 'skipped this one' : how === 'aloud' ? 'answered out loud' : this.talkText();
+    if (!how) this.speak(text);
+    const log = t.log.concat([{ who, text, child, muted: !!how }]);
+    if (child) this.setTalk({ log, sent: [], turn: 'partner' });
+    else if (t.q < 2) this.setTalk({ log, sent: [], turn: 'child', q: t.q + 1 });
+    else this.setTalk({ log, sent: [], phase: 'done' });
+  }
+  addFriend(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const t = this.state.talk, name = (t.newName || '').trim();
+    if (!name) return;
+    const f = { id: 'f' + Date.now(), name, av: t.newAv };
+    this.setState(z => ({ friends: z.friends.concat([f]), talk: Object.assign({}, z.talk, { adding: false, newName: '', partner: f.id, query: '' }) }), () => this.persist());
+    this.toast(name + ' was added to your friends.');
+  }
+
+  setStory(p) { this.setState(z => ({ story: Object.assign({}, z.story, p) })); }
+  pickStory(k, val) {
+    const st = Object.assign({}, this.state.story, { savedId: null });
+    st[k] = val;
+    let step = ['c', 'p', 'a', 'f'].findIndex(x => !st[x]);
+    st.step = step < 0 ? 4 : step;
+    this.setState({ story: st });
+  }
+  storyLines(st) { const a = this.D.story.actions.find(x => x[0] === st.a); return [st.c + ' went to ' + st.p + '.', st.c + ' likes to ' + (a ? a[2] : st.a) + '.', st.c + ' felt ' + st.f + '.']; }
+  playStory(lines) {
+    const tok = ++this._sTok;
+    const run = i => {
+      if (tok !== this._sTok) return;
+      if (i >= lines.length) { this.setStory({ playing: -1 }); return; }
+      this.setStory({ playing: i });
+      let done = false;
+      const next = () => { if (done || tok !== this._sTok) return; done = true; clearTimeout(this._sfb); setTimeout(() => run(i + 1), 300); };
+      clearTimeout(this._sfb);
+      this._sfb = setTimeout(next, 2200 + lines[i].length * 110 / (this.state.settings.rate || 1));
+      this.speak(lines[i], { onend: next, quiet: i > 0 });
+    };
+    run(0);
+  }
+  stopStory() { this._sTok++; clearTimeout(this._sfb); try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {} this.setStory({ playing: -1 }); }
+  saveStory() {
+    const st = this.state.story, id = 's' + Date.now();
+    this.setState(z => ({ stories: [{ id, c: st.c, p: st.p, a: st.a, f: st.f }].concat(z.stories).slice(0, 8), story: Object.assign({}, z.story, { savedId: id }) }), () => this.persist());
+    this.toast('Story saved on this device.');
+  }
+
+  pickGame(o) {
+    const g = this.state.game, R = this.D.rounds[g.r];
+    if (g.correct) return;
+    if (o === R.t) { this.setState({ game: Object.assign({}, g, { picked: o, correct: true }) }); this.speak('Yes! That’s the ' + o + '.', { quiet: true }); }
+    else { this.setState({ game: Object.assign({}, g, { picked: o, correct: false }) }); this.speak('That’s the ' + o + '. Can you find the ' + R.t + '?', { quiet: true }); }
+  }
+  nextGame() { const g = this.state.game; if (g.r >= this.D.rounds.length - 1) this.setState({ game: { r: g.r, picked: null, correct: false, done: true } }); else this.setState({ game: { r: g.r + 1, picked: null, correct: false, done: false } }); }
+
+  setStart(p) { this.setState(z => ({ start: Object.assign({}, z.start, p) })); }
+  finishStart(r) {
+    const s0 = this.state.start;
+    let settings = this.state.settings;
+    if (r === 'child') settings = Object.assign({}, settings, { name: (s0.name || '').trim() || 'Friend', avatar: s0.avatar || 'bee', density: s0.density, contrast: s0.contrast });
+    this.setState({ settings, draft: this.clone(settings), onboarded: true, role: r, route: 'home', cg: r === 'caregiver' ? 'setup' : (settings.about.age ? 'profile' : 'setup'), th: 'overview', ob: 0, obApplied: false, fromCg: false }, () => this.persist());
+    if (r === 'child') this.toast('Welcome, ' + settings.name + '!');
+  }
+
+  setDraft(p) { this.setState(z => ({ draft: Object.assign({}, z.draft, p) })); }
+  dirty() { return JSON.stringify(this.state.draft) !== JSON.stringify(this.state.settings); }
+  setRole(r) {
+    const s = this.state;
+    if (r === s.role && !s.fromCg) return;
+    if (s.role === 'caregiver' && this.dirty()) { this.setState({ dialog: { kind: 'unsaved', next: { r } } }); return; }
+    this.goRole(r);
+  }
+  goRole(r, x) {
+    this.stopAll();
+    this.setState(z => Object.assign({ role: r, onboarded: true, fromCg: false, dialog: null, draft: this.clone(z.settings), route: r === 'child' ? 'home' : z.route, cg: z.settings.about && z.settings.about.age ? 'profile' : 'setup', th: 'overview', ob: 0, obApplied: false }, x || {}), () => this.persist());
+  }
+  openPreview() {
+    const next = { r: 'child', x: { fromCg: true, cg: this.state.cg } };
+    if (this.dirty()) { this.setState({ dialog: { kind: 'unsaved', next } }); return; }
+    this.goRole(next.r, next.x);
+  }
+  save(next) {
+    const s = this.state;
+    if (!this.dirty()) { if (next) this.goRole(next.r, next.x); return; }
+    if (s.draft.density !== s.settings.density) { this.setState({ dialog: { kind: 'density', next } }); return; }
+    this.commit(next);
+  }
+  commit(next) {
+    const name = this.state.draft.name || 'your child';
+    this.setState(z => ({ settings: this.clone(z.draft), dialog: null, page: 0 }), () => { this.persist(); if (next) this.goRole(next.r, next.x); });
+    this.toast('Saved. ' + name + '’s SayPlay is updated.');
+  }
+  cancel() { if (!this.dirty()) return; this.setState(z => ({ draft: this.clone(z.settings), obApplied: false })); this.toast('Changes discarded.'); }
+  restore() {
+    const d = this.state.draft, def = this.clone(this.DEF);
+    this.setState({ draft: Object.assign(def, { name: d.name, avatar: d.avatar, about: this.clone(d.about) }) });
+    this.toast('Defaults restored. Press Save changes to apply them.');
+  }
+  obPick(q, o) {
+    const ab = this.clone(this.state.draft.about);
+    if (q.multi) { const a = ab[q.key] || []; const i = a.indexOf(o); if (i >= 0) a.splice(i, 1); else a.push(o); ab[q.key] = a; }
+    else ab[q.key] = o;
+    this.setState({ obApplied: false });
+    this.setDraft({ about: ab });
+  }
+  suggest(Dr) {
+    const ab = Dr.about || {}, ch = ab.challenges || [], mo = ab.motivates || [], go = ab.goals || [], sg = ab.strengths || [];
+    let d = { '0-5': 9, '6-10': 15, '11-15': 24, '16-20': 24 }[ab.age] || 15;
+    let dWhy = ab.age ? 'A starting point for ages ' + ab.age + '.' : 'The standard starting point.';
+    if (ch.includes('Struggles with fine motor skills') && d > 9) { d = d === 24 ? 15 : 9; dWhy += ' One step larger, since fine motor skills were flagged.'; }
+    const tap = ab.style === 'Nonverbal, uses AAC or gestures' || ab.style === 'Uses gestures or phrases';
+    const motion = ch.includes('Difficulty focusing');
+    const feat = [];
+    if (go.includes('Expressing needs and feelings') || go.includes('Managing emotions') || ch.includes('Easily frustrated')) feat.push('Feelings');
+    if (go.includes('Playing with others')) feat.push('Let’s Talk');
+    if (mo.includes('Games and rewards') || mo.includes('Physical play and movement')) feat.push('Let’s Play');
+    if (mo.includes('Stories and animations') || sg.includes('Likes stories and pretend play')) feat.push('Story Builder');
+    return { density: d, speakOnTap: tap, motion, rows: [
+      { label: 'Board size', value: d + ' symbols per page', why: dWhy },
+      { label: 'Speak each word as tapped', value: tap ? 'On' : 'Off', why: tap ? 'Hearing each word can confirm a choice before building a sentence.' : 'You can turn this on later in Accessibility.' },
+      { label: 'Reduce motion', value: motion ? 'On' : 'Off', why: motion ? 'Fewer moving parts on screen, since focusing was flagged.' : 'You can turn this on later in Accessibility.' },
+      { label: 'Activities to start with', value: feat.length ? feat.join(', ') : 'Talk board', why: 'Based on what motivates your child and the goals you chose. Every activity stays available.' }
+    ] };
+  }
+  addPlan(id) { if (this.state.plan.includes(id)) return; this.setState(z => ({ plan: z.plan.concat([id]), planDirty: true })); }
+  movePlan(i, d) { const p = this.state.plan.slice(), j = i + d; if (j < 0 || j >= p.length) return; const t = p[i]; p[i] = p[j]; p[j] = t; this.setState({ plan: p, planDirty: true }); }
+  removePlan(i) { this.setState(z => ({ plan: z.plan.filter((_, k) => k !== i), planDirty: true })); }
+  savePlan() { this.setState({ planDirty: false }, () => this.persist()); this.toast('Session plan saved on this device.'); }
+  reset() {
+    this.stopAll();
+    try { localStorage.removeItem(this.KEY); } catch (e) {}
+    const ns = this.init(); ns.voices = this.state.voices; ns.vstate = this.state.vstate;
+    this.setState(ns);
+    this.toast('Demo reset to its starting state.');
+  }
+
+  dims(d) { return d === 9 ? { cols: 3, rows: 3 } : d === 24 ? { cols: 6, rows: 4 } : { cols: 5, rows: 3 }; }
+  ui(S) {
+    const d = S.density, dm = this.dims(d), base = { s: [15, 24], m: [18, 30], l: [22, 38] }[S.textSize] || [18, 30], f = d === 9 ? 1.25 : d === 24 ? .8 : 1;
+    return { cols: dm.cols, rows: dm.rows, gap: d === 24 ? '8px' : '10px', rowMin: d === 9 ? '128px' : d === 24 ? '96px' : '112px', areaMin: 'auto', labelPx: Math.round(base[0] * (d === 24 ? .9 : d === 9 ? 1.15 : 1)) + 'px', wordPx: Math.round(base[1] * f) + 'px', chipPx: ({ s: 17, m: 20, l: 24 })[S.textSize] + 'px',
+      barBorder: S.contrast ? '3px solid #1F1C17' : '1px solid #EFE4CB', tileBorderSoft: S.contrast ? '2px solid #1F1C17' : '1.5px solid #EDE4CE', tileBorder: S.contrast ? '3px solid #1F1C17' : '1.5px solid #CFE7E1',
+      trans: S.motion ? 'none' : 'transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease', ink: S.contrast ? '#000' : '#2B2822' };
+  }
+  tint(id) { return this.TINT[id] || this.TINT.core; }
+  tileVM(t, i, S, ui, onPick, wordPx) {
+    const fl = this.state.flashId === t.id, tn = this.tint(t.cat), ct = S.contrast, edge = ct ? '#1F1C17' : tn.edge;
+    return { i, id: t.id, label: t.label, img: t.img || null, hasImg: !!t.img, isWord: !t.img, real: true, empty: false, flash: fl, bg: fl ? '#EAF6F2' : '#fff', plate: tn.plate,
+      border: fl ? '3px solid #31706B' : (ct ? '3px solid #1F1C17' : '2px solid ' + tn.edge), shadow: fl ? '0 0 0 4px rgba(49,112,107,.22)' : '0 3px 0 ' + edge, trans: ui.trans, labelPx: ui.labelPx, wordPx: wordPx || ui.wordPx, ink: ui.ink, onClick: () => onPick(t) };
+  }
+  resolve(t, S) { return t && t.label === 'me' ? Object.assign({}, t, { img: this.AV[S.avatar] || this.AV.fox }) : t; }
+  mini(S, sc) {
+    const d = S.density, dm = this.dims(d), k = sc || 1, ct = S.contrast, word = this.D.cats[0].items[this.TRACK].label;
+    return { cols: dm.cols, gap: Math.round((d === 24 ? 3 : 4) * k) + 'px', pad: Math.round(8 * k) + 'px', r: Math.round((d === 9 ? 8 : d === 15 ? 6 : 5) * k) + 'px', px: Math.round((d === 9 ? 15 : d === 15 ? 12 : 10) * k) + 'px',
+      cells: Array.from({ length: d }, (_, i) => i === this.TRACK ? { label: word, bg: '#31706B', ink: '#fff', border: '1px solid #31706B' } : { label: '', bg: '#fff', ink: '#3A362D', border: ct ? '1.5px solid #1F1C17' : '1px solid #E6DCC4' }) };
+  }
+  tog(title, sub, on, fn) { return { title, sub, on: !!on, state: on ? 'On' : 'Off', knob: on ? 'flex-end' : 'flex-start', bg: on ? '#31706B' : '#DCD3BF', onClick: fn }; }
+
+  renderVals() {
+    const s = this.state, S = s.settings, Dr = s.draft, AV = this.AV, D = this.D, IC = this.ICONS;
+    const isStart = s.role === 'start', isChild = s.role === 'child', isCg = s.role === 'caregiver', isTh = s.role === 'therapist';
+    const name = S.name || 'Angie', childImg = AV[S.avatar] || AV.fox, ui = this.ui(S), dirty = this.dirty();
+    const roles = [['child', 'Child'], ['caregiver', 'Caregiver'], ['therapist', 'Therapist']].map(([k, l]) => { const on = s.role === k; return { label: l, pressed: on, bg: on ? '#F6F1E2' : 'transparent', color: on ? '#2B2822' : '#F6F1E2', onClick: () => this.setRole(k) }; });
+    const mk = (label, icon, active, fn, adult) => ({ label, icon: this.icon(icon, active ? (adult ? '#2A6660' : '#39481A') : '#8E8672'), bg: active ? (adult ? '#DDEFEA' : '#BAD65D') : 'transparent', color: active ? (adult ? '#2A6660' : '#39481A') : '#6C6555', weight: active ? 600 : 500, current: active ? 'page' : undefined, onClick: fn });
+    const r = s.route, fe = r === 'board' && s.cat === 'feelings';
+    let nav = [], head = ['', ''];
+    if (isChild) {
+      nav = [mk('Home', IC.home, r === 'home', () => this.goChild('home')), mk('Talk', IC.grid, r === 'board' && !fe, () => this.goChild('board')), mk('Feelings', IC.face, fe, () => this.goChild('feelings'))];
+      if (S.acts.talk) nav.push(mk('Let’s Talk', IC.chat, r === 'talk', () => this.goChild('talk')));
+      if (S.acts.play) nav.push(mk('Let’s Play', IC.star, r === 'play', () => this.goChild('play')));
+      if (S.acts.story) nav.push(mk('Stories', IC.book, r === 'story', () => this.goChild('story')));
+      head = ({ home: ['Hi, ' + name, 'What do you want to say today?'], board: fe ? ['Feelings', 'Choose how you feel. You decide what to say.'] : ['Talk', 'Tap pictures to build a sentence, then press Speak.'], talk: ['Let’s Talk', 'Take turns talking with someone you know.'], play: ['Let’s Play', 'Find the picture. Take your time.'], story: ['Story Builder', 'Pick who, where and what happens.'] })[r] || ['', ''];
+    } else if (isCg) {
+      const g = s.cg, cn = Dr.name || 'your child';
+      nav = [mk('Set-up', IC.ask, g === 'setup', () => this.setState({ cg: 'setup' }), 1), mk('Profile', IC.user, g === 'profile', () => this.setState({ cg: 'profile' }), 1), mk('Access', IC.sliders, g === 'access', () => this.setState({ cg: 'access' }), 1), mk('Vocabulary', IC.grid, g === 'vocab', () => this.setState({ cg: 'vocab' }), 1), mk('Activities', IC.star, g === 'acts', () => this.setState({ cg: 'acts' }), 1), mk('Preview', IC.eye, false, () => this.openPreview(), 1)];
+      head = ({ setup: ['Getting to know your child', 'A few questions to suggest a starting set-up. You can change everything later.'], profile: ['Child profile', 'Set up SayPlay for ' + cn + '.'], access: ['Accessibility', 'Make SayPlay work the way ' + cn + ' does.'], vocab: ['Vocabulary', 'Choose how many symbols fit on one page.'], acts: ['Activities', 'Choose what appears on the child’s home screen.'] })[g];
+    } else if (isTh) {
+      const t = s.th;
+      nav = [mk('Overview', IC.list, t === 'overview', () => this.setState({ th: 'overview' }), 1), mk('Session plan', IC.cal, t === 'plan', () => this.setState({ th: 'plan' }), 1), mk('Preferences', IC.sliders, t === 'prefs', () => this.setState({ th: 'prefs' }), 1)];
+      head = ({ overview: ['Overview', name + '’s current set-up'], plan: ['Session plan', 'Plan activities for your next session.'], prefs: ['Accessibility preferences', 'How ' + name + '’s SayPlay is configured.'] })[t];
+    }
+    const v = { cHome: isChild && r === 'home', cBoard: isChild && r === 'board', cTalk: isChild && r === 'talk', cPlay: isChild && r === 'play', cStory: isChild && r === 'story',
+      gSetup: isCg && s.cg === 'setup', gProfile: isCg && s.cg === 'profile', gAccess: isCg && s.cg === 'access', gVocab: isCg && s.cg === 'vocab', gActs: isCg && s.cg === 'acts', showPreview: isCg && s.cg !== 'vocab' && s.cg !== 'setup',
+      tOverview: isTh && s.th === 'overview', tPlan: isTh && s.th === 'plan', tPrefs: isTh && s.th === 'prefs' };
+
+    // start
+    const s0 = s.start, sizeName = { 9: 'Large · 9 per page', 15: 'Medium · 15 per page', 24: 'Small · 24 per page' };
+    const start = { welcome: s0.step === 'welcome', who: s0.step === 'who', avatar: s0.step === 'avatar', profile: s0.step === 'profile', fox: AV.fox,
+      onBegin: () => this.setStart({ step: 'who' }), onBack: () => this.setStart({ step: ({ who: 'welcome', avatar: 'who', profile: 'avatar' })[s0.step] || 'welcome' }),
+      roles: [{ title: 'Child', sub: 'Talk with pictures, play and make stories', img: AV.fox, bg: '#FBEBE0', onClick: () => this.setStart({ step: 'avatar' }) }, { title: 'Parent or caregiver', sub: 'Answer a few questions and set things up', img: AV.star, bg: '#FBF3DE', onClick: () => this.finishStart('caregiver') }, { title: 'Therapist', sub: 'See the set-up and plan a session', img: AV.bee, bg: '#EEF2F8', onClick: () => this.finishStart('therapist') }],
+      avatars: ['snail', 'bee', 'star'].map(k => { const sel = s0.avatar === k; return { img: AV[k], label: ({ snail: 'Snail', bee: 'Bee', star: 'Star' })[k], sel, mark: sel ? '✓ Chosen' : '', bg: sel ? '#EAF6F2' : 'transparent', border: sel ? '3px solid #3F7F78' : '3px solid transparent', onClick: () => this.setStart({ avatar: k }) }; }),
+      noAvatar: !s0.avatar, nextBg: s0.avatar ? '#D9561C' : '#E3B9A3', onNext: () => this.setStart({ step: 'profile' }),
+      img: AV[s0.avatar || 'bee'], name: s0.name, onName: e => this.setStart({ name: e.target.value }), sizeText: sizeName[s0.density],
+      onSmaller: () => this.setStart({ density: s0.density === 9 ? 15 : 24 }), onLarger: () => this.setStart({ density: s0.density === 24 ? 15 : 9 }),
+      minSize: s0.density === 24, maxSize: s0.density === 9, minOp: s0.density === 24 ? .35 : 1, maxOp: s0.density === 9 ? .35 : 1,
+      contrast: !!s0.contrast, onContrast: () => this.setStart({ contrast: !s0.contrast }), knob: s0.contrast ? 'flex-end' : 'flex-start', togBg: s0.contrast ? '#3F7F78' : '#D6D6D6', contrastText: s0.contrast ? 'On' : 'Off',
+      onFinish: () => this.finishStart('child') };
+
+    // home
+    const quick = ['eat', 'play outside', 'see Anna', 'go home'].map(x => { const on = s.quickSaid === x; return { label: x, aria: 'Say: I want to ' + x, bg: on ? '#EAF6F2' : '#FBF7EA', border: on ? '1.5px solid #59C0B2' : (S.contrast ? '2px solid #1F1C17' : '1px solid #EFE6D2'), onClick: () => { this.speak('I want to ' + x); this.setState({ quickSaid: x }); } }; });
+    const hb = S.contrast ? '2px solid #1F1C17' : '1px solid rgba(58,54,45,.06)';
+    const homeCards = [{ title: 'Talk', sub: 'Build and speak a sentence', img: childImg, bg: '#EAF6F2', ink: '#2A6660', go: 'board' }, { title: 'Feelings', sub: 'Say how you feel', img: this.face('happy'), bg: '#FBF3DE', ink: '#7A5A12', go: 'feelings' }]
+      .concat(S.acts.talk ? [{ title: 'Let’s Talk', sub: 'Take turns with a friend', img: AV.star, bg: '#EFF6E4', ink: '#3F6B2E', go: 'talk' }] : [])
+      .concat(S.acts.play ? [{ title: 'Let’s Play', sub: 'Find-the-picture game', img: AV.bee, bg: '#EFEEF8', ink: '#4B4A86', go: 'play' }] : [])
+      .concat(S.acts.story ? [{ title: 'Story Builder', sub: 'Make a short story', img: AV.snail, bg: '#FBEFE2', ink: '#7A5320', go: 'story' }] : [])
+      .map(c => Object.assign(c, { border: hb, onClick: () => this.goChild(c.go) }));
+    const homeCats = D.cats.map(c => ({ name: c.name, dot: c.dot, icon: c.icon, onClick: () => { this.stopAll(); this.setState({ route: 'board', cat: c.id, page: 0, followUp: false }); } }));
+
+    // board
+    const cat = D.cats.find(c => c.id === s.cat) || D.cats[0], N = S.density, pages = Math.max(1, Math.ceil(cat.items.length / N)), page = Math.min(s.page, pages - 1);
+    const slice = cat.items.slice(page * N, page * N + N), grid = [];
+    for (let i = 0; i < N; i++) { const t = slice[i]; grid.push(t ? this.tileVM(this.resolve(t, S), i, S, ui, x => this.add(x)) : { i, empty: true, real: false }); }
+    const cats = D.cats.map(c => { const a = c.id === cat.id; return { name: c.name, dot: c.dot, icon: c.icon, on: a, plate: a ? '#fff' : this.tint(c.id).plate, bg: a ? '#BAD65D' : '#fff', ink: a ? '#39481A' : '#3A362D', weight: a ? 600 : 500, border: a ? '2px solid #8FB03A' : ui.tileBorderSoft, onClick: () => this.setCat(c.id) }; });
+    const ct = S.contrast;
+    const ub = on => on ? { bg: '#FBF7EA', border: ct ? '2px solid #1F1C17' : '1.5px solid #E2D7BE', ink: '#2B2822' } : { bg: 'transparent', border: '1.5px dashed #E3DBC8', ink: '#A79E8B' };
+    const sp = (on, busy) => !on ? { bg: '#ECE6D8', ink: '#7D7663', shadow: 'none' } : busy ? { bg: '#1F4E4A', ink: '#fff', shadow: '0 2px 0 #143532' } : { bg: '#31706B', ink: '#fff', shadow: '0 5px 0 #1F4E4A' };
+    const pager = { multi: pages > 1, text: 'Page ' + (page + 1) + ' of ' + pages, noPrev: page === 0, noNext: page >= pages - 1, prevB: ub(page > 0), nextB: ub(page < pages - 1),
+      onPrev: () => this.setState({ page: page - 1 }), onNext: () => this.setState({ page: page + 1 }), dots: Array.from({ length: pages }, (_, i) => ({ w: i === page ? '24px' : '8px', bg: i === page ? '#31706B' : '#CFC5AE' })) };
+    const chip = t => { const tn = this.tint(String(t.k || '').split(':')[0]); return { label: t.label, img: t.img, hasImg: !!t.img, padL: t.img ? '8px' : '18px', border: ct ? '2px solid #1F1C17' : '1.5px solid ' + tn.edge, edge: ct ? '#1F1C17' : tn.edge }; };
+    const empty = !s.sentence.length;
+    const bar = { chips: s.sentence.map(chip), empty, noUndo: !s.history.length, undoB: ub(!!s.history.length), delB: ub(!empty), clearB: ub(!empty), speak: sp(!empty, s.speaking),
+      onUndo: () => this.undo(), onBack: () => this.back(), onClear: () => this.clear(), onSpeak: () => this.speak(s.sentence.map(x => x.say).join(' ')), speakLabel: s.speaking ? 'Speaking…' : 'Speak' };
+    const follow = { show: fe && s.followUp, hide: !(fe && s.followUp), chips: D.follow.map(x => ({ label: x, onClick: () => this.addPhrase(x) })), onDismiss: () => this.setState({ followUp: false }) };
+    const panel = { bg: fe ? '#FFF7DC' : '#F8F3E6', edge: fe ? '#F1DF9F' : '#F1E6CC', emptyEdge: fe ? '#EEDDA6' : '#E6DCC4', title: cat.name, icon: cat.icon, dot: cat.dot, meta: pages > 1 ? pager.text : (fe ? 'You decide what to say' : '') };
+    const narrow = (s.vw || 1200) < 1000;
+    const lay = { boardCols: narrow ? 'minmax(0,1fr)' : '196px minmax(0,1fr)', boardRows: narrow ? 'auto minmax(0,1fr)' : 'minmax(0,1fr)', catDir: narrow ? 'row' : 'column' };
+
+    // talk
+    const T = s.talk, A = D.talk.find(a => a.id === T.act), PF = this.friend(T.partner), pFirst = PF ? PF.name.split(' ')[0] : '';
+    const q = (T.query || '').trim().toLowerCase(), fl = s.friends.filter(f => !q || f.name.toLowerCase().includes(q));
+    const talkWordPx = ({ s: '20px', m: '24px', l: '28px' })[S.textSize];
+    const talk = { pPartner: isChild && T.phase === 'partner', pAct: T.phase === 'act', pTurn: T.phase === 'turn' && !!A, pDone: T.phase === 'done' && !!A,
+      query: T.query, onQuery: e => this.setTalk({ query: e.target.value }), noMatch: !!q && !fl.length,
+      partners: fl.map(f => { const sel = T.partner === f.id; return { name: f.name, img: AV[f.av] || AV.star, sel, border: sel ? '3px solid #D9561C' : '3px solid transparent', dotBg: sel ? '#D9561C' : '#FBD59B', mark: sel ? '✓' : '', onClick: () => this.setTalk({ partner: f.id }) }; }),
+      adding: T.adding, newName: T.newName, onNewName: e => this.setTalk({ newName: e.target.value }), noNewName: !(T.newName || '').trim(), addBg: (T.newName || '').trim() ? '#D9561C' : '#E3B9A3',
+      newAvatars: ['snail', 'bee', 'star', 'fox'].map(k => ({ img: AV[k], label: k, sel: T.newAv === k, border: T.newAv === k ? '3px solid #D9561C' : '2px solid #EDE4CE', onClick: () => this.setTalk({ newAv: k }) })),
+      onAddOpen: () => this.setTalk({ adding: true }), onAddCancel: () => this.setTalk({ adding: false, newName: '' }), onAddSubmit: e => this.addFriend(e),
+      partnerImg: PF ? (AV[PF.av] || AV.star) : AV.star, partnerName: PF ? PF.name : '', noNext: !PF, nextBg: PF ? '#D9561C' : '#E3B9A3', nextHint: PF ? 'Choose a game to play with ' + pFirst + '.' : 'Choose a friend first.', onNext: () => this.setTalk({ phase: 'act' }),
+      onChangePartner: () => this.setTalk({ phase: 'partner' }),
+      acts: D.talk.map(a => ({ title: a.title, blurb: a.blurb, img: a.img, bg: a.bg, ink: a.ink, onClick: () => this.setTalk({ act: a.id, phase: 'turn', q: 0, turn: 'child', sent: [], log: [] }) })),
+      log: T.log.map(l => ({ who: l.who, text: l.text, align: l.child ? 'flex-start' : 'flex-end', bg: l.muted ? '#F6F1E2' : l.child ? '#EAF6F2' : '#FBF3DE', ink: l.muted ? '#6C6555' : '#3A362D', weight: l.muted ? 400 : 500 })), logEmpty: !T.log.length };
+    if (A) {
+      const Q = A.qs[Math.min(T.q, 2)], ch = T.turn === 'child', te = !T.sent.length;
+      Object.assign(talk, { actTitle: A.title, progressText: 'Question ' + (T.q + 1) + ' of 3', steps: [0, 1, 2].map(i => ({ bg: i < T.q || T.phase === 'done' ? '#31706B' : i === T.q ? '#59C0B2' : '#E6DDC8' })),
+        isChildTurn: ch, isPartnerTurn: !ch, turnLabel: ch ? name + '’s turn' : pFirst + '’s turn', turnImg: ch ? childImg : talk.partnerImg, turnBg: ch ? '#EAF6F2' : '#FBF3DE', turnBorder: ch ? '1.5px solid #9AD0C6' : '1.5px solid #EAD9A6', turnInk: ch ? '#2A6660' : '#7A5A12', q: Q.q,
+        onHear: () => this.speak(Q.q), empty: te, op: te ? .4 : 1, emptyText: ch ? 'Answer with pictures, ' + name : pFirst + ' can answer with pictures too', chips: T.sent.map(chip),
+        onBack: () => this.setTalk({ sent: T.sent.slice(0, -1) }), onSpeak: () => this.speak(this.talkText()), delB: ub(!te), speakBg: sp(!te).bg, speakInk: sp(!te).ink, speakShadow: sp(!te).shadow,
+        tiles: A.starters.concat(Q.o).map((l, i) => this.tileVM(this.resolve(D.T[l], S), i, S, ui, x => this.addT(x), talkWordPx)),
+        doneLabel: ch ? 'Say it · ' + pFirst + '’s turn →' : (T.q < 2 ? 'Say it · next question →' : 'Say it · finish →'), aloudLabel: pFirst + ' answered out loud',
+        onDone: () => this.talkDone(), onPass: () => this.talkDone('pass'), onAloud: () => this.talkDone('aloud'),
+        onExit: () => { this.stopAll(); this.setTalk({ phase: 'act', act: null, sent: [], log: [], q: 0, turn: 'child' }); },
+        summary: 'You and ' + pFirst + ' talked about ' + A.qs.length + ' things.', onAgain: () => this.setTalk({ phase: 'turn', q: 0, turn: 'child', sent: [], log: [] }),
+        onOtherAct: () => this.setTalk({ phase: 'act', act: null, log: [], q: 0, turn: 'child', sent: [] }), onBoard: () => this.goChild('board') });
+    }
+
+    // game
+    const g = s.game, R = D.rounds[g.r];
+    const game = { active: !g.done, done: g.done, mascot: AV.bee, progressText: 'Picture ' + (g.r + 1) + ' of ' + D.rounds.length, prompt: 'Can you find the ' + R.t + '?', onHear: () => this.speak('Can you find the ' + R.t + '?'),
+      dots: D.rounds.map((_, i) => ({ bg: i < g.r || (i === g.r && g.correct) ? '#4B4A86' : i === g.r ? '#B8B5E0' : '#E1DFF2' })),
+      tiles: R.o.map((k, i) => { const pk = g.picked === k, ok = pk && g.correct; return { i, label: k, img: k === 'lion' ? 'assets/sp-ic-lion2.png' : 'assets/sp-ic-' + k + '.png', border: ok ? '3px solid #31706B' : pk ? '3px dashed #C98A5A' : ui.tileBorder, hasNote: pk, note: ok ? '✓ Yes' : 'Not this one', noteBg: ok ? '#31706B' : '#FBEBE0', noteInk: ok ? '#fff' : '#7A3B1E', op: g.correct && !pk ? .5 : 1, onClick: () => this.pickGame(k) }; }),
+      fb: g.correct ? 'Yes! That’s the ' + R.t + '.' : g.picked ? 'That’s the ' + g.picked + '. Can you find the ' + R.t + '?' : 'Tap a picture when you’re ready.', fbInk: g.correct ? '#2A6660' : g.picked ? '#7A3B1E' : '#6C6555',
+      canNext: g.correct, nextLabel: g.r >= D.rounds.length - 1 ? 'Finish' : 'Next picture →', onNext: () => this.nextGame(),
+      onAgain: () => this.setState({ game: { r: 0, picked: null, correct: false, done: false } }), onHome: () => this.goChild('home') };
+
+    // story
+    const st = s.story, SD = D.story, chars = [[name, childImg]].concat(SD.chars), cImg = (chars.find(x => x[0] === st.c) || [0, childImg])[1];
+    const defs = [['c', 'Who'], ['p', 'Where'], ['a', 'What'], ['f', 'Feeling'], [null, 'Story']], keys = ['c', 'p', 'a', 'f'];
+    const lists = [chars.map(x => ({ label: x[0], img: x[1] })), SD.places.map(x => ({ label: x[0], img: x[1] })), SD.actions.map(x => ({ label: x[0], img: x[1] })), SD.feels.map(f => ({ label: f, img: this.face(f) }))];
+    const story = { isPick: st.step < 4, isStory: st.step >= 4, canBack: st.step > 0 && st.step < 4, onBackStep: () => this.setStory({ step: st.step - 1 }),
+      pickTitle: ['Who is in your story?', 'Where do they go?', 'What do they do there?', 'How do they feel?'][st.step] || '',
+      steps: defs.map(([k, label], i) => { const cur = st.step === i, en = defs.slice(0, i).every(([kk]) => !kk || st[kk]), pk = k && st[k]; return { num: i + 1, label, pick: pk || '', hasPick: !!pk, current: cur ? 'step' : undefined, disabled: !en, op: en ? 1 : .45, bg: cur ? '#7A5320' : '#fff', ink: cur ? '#fff' : '#3A362D', border: cur ? '1.5px solid #7A5320' : '1.5px solid #EDE4CE', numBg: cur ? '#fff' : (pk ? '#BAD65D' : '#F6F1E2'), numInk: cur ? '#7A5320' : '#3A362D', onClick: () => { this.stopStory(); this.setStory({ step: i }); } }; }),
+      options: st.step < 4 ? lists[st.step].map((o, i) => { const sel = st[keys[st.step]] === o.label; return { i, label: o.label, img: o.img, sel, border: sel ? '3px solid #31706B' : ui.tileBorder, onClick: () => this.pickStory(keys[st.step], o.label) }; }) : [],
+      saved: s.stories.map(x => ({ title: x.c + ' at ' + x.p.replace(/^the /, ''), delAria: 'Delete story ' + x.c + ' at ' + x.p, onOpen: () => this.setStory(Object.assign(this.story0(), { c: x.c, p: x.p, a: x.a, f: x.f, step: 4, savedId: x.id })), onDelete: () => this.setState(z => ({ stories: z.stories.filter(y => y.id !== x.id) }), () => this.persist()) })),
+      savedEmpty: !s.stories.length, savedThis: !!st.savedId, saveLabel: st.savedId ? '✓ Saved' : 'Save story', saveOp: st.savedId ? .6 : 1,
+      onSave: () => this.saveStory(), onNew: () => { this.stopStory(); this.setStory(this.story0()); }, panels: [], playLabel: st.playing >= 0 ? 'Stop' : 'Play story' };
+    if (st.step >= 4 && st.c && st.p && st.a && st.f) {
+      const lines = this.storyLines(st), pl = SD.places.find(x => x[0] === st.p) || SD.places[0], ac = SD.actions.find(x => x[0] === st.a) || SD.actions[0];
+      story.panels = [{ img: pl[1], bg: pl[2], line: lines[0], what: 'place', step: 1 }, { img: ac[1], bg: '#FBF7EA', line: lines[1], what: 'action', step: 2 }, { img: this.face(st.f), bg: '#FBF3DE', line: lines[2], what: 'feeling', step: 3 }]
+        .map((p, i) => Object.assign(p, { charImg: cImg, border: st.playing === i ? '3px solid #31706B' : '1.5px solid #EDE4CE', shadow: st.playing === i ? '0 0 0 5px rgba(49,112,107,.15)' : 'none', onEdit: () => { this.stopStory(); this.setStory({ step: p.step }); } }));
+      story.onPlay = st.playing >= 0 ? () => this.stopStory() : () => this.playStory(lines);
+    }
+
+    // caregiver
+    const cgBar = { status: dirty ? 'Unsaved changes' : 'All changes saved', statusColor: dirty ? '#B5541F' : '#4F7A3C', clean: !dirty, cancelInk: dirty ? '#3A362D' : '#A79E8B', saveBg: dirty ? '#31706B' : '#ECE6D8', saveInk: dirty ? '#fff' : '#7D7663' };
+    const ob = { fox: AV.fox, dots: this.OBQ.map((_, i) => ({ bg: i < s.ob ? '#C4531F' : i === s.ob ? '#E89A6E' : '#F1E3C8' })) };
+    if (s.ob < this.OBQ.length) {
+      const Q = this.OBQ[s.ob], val = Dr.about[Q.key], has = Q.multi ? (val || []).length > 0 : !!val;
+      Object.assign(ob, { isQ: true, isSummary: false, q: Q.q, stepText: 'Question ' + (s.ob + 1) + ' of ' + this.OBQ.length, hint: Q.multi ? 'Choose all that apply.' : 'Choose one.', role: Q.multi ? 'group' : 'radiogroup',
+        cols: Q.grid ? 'repeat(2,minmax(0,1fr))' : 'minmax(0,1fr)', h: Q.grid ? '110px' : '72px', px: Q.grid ? '34px' : '23px',
+        opts: Q.opts.map(o => { const sel = Q.multi ? (val || []).includes(o) : val === o; return { label: o, sel, role: Q.multi ? 'checkbox' : 'radio', bg: sel ? '#C4531F' : '#FFEFCC', ink: sel ? '#fff' : '#A8441A', border: sel ? '2px solid #C4531F' : '2px solid #FFEFCC', onClick: () => this.obPick(Q, o) }; }),
+        canBack: s.ob > 0, noNext: !has, nextBg: has ? '#C4531F' : '#E3B9A3', onNext: () => this.setState({ ob: s.ob + 1 }), onBack: () => this.setState({ ob: s.ob - 1 }), onSkip: () => this.setState({ ob: s.ob + 1 }) });
+    } else {
+      const sg = this.suggest(Dr);
+      Object.assign(ob, { isQ: false, isSummary: true, q: 'Here’s a starting point for ' + (Dr.name || 'your child'), stepText: 'Summary', rows: sg.rows, applied: s.obApplied, applyBg: s.obApplied ? '#9DB8B4' : '#C4531F', applyLabel: s.obApplied ? '✓ Added to settings' : 'Use these settings',
+        onApply: () => { this.setDraft({ density: sg.density, speakOnTap: sg.speakOnTap, motion: sg.motion }); this.setState({ obApplied: true }); this.toast('Suggestions added. Review them, then press Save changes.'); },
+        onEdit: () => this.setState({ ob: 0, obApplied: false }) });
+    }
+    const cgP = { name: Dr.name, onName: e => this.setDraft({ name: e.target.value }), age: (Dr.about && Dr.about.age) || '', onAge: e => this.setDraft({ about: Object.assign({}, Dr.about, { age: e.target.value || null }) }),
+      ages: [{ value: '', label: 'Not set' }].concat(['0-5', '6-10', '11-15', '16-20'].map(a => ({ value: a, label: a }))),
+      avatars: [['fox', 'Fox'], ['bee', 'Bee'], ['snail', 'Snail'], ['star', 'Star']].map(([k, l]) => { const sel = Dr.avatar === k; return { img: AV[k], label: l, sel, mark: sel ? '✓ Selected' : '', bg: sel ? '#EAF6F2' : '#fff', border: sel ? '3px solid #31706B' : '1.5px solid #EDE4CE', onClick: () => this.setDraft({ avatar: k }) }; }) };
+    let vo, vdis = false, vnote;
+    if (s.vstate === 'none') { vo = [{ value: '', label: 'Speech not available' }]; vdis = true; vnote = 'This browser can’t speak aloud. SayPlay shows the sentence on screen instead.'; }
+    else if (s.vstate === 'loading') { vo = [{ value: '', label: 'Loading voices…' }]; vdis = true; vnote = 'Looking for voices on this device…'; }
+    else { const vs = s.voices.slice().sort((a, b) => ((b.lang || '').indexOf('en') === 0) - ((a.lang || '').indexOf('en') === 0)).slice(0, 30); vo = [{ value: '', label: 'Device default' }].concat(vs.map(x => ({ value: x.voiceURI, label: x.name + ' · ' + x.lang }))); vnote = s.voices.length ? 'Voices come from this device, so the list changes between tablets and browsers.' : 'No named voices found. SayPlay will use the device default.'; }
+    const cgA = { sizes: [['s', 'Small', '16px'], ['m', 'Medium', '21px'], ['l', 'Large', '27px']].map(([k, l, px]) => { const sel = Dr.textSize === k; return { px, aria: l + ' text', sel, bg: sel ? '#31706B' : '#fff', ink: sel ? '#fff' : '#3A362D', border: sel ? '2px solid #31706B' : '1.5px solid #EDE4CE', onClick: () => this.setDraft({ textSize: k }) }; }),
+      display: [this.tog('High contrast', 'Stronger borders and darker text on every tile', Dr.contrast, () => this.setDraft({ contrast: !Dr.contrast })), this.tog('Reduce motion', 'Turns off movement and transitions', Dr.motion, () => this.setDraft({ motion: !Dr.motion }))],
+      voiceToggles: [this.tog('Speak each word as it’s tapped', 'Confirms a choice before building a full sentence', Dr.speakOnTap, () => this.setDraft({ speakOnTap: !Dr.speakOnTap }))],
+      voiceOpts: vo, voiceValue: Dr.voiceURI || '', voiceDisabled: vdis, voiceNote: vnote, onVoice: e => this.setDraft({ voiceURI: e.target.value }),
+      rate: Dr.rate, rateText: Number(Dr.rate).toFixed(1) + '×', onRate: e => this.setDraft({ rate: parseFloat(e.target.value) }),
+      sliders: [{ id: 'cg-pitch', label: 'Pitch', text: Number(Dr.pitch).toFixed(1), min: 0.6, max: 1.6, value: Dr.pitch, lo: 'Lower', hi: 'Higher', onChange: e => this.setDraft({ pitch: parseFloat(e.target.value) }) }, { id: 'cg-vol', label: 'Volume', text: Math.round(Dr.volume * 100) + '%', min: 0.2, max: 1, value: Dr.volume, lo: 'Quieter', hi: 'Louder', onChange: e => this.setDraft({ volume: parseFloat(e.target.value) }) }],
+      onTest: () => this.speak('Hi, I’m ' + (Dr.name || 'SayPlay') + '. I want to play.', { set: Dr }),
+      concepts: [{ title: 'Switch scanning', sub: 'Highlights each symbol in turn; the child presses a switch to choose.' }, { title: 'Hold to confirm', sub: 'A symbol is chosen only after it’s held, to ignore accidental taps.' }, { title: 'Eye tracking', sub: 'Looking at a symbol for a set time selects it.' }, { title: 'Visual cues', sub: 'Gently highlights a likely next word to support sentence building.' }] };
+    const tw = D.cats[0].items[this.TRACK].label;
+    const pos = d => { const c = this.dims(d).cols; return 'row ' + (Math.floor(this.TRACK / c) + 1) + ', column ' + (this.TRACK % c + 1); };
+    const cgV = { warn: Dr.density !== S.density, warnText: 'When you save, symbols move to new places. For example, “' + tw + '” moves from ' + pos(S.density) + ' to ' + pos(Dr.density) + '. ' + (Dr.name || 'Your child') + ' may need time to relearn where words are.',
+      beforeLabel: S.density + ' symbols · ' + this.dims(S.density).cols + ' × ' + this.dims(S.density).rows, afterLabel: Dr.density + ' symbols · ' + this.dims(Dr.density).cols + ' × ' + this.dims(Dr.density).rows,
+      beforePos: '“' + tw + '” is in ' + pos(S.density), afterPos: '“' + tw + '” moves to ' + pos(Dr.density),
+      before: this.mini(Object.assign({}, Dr, { density: S.density }), 1.25), after: this.mini(Dr, 1.25),
+      cards: [[9, 'Large targets', 'Biggest targets and the least precise movement. More page turns to reach words.', 'Largest'], [15, 'Standard', 'A middle ground between target size and words per page.', 'Medium'], [24, 'Expanded vocabulary', 'More words at once. Smaller targets need more precise movement.', 'Smallest']]
+        .map(([d, t, desc, tt]) => { const sel = Dr.density === d, dm = this.dims(d); return { count: d, title: t, desc, sel, targetText: tt, dims: dm.cols + ' × ' + dm.rows, tick: sel ? '✓' : '', radioBorder: sel ? '2px solid #31706B' : '2px solid #CFC5AE', radioBg: sel ? '#31706B' : '#fff', isNow: S.density === d, bg: sel ? '#F3FAF8' : '#fff', border: sel ? '3px solid #31706B' : '1.5px solid #E6DCC4', shadow: sel ? '0 14px 30px -18px rgba(49,112,107,.6)' : 'none', mini: this.mini(Object.assign({}, Dr, { density: d }), 1), onClick: () => this.setDraft({ density: d }) }; }) };
+    const cgX = { acts: [['talk', 'Let’s Talk', 'Turn-taking conversations with a friend or adult'], ['play', 'Let’s Play', 'Find-the-picture game'], ['story', 'Story Builder', 'Build and hear a short story']].map(([k, t, sub]) => this.tog(t, sub, Dr.acts[k], () => this.setDraft({ acts: Object.assign({}, Dr.acts, { [k]: !Dr.acts[k] }) }))) };
+    const prev = { title: (Dr.name || 'Child') + '’s board', img: AV[Dr.avatar] || AV.fox, chips: ['I', 'want', 'to', 'play'].map(l => ({ label: l })), chipPx: ({ s: '10px', m: '12px', l: '14px' })[Dr.textSize], barBorder: Dr.contrast ? '2px solid #1F1C17' : '1px solid #F1E6CC', chipBorder: Dr.contrast ? '1.5px solid #1F1C17' : '1px solid #EFE6D2',
+      mini: this.mini(Dr, .9), acts: [{ label: 'Talk' }, { label: 'Feelings' }].concat(['talk', 'play', 'story'].filter(k => Dr.acts[k]).map(k => ({ label: ({ talk: 'Let’s Talk', play: 'Let’s Play', story: 'Stories' })[k] }))),
+      badge: dirty ? 'Unsaved' : 'Saved', badgeBg: dirty ? '#FFF3E6' : '#EAF6F2', badgeInk: dirty ? '#B5541F' : '#2A6660', note: dirty ? 'This is how the child’s board will look after you save.' : 'This matches what the child sees now.' };
+
+    // therapist
+    const ab = S.about || {}, onoff = b => b ? 'On' : 'Off', sz = ({ s: 'Small', m: 'Medium', l: 'Large' })[S.textSize];
+    const vname = S.voiceURI ? ((s.voices.find(x => x.voiceURI === S.voiceURI) || {}).name || 'Saved voice') : 'Device default';
+    const actsOn = ['talk', 'play', 'story'].filter(k => S.acts[k]).map(k => ({ talk: 'Let’s Talk', play: 'Let’s Play', story: 'Story Builder' })[k]);
+    const planItems = s.plan.map((id, i) => ({ id, i, label: (D.catalog.find(c => c.id === id) || { label: id }).label }));
+    const thO = { cards: [{ label: 'Child', value: name + (ab.age ? ' · age ' + ab.age : '') }, { label: 'Board', value: S.density + ' symbols per page' }, { label: 'Text size', value: sz }, { label: 'High contrast', value: onoff(S.contrast) }, { label: 'Reduced motion', value: onoff(S.motion) }, { label: 'Voice', value: vname + ' · ' + Number(S.rate).toFixed(1) + '×' }, { label: 'Communication style', value: ab.style || 'Not answered yet' }, { label: 'Activities on home', value: actsOn.join(', ') || 'Talk and Feelings only' }],
+      plan: planItems.map(p => ({ n: p.i + 1, label: p.label })), planEmpty: !planItems.length, onPlan: () => this.setState({ th: 'plan' }) };
+    const thP = { catalog: D.catalog.map(c => { const inP = s.plan.includes(c.id); return { label: c.label, sub: c.sub, inPlan: inP, addLabel: inP ? '✓ Added' : 'Add', addBorder: inP ? '#CFE7E1' : '#31706B', addInk: inP ? '#6C6555' : '#31706B', onAdd: () => this.addPlan(c.id) }; }),
+      plan: planItems.map(p => ({ n: p.i + 1, label: p.label, noUp: p.i === 0, upOp: p.i === 0 ? .35 : 1, noDown: p.i === planItems.length - 1, downOp: p.i === planItems.length - 1 ? .35 : 1, upAria: 'Move ' + p.label + ' up', downAria: 'Move ' + p.label + ' down', rmAria: 'Remove ' + p.label, onUp: () => this.movePlan(p.i, -1), onDown: () => this.movePlan(p.i, 1), onRemove: () => this.removePlan(p.i) })),
+      planEmpty: !planItems.length, notes: s.notes, onNotes: e => this.setState({ notes: e.target.value, planDirty: true }), clean: !s.planDirty, saveBg: s.planDirty ? '#31706B' : '#9DB8B4', status: s.planDirty ? 'Unsaved changes' : 'Saved on this device', statusInk: s.planDirty ? '#B5541F' : '#4F7A3C', onSave: () => this.savePlan() };
+    const thR = { rows: [['Board size', S.density + ' symbols per page', 'Fewer symbols means larger targets, but more page turns.'], ['Text size', sz, 'Size of the label under each symbol.'], ['High contrast', onoff(S.contrast), 'Stronger borders and darker text.'], ['Reduced motion', onoff(S.motion), 'Removes transitions between screens.'], ['Voice', vname + ' · rate ' + Number(S.rate).toFixed(1) + '× · pitch ' + Number(S.pitch).toFixed(1), 'Device voice, speed and pitch.'], ['Speak on tap', onoff(S.speakOnTap), 'Says each word as it’s tapped.'], ['Input', 'Touch', 'Other access methods are concepts only in this prototype.'], ['Goals from caregiver', (ab.goals || []).join(', ') || 'Not answered yet', 'From the caregiver’s set-up questions.']].map(([label, value, why]) => ({ label, value, why })),
+      onEdit: () => this.goRole('caregiver', { cg: 'access' }) };
+
+    // dialog
+    let dlg = { show: false, density: false, compare: [] };
+    if (s.dialog) {
+      const nx = s.dialog.next;
+      if (s.dialog.kind === 'density') dlg = { show: true, density: true, title: 'Change ' + (Dr.name || 'the') + '’s board to ' + Dr.density + ' symbols?', body: 'Symbols will move to new places on the board. ' + (Dr.name || 'Your child') + ' may need time to relearn where words are, so it can help to tell their therapist before switching.',
+        compare: [{ label: 'Now · ' + S.density + ' symbols', pos: cgV.beforePos, mini: this.mini(Object.assign({}, Dr, { density: S.density }), 1), border: '1.5px solid #E6DCC4' }, { label: 'After · ' + Dr.density + ' symbols', pos: cgV.afterPos, mini: this.mini(Dr, 1), border: '2.5px solid #31706B' }],
+        secondary: 'Keep ' + S.density, onSecondary: () => this.setState({ dialog: null }), primary: 'Apply ' + Dr.density + ' and save', onPrimary: () => this.commit(nx) };
+      else dlg = { show: true, density: false, compare: [], title: 'Save your changes first?', body: 'You changed some of ' + (Dr.name || 'your child') + '’s settings. Save them, or discard them and keep the current set-up.',
+        secondary: 'Discard changes', onSecondary: () => this.goRole(nx.r, nx.x), primary: 'Save changes', onPrimary: () => this.save(nx) };
+      dlg.onClose = () => this.setState({ dialog: null });
+    }
+
+    return {
+      notEmbed: !this.EMBED, reduce: S.motion ? '1' : '0', roles, onReset: () => this.reset(), onRestart: () => { this.stopAll(); this.setState({ role: 'start', start: this.start0(), fromCg: false, dialog: null }); },
+      isStart, notStart: !isStart, start, fromCg: isChild && s.fromCg, childName: name, onBackCg: () => this.goRole('caregiver', { cg: s.cg }),
+      navLabel: isChild ? 'Child navigation' : isCg ? 'Caregiver navigation' : 'Therapist navigation', nav, childImg, footLabel: isChild ? name : isCg ? 'Caregiver' : 'Therapist',
+      head: { title: head[0], sub: head[1] }, isChild, isCg, isTh, cgBar, onRestore: () => this.restore(), onCancel: () => this.cancel(), onSave: () => this.save(),
+      v, ui, lay, panel, showHead: !v.cBoard, mainPad: v.cBoard ? '14px 18px 18px' : '24px 28px 28px', quick, quickNote: s.quickSaid ? 'Said: “I want to ' + s.quickSaid + '”' : '', homeCards, homeCats,
+      bar, follow, cats, grid, gridKey: this.gridKey, boardAria: cat.name + ' symbols, page ' + (page + 1) + ' of ' + pages, pager,
+      talk, game, story, cgCols: v.showPreview ? 'minmax(0,1fr) minmax(280px,360px)' : 'minmax(0,1fr)', ob, cgP, cgA, cgV, cgX, prev, thO, thP, thR, dlg, stop: this.stop,
+      rootRef: this.rootRef, rootH: this.FIG ? '820px' : '100vh', fixPos: this.FIG ? 'absolute' : 'fixed',
+      toast: { show: !!s.toast, msg: s.toast ? s.toast.msg : '', bg: s.toast && s.toast.kind === 'warn' ? '#8A3A14' : '#2B2822' }
+    };
+  }
+}
+</script>
+</body>
+</html>
