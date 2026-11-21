@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Instrument+Serif&family=Noto+Serif+JP:wght@400;500&family=Zen+Old+Mincho:wght@400;500&family=Jost:wght@300;400;500&family=Noto+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  a { color: #C0442A; text-decoration: none; }
+  a:hover { color: #8E2F1C; }
+  .nagi-scr::-webkit-scrollbar { display: none; }
+  .nagi-col { --sc: 1; }
+  .nagi-fit { width: calc(390px * var(--sc)); height: calc(844px * var(--sc)); }
+  .nagi-phone { transform: scale(var(--sc)); transform-origin: top left; }
+  .nagi-hint { width: calc(390px * var(--sc)); }
+  @media (max-width: 760px) {
+    .nagi-rail { width: 100% !important; flex-direction: row !important; overflow-x: auto; gap: 20px !important; }
+    .nagi-rail > div { min-width: max-content; border-bottom: none !important; }
+    .nagi-quote { display: none; }
+  }
+  @media (max-width: 470px) { .nagi-col { --sc: 0.8; } }
+  @media (max-width: 400px) { .nagi-col { --sc: 0.72; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; padding: 40px 20px 56px; font-family: Jost, 'Noto Sans', system-ui, sans-serif; box-sizing: border-box;">
+
+  <div style="width: 100%; max-width: 940px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; margin-bottom: 26px;">
+    <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 17px; color: #191410;">凪</span>
+    <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.34em; color: #191410;">NAGI</span>
+    <span style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; color: #6B6255;">an omakase companion</span>
+    <span style="flex: 1; min-width: 20px; height: 1px; background: #E2DCD0;"></span>
+    <span style="font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8073;">{{ phase }}</span>
+  </div>
+
+  <div style="width: 100%; max-width: 940px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; justify-content: center;">
+
+    <div class="nagi-rail" style="width: 200px; flex: 0 0 auto; display: flex; flex-direction: column; gap: 2px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="9">
+        <div style="display: flex; align-items: center; gap: 12px; min-height: 40px; cursor: pointer; border-bottom: 1px solid #F0ECE3;" onClick="{{ s.go }}" style-hover="opacity: 0.6">
+          <span style="font-family: 'DM Mono', monospace; font-size: 10px; color: {{ s.dim }};">{{ s.n }}</span>
+          <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13px; color: {{ s.col }};">{{ s.label }}</span>
+          <span style="flex: 1;"></span>
+          <span style="width: 14px; height: 1px; background: {{ s.mark }};"></span>
+        </div>
+      </sc-for>
+      <div class="nagi-quote" style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 14px; line-height: 1.5; color: #8A8073; margin-top: 18px; text-wrap: pretty;">Technology should accompany the meal, not interrupt it.</div>
+    </div>
+
+    <div class="nagi-col" style="flex: 0 0 auto;">
+      <div class="nagi-fit">
+      <div class="nagi-scr nagi-phone" style="width: 390px; height: 844px; background: {{ shell }}; border: 1px solid {{ edge }}; border-radius: 34px; overflow: hidden; display: flex; box-shadow: 0 26px 64px rgba(30,22,14,0.18); box-sizing: border-box;">
+        <sc-if value="{{ inDinner }}" hint-placeholder-val="{{ false }}">
+          <div style="width: 46px; flex: none; border-right: 1px solid rgba(242,235,221,0.12); display: flex; flex-direction: column; align-items: center; padding: 44px 0 26px;">
+            <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 14px; color: #EFE7D8;">凪</span>
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+              <sc-for list="{{ spine }}" as="p" hint-placeholder-count="16">
+                <div style="height: 38px; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer;" onClick="{{ p.go }}">
+                  <span style="font-family: 'DM Mono', monospace; font-size: 10px; color: {{ p.col }};">{{ p.num }}</span>
+                  <span style="height: 1px; background: #C0442A; width: {{ p.dash }}px;"></span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; position: relative;">
+
+          <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+            <div style="position: relative; height: 372px; flex: none;">
+              <img src="assets/omakase/counter.jpg" alt="The counter at Nagi" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+              <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(20,16,13,0.35) 0%, rgba(20,16,13,0) 34%, rgba(247,243,234,0.1) 74%, #F7F3EA 100%);"></div>
+              <div style="position: absolute; top: 18px; left: 26px; right: 26px; display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #FFFFFF;">
+                <span>7:41</span><span style="letter-spacing: 0.1em;">•••</span>
+              </div>
+            </div>
+            <div style="position: relative; z-index: 1; padding: 0 30px; margin-top: -34px;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 42px; line-height: 1.3; color: #191410; padding-bottom: 2px;">凪</div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 12px; letter-spacing: 0.42em; color: #191410; margin-top: 14px;">NAGI</div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 23px; line-height: 1.4; color: #3B342B; margin-top: 26px; text-wrap: pretty;">Sixteen courses. Ten seats. One counter.</div>
+              <div style="height: 1px; background: #DAD3C4; margin: 26px 0;"></div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 14.5px; line-height: 1.65; color: #4A4237; text-wrap: pretty;">Chef Ren Asakura trained in Kanazawa and has worked this counter since 2019. There is no menu. There has never been one.</div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 30px 34px;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 52px; background: #191410; color: #F7F3EA; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;" onClick="{{ toDate }}" style-hover="background: #C0442A">Reserve an evening</div>
+              <div style="text-align: center; font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #6B6255; margin-top: 16px;">41 Kenmare Street, New York</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isDate }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>7:41</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 26px 18px;">
+              <span style="font-family: Newsreader, serif; font-size: 22px; color: #6B6255; cursor: pointer; min-width: 44px; min-height: 44px; display: flex; align-items: center;" onClick="{{ toHome }}">‹</span>
+              <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #191410;">Reserve</span>
+              <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 15px; color: #191410; min-width: 44px; text-align: right;">凪</span>
+            </div>
+            <div style="height: 1px; background: #191410; margin: 0 26px;"></div>
+            <div style="padding: 32px 26px 0;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 26px; color: #191410;">Choose an evening</div>
+              <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 28px;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">September 2026</span>
+                <span style="height: 1px; flex: 1; background: #DAD3C4;"></span>
+              </div>
+              <div style="display: flex; gap: 6px; margin-top: 18px;">
+                <div style="flex: 1; text-align: center; padding: 12px 0 14px; border: 1px solid #E4DDCD;">
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #A79C8B;">Wed</div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 15px; color: #C6BEAF; margin-top: 6px;">16</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0 14px; border: 1px solid #E4DDCD;">
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6255;">Thu</div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 15px; color: #191410; margin-top: 6px;">17</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0 14px; background: #191410; border: 1px solid #191410;">
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #B9B0A0;">Fri</div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 15px; color: #F7F3EA; margin-top: 6px;">18</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0 14px; border: 1px solid #E4DDCD;">
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #6B6255;">Sat</div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 15px; color: #191410; margin-top: 6px;">19</div>
+                </div>
+                <div style="flex: 1; text-align: center; padding: 12px 0 14px; border: 1px solid #E4DDCD;">
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #A79C8B;">Sun</div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 15px; color: #C6BEAF; margin-top: 6px;">20</div>
+                </div>
+              </div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-size: 14px; color: #6B6255; margin-top: 14px;">Greyed evenings are fully seated.</div>
+              <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 38px;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">Seating</span>
+                <span style="height: 1px; flex: 1; background: #DAD3C4;"></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; min-height: 58px; border-bottom: 1px solid #E4DDCD;">
+                <span style="width: 9px; height: 9px; border: 1px solid #BDB4A3; flex: none;"></span>
+                <span style="font-family: Newsreader, serif; font-size: 19px; color: #191410; flex: 1;">5:30 PM</span>
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11.5px; color: #6B6255;">First seating</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; min-height: 58px; border-bottom: 1px solid #E4DDCD;">
+                <span style="width: 9px; height: 9px; background: #C0442A; flex: none;"></span>
+                <span style="font-family: Newsreader, serif; font-size: 19px; color: #191410; flex: 1;">7:30 PM</span>
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11.5px; color: #6B6255;">Second seating</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; min-height: 62px; margin-top: 10px;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">Guests</span>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                  <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #DAD3C4; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 16px; color: #6B6255; cursor: pointer;" onClick="{{ less }}" style-hover="border-color: #191410; color: #191410">−</span>
+                  <span style="font-family: 'DM Mono', monospace; font-size: 18px; color: #191410; min-width: 14px; text-align: center;">{{ guests }}</span>
+                  <span style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #DAD3C4; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 16px; color: #6B6255; cursor: pointer;" onClick="{{ more }}" style-hover="border-color: #191410; color: #191410">+</span>
+                </div>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 26px 34px;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 52px; background: #191410; color: #F7F3EA; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;" onClick="{{ toSeat }}" style-hover="background: #C0442A">Continue</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isSeat }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>7:41</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 26px 18px;">
+              <span style="font-family: Newsreader, serif; font-size: 22px; color: #6B6255; cursor: pointer; min-width: 44px; min-height: 44px; display: flex; align-items: center;" onClick="{{ toDate }}">‹</span>
+              <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #191410;">Friday 18 · {{ time }}</span>
+              <span style="min-width: 44px;"></span>
+            </div>
+            <div style="height: 1px; background: #191410; margin: 0 26px;"></div>
+            <div style="padding: 28px 26px 0;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 26px; color: #191410;">Choose your seat</div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; color: #4A4237; margin-top: 10px;">Ten seats. The chef works the middle.</div>
+            </div>
+            <div style="display: flex; gap: 18px; padding: 26px 26px 0;">
+              <div style="width: 12px; flex: none; position: relative; margin-top: 6px;">
+                <div style="position: absolute; inset: 0; background: #E7DFCC; border-left: 1px solid #D3C7AC; border-right: 1px solid #D3C7AC;"></div>
+                <div style="position: absolute; left: -3px; right: -3px; top: 42%; height: 76px; background: #191410;"></div>
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column;">
+                <sc-for list="{{ seats }}" as="st" hint-placeholder-count="10">
+                  <div style="display: flex; align-items: center; gap: 14px; height: 44px; border-bottom: 1px solid #EDE6D6; cursor: pointer;" onClick="{{ st.go }}">
+                    <sc-if value="{{ st.mine }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #C0442A; width: 20px;">{{ st.num }}</span>
+                      <span style="width: 8px; height: 8px; background: #C0442A;"></span>
+                      <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13.5px; color: #191410; flex: 1;">Counter seat</span>
+                      <span style="font-family: Newsreader, serif; font-style: italic; font-size: 15px; color: #C0442A;">you</span>
+                    </sc-if>
+                    <sc-if value="{{ st.taken }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #C6BEAF; width: 20px;">{{ st.num }}</span>
+                      <span style="width: 8px; height: 8px; border: 1px dotted #C6BEAF;"></span>
+                      <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13.5px; color: #A79C8B;">Taken</span>
+                    </sc-if>
+                    <sc-if value="{{ st.open }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-family: 'DM Mono', monospace; font-size: 11px; color: #A79C8B; width: 20px;">{{ st.num }}</span>
+                      <span style="width: 8px; height: 8px; border: 1px solid #BDB4A3;"></span>
+                      <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13.5px; color: #4A4237; flex: 1;">Counter seat</span>
+                      <span style="font-family: Newsreader, serif; font-style: italic; font-size: 14px; color: #6B6255;">{{ st.note }}</span>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 26px 34px;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 52px; background: #191410; color: #F7F3EA; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;" onClick="{{ toDiet }}" style-hover="background: #C0442A">Seat {{ seatNum }} · Continue</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isDiet }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>7:41</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 26px 18px;">
+              <span style="font-family: Newsreader, serif; font-size: 22px; color: #6B6255; cursor: pointer; min-width: 44px; min-height: 44px; display: flex; align-items: center;" onClick="{{ toSeat }}">‹</span>
+              <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: #191410;">Seat {{ seatNum }}</span>
+              <span style="min-width: 44px;"></span>
+            </div>
+            <div style="height: 1px; background: #191410; margin: 0 26px;"></div>
+            <div style="padding: 28px 26px 0;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 26px; line-height: 1.3; color: #191410;">Anything we should know?</div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; line-height: 1.5; color: #4A4237; margin-top: 12px; text-wrap: pretty;">The menu is fixed. The chef will work around whatever you tell us.</div>
+            </div>
+            <div style="padding: 30px 26px 0;">
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">Allergies</div>
+              <sc-for list="{{ allergyList }}" as="a" hint-placeholder-count="5">
+                <div style="display: flex; align-items: center; gap: 16px; min-height: 54px; border-bottom: 1px solid #E4DDCD; cursor: pointer;" onClick="{{ a.go }}">
+                  <span style="width: 10px; height: 10px; background: {{ a.box }}; border: 1px solid {{ a.edge }}; flex: none;"></span>
+                  <span style="font-family: Newsreader, serif; font-size: 18px; color: {{ a.col }};">{{ a.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="padding: 28px 26px 0;">
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255; margin-bottom: 12px;">Occasion</div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 17px; line-height: 1.5; color: #A79C8B; border-bottom: 1px solid #191410; padding-bottom: 12px; min-height: 44px;">Celebrating something? Tell the chef here.</div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 26px 34px;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 52px; background: #191410; color: #F7F3EA; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer;" onClick="{{ toConfirm }}" style-hover="background: #C0442A">Confirm reservation</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isConfirm }}" hint-placeholder-val="{{ false }}">
+            <div style="height: 3px; background: #C0442A; flex: none;"></div>
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>7:41</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="padding: 72px 34px 0; text-align: center;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 18px; color: #191410;">凪</div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.4em; color: #6B6255; margin-top: 12px;">YOUR OMAKASE</div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 32px; line-height: 1.35; color: #191410; margin-top: 44px; text-wrap: pretty;">Tonight, you leave the menu to us.</div>
+            </div>
+            <div style="padding: 54px 34px 0;">
+              <div style="height: 1px; background: #191410;"></div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #E4DDCD;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Date</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">Friday, September 18</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #E4DDCD;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Time</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">{{ time }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #E4DDCD;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Seat</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">Counter {{ seatNum }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #E4DDCD;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Menu</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">Sixteen courses</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #E4DDCD;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Guests</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">{{ guestWord }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 15px 0;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #6B6255;">Noted</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #191410;">{{ allergyCount }} allergies</span>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 34px 38px; text-align: center;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 50px; border: 1px solid #191410; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #191410; cursor: pointer;" onClick="{{ toCard }}" style-hover="background: #191410; color: #F7F3EA">Service has begun</div>
+              <div style="font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; color: #6B6255; margin-top: 18px; line-height: 1.7;">THE APP DARKENS AT THE COUNTER</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isCard }}" hint-placeholder-val="{{ false }}">
+            <div style="position: relative; height: 352px; flex: none; cursor: pointer;" onClick="{{ toDetail }}">
+              <div role="img" aria-label="Current course" style="position: absolute; inset: 0; background: #100D0B url({{ photo }}) center / cover no-repeat;"></div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,13,11,0.6) 0%, rgba(16,13,11,0) 32%, rgba(16,13,11,0.25) 66%, #100D0B 100%);"></div>
+              <div style="position: absolute; top: 18px; left: 22px; right: 22px; display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 11.5px; color: rgba(242,235,221,0.85);">
+                <span>8:12</span><span style="letter-spacing: 0.1em;">•••</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 0 22px; margin-top: -22px; position: relative;">
+              <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #B9AE9B; min-height: 44px; display: flex; align-items: center; cursor: pointer;" onClick="{{ toRail }}" style-hover="color: #C0442A">Progression</div>
+              <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #B9AE9B; min-height: 44px; display: flex; align-items: center; cursor: pointer;" onClick="{{ toRemembered }}" style-hover="color: #C0442A">Remembered · {{ savedCount }}</div>
+            </div>
+            <div style="padding: 6px 22px 0;">
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #9AA08C;">{{ label }}</div>
+              <div style="font-family: 'Instrument Serif', serif; font-size: 50px; line-height: 1.02; color: #F2EBDD; margin-top: 12px;">{{ name }}</div>
+              <div style="display: flex; align-items: baseline; gap: 14px; margin-top: 12px;">
+                <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 16px; color: #C0442A; letter-spacing: 0.16em;">{{ kanji }}</span>
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13px; color: #B9AE9B;">{{ en }}</span>
+              </div>
+              <div style="font-family: Newsreader, serif; font-weight: 300; font-size: 18px; line-height: 1.55; color: #DCD3C2; margin-top: 20px; text-wrap: pretty;">{{ desc }}</div>
+              <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8073; margin-top: 18px; min-height: 44px; display: flex; align-items: center; cursor: pointer;" onClick="{{ toDetail }}" style-hover="color: #C0442A">Where it comes from →</div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 22px 34px;">
+              <div style="width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Newsreader, serif; font-size: 20px; color: #8A8073; cursor: pointer;" onClick="{{ prev }}" style-hover="color: #F2EBDD">‹</div>
+              <sc-if value="{{ notSaved }}" hint-placeholder-val="{{ true }}">
+                <div style="display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 18px; border: 1px solid rgba(242,235,221,0.3); cursor: pointer;" onClick="{{ toggle }}" style-hover="border-color: #C0442A">
+                  <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 16px; color: #F2EBDD; line-height: 1;">♡</span>
+                  <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2EBDD;">Remember this one</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ isSaved }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 18px; border: 1px solid #C0442A; background: rgba(192,68,42,0.16); cursor: pointer;" onClick="{{ toggle }}">
+                  <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 16px; color: #C0442A; line-height: 1;">♥</span>
+                  <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: #E8B4A6;">Remembered</span>
+                </div>
+              </sc-if>
+              <div style="width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Newsreader, serif; font-size: 20px; color: #8A8073; cursor: pointer;" onClick="{{ next }}" style-hover="color: #F2EBDD">›</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+            <div style="position: relative; height: 470px; flex: none;">
+              <div role="img" aria-label="Current course" style="position: absolute; inset: 0; background: #100D0B url({{ photo }}) center / cover no-repeat;"></div>
+              <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(16,13,11,0.55) 0%, rgba(16,13,11,0) 34%, rgba(16,13,11,0.4) 74%, #100D0B 100%);"></div>
+              <div style="position: absolute; top: 18px; left: 22px; right: 22px; display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 11.5px; color: rgba(242,235,221,0.85);">
+                <span>8:12</span><span style="letter-spacing: 0.1em;">•••</span>
+              </div>
+              <div style="position: absolute; top: 46px; right: 12px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 20px; color: #F2EBDD; cursor: pointer;" onClick="{{ toCard }}">×</div>
+              <div style="position: absolute; bottom: 22px; left: 22px; right: 22px;">
+                <div style="font-family: 'Instrument Serif', serif; font-size: 40px; line-height: 1.05; color: #F2EBDD;">{{ name }}</div>
+                <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 15px; color: #C0442A; letter-spacing: 0.16em; margin-top: 8px;">{{ kanji }}</div>
+              </div>
+            </div>
+            <div style="padding: 28px 22px 0;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(242,235,221,0.16);">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #A79C8B;">Origin</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #F2EBDD;">{{ origin }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(242,235,221,0.16);">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #A79C8B;">Preparation</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #F2EBDD;">{{ prep }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(242,235,221,0.16);">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #A79C8B;">Season</span>
+                <span style="font-family: Newsreader, serif; font-size: 17px; color: #F2EBDD;">{{ season }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #A79C8B;">Course</span>
+                <span style="font-family: 'DM Mono', monospace; font-size: 15px; color: #F2EBDD;">{{ num }} / 16</span>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 22px 34px;">
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; line-height: 1.5; color: #B9AE9B; text-wrap: pretty;">{{ desc }}</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isRail }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 22px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: rgba(242,235,221,0.6);">
+              <span>8:12</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 28px 22px 0;">
+              <div>
+                <div style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #F2EBDD;">Tonight</div>
+                <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 15px; color: #B9AE9B; margin-top: 6px;">What comes next stays hidden.</div>
+              </div>
+              <div style="width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 20px; color: #F2EBDD; cursor: pointer; margin-right: -10px;" onClick="{{ toCard }}">×</div>
+            </div>
+            <div style="padding: 22px 22px 0;">
+              <sc-for list="{{ rail }}" as="r" hint-placeholder-count="16">
+                <div style="display: flex; align-items: center; gap: 14px; height: 38px; border-bottom: 1px solid rgba(242,235,221,0.08); cursor: pointer;" onClick="{{ r.go }}">
+                  <span style="font-family: 'DM Mono', monospace; font-size: 10.5px; color: {{ r.col }}; width: 22px; flex: none;">{{ r.num }}</span>
+                  <sc-if value="{{ r.shown }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-family: Newsreader, serif; font-size: 17px; color: {{ r.col }};">{{ r.name }}</span>
+                    <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 11px; color: #A79C8B;">{{ r.kanji }}</span>
+                  </sc-if>
+                  <sc-if value="{{ r.hidden }}" hint-placeholder-val="{{ false }}">
+                    <span style="width: 34px; height: 1px; background: rgba(242,235,221,0.2);"></span>
+                  </sc-if>
+                  <span style="flex: 1;"></span>
+                  <sc-if value="{{ r.marked }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 13px; color: #C0442A;">♥</span>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 22px 34px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #A79C8B;">The chef sets the pace</div>
+          </sc-if>
+
+          <sc-if value="{{ isRemembered }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 22px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: rgba(242,235,221,0.6);">
+              <span>8:12</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 28px 22px 0;">
+              <div>
+                <div style="font-family: 'Instrument Serif', serif; font-size: 30px; color: #F2EBDD;">Remembered</div>
+                <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 15px; color: #B9AE9B; margin-top: 6px;">Yours to keep after service.</div>
+              </div>
+              <div style="width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 20px; color: #F2EBDD; cursor: pointer; margin-right: -10px;" onClick="{{ toCard }}">×</div>
+            </div>
+            <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ true }}">
+              <div style="padding: 26px 22px 0;">
+                <sc-for list="{{ savedList }}" as="p" hint-placeholder-count="2">
+                  <div style="display: flex; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid rgba(242,235,221,0.1); cursor: pointer;" onClick="{{ p.go }}">
+                    <div role="img" aria-label="{{ p.name }}" style="width: 62px; height: 62px; flex: none; background: #241E19 url({{ p.photo }}) center / cover no-repeat;"></div>
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-family: Newsreader, serif; font-size: 20px; color: #F2EBDD;">{{ p.name }}</div>
+                      <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #B9AE9B; margin-top: 4px;">{{ p.en }} · {{ p.origin }}</div>
+                    </div>
+                    <div style="font-family: 'DM Mono', monospace; font-size: 10.5px; color: #A79C8B;">{{ p.num }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ noSaved }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 38px 22px 0; font-family: Newsreader, serif; font-weight: 300; font-size: 17px; line-height: 1.55; color: #B9AE9B; text-wrap: pretty;">Nothing yet. Tap the heart when something stays with you.</div>
+            </sc-if>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 22px 34px;">
+              <div style="display: flex; align-items: center; justify-content: center; height: 48px; border: 1px solid rgba(242,235,221,0.3); font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2EBDD; cursor: pointer;" onClick="{{ toRecap }}" style-hover="border-color: #C0442A; color: #C0442A">Service has ended</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isRecap }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>10:24</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="padding: 42px 30px 0;">
+              <div style="height: 2px; background: #C0442A; width: 46px;"></div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.4em; color: #6B6255; margin-top: 20px;">YOUR OMAKASE</div>
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 30px; line-height: 1.25; color: #191410; margin-top: 14px;">September 18, 2026</div>
+              <div style="display: flex; gap: 26px; margin-top: 24px;">
+                <div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 22px; color: #191410;">16</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6255; margin-top: 5px;">courses</div>
+                </div>
+                <div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 22px; color: #191410;">2:40</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6255; margin-top: 5px;">at the counter</div>
+                </div>
+                <div>
+                  <div style="font-family: 'DM Mono', monospace; font-size: 22px; color: #191410;">{{ seatNum }}</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6B6255; margin-top: 5px;">your seat</div>
+                </div>
+              </div>
+            </div>
+            <div style="padding: 34px 30px 0;">
+              <div style="display: flex; align-items: baseline; gap: 12px;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">You remembered</span>
+                <span style="height: 1px; flex: 1; background: #DAD3C4;"></span>
+              </div>
+              <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ true }}">
+                <sc-for list="{{ savedList }}" as="p" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: center; gap: 20px; padding: 16px 0; border-bottom: 1px solid #E4DDCD;">
+                    <div role="img" aria-label="{{ p.name }}" style="width: 70px; height: 70px; flex: none; border-radius: 2px; background: #E4DDCD url({{ p.photo }}) center / cover no-repeat;"></div>
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-family: Newsreader, serif; font-size: 22px; color: #191410;">{{ p.name }}</div>
+                      <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12.5px; color: #4A4237; margin-top: 4px;">{{ p.en }} · {{ p.origin }}</div>
+                    </div>
+                    <span style="font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6B6255;">{{ p.num }}</span>
+                  </div>
+                </sc-for>
+              </sc-if>
+              <sc-if value="{{ noSaved }}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 22px 0 0; font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 17px; line-height: 1.5; color: #4A4237; text-wrap: pretty;">You kept nothing this time. The evening is recorded all the same.</div>
+              </sc-if>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 30px 36px;">
+              <div style="height: 1px; background: #DAD3C4; margin-bottom: 20px;"></div>
+              <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;">
+                <div>
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 16px; color: #191410;">凪</div>
+                  <div style="font-family: Newsreader, serif; font-style: italic; font-size: 16px; color: #4A4237; margin-top: 8px;">Chef Ren Asakura</div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border: 1px solid #191410; font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #191410; cursor: pointer;" onClick="{{ toJournal }}" style-hover="background: #191410; color: #F7F3EA">Keep</div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; justify-content: space-between; padding: 18px 26px 0; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #6B6255;">
+              <span>9:12</span><span style="letter-spacing: 0.1em;">•••</span>
+            </div>
+            <div style="padding: 36px 26px 0;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 30px; color: #191410;">Journal</div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 13px; color: #4A4237; margin-top: 10px;">New York · twelve evenings · 31 pieces remembered</div>
+              <div style="height: 1px; background: #191410; margin-top: 20px;"></div>
+            </div>
+            <div style="padding: 6px 26px 0;">
+              <div style="font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.18em; color: #6B6255; padding: 16px 0 8px;">2026</div>
+              <div style="display: flex; align-items: center; gap: 18px; padding: 13px 0; border-bottom: 1px solid #E4DDCD; cursor: pointer;" onClick="{{ toRecap }}" style-hover="opacity: 0.65">
+                <img src="assets/omakase/course-nigiri.png" alt="Nagi" style="width: 64px; height: 64px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; color: #191410;">Nagi</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 5px;">September · 16 courses · {{ savedCount }} remembered</div>
+                </div>
+                <span style="font-family: Newsreader, serif; font-size: 18px; color: #A79C8B;">›</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 18px; padding: 13px 0; border-bottom: 1px solid #E4DDCD; cursor: pointer;" onClick="{{ toPast }}" style-hover="opacity: 0.65">
+                <img src="assets/omakase/plate-long.jpg" alt="Kaze" style="width: 64px; height: 64px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; color: #191410;">Kaze</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 5px;">July · 12 courses · 2 remembered</div>
+                </div>
+                <span style="font-family: Newsreader, serif; font-size: 18px; color: #A79C8B;">›</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 18px; padding: 13px 0; border-bottom: 1px solid #E4DDCD; cursor: pointer;" onClick="{{ toPast }}" style-hover="opacity: 0.65">
+                <img src="assets/omakase/plate-stone.jpg" alt="Shizuku" style="width: 64px; height: 64px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; color: #191410;">Shizuku</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 5px;">April · 18 courses · 5 remembered</div>
+                </div>
+                <span style="font-family: Newsreader, serif; font-size: 18px; color: #A79C8B;">›</span>
+              </div>
+              <div style="font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.18em; color: #6B6255; padding: 20px 0 8px;">2025</div>
+              <div style="display: flex; align-items: center; gap: 18px; padding: 13px 0; border-bottom: 1px solid #E4DDCD; cursor: pointer;" onClick="{{ toPast }}" style-hover="opacity: 0.65">
+                <img src="assets/omakase/counter.jpg" alt="Nagi" style="width: 64px; height: 64px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; color: #191410;">Nagi</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 5px;">November · 16 courses · 2 remembered</div>
+                </div>
+                <span style="font-family: Newsreader, serif; font-size: 18px; color: #A79C8B;">›</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 18px; padding: 13px 0; cursor: pointer;" onClick="{{ toPast }}" style-hover="opacity: 0.65">
+                <img src="assets/omakase/course-tartare.png" alt="Hakuun" style="width: 64px; height: 64px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 20px; color: #191410;">Hakuun</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 5px;">February · 14 courses · 4 remembered</div>
+                </div>
+                <span style="font-family: Newsreader, serif; font-size: 18px; color: #A79C8B;">›</span>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 26px 36px; font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; line-height: 1.5; color: #4A4237; text-wrap: pretty;">Every evening you sit at a counter is added here, whether or not you remembered anything.</div>
+          </sc-if>
+
+          <sc-if value="{{ isPast }}" hint-placeholder-val="{{ false }}">
+            <div style="position: relative; height: 208px; flex: none;">
+              <img src="assets/omakase/counter.jpg" alt="Nagi counter" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+              <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(20,16,13,0.4) 0%, rgba(20,16,13,0) 46%, rgba(247,243,234,0.86) 100%);"></div>
+              <div style="position: absolute; top: 18px; left: 26px; right: 26px; display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 11.5px; color: #FFFFFF;">
+                <span>9:12</span><span style="letter-spacing: 0.1em;">•••</span>
+              </div>
+              <div style="position: absolute; top: 46px; left: 12px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; font-family: Newsreader, serif; font-size: 22px; color: #FFFFFF; cursor: pointer;" onClick="{{ toJournal }}">‹</div>
+            </div>
+            <div style="padding: 6px 26px 0;">
+              <div style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 28px; color: #191410;">Nagi</div>
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12.5px; color: #4A4237; margin-top: 8px;">November 14, 2025 · Counter 09 · 16 courses</div>
+              <div style="height: 1px; background: #191410; margin-top: 16px;"></div>
+            </div>
+            <div style="padding: 18px 26px 0;">
+              <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">You remembered</div>
+              <div style="display: flex; align-items: center; gap: 16px; padding: 12px 0 10px;">
+                <img src="assets/omakase/plate-stone.jpg" alt="Kohada" style="width: 56px; height: 56px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: Newsreader, serif; font-size: 19px; color: #191410;">Kohada</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 3px;">Gizzard shad · Saga</div>
+                </div>
+                <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 13px; color: #C0442A;">♥</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 16px; padding: 0 0 8px;">
+                <img src="assets/omakase/plate-long.jpg" alt="Anago" style="width: 56px; height: 56px; object-fit: cover; flex: none; border-radius: 2px;">
+                <div style="flex: 1;">
+                  <div style="font-family: Newsreader, serif; font-size: 19px; color: #191410;">Anago</div>
+                  <div style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-weight: 300; font-size: 12px; color: #4A4237; margin-top: 3px;">Sea eel · Tokyo Bay</div>
+                </div>
+                <span style="font-family: 'Zen Old Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif; font-size: 13px; color: #C0442A;">♥</span>
+              </div>
+            </div>
+            <div style="padding: 20px 26px 0;">
+              <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
+                <span style="font-family: Jost, 'Noto Sans', system-ui, sans-serif; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: #6B6255;">The whole menu</span>
+                <span style="height: 1px; flex: 1; background: #DAD3C4;"></span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 22px; row-gap: 9px; font-family: Newsreader, serif; font-size: 14.5px; color: #3B342B;">
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">01</span>Tai</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">09</span>Sawara</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">02</span>Sumiika</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">10</span>Uni</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">03</span>Aji</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">11</span>Botan Ebi</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">04</span>Akami</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">12</span>Hotate</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">05</span>Chūtoro</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">13</span>Nodoguro</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">06</span>Ōtoro</div>
+                <div style="display: flex; gap: 8px; color: #C0442A;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #C0442A; padding-top: 3px;">14</span>Anago ♥</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">07</span>Kinmedai</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">15</span>Wagyū</div>
+                <div style="display: flex; gap: 8px; color: #C0442A;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #C0442A; padding-top: 3px;">08</span>Kohada ♥</div>
+                <div style="display: flex; gap: 8px;"><span style="font-family: 'DM Mono', monospace; font-size: 10px; color: #A79C8B; padding-top: 3px;">16</span>Tamago</div>
+              </div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div style="padding: 0 26px 34px;">
+              <div style="height: 1px; background: #DAD3C4; margin-bottom: 16px;"></div>
+              <div style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 16px; line-height: 1.5; color: #3B342B; text-wrap: pretty;">The kohada that night was cured a day longer than usual. You asked about it.</div>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+      </div>
+      <div class="nagi-hint" style="display: flex; align-items: center; justify-content: space-between; margin-top: 16px;">
+        <span style="font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 15px; color: #6B6255;">{{ hint }}</span>
+        <span style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #A79C8B; min-height: 44px; display: flex; align-items: center; cursor: pointer;" onClick="{{ restart }}" style-hover="color: #C0442A">Restart</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:980,&quot;height&quot;:1020},&quot;revealUpcoming&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototype&quot;}}">
+class Component extends DCLogic {
+  courses = [
+    { name: 'Tai', kanji: '鯛', en: 'Sea bream', origin: 'Ehime', prep: 'Nigiri', season: 'Winter–Spring', desc: 'The opening. Lean, faintly sweet, cut thin to wake the palate.', photo: 'assets/omakase/course-nigiri.png' },
+    { name: 'Sumiika', kanji: '墨烏賊', en: 'Golden cuttlefish', origin: 'Kyushu', prep: 'Nigiri, scored', season: 'Winter', desc: 'Scored forty times by hand so it gives at the first press.', photo: 'assets/omakase/plate-stone.jpg' },
+    { name: 'Aji', kanji: '鰺', en: 'Horse mackerel', origin: 'Nagasaki', prep: 'Nigiri', season: 'Summer', desc: 'Oily and bright, with grated ginger standing in for wasabi.', photo: 'assets/omakase/plate-long.jpg' },
+    { name: 'Akami', kanji: '赤身', en: 'Lean bluefin', origin: 'Ōma, Aomori', prep: 'Nigiri', season: 'Autumn–Winter', desc: 'The leanest cut of the loin. Iron, clean, almost cold.', photo: 'assets/omakase/course-nigiri.png' },
+    { name: 'Chūtoro', kanji: '中トロ', en: 'Medium fatty bluefin', origin: 'Ōma, Aomori', prep: 'Nigiri', season: 'Autumn–Winter', desc: 'The middle belly, where the iron of akami turns to butter.', photo: 'assets/omakase/plate-stone.jpg' },
+    { name: 'Ōtoro', kanji: '大トロ', en: 'Fatty bluefin belly', origin: 'Ōma, Aomori', prep: 'Nigiri', season: 'Autumn–Winter', desc: 'Marbled to the point of translucence. It does not need chewing.', photo: 'assets/omakase/course-tartare.png' },
+    { name: 'Kinmedai', kanji: '金目鯛', en: 'Golden eye snapper', origin: 'Chiba', prep: 'Nigiri', season: 'Autumn–Winter', desc: 'Aged four days, brushed with nikiri, finished with a single grain of yuzu salt.', photo: 'assets/omakase/course-nigiri.png' },
+    { name: 'Kohada', kanji: '小肌', en: 'Gizzard shad', origin: 'Saga', prep: 'Cured, nigiri', season: 'Autumn', desc: 'Cured in salt and vinegar for a day. The measure of any sushiya.', photo: 'assets/omakase/plate-long.jpg' },
+    { name: 'Sawara', kanji: '鰆', en: 'Spanish mackerel', origin: 'Fukuoka', prep: 'Straw-seared', season: 'Spring', desc: 'Seared over rice straw, so the smoke sits above the fat rather than in it.', photo: 'assets/omakase/plate-stone.jpg' },
+    { name: 'Uni', kanji: '雲丹', en: 'Sea urchin', origin: 'Hokkaidō', prep: 'Gunkan', season: 'Summer–Autumn', desc: 'Creamy, sweet, faintly briny, spooned over warm shari.', photo: 'assets/omakase/plate-stone.jpg' },
+    { name: 'Botan Ebi', kanji: '牡丹海老', en: 'Sweet shrimp', origin: 'Toyama Bay', prep: 'Nigiri', season: 'Winter', desc: 'Served raw and still cold from the ice, the head fried separately.', photo: 'assets/omakase/plate-long.jpg' },
+    { name: 'Hotate', kanji: '帆立', en: 'Scallop', origin: 'Aomori', prep: 'Nigiri', season: 'Winter–Spring', desc: 'Cut open at the counter, dressed only with a brush of nikiri.', photo: 'assets/omakase/course-nigiri.png' },
+    { name: 'Nodoguro', kanji: '喉黒', en: 'Blackthroat perch', origin: 'Shimane', prep: 'Skin-seared', season: 'Autumn', desc: 'The skin blistered with a hot iron, the flesh left barely warm.', photo: 'assets/omakase/plate-stone.jpg' },
+    { name: 'Anago', kanji: '穴子', en: 'Sea eel', origin: 'Tokyo Bay', prep: 'Simmered', season: 'Summer', desc: 'Simmered until it collapses, glazed with the reduction of its own broth.', photo: 'assets/omakase/plate-long.jpg' },
+    { name: 'Wagyū', kanji: '和牛', en: 'A5 beef', origin: 'Miyazaki', prep: 'Seared nigiri', season: 'All year', desc: 'One slice, seared five seconds a side, with a grate of fresh wasabi.', photo: 'assets/omakase/course-tartare.png' },
+    { name: 'Tamago', kanji: '玉子', en: 'Egg custard', origin: 'In house', prep: 'Layered, chilled', season: 'All year', desc: 'The close. Eighteen layers, served at room temperature, barely sweet.', photo: 'assets/omakase/course-nigiri.png' }
+  ];
+
+  order = ['home', 'date', 'seat', 'diet', 'confirm', 'card', 'rail', 'remembered', 'recap', 'journal', 'past'];
+  labels = { home: 'The counter', date: 'Choose an evening', seat: 'Choose your seat', diet: 'What we should know', confirm: 'Confirmed', card: 'Now serving', rail: 'Progression', remembered: 'Remembered', recap: 'The evening, kept', journal: 'Journal', past: 'A past evening' };
+  dark = { card: 1, detail: 1, rail: 1, remembered: 1 };
+
+  state = { s: 'home', i: 6, saved: [5, 9], allergies: [0, 1], guests: 2, seat: 4, time: '7:30 PM' };
+
+  pad(n) { return (n < 10 ? '0' : '') + n; }
+  go(s) { return () => this.setState({ s: s }); }
+
+  renderVals() {
+    const st = this.state, cs = this.courses, i = st.i, c = cs[i];
+    const s = st.s, isDark = !!this.dark[s];
+    const saved = st.saved, isSaved = saved.indexOf(i) >= 0;
+    const reveal = this.props.revealUpcoming === true;
+    const words = ['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen'];
+    const hints = { home: 'Tap Reserve an evening.', date: 'Friday 18 is held for you.', seat: 'Pick any open seat.', diet: 'Two allergies are already noted.', confirm: 'Tap to begin service.', card: 'Tap the spine, the photograph, or the heart.', detail: 'Close to return to the course.', rail: 'What is coming stays hidden.', remembered: 'Yours to keep after service.', recap: 'The evening, assembled.', journal: 'Twelve evenings so far.', past: 'November, from the archive.' };
+    const stepOf = { detail: 'card' };
+    const cur = stepOf[s] || s;
+
+    return {
+      phase: isDark ? 'during service' : (s === 'recap' || s === 'journal' || s === 'past' ? 'after' : 'before'),
+      shell: isDark ? '#100D0B' : '#F7F3EA',
+      edge: isDark ? '#100D0B' : '#DAD3C4',
+      hint: hints[s],
+      inDinner: isDark,
+      steps: this.order.map((k, n) => ({
+        n: this.pad(n + 1), label: this.labels[k],
+        col: k === cur ? '#191410' : '#8A8073',
+        dim: k === cur ? '#C0442A' : '#C6BEAF',
+        mark: k === cur ? '#C0442A' : 'transparent',
+        go: this.go(k)
+      })),
+      spine: cs.map((x, k) => ({
+        num: this.pad(k + 1),
+        col: k === i ? '#C0442A' : (k < i ? 'rgba(242,235,221,0.6)' : 'rgba(242,235,221,0.2)'),
+        dash: k === i ? 12 : 0,
+        go: () => this.setState({ i: k, s: 'card' })
+      })),
+      rail: cs.map((x, k) => ({
+        num: this.pad(k + 1), name: x.name, kanji: x.kanji,
+        col: k === i ? '#C0442A' : (k < i ? '#EFE7D8' : 'rgba(242,235,221,0.3)'),
+        shown: k <= i || reveal, hidden: !(k <= i || reveal),
+        marked: saved.indexOf(k) >= 0,
+        go: () => this.setState({ i: k, s: 'card' })
+      })),
+      savedList: saved.slice().sort((a, b) => a - b).map(k => ({
+        num: this.pad(k + 1), name: cs[k].name, en: cs[k].en, photo: cs[k].photo,
+        origin: cs[k].origin,
+        go: () => this.setState({ i: k, s: 'card' })
+      })),
+      allergyList: ['Shellfish', 'Roe and uni', 'Raw egg', 'Freshwater eel', 'Sesame'].map((a, k) => ({
+        label: a,
+        box: st.allergies.indexOf(k) >= 0 ? '#191410' : 'transparent',
+        edge: st.allergies.indexOf(k) >= 0 ? '#191410' : '#BDB4A3',
+        col: st.allergies.indexOf(k) >= 0 ? '#191410' : '#4A4237',
+        go: () => this.setState(p => ({ allergies: p.allergies.indexOf(k) >= 0 ? p.allergies.filter(x => x !== k) : p.allergies.concat([k]) }))
+      })),
+      seats: [1,2,3,4,5,6,7,8,9,10].map(n => ({
+        num: this.pad(n),
+        taken: n === 3 || n === 7 || n === 8,
+        open: !(n === 3 || n === 7 || n === 8) && st.seat !== n,
+        mine: st.seat === n,
+        note: (n === 5 || n === 6) ? 'facing the chef' : '',
+        go: () => { if (!(n === 3 || n === 7 || n === 8)) this.setState({ seat: n }); }
+      })),
+      seatNum: this.pad(st.seat),
+      guests: st.guests,
+      guestWord: st.guests === 1 ? 'One' : (st.guests === 2 ? 'Two' : String(st.guests)),
+      time: st.time,
+      allergyCount: st.allergies.length,
+      num: this.pad(i + 1), label: 'course ' + words[i],
+      name: c.name, kanji: c.kanji, en: c.en, desc: c.desc,
+      origin: c.origin, prep: c.prep, season: c.season, photo: c.photo,
+      isHome: s === 'home', isDate: s === 'date', isSeat: s === 'seat', isDiet: s === 'diet',
+      isConfirm: s === 'confirm', isCard: s === 'card', isDetail: s === 'detail', isRail: s === 'rail',
+      isRemembered: s === 'remembered', isRecap: s === 'recap', isJournal: s === 'journal', isPast: s === 'past',
+      isSaved: isSaved, notSaved: !isSaved,
+      savedCount: saved.length, hasSaved: saved.length > 0, noSaved: saved.length === 0,
+      toHome: this.go('home'), toDate: this.go('date'), toSeat: this.go('seat'), toDiet: this.go('diet'),
+      toConfirm: this.go('confirm'), toCard: this.go('card'), toDetail: this.go('detail'), toRail: this.go('rail'),
+      toRemembered: this.go('remembered'), toRecap: this.go('recap'), toJournal: this.go('journal'), toPast: this.go('past'),
+      next: () => this.setState(p => (p.i >= cs.length - 1 ? { s: 'recap' } : { i: p.i + 1, s: 'card' })),
+      prev: () => this.setState(p => ({ i: Math.max(0, p.i - 1), s: 'card' })),
+      more: () => this.setState(p => ({ guests: Math.min(4, p.guests + 1) })),
+      less: () => this.setState(p => ({ guests: Math.max(1, p.guests - 1) })),
+      toggle: () => this.setState(p => ({ saved: p.saved.indexOf(p.i) >= 0 ? p.saved.filter(k => k !== p.i) : p.saved.concat([p.i]) })),
+      restart: () => this.setState({ s: 'home', i: 6, saved: [5, 9] })
+    };
+  }
+}
+</script>
+</body>
+</html>

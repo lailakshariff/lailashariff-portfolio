@@ -4,11 +4,40 @@
   window.__dotCursor = true;
   if (!window.matchMedia || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
 
-  var W = 26, H = 26;
+  var W = 32, H = 32;
   var STAR = "url(\"data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%201.2%20L15.1%209.1%20L23.4%209.4%20L16.9%2014.5%20L19.3%2022.5%20L12%2017.8%20L4.7%2022.5%20L7.1%2014.5%20L0.6%209.4%20L8.9%209.1%20Z'%20fill='black'/%3E%3C/svg%3E\")";
   var TAG = document.querySelector('script[src*="dot-cursor.js"]');
   var COLOR = (TAG && TAG.getAttribute('data-dot-color')) || '#141311';
   var dot, tx = -100, ty = -100, x = -100, y = -100, scale = 1, cur = 1, raf = 0;
+
+
+  /* dithered star: a grid of dots inside the five-point outline, densest at the centre */
+  function ditherStar() {
+    var P = [[12,1.2],[15.1,9.1],[23.4,9.4],[16.9,14.5],[19.3,22.5],[12,17.8],[4.7,22.5],[7.1,14.5],[0.6,9.4],[8.9,9.1]];
+    function inside(x, y) { var c = false; for (var i = 0, k = P.length - 1; i < P.length; k = i++) { var a = P[i], b = P[k]; if ((a[1] > y) !== (b[1] > y) && x < (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]) + a[0]) c = !c; } return c; }
+    var cols = ['#a8544a','#a8544a','#a8544a','#a8544a','#a8544a','#7b8fae','#22201d','#c49a5a'];
+    var seed = 7, pts = [];
+    function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    function far(x, y, m) { for (var i = 0; i < pts.length; i++) if (Math.hypot(pts[i][0] - x, pts[i][1] - y) < m) return false; return true; }
+    /* outline first: a dot on every tip and inner corner, then evenly along each edge, so the five points read */
+    for (var i = 0; i < P.length; i++) {
+      var p = P[i], q = P[(i + 1) % P.length], cx = 12, cy = 12.4;
+      var tip = i % 2 === 0, ix = p[0] + (cx - p[0]) * (tip ? 0.07 : 0.03), iy = p[1] + (cy - p[1]) * (tip ? 0.07 : 0.03);
+      pts.push([ix, iy, tip ? 0.66 : 0.58]);
+      var len = Math.hypot(q[0] - p[0], q[1] - p[1]), n = Math.max(1, Math.round(len / 1.35));
+      for (var k = 1; k < n; k++) { var t = k / n, ex = p[0] + (q[0] - p[0]) * t, ey = p[1] + (q[1] - p[1]) * t; ex += (cx - ex) * 0.05; ey += (cy - ey) * 0.05; pts.push([ex, ey, 0.6]); }
+    }
+    /* then fill the body on a grid, larger towards the centre */
+    for (var y = 1.6; y < 22.6; y += 1.3) for (var x = 0.8; x < 23.6; x += 1.3) {
+      if (!inside(x, y) || !far(x, y, 1.2)) continue;
+      var d = Math.hypot(x - 12, y - 12.6) / 11;
+      pts.push([x, y, (0.74 - d * 0.16) * (0.82 + rnd() * 0.28)]);
+    }
+    var s = '';
+    for (var m = 0; m < pts.length; m++) s += '<circle cx="' + pts[m][0].toFixed(2) + '" cy="' + pts[m][1].toFixed(2) + '" r="' + pts[m][2].toFixed(2) + '" fill="' + cols[(rnd() * cols.length) | 0] + '"/>';
+    return '<svg viewBox="0 0 24 24" width="100%" height="100%" style="display:block;overflow:visible">' + s + '</svg>';
+  }
+
 
   function build() {
     if (dot || !document.body) return;
@@ -17,16 +46,14 @@
     dot.style.cssText =
       'position:fixed;left:0;top:0;width:' + W + 'px;height:' + H + 'px;' +
       'margin:' + (-H / 2) + 'px 0 0 ' + (-W / 2) + 'px;' +
-      'background:#a8544a;pointer-events:none;z-index:2147483647;' +
-      '-webkit-mask-image:' + STAR + ';mask-image:' + STAR + ';' +
-      '-webkit-mask-size:100% 100%;mask-size:100% 100%;' +
-      '-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;' +
+      'pointer-events:none;z-index:2147483647;' +
       'opacity:0;transition:opacity .25s ease;will-change:transform;' +
       'transform:translate3d(-100px,-100px,0)';
+    dot.innerHTML = ditherStar();
     document.body.appendChild(dot);
 
     var s = document.createElement('style');
-    s.textContent = 'html,body,a,button,[role="button"],.pile-card,input,textarea,select,label{cursor:none !important}';
+    s.textContent = 'html,body,a,button,[role="button"],.pile-card,input,textarea,select,label{cursor:none !important}.dcur-ink circle{fill:currentColor !important}';
     document.head.appendChild(s);
   }
 
@@ -115,7 +142,8 @@
     if (want === navBlack) return;
     navBlack = want;
     var over = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ffffff' : '#000000';
-    dot.style.background = want ? over : STAR_BASE;
+    dot.style.color = over;
+    dot.classList.toggle('dcur-ink', want);
   }
 
   function hoverable(el) {
@@ -258,7 +286,6 @@
     tx = e.clientX; ty = e.clientY;
     adapt(e.target, e.clientX, e.clientY);
     navTint(e.target);
-    maybeTrail(e.target, tx, ty, pvx, pvy);
     scale = hoverable(e.target) ? 1.55 : 1;
     if (dot) dot.style.opacity = '1';
     if (!raf) { x = tx; y = ty; raf = requestAnimationFrame(tick); }

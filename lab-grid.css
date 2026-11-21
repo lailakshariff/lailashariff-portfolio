@@ -1,0 +1,13 @@
+/* Even square grid for the nine experiments. Layered on lab.css; each tile keeps its own ground. */
+.labgrid{columns:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.labtile{position:relative;margin:0;break-inside:auto;display:flex;flex-direction:column}
+.labbox,.labbox.h-s,.labbox.h-m,.labbox.h-l{height:auto;aspect-ratio:1/1;border-radius:20px;box-shadow:none;border:1px solid rgba(0,0,0,.08)}
+.labcap{position:absolute;top:14px;left:14px;z-index:5;padding:0;pointer-events:none}
+.labcap b{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(12px) saturate(160%);backdrop-filter:blur(12px) saturate(160%);box-shadow:0 0 0 1px rgba(0,0,0,.06);font:500 12.5px/1 var(--font-sans);color:#1d1b18;white-space:nowrap}
+.labcap span{display:none}
+.labtile > .labcap + .gt-desc,.gt-desc{margin:12px 2px 0;font:400 13px/1.45 var(--font-sans);color:var(--muted);text-wrap:pretty}
+#lab-type{padding-top:58px}
+#lab-type input{min-width:0}
+#lab-type .ctl{gap:10px}
+@media (max-width:1100px){.labgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.labtile:last-child{grid-column:1/-1}.labtile:last-child .labbox{aspect-ratio:2/1}}
+@media (max-width:560px){.labgrid{grid-template-columns:minmax(0,1fr)}.labbox,.labbox.h-s,.labbox.h-m,.labbox.h-l{border-radius:16px}.labtile:last-child{grid-column:auto}.labtile:last-child .labbox{aspect-ratio:1/1}}

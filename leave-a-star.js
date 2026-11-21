@@ -27,11 +27,11 @@
   };
   /* Portfolio colours, tuned to stay legible against a dusk ground in both modes. */
   var COLORS = {
-    terracotta: { label: 'Terracotta', l1: '#8f3a2c', l2: '#f4ab95', d: '#d98d7e' },
-    dusty:      { label: 'Dusty blue', l1: '#2f4d78', l2: '#c3d8ef', d: '#93aecb' },
-    ochre:      { label: 'Ochre',      l1: '#8a5c10', l2: '#f3d193', d: '#dcae60' },
-    cream:      { label: 'Cream',      l1: '#8a7a58', l2: '#f9f2e0', d: '#efe4c9' },
-    charcoal:   { label: 'Charcoal',   l1: '#1b1a20', l2: '#d3d7e0', d: '#8d8778' }
+    terracotta: { label: 'Terracotta', l1: '#8f3a2c', l2: '#ffb69e', d: '#d98d7e' },
+    dusty:      { label: 'Dusty blue', l1: '#2f4d78', l2: '#eef5ff', d: '#93aecb' },
+    ochre:      { label: 'Ochre',      l1: '#5e3c06', l2: '#ffd879', d: '#dcae60' },
+    cream:      { label: 'Cream',      l1: '#4f4530', l2: '#fffaf0', d: '#efe4c9' },
+    charcoal:   { label: 'Charcoal',   l1: '#1b1a20', l2: '#1b1a20', d: '#8d8778' }
   };
 
   function hx(c) { return [parseInt(c.slice(1,3),16), parseInt(c.slice(3,5),16), parseInt(c.slice(5,7),16)]; }
@@ -213,13 +213,14 @@
       var c = COLORS[k] || COLORS.terracotta;
       if (dark()) return c.d;
       var t = Math.min(1, Math.max(0, (y === undefined ? 0 : y)));
-      return mix(c.l1, c.l2, t * t * 0.55 + t * 0.45);
+      return t < 0.22 ? c.l1 : c.l2;
     }
     function svg(sh, co, size, y) {
       var s = SHAPES[sh] || SHAPES.five, f = hex(co, y);
-      return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true" style="display:block;overflow:visible">' +
+      var glow = (!dark() && co !== 'charcoal' && (y || 0) >= 0.22) ? ';filter:drop-shadow(0 0 2px rgba(255,255,255,.7)) drop-shadow(0 0 6px rgba(255,240,220,.45))' : '';
+      return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true" style="display:block;overflow:visible' + glow + '">' +
         (s.fill ? '<path d="' + s.d + '" fill="' + f + '"/>'
-                : '<path d="' + s.d + '" stroke="' + f + '" stroke-width="2" stroke-linecap="round" fill="none"/>') + '</svg>';
+                : '<path d="' + s.d + '" stroke="' + f + '" stroke-width="2.4" stroke-linecap="round" fill="none"/>') + '</svg>';
     }
     function say(m) { if (el.live) el.live.textContent = m; }
     function show(node, on) { if (node) node.style.display = on ? '' : 'none'; }

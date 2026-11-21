@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>The Attention Experiment | The Lab | Laila Shariff</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link rel="stylesheet" href="./theme.css?v=5">
+<link rel="stylesheet" href="./pill-nav.css">
+<link rel="stylesheet" href="./lab-site.css">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab-site.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+summary{list-style:none}summary::-webkit-details-marker{display:none}
+details[open] .ae-plus{transform:rotate(45deg)}
+:root{--lab-gutter:64px}@media (max-width:900px){:root{--lab-gutter:24px}}@media (max-width:560px){:root{--lab-gutter:20px}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden">
+
+<sc-if value="{{ showSiteHeader }}" hint-placeholder-val="{{ true }}">
+<div class="pnav">
+<a href="index.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="index.html#work">Work</a>
+<span class="pnav-dd is-on"><a href="playground.html" aria-current="true">Playground</a><button type="button" class="pnav-dd-btn" aria-expanded="false" aria-controls="pnav-dd-menu" aria-label="More in Playground"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5"></path></svg></button><span class="pnav-dd-menu" id="pnav-dd-menu"><span class="pnav-dd-panel"><a href="playground.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.8L13 7.6H7Z"></path><circle cx="6" cy="14" r="2.9"></circle><rect x="11.4" y="11.1" width="5.8" height="5.8" rx="1.2"></rect></svg><b>Playground</b></a><a href="The Lab.dc.html" aria-current="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.6 2.8h4.8M8.4 2.8v5.1L4 15.6a1.1 1.1 0 0 0 1 1.6h10a1.1 1.1 0 0 0 1-1.6l-4.4-7.7V2.8"></path><path d="M5.9 12.4h8.2"></path></svg><b>The Lab</b></a></span></span></span>
+<a href="about.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+</div>
+</div>
+<div class="pnav-space" aria-hidden="true"></div>
+</sc-if>
+
+<sc-if value="{{ showRunBar }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:14px var(--lab-gutter)">
+<span style="font:600 15px/1.2 var(--font-sans);letter-spacing:-.01em">{{ roundName }}</span>
+<div role="progressbar" aria-label="Rounds completed" aria-valuemin="0" aria-valuemax="3" aria-valuenow="{{ roundsDone }}" style="display:flex;gap:6px">
+<sc-for list="{{ progress }}" as="p" hint-placeholder-count="3"><span style="display:block;width:clamp(24px,4vw,44px);height:4px;border-radius:2px;background:{{ p.bg }};transition:background .4s ease"></span></sc-for>
+</div>
+<div style="display:flex;justify-content:flex-end;align-items:center;gap:18px">
+<span style="font:500 15px/1.2 var(--font-sans);color:var(--body-2);font-variant-numeric:tabular-nums">{{ roundNum }} of 3</span>
+<a href="The Lab.dc.html" style="display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 var(--font-sans);color:var(--ink);text-decoration:none" style-hover="color:var(--body-2)">Exit</a>
+</div>
+</div>
+</sc-if>
+
+<main ref="{{ stageRef }}" style="flex:1;display:flex;flex-direction:column">
+
+<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+<div>
+<section aria-labelledby="intro-h" style="padding:88px var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Lab experiment 2</p>
+<h1 id="intro-h" style="margin:22px 0 0;max-width:12ch;font:500 clamp(42px,5.2vw,56px)/1.08 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">The Attention Experiment</h1>
+<p style="margin:22px 0 0;max-width:26ch;font:400 clamp(22px,2.2vw,26px)/1.4 var(--font-sans);letter-spacing:-.005em;color:var(--body-2);text-wrap:balance">What catches your eye before you even realize you’re looking?</p>
+<div style="margin-top:34px;display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap">
+<button type="button" onClick="{{ begin }}" style="display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">Begin experiment</button>
+<span style="font:500 15px/1.4 var(--font-sans);color:var(--body-2)">About 3 minutes</span>
+</div>
+<div aria-hidden="true" style="margin-top:clamp(48px,6vw,80px);width:100%;border-radius:16px;background:#2F5D50;padding:clamp(40px,7vw,96px) clamp(24px,6vw,80px);display:flex;justify-content:center">
+<div style="width:100%;max-width:440px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.4vw,16px)">
+<sc-for list="{{ comp }}" as="c" hint-placeholder-count="20">
+<div style="aspect-ratio:1/1;display:flex;align-items:center;justify-content:center"><div data-drift="{{ c.drift }}" style="width:{{ c.size }};aspect-ratio:1/1;border-radius:{{ c.radius }};background:{{ c.fill }};border:2px solid {{ c.stroke }}"></div></div>
+</sc-for>
+</div>
+</div>
+</section>
+<section style="padding:clamp(80px,10vw,144px) var(--lab-gutter) clamp(80px,10vw,128px);display:flex;flex-direction:column;align-items:flex-start">
+<h2 style="margin:0;max-width:18ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">What if the first thing you notice isn’t the most important thing?</h2>
+<p style="margin:24px 0 0;max-width:46ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Three short rounds on contrast, layout and motion. You tell us what you notice. The page records your time and clicks. Nothing leaves your browser.</p>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRoundIntro }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="ri-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:48px var(--lab-gutter) 80px;text-align:center">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Round {{ roundNum }}</p>
+<h2 id="ri-h" style="margin:0;font:500 clamp(42px,5.2vw,56px)/1.08 var(--font-sans);letter-spacing:-.015em">{{ ri.name }}</h2>
+<p style="margin:0;max-width:36ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">{{ ri.body }}</p>
+<button type="button" ref="{{ focusBtnRef }}" onClick="{{ startRound }}" style="margin-top:10px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">Start</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCue }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="cue-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:48px var(--lab-gutter) 80px;text-align:center">
+<p style="margin:0;font:500 17px/1.2 var(--font-sans);color:var(--body-2)">{{ cue.step }}</p>
+<h2 id="cue-h" style="margin:0;max-width:20ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">{{ cue.title }}</h2>
+<p style="margin:0;max-width:34ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">{{ cue.body }}</p>
+<button type="button" ref="{{ focusBtnRef }}" onClick="{{ cue.go }}" style="margin-top:10px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">{{ cue.btn }}</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isTiles }}" hint-placeholder-val="{{ false }}">
+<section aria-label="{{ tilesPrompt }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:32px var(--lab-gutter) 64px">
+<p style="margin:0;font:600 clamp(20px,1.8vw,24px)/1.3 var(--font-sans);letter-spacing:-.015em;text-align:center">{{ tilesPrompt }}</p>
+<div ref="{{ gridRef }}" tabindex="-1" style="width:100%;max-width:680px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:12px;outline:none">
+<sc-for list="{{ tiles }}" as="t" hint-placeholder-count="12">
+<button type="button" onClick="{{ t.onPick }}" aria-label="{{ t.label }}" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:24px;min-height:clamp(92px,10vw,116px);padding:16px 18px;border:2px solid {{ t.border }};border-radius:12px;background:{{ t.bg }};color:{{ t.fg }};font:600 16px/1.2 var(--font-sans);letter-spacing:-.01em;text-align:left;cursor:pointer;transition:transform .15s ease;-webkit-tap-highlight-color:transparent" style-active="transform:scale(.97)"><svg viewBox="0 0 40 40" width="20" height="20" aria-hidden="true" style="display:block;overflow:visible"><path d="{{ t.d }}" fill="currentColor"></path></svg><span>{{ t.label }}</span></button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isBShow }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Boarding pass" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px var(--lab-gutter) 64px">
+<p style="margin:0;font:600 clamp(20px,1.8vw,24px)/1.3 var(--font-sans);letter-spacing:-.015em;text-align:center">Take a look. This disappears in {{ exposure }} seconds.</p>
+<div style="width:100%;max-width:680px;padding:clamp(20px,3vw,32px);border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 4px 18px;font:600 16px/1.3 var(--font-sans)"><span>Flight LS 208</span><span style="font-weight:500;color:var(--body-2)">Boston to Lisbon</span></div>
+<div style="display:grid;grid-template-columns:{{ bl.cols }};grid-template-areas:{{ bl.areas }};grid-template-rows:{{ bl.rows }};gap:10px">
+<sc-for list="{{ bShow }}" as="b" hint-placeholder-count="5">
+<div style="grid-area:{{ b.area }};display:grid;gap:8px;align-content:start;padding:{{ b.pad }};border-radius:16px;background:var(--bg)"><span style="font:500 14px/1.2 var(--font-sans);color:var(--body-2)">{{ b.label }}</span><span style="font-family:var(--font-sans);font-weight:700;font-size:{{ b.vsize }};line-height:1.08;letter-spacing:-.015em;text-wrap:balance">{{ b.value }}</span></div>
+</sc-for>
+</div>
+</div>
+<div aria-hidden="true" style="width:100%;max-width:200px;height:4px;background:rgba(var(--inkrgb),.1);border-radius:2px;overflow:hidden"><div ref="{{ countRef }}" style="height:100%;width:100%;background:var(--ink);transform-origin:left center"></div></div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isBFirst }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="bf-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px var(--lab-gutter) 64px;text-align:center">
+<h2 id="bf-h" ref="{{ headRef }}" tabindex="-1" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;outline:none;text-wrap:balance">What did you notice first?</h2>
+<p style="margin:0 0 12px;max-width:34ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">Same layout, details hidden. Tap the block your eyes went to first.</p>
+<div style="width:100%;max-width:680px;padding:clamp(20px,3vw,32px);border-radius:16px;background:rgba(var(--inkrgb),.045);text-align:left">
+<div aria-hidden="true" style="display:flex;justify-content:space-between;gap:12px;padding:0 4px 18px"><span style="display:block;width:30%;height:14px;border-radius:7px;background:rgba(var(--inkrgb),.14)"></span><span style="display:block;width:26%;height:14px;border-radius:7px;background:rgba(var(--inkrgb),.08)"></span></div>
+<div style="display:grid;grid-template-columns:{{ bl.cols }};grid-template-areas:{{ bl.areas }};grid-template-rows:{{ bl.rows }};gap:10px">
+<sc-for list="{{ bPick }}" as="b" hint-placeholder-count="5">
+<button type="button" onClick="{{ b.onPick }}" aria-label="{{ b.aria }}" style="grid-area:{{ b.area }};display:grid;gap:10px;align-content:start;padding:{{ b.pad }};border:2px solid transparent;border-radius:16px;background:var(--bg);cursor:pointer;text-align:left;transition:border-color .15s ease" style-hover="border-color:var(--ink)"><span style="display:block;width:38%;height:12px;border-radius:6px;background:rgba(var(--inkrgb),.12)"></span><span style="display:block;width:{{ b.barW }};height:{{ b.barH }};border-radius:8px;background:rgba(var(--inkrgb),.2)"></span></button>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isBRecall }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="br-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px var(--lab-gutter) 64px;text-align:center">
+<h2 id="br-h" ref="{{ headRef }}" tabindex="-1" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;outline:none">What do you remember?</h2>
+<p style="margin:0 0 12px;max-width:34ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">Select everything you saw. Some of these weren’t there.</p>
+<div role="group" aria-labelledby="br-h" style="width:100%;max-width:720px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px">
+<sc-for list="{{ recall }}" as="r" hint-placeholder-count="8">
+<button type="button" onClick="{{ r.onToggle }}" aria-pressed="{{ r.pressed }}" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:0;border-radius:999px;background:{{ r.bg }};color:{{ r.fg }};font:500 16px/1.2 var(--font-sans);cursor:pointer;transition:background .2s ease,color .2s ease" style-active="transform:scale(.97)">{{ r.text }}</button>
+</sc-for>
+</div>
+<button type="button" onClick="{{ recallDone }}" style="margin-top:18px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">Continue</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isCTrial }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Inbox task" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:32px var(--lab-gutter) 64px">
+<p style="margin:0;max-width:34ch;font:600 clamp(20px,1.8vw,24px)/1.3 var(--font-sans);letter-spacing:-.015em;text-align:center;text-wrap:balance">{{ cueText }}</p>
+<div ref="{{ gridRef }}" tabindex="-1" style="width:100%;max-width:760px;border-radius:16px;background:rgba(var(--inkrgb),.045);padding:10px;outline:none">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px 16px"><span style="font:500 22px/1 var(--font-sans);letter-spacing:-.012em">Inbox</span><span style="font:500 14px/1 var(--font-sans);color:var(--body-2)">8 messages</span></div>
+<button type="button" onClick="{{ widgetClick }}" style="width:100%;display:flex;align-items:center;gap:16px;margin-bottom:10px;padding:14px 18px;border:0;border-radius:16px;background:var(--bg);color:var(--ink);font:500 15px/1.3 var(--font-sans);text-align:left;cursor:pointer"><span aria-hidden="true" style="position:relative;flex:0 0 auto;width:72px;height:18px"><span ref="{{ driftRef }}" style="position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:#E3A944"></span></span><span ref="{{ tipRef }}" style="flex:1;min-width:0">{{ tipText }}</span><span style="flex:0 0 auto;color:var(--body-2)">Learn more</span></button>
+<div style="border-radius:16px;background:var(--bg);overflow:hidden">
+<sc-for list="{{ msgs }}" as="m" hint-placeholder-count="8">
+<button type="button" onClick="{{ m.onPick }}" style="width:100%;display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;min-height:52px;padding:14px 18px;border:0;border-bottom:1px solid rgba(var(--inkrgb),.07);background:{{ m.bg }};color:{{ m.fg }};font:400 15px/1.35 var(--font-sans);text-align:left;cursor:pointer" style-hover="background:rgba(var(--inkrgb),.04)"><span style="font-weight:600">{{ m.from }}</span><span>{{ m.subj }}</span><span style="font-size:13px;color:var(--body-2)">{{ m.time }}</span></button>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isRate }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="rate-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(28px,4vw,44px);padding:48px var(--lab-gutter) 80px;text-align:center">
+<div style="display:grid;gap:14px;justify-items:center">
+<p style="margin:0;font:500 17px/1.2 var(--font-sans);color:var(--body-2)">{{ rateNote }}</p>
+<h2 id="rate-h" ref="{{ headRef }}" tabindex="-1" style="margin:0;max-width:18ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;outline:none;text-wrap:balance">{{ rateQ }}</h2>
+</div>
+<div role="group" aria-labelledby="rate-h" style="width:100%;max-width:860px;display:grid;grid-template-columns:repeat(auto-fit,minmax(124px,1fr));gap:10px">
+<sc-for list="{{ scale }}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{ o.onPick }}" aria-pressed="{{ o.pressed }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:clamp(104px,12vw,128px);padding:16px;border:0;border-radius:14px;background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;transition:background .2s ease,color .2s ease" style-hover="background:{{ o.hover }}" style-active="transform:scale(.97)"><span style="font:500 28px/1 var(--font-sans);letter-spacing:-.012em">{{ o.n }}</span><span style="font:500 15px/1.2 var(--font-sans)">{{ o.label }}</span></button>
+</sc-for>
+</div>
+<span style="font:500 14px/1 var(--font-sans);color:var(--body-2)">Or press 1 to 5</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ isPaused }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="pz-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px var(--lab-gutter) 80px;text-align:center">
+<h2 id="pz-h" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">Paused</h2>
+<p style="margin:0;max-width:36ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">You left this tab while the timer was running, so that attempt won’t count.</p>
+<button type="button" ref="{{ focusBtnRef }}" onClick="{{ restart }}" style="margin-top:10px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82">Try again</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+<div>
+<section aria-labelledby="res-h" style="padding:88px var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Your results</p>
+<h1 id="res-h" ref="{{ headRef }}" tabindex="-1" style="margin:22px 0 0;max-width:14ch;font:500 clamp(42px,5.2vw,56px)/1.08 var(--font-sans);letter-spacing:-.015em;outline:none;text-wrap:balance">What caught your eye</h1>
+<p style="margin:22px 0 0;max-width:40ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">“You reported” is what you told us. “Measured” is what the page recorded. No eye tracking was used.</p>
+</section>
+
+<section style="padding:0 var(--lab-gutter);width:100%">
+<sc-for list="{{ rounds }}" as="r" hint-placeholder-count="3">
+<div style="margin-top:clamp(72px,9vw,128px);opacity:{{ r.opacity }};transform:{{ r.shift }};transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)">
+<div>
+<h2 style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">{{ r.name }}</h2>
+<p style="margin:14px 0 0;max-width:46ch;font:400 19px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">{{ r.principle }}</p>
+</div>
+<div style="margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px">
+<div style="display:flex;flex-direction:column;gap:22px;padding:clamp(24px,3.2vw,44px);border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<p style="margin:0;font:600 15px/1 var(--font-sans);color:var(--body-2)">You reported</p>
+<sc-if value="{{ r.isA }}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px">
+<sc-for list="{{ r.tiles }}" as="t" hint-placeholder-count="12"><div style="display:flex;align-items:flex-end;min-height:50px;padding:8px 10px;border-radius:10px;background:{{ t.bg }};color:{{ t.fg }};box-shadow:0 0 0 2.5px {{ t.ring }};font:600 12px/1.15 var(--font-sans)">{{ t.label }}</div></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ r.isB }}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="display:grid;grid-template-columns:{{ bl.cols }};grid-template-areas:{{ bl.areas }};grid-template-rows:{{ bl.rows }};gap:6px">
+<sc-for list="{{ r.blocks }}" as="b" hint-placeholder-count="5"><div style="grid-area:{{ b.area }};display:flex;flex-direction:column;justify-content:space-between;gap:4px;min-height:{{ b.minH }};padding:10px 12px;border-radius:12px;background:{{ b.bg }};color:{{ b.fg }};box-shadow:0 0 0 2.5px {{ b.ring }}"><span style="font:600 13px/1.2 var(--font-sans)">{{ b.label }}</span><span style="font:500 12px/1.2 var(--font-sans)">{{ b.status }}</span></div></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ r.isC }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<sc-for list="{{ r.rated }}" as="s" hint-placeholder-count="2"><div style="display:grid;gap:8px"><span style="font:500 clamp(28px,3vw,40px)/1.05 var(--font-sans);letter-spacing:-.015em">{{ s.value }}</span><span style="font:500 14px/1.35 var(--font-sans);color:var(--body-2)">{{ s.caption }}</span></div></sc-for>
+</div>
+</sc-if>
+<div style="display:flex;gap:8px 18px;flex-wrap:wrap;font:500 13px/1.3 var(--font-sans);color:var(--body-2)">
+<sc-for list="{{ r.legend }}" as="l" hint-placeholder-count="2"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:4px;background:{{ l.bg }};box-shadow:inset 0 0 0 2px {{ l.ring }}"></span>{{ l.text }}</span></sc-for>
+</div>
+<p style="margin:auto 0 0;font:500 clamp(18px,1.6vw,21px)/1.45 var(--font-sans);letter-spacing:-.015em;text-wrap:pretty">{{ r.reported }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px;padding:clamp(24px,3.2vw,44px);border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<p style="margin:0;font:600 15px/1 var(--font-sans);color:var(--body-2)">Measured</p>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+<sc-for list="{{ r.stats }}" as="s" hint-placeholder-count="2"><div style="display:grid;gap:8px;align-content:start"><span style="font:500 clamp(48px,5.6vw,76px)/1 var(--font-sans);letter-spacing:-.015em;font-variant-numeric:tabular-nums;color:{{ s.color }}">{{ s.value }}<span style="font-size:.42em;letter-spacing:-.01em;color:var(--body-2)">{{ s.unit }}</span></span><span style="font:500 14px/1.35 var(--font-sans);color:var(--body-2)">{{ s.caption }}</span></div></sc-for>
+</div>
+<p style="margin:auto 0 0;font:500 clamp(18px,1.6vw,21px)/1.45 var(--font-sans);letter-spacing:-.015em;text-wrap:pretty">{{ r.measured }}</p>
+</div>
+</div>
+</div>
+</sc-for>
+</section>
+
+<section style="margin:clamp(88px,11vw,160px) var(--lab-gutter) 0;padding:clamp(64px,9vw,128px) clamp(24px,6vw,96px);border-radius:16px;background:var(--ink);color:var(--bg);text-align:center;display:flex;flex-direction:column;align-items:center;opacity:{{ rv4 }};transition:opacity .8s ease">
+<p style="margin:0;max-width:30ch;font:500 clamp(26px,2.8vw,34px)/1.12 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">{{ summary }}</p>
+<p style="margin:24px 0 0;max-width:46ch;font:500 16px/1.55 var(--font-sans);text-wrap:pretty;opacity:.72">One session, one or two tries per condition. A snapshot, with chance and practice mixed in.</p>
+<button type="button" onClick="{{ begin }}" style="margin-top:32px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--bg);color:var(--ink);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.85">Try it again</button>
+</section>
+
+<section aria-labelledby="psy-h" style="padding:clamp(96px,12vw,176px) var(--lab-gutter) 0;max-width:1040px">
+<h2 id="psy-h" style="margin:0;max-width:16ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">What attracts attention isn’t always what deserves it.</h2>
+<p style="margin:24px 0 0;max-width:48ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Noticing something and being helped by it are different. What grabs you also depends on what you’re looking for (Folk, Remington &amp; Johnston, 1992).</p>
+<div style="margin-top:clamp(40px,5vw,64px);display:grid;gap:clamp(24px,3vw,36px)">
+<sc-for list="{{ psych }}" as="p" hint-placeholder-count="3">
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">{{ p.title }} <span style="color:var(--body-2)">{{ p.body }}</span></p>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="imp-h" style="padding:clamp(96px,12vw,176px) var(--lab-gutter) 0;max-width:1040px">
+<h2 id="imp-h" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">For designers</h2>
+<div style="margin-top:clamp(32px,4vw,48px);display:grid;gap:clamp(24px,3vw,36px)">
+<sc-for list="{{ implications }}" as="p" hint-placeholder-count="3">
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">{{ p.title }} <span style="color:var(--body-2)">{{ p.body }}</span></p>
+</sc-for>
+</div>
+</section>
+
+<section style="padding:clamp(96px,12vw,160px) var(--lab-gutter) 0;max-width:1040px">
+<details style="border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:clamp(22px,2.6vw,32px) clamp(24px,3.2vw,40px);cursor:pointer;font:500 clamp(21px,2vw,26px)/1.2 var(--font-sans);letter-spacing:-.012em">How this was built<svg class="ae-plus" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="flex:0 0 auto;transition:transform .25s ease"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"></path></svg></summary>
+<div style="padding:0 clamp(24px,3.2vw,40px) clamp(28px,3.4vw,44px)">
+<dl style="margin:0;display:grid;gap:22px">
+<sc-for list="{{ method }}" as="m" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 32px"><dt style="font:600 16px/1.45 var(--font-sans)">{{ m.term }}</dt><dd style="margin:0;font:400 16px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">{{ m.body }}</dd></div>
+</sc-for>
+</dl>
+<h3 style="margin:36px 0 12px;font:600 16px/1.4 var(--font-sans)">References</h3>
+<ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px">
+<sc-for list="{{ refs }}" as="x" hint-placeholder-count="9"><li style="font:400 14px/1.55 var(--font-sans);color:var(--body-2);text-wrap:pretty">{{ x }}</li></sc-for>
+</ul>
+</div>
+</details>
+</section>
+
+<section aria-labelledby="essay-h" style="padding:clamp(96px,12vw,160px) var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;font:600 17px/1.2 var(--font-sans);color:var(--body-2)">Further reading</p>
+<h2 id="essay-h" style="margin:12px 0 0;max-width:16ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">The Invisible Hand of Attention</h2>
+<sc-if value="{{ hasEssay }}" hint-placeholder-val="{{ false }}">
+<a href="{{ essayUrl }}" target="_blank" rel="noopener" style="margin-top:28px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);text-decoration:none;transition:opacity .2s ease" style-hover="opacity:.82;color:var(--bg)">Read the essay</a>
+</sc-if>
+<sc-if value="{{ noEssay }}" hint-placeholder-val="{{ true }}">
+<p style="margin:20px 0 0;font:500 17px/1.4 var(--font-sans);color:var(--body-2)">Coming soon on The Way We Think</p>
+</sc-if>
+</section>
+
+<div style="margin-top:clamp(80px,10vw,128px);padding:24px var(--lab-gutter) 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font:500 15px/1.5 var(--font-sans);color:var(--body-2)">
+<a href="The Lab.dc.html" style="color:var(--ink);text-decoration:none" style-hover="color:var(--body-2)">Back to The Lab</a>
+<span>An informal demonstration. Your responses never leave this browser.</span>
+</div>
+</div>
+</sc-if>
+
+</main>
+
+<sc-if value="{{ showSiteHeader }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="height:48px"></div>
+<div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
+<div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:30px;max-width:560px">
+<svg class="lsfmark" viewBox="0 0 250 150" width="112" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;overflow:visible;color:var(--ink)"><defs><filter id="gooFootLab" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootLab)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootLab)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+<p style="margin:18px 0 0;font:400 12.5px/1 var(--font-sans);color:var(--muted)">Currently in New York, <i id="lsf-time" style="font-style:normal;font-variant-numeric:tabular-nums">--:--</i></p>
+</div>
+</div>
+<div style="display:flex;gap:64px">
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
+</div>
+</div>
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="index.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="playground.html" style="text-decoration:none;color:var(--body-2)">Playground</a>
+<a href="The Lab.dc.html" style="text-decoration:none;color:var(--body-2)">Lab</a>
+<a href="about.html" style="text-decoration:none;color:var(--body-2)">About</a>
+</div>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<span>Made with ♥ by Laila · 2026</span>
+<a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surf)">↑ Back to top</a>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;essayUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Companion essay&quot;},&quot;exposureSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:4,&quot;min&quot;:2,&quot;max&quot;:8,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Experiment&quot;}}">
+const SH={circle:'M6 20a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z',square:'M7 7H33V33H7Z',triangle:'M20 5L35 32H5Z',invtri:'M5 8H35L20 35Z',diamond:'M20 3L37 20L20 37L3 20Z',hexagon:'M20 4L34 12V28L20 36L6 28V12Z',pentagon:'M20 4L35.2 15.1L29.4 33H10.6L4.8 15.1Z',cross:'M15 5H25V15H35V25H25V35H15V25H5V15H15Z',semicircle:'M5 28A15 15 0 0 1 35 28Z',star:'M20 3L25 15L37 20L25 25L20 37L15 25L3 20L15 15Z'};
+const ACTIONS=[['Archive','square'],['Share','triangle'],['Export','invtri'],['Rename','diamond'],['Duplicate','hexagon'],['Move','pentagon'],['Print','circle'],['Download','semicircle'],['Tag','cross'],['Pin','star'],['Copy link','circle'],['Delete','square']].map(([label,shape])=>({label,shape}));
+const BIG='clamp(30px,4.4vw,46px)';
+const BLOCKS=[{id:'gate',label:'Gate',value:'B14',name:'gate'},{id:'boarding',label:'Boarding',value:'7:40 AM',name:'boarding time'},{id:'seat',label:'Seat',value:'23A, window',name:'seat'},{id:'bag',label:'Baggage',value:'1 carry-on included',name:'baggage allowance'},{id:'upgrade',label:'Offer',value:'Extra legroom for $49',name:'upgrade offer'}];
+const LAYOUTS={
+  offer:{name:'Offer-led layout',cols:'repeat(3,minmax(0,1fr))',areas:"'upgrade upgrade upgrade' 'gate boarding seat' 'bag bag bag'",rows:'auto auto auto',big:['upgrade'],size:'19px',dom:'Your version put the upgrade offer first, in the largest type.'},
+  gate:{name:'Gate-led layout',cols:'repeat(2,minmax(0,1fr))',areas:"'gate boarding' '. .' 'seat bag' 'upgrade upgrade'",rows:'auto 14px auto auto',big:['gate','boarding'],size:'19px',dom:'Your version put the gate and boarding time first, in the largest type.'},
+  even:{name:'Even layout',cols:'repeat(3,minmax(0,1fr))',areas:"'gate boarding seat' 'bag upgrade .'",rows:'auto auto',big:[],size:'23px',dom:'In your version, every block had the same weight.'}
+};
+const RECALL=[{key:'gate',text:'Gate B14',block:'gate'},{key:'boarding',text:'Boarding at 7:40 AM',block:'boarding'},{key:'seat',text:'Seat 23A',block:'seat'},{key:'bag',text:'1 carry-on included',block:'bag'},{key:'upgrade',text:'Extra legroom for $49',block:'upgrade'},{key:'l1',text:'Gate C9'},{key:'l2',text:'Boarding at 8:15 AM'},{key:'l3',text:'Free Wi-Fi on board'}];
+const MSGS={p1:['Priya Nair','Invoice for March'],p2:['Priya Nair','Team lunch on Friday'],m1:['Marco Bell','Lease renewal'],m2:['Marco Bell','Photos from Saturday'],a1:['Ana Ruiz','Invoice for April'],a2:['Ana Ruiz','Draft agenda'],s1:['Sam Okafor','Lease questions'],s2:['Sam Okafor','Flight details'],j1:['Jules Martin','Invoice reminder'],j2:['Jules Martin','Coffee next week?'],d1:['Dana Kim','Renewal notice'],d2:['Dana Kim','Quarterly report']};
+const TASKS=[{target:'p1',cue:'Open the message from Priya Nair about the March invoice.',lures:['p2','a1','j1']},{target:'m1',cue:'Open the message from Marco Bell about the lease renewal.',lures:['m2','s1','d1']}];
+const TIMES=['9:12 AM','8:47 AM','8:05 AM','Yesterday','Yesterday','Mon','Sun','Sat'];
+const TIPS=['New: shared folders are here','Try the new calendar view','Themes are now available'];
+const CONF=['Not at all','Slightly','Moderately','Very','Completely'];
+const DIST=['Not at all','Slightly','Somewhat','Quite','Very'];
+const ROUNDS=['Contrast','Layout','Motion'];
+const G='#2F5D50', TER='#A8544A', OCH='#E3A944', INK='var(--ink)', TILE='rgba(var(--inkrgb),.045)';
+const KEY='lab:attention:session';
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const rnd=n=>Math.floor(Math.random()*n);
+const reduced=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const sec=ms=>(ms/1000).toFixed(2);
+const times=n=>n===1?'once':n+' times';
+const errs=n=>n===0?'no misses':n===1?'1 miss':n+' misses';
+const comp=()=>Array.from({length:20},(_,i)=>{const hot=i===7,mv=i===13,sq=[2,10,16].includes(i);return{fill:hot?TER:mv?OCH:'transparent',stroke:hot?TER:mv?OCH:'rgba(243,236,210,.6)',size:hot?'64%':mv?'46%':'38%',radius:hot?'8px':sq?'5px':'50%',drift:mv?'1':''}});
+const mkGlance=()=>({tiles:shuffle(ACTIONS),salient:rnd(12),pick:null,ms:null,restarts:0});
+const mkFind=(cond,avoid)=>{let t;do{const tiles=shuffle(ACTIONS),salient=rnd(12);let target=salient;if(cond==='mismatch')while(target===salient)target=rnd(12);t={tiles,salient,target}}while(avoid&&t.tiles[t.target].label===avoid);return t};
+const mkList=task=>{const others=shuffle(Object.keys(MSGS).filter(k=>k!==task.target&&!task.lures.includes(k))).slice(0,4);return shuffle([task.target,...task.lures,...others])};
+
+class Component extends DCLogic {
+  state={stage:'intro',run:null,aT:0,cT:0,wrong:{},pressed:null,reveal:0,tip:0};
+  stageRef=React.createRef(); focusBtnRef=React.createRef(); gridRef=React.createRef(); headRef=React.createRef();
+  countRef=React.createRef(); driftRef=React.createRef(); tipRef=React.createRef();
+  comp=comp();
+  psych=[
+    {title:'Contrast stands out.',body:'Color and brightness register across the whole scene at once, so the odd one out gets found first (Treisman & Gelade, 1980).'},
+    {title:'Layout sets the order.',body:'Size, position and spacing decide what gets read first and what reads as a group (Wertheimer, 1923).'},
+    {title:'Motion interrupts.',body:'Movement pulls the eye even when it’s irrelevant (Abrams & Christ, 2003). Animated ads slow search and are often forgotten (Burke et al., 2005).'}
+  ];
+  implications=[
+    {title:'Spend contrast on the next step.',body:'Give it to the one thing people came for.'},
+    {title:'Let layout carry priority.',body:'Put essential details first, largest and together.'},
+    {title:'Keep decoration still.',body:'Use motion to confirm or show change, and respect reduced-motion settings.'}
+  ];
+  method=[
+    {term:'Research question',body:'How do contrast, layout and motion influence what people notice first and how quickly they complete a task?'},
+    {term:'Hypotheses',body:'The high-contrast tile will be noticed first and will speed up search only when it is the target. The most prominent block will be noticed first and remembered more. A moving banner will slow the task and feel more distracting.'},
+    {term:'Independent variables',body:'Target contrast (is or isn’t the high-contrast tile), layout (offer-led, gate-led or even, assigned at random) and motion (still or moving banner). Order is randomized within each round.'},
+    {term:'Dependent variables',body:'First-noticed reports, time from display to correct selection, misses, banner clicks, recall hits and false alarms, confidence and perceived distraction.'},
+    {term:'Limitations',body:'One person, one or two trials per condition. “Noticed first” is reported after the fact. No eye tracking. Each visitor sees one layout. Practice, screen size and the instructions all shape results.'},
+    {term:'A more rigorous version',body:'Many counterbalanced trials per condition, eye tracking for first fixation, a larger preregistered sample, controlled screens, and stimuli matched for size and luminance.'}
+  ];
+  refs=[
+    'Abrams, R. A., & Christ, S. E. (2003). Motion onset captures attention. Psychological Science, 14(5), 427–432.',
+    'Benway, J. P., & Lane, D. M. (1998). Banner blindness: Web searchers often miss “obvious” links. Internetworking, 1(3).',
+    'Burke, M., Hornof, A., Nilsen, E., & Gorman, N. (2005). High-cost banner blindness: Ads increase perceived workload, hinder visual search, and are forgotten. ACM Transactions on Computer-Human Interaction, 12(4), 423–445.',
+    'Folk, C. L., Remington, R. W., & Johnston, J. C. (1992). Involuntary covert orienting is contingent on attentional control settings. Journal of Experimental Psychology: Human Perception and Performance, 18(4), 1030–1044.',
+    'Itti, L., & Koch, C. (2001). Computational modelling of visual attention. Nature Reviews Neuroscience, 2(3), 194–203.',
+    'Simons, D. J., & Chabris, C. F. (1999). Gorillas in our midst: Sustained inattentional blindness for dynamic events. Perception, 28(9), 1059–1074.',
+    'Treisman, A. M., & Gelade, G. (1980). A feature-integration theory of attention. Cognitive Psychology, 12(1), 97–136.',
+    'Wertheimer, M. (1923). Untersuchungen zur Lehre von der Gestalt II. Psychologische Forschung, 4, 301–350.',
+    'Yantis, S., & Jonides, J. (1984). Abrupt visual onsets and selective attention. Journal of Experimental Psychology: Human Perception and Performance, 10(5), 601–621.'
+  ];
+
+  componentDidMount(){
+    this.onVis=()=>{if(document.hidden)this.invalidate()};
+    this.onBlur=()=>this.invalidate();
+    this.onKey=e=>{const st=this.state.stage;if((st==='b-conf'||st==='c-rate')&&/^[1-5]$/.test(e.key))this.rate(+e.key)};
+    document.addEventListener('visibilitychange',this.onVis);
+    window.addEventListener('blur',this.onBlur);
+    window.addEventListener('keydown',this.onKey);
+    this._last=this.state.stage;
+    this.drift();
+  }
+  componentWillUnmount(){
+    document.removeEventListener('visibilitychange',this.onVis);
+    window.removeEventListener('blur',this.onBlur);
+    window.removeEventListener('keydown',this.onKey);
+    this.clearAll();
+  }
+  componentDidUpdate(){this.afterStage()}
+  clearAll(){(this.timers||[]).forEach(clearTimeout);this.timers=[];clearTimeout(this.showTimer);this.stopMotion()}
+  later(fn,ms){this.timers=[...(this.timers||[]),setTimeout(fn,ms)]}
+  drift(){
+    if(reduced())return;
+    requestAnimationFrame(()=>document.querySelectorAll('[data-drift="1"]').forEach(el=>{if(!el._d&&el.animate){el._d=1;el.animate([{transform:'translate(0,0)'},{transform:'translate(10px,-8px)'},{transform:'translate(-6px,6px)'},{transform:'translate(0,0)'}],{duration:7000,iterations:Infinity,easing:'ease-in-out'})}}));
+  }
+  afterStage=()=>{
+    const st=this.state.stage;
+    if(this._last===st)return;
+    this._last=st;
+    window.scrollTo(0,0);
+    if(!reduced()&&this.stageRef.current&&this.stageRef.current.animate)this.stageRef.current.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'}],{duration:480,easing:'cubic-bezier(.2,.7,.2,1)'});
+    const f=(['a-intro','b-intro','c-intro','a-cue','c-cue','paused'].includes(st))?this.focusBtnRef:(['a-glance','a-find','c-trial'].includes(st))?this.gridRef:(['b-first','b-recall','b-conf','c-rate','results'].includes(st))?this.headRef:null;
+    if(f&&f.current)f.current.focus({preventScroll:true});
+    if(st==='intro')this.drift();
+    if(st==='b-show'&&this.countRef.current&&this.countRef.current.animate&&!reduced())this.countRef.current.animate([{transform:'scaleX(1)'},{transform:'scaleX(0)'}],{duration:this.exposure()*1000,easing:'linear',fill:'forwards'});
+    if(st==='c-trial')this.startMotion();
+    if(st==='results')this.runReveal();
+    if(st==='intro'||st==='results')requestAnimationFrame(()=>document.querySelectorAll('.lsfmark').forEach(e=>e.classList.add('is-in')));
+  };
+  exposure(){const v=Number(this.props.exposureSeconds??4);return Math.min(8,Math.max(2,isFinite(v)?v:4))}
+  go(stage,extra){this.setState({stage,wrong:{},pressed:null,...(extra||{})},this.afterStage)}
+  save(){try{sessionStorage.setItem(KEY,JSON.stringify(this.state.run))}catch(e){}}
+  arm(){this.running=false;requestAnimationFrame(()=>requestAnimationFrame(()=>{this.t0=performance.now();this.running=true}))}
+
+  begin=()=>{
+    this.clearAll();
+    const aConds=shuffle(['match','mismatch']);
+    const f0=mkFind(aConds[0]), f1=mkFind(aConds[1],f0.tiles[f0.target].label);
+    const cConds=shuffle(['static','moving']), tasks=shuffle(TASKS);
+    const run={
+      glance:mkGlance(),
+      a:[{cond:aConds[0],...f0},{cond:aConds[1],...f1}].map(t=>({...t,ms:null,errors:0,salientClicks:0,restarts:0})),
+      b:{layout:shuffle(Object.keys(LAYOUTS))[0],first:null,recall:shuffle(RECALL),selected:{},conf:null,restarts:0},
+      c:cConds.map((c,i)=>({cond:c,task:tasks[i],list:mkList(tasks[i]),ms:null,errors:0,widgetClicks:0,rating:null,restarts:0})),
+      reducedMotion:reduced()
+    };
+    this._revealed=false;
+    this.setState({run,aT:0,cT:0,reveal:0,tip:0},()=>{this.save();this.go('a-intro')});
+  };
+  startRound=()=>{
+    const st=this.state.stage;
+    if(st==='a-intro'){this.go('a-glance');this.arm()}
+    else if(st==='b-intro')this.startShow();
+    else if(st==='c-intro')this.go('c-cue');
+  };
+  startFind=()=>{this.go('a-find');this.arm()};
+  startShow=()=>{
+    this.go('b-show');this.running=true;
+    clearTimeout(this.showTimer);
+    this.showTimer=setTimeout(()=>{if(this.state.stage!=='b-show')return;this.running=false;this.go('b-first')},this.exposure()*1000);
+  };
+  startC=()=>{this.go('c-trial',{tip:0});this.arm()};
+
+  glancePick(i){
+    if(!this.running)return;this.running=false;
+    const g=this.state.run.glance;g.pick=i;g.ms=Math.round(performance.now()-this.t0);this.save();
+    this.go('a-cue');
+  }
+  findPick(i){
+    if(!this.running)return;
+    const {run,aT}=this.state,t=run.a[aT];
+    if(i===t.target){
+      this.running=false;t.ms=Math.round(performance.now()-this.t0);this.save();
+      aT<1?this.go('a-cue',{aT:1}):this.go('b-intro');
+    } else {
+      t.errors++;if(i===t.salient)t.salientClicks++;
+      this.setState(s=>({wrong:{...s.wrong,[i]:true}}));
+    }
+  }
+  bFirst(id){const b=this.state.run.b;b.first=id;this.save();this.go('b-recall')}
+  toggleRecall(k){const b=this.state.run.b;b.selected={...b.selected,[k]:!b.selected[k]};this.forceUpdate()}
+  recallDone=()=>{this.save();this.go('b-conf')};
+  cPick(id){
+    if(!this.running)return;
+    const {run,cT}=this.state,t=run.c[cT];
+    if(id===t.task.target){
+      this.running=false;t.ms=Math.round(performance.now()-this.t0);this.stopMotion();this.save();
+      this.go('c-rate');
+    } else {t.errors++;this.setState(s=>({wrong:{...s.wrong,[id]:true}}))}
+  }
+  widgetClick=()=>{if(!this.running)return;this.state.run.c[this.state.cT].widgetClicks++};
+  rate(v){
+    if(this.state.pressed)return;
+    const {stage,run,cT}=this.state;
+    if(stage==='b-conf')run.b.conf=v;else run.c[cT].rating=v;
+    this.save();this.setState({pressed:v});
+    const next=()=>stage==='b-conf'?this.go('c-intro'):cT<1?this.go('c-cue',{cT:1}):this.go('results',{reveal:0});
+    reduced()?next():this.later(next,340);
+  }
+  startMotion(){
+    this.stopMotion();
+    const t=this.state.run&&this.state.run.c[this.state.cT];
+    if(!t||t.cond!=='moving')return;
+    const rm=reduced();
+    if(!rm&&this.driftRef.current&&this.driftRef.current.animate)this.anim=this.driftRef.current.animate([{transform:'translateX(0)'},{transform:'translateX(54px)'}],{duration:2600,iterations:Infinity,direction:'alternate',easing:'ease-in-out'});
+    this.tipTimer=setInterval(()=>{this.setState(s=>({tip:(s.tip+1)%TIPS.length}),()=>{const el=this.tipRef.current;if(el&&el.animate)el.animate(rm?[{opacity:0},{opacity:1}]:[{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'none'}],{duration:450,easing:'ease-out'})})},2400);
+  }
+  stopMotion(){clearInterval(this.tipTimer);this.tipTimer=0;if(this.anim){this.anim.cancel();this.anim=null}}
+  invalidate(){
+    const st=this.state.stage;
+    if(!this.running||!['a-glance','a-find','b-show','c-trial'].includes(st))return;
+    this.running=false;clearTimeout(this.showTimer);this.stopMotion();
+    const {run,aT,cT}=this.state;
+    const rec=st==='a-glance'?run.glance:st==='a-find'?run.a[aT]:st==='b-show'?run.b:run.c[cT];
+    rec.restarts++;this.save();this.resume=st;this.go('paused');
+  }
+  restart=()=>{
+    const {run,aT,cT}=this.state,r=this.resume;
+    if(r==='a-glance'){const g=mkGlance();run.glance={...g,restarts:run.glance.restarts};this.go('a-glance');this.arm()}
+    else if(r==='a-find'){const t=run.a[aT],o=run.a[1-aT],f=mkFind(t.cond,o.tiles[o.target].label);Object.assign(t,f,{errors:0,salientClicks:0});this.startFind()}
+    else if(r==='b-show')this.startShow();
+    else {run.c[cT].list=mkList(run.c[cT].task);run.c[cT].errors=0;run.c[cT].widgetClicks=0;this.startC()}
+  };
+  runReveal(){
+    if(this._revealed)return;this._revealed=true;
+    if(reduced()){this.setState({reveal:5});return}
+    [[1,150],[2,450],[3,750],[4,1050]].forEach(([v,t])=>this.later(()=>this.setState({reveal:v}),t));
+  }
+
+  results(R,rv){
+    const g=R.glance, pickL=g.tiles[g.pick].label, salL=g.tiles[g.salient].label, hit=g.pick===g.salient;
+    const am=R.a.find(t=>t.cond==='match'), ax=R.a.find(t=>t.cond==='mismatch');
+    let aMeas=ax.ms>am.ms*1.15?'Contrast sped you up when it marked the target, and slowed you down when it didn’t.':'Contrast made little difference to your search time.';
+    if(ax.salientClicks>0)aMeas+=` You tapped the high-contrast tile by mistake ${times(ax.salientClicks)}.`;
+    const A={name:'Contrast',isA:true,principle:'Contrast helps when it marks what you’re looking for, and costs time when it marks something else.',
+      tiles:g.tiles.map((a,i)=>({label:a.label,bg:i===g.salient?'var(--ink)':'var(--bg)',fg:i===g.salient?'var(--bg)':'var(--body-2)',ring:i===g.pick?TER:'transparent'})),
+      legend:[{text:'High contrast',bg:'var(--ink)',ring:'transparent'},{text:'Your first pick',bg:'transparent',ring:TER}],
+      reported:hit?`You noticed ${pickL} first, the high-contrast tile.`:`You noticed ${pickL} first. The high-contrast tile was ${salL}.`,
+      stats:[{value:sec(am.ms),unit:'s',caption:`Target was the high-contrast tile, ${errs(am.errors)}`,color:INK},{value:sec(ax.ms),unit:'s',caption:`Target was a regular tile, ${errs(ax.errors)}`,color:ax.ms>am.ms*1.15?TER:INK}],
+      measured:aMeas};
+    const b=R.b, L=LAYOUTS[b.layout], firstB=BLOCKS.find(x=>x.id===b.first), sel=b.selected;
+    const hits=RECALL.filter(r=>r.block&&sel[r.key]).length, fa=RECALL.filter(r=>!r.block&&sel[r.key]).length;
+    const kept=['gate','boarding'].filter(k=>sel[k]).length;
+    const B={name:'Layout',isB:true,principle:`Same five details in every version. Only size, position and spacing changed. You saw the ${L.name.toLowerCase()}.`,
+      blocks:BLOCKS.map(x=>{const r=!!sel[x.id];return{area:x.id,label:x.label,status:r?'Remembered':'Forgotten',bg:r?G:'var(--bg)',fg:r?'#F3ECD2':'var(--ink)',ring:x.id===b.first?TER:'transparent',minH:L.big.includes(x.id)?'88px':'56px'}}),
+      legend:[{text:'Remembered',bg:G,ring:'transparent'},{text:'Noticed first',bg:'transparent',ring:TER}],
+      reported:`You noticed the ${firstB.name} first. ${L.dom}`,
+      stats:[{value:String(hits),unit:' of 5',caption:'Details remembered',color:INK},{value:String(fa),unit:' of 3',caption:'Picked but never shown',color:fa?TER:INK}],
+      measured:kept===2?'You kept both details a traveler needs most: gate and boarding time.':kept===1?'You kept one of the two details a traveler needs most.':'The gate and boarding time, the details that matter most, both slipped away.'};
+    const cs=R.c.find(t=>t.cond==='static'), cm=R.c.find(t=>t.cond==='moving'), mv=R.reducedMotion?'changing':'moving';
+    const C={name:'Motion',isC:true,principle:'The banner had nothing to do with your task. Movement competes for attention anyway.',
+      rated:[{value:DIST[cs.rating-1],caption:'Still banner, how distracting it felt'},{value:DIST[cm.rating-1],caption:`${mv[0].toUpperCase()+mv.slice(1)} banner, how distracting it felt`}],
+      legend:[],
+      reported:cm.rating>cs.rating?`The ${mv} banner felt more distracting.`:cm.rating<cs.rating?`The still version felt more distracting.`:'Both versions felt the same.',
+      stats:[{value:sec(cs.ms),unit:'s',caption:`Still banner, ${errs(cs.errors)}`,color:INK},{value:sec(cm.ms),unit:'s',caption:`${mv[0].toUpperCase()+mv.slice(1)} banner, ${errs(cm.errors)}${cm.widgetClicks?`, banner tapped ${times(cm.widgetClicks)}`:''}`,color:cm.ms>cs.ms*1.15?TER:INK}],
+      measured:(cm.ms>cs.ms*1.15?`You were slower with the ${mv} banner.`:cm.ms<cs.ms*.87?`You were faster with the ${mv} banner.`:'Your times were about the same.')+(R.reducedMotion?' Reduced motion is on, so the banner changed text without moving.':'')};
+    const rounds=[A,B,C].map((r,i)=>({...r,opacity:rv>=i+1?1:0,shift:rv>=i+1?'none':'translateY(16px)'}));
+    let summary;
+    const misled=(!hit)||(L.big.length&&!L.big.includes(b.first)&&b.layout==='offer')||(cm.ms>cs.ms*1.15);
+    if(b.layout==='offer'&&b.first==='upgrade')summary='Your eyes went to the upgrade offer, the least useful thing on the boarding pass.';
+    else if(ax.ms>am.ms*1.15)summary='The brightest tile helped only when it was the one you needed.';
+    else if(cm.ms>cs.ms*1.15||cm.rating>cs.rating)summary=`A ${mv} banner you didn’t need still cost you something.`;
+    else summary=misled?'What caught your eye wasn’t always what you needed.':'You held your focus well. Most people find at least one of these rounds harder.';
+    if(summary.startsWith('You held'))summary='You held your focus well this time. The design still pulled in its own direction.';
+    return {rounds,summary};
+  }
+
+  renderVals(){
+    const S=this.state, st=S.stage, R=S.run;
+    const roundOf=x=>x&&x.startsWith('a-')?0:x&&x.startsWith('b-')?1:x&&x.startsWith('c-')?2:0;
+    const round=st==='paused'?roundOf(this.resume):roundOf(st);
+    const done=st==='results'?3:round;
+    const v={
+      showSiteHeader:st==='intro'||st==='results', showRunBar:st!=='intro'&&st!=='results',
+      isIntro:st==='intro', isRoundIntro:['a-intro','b-intro','c-intro'].includes(st), isCue:st==='a-cue'||st==='c-cue',
+      isTiles:st==='a-glance'||st==='a-find', isBShow:st==='b-show', isBFirst:st==='b-first', isBRecall:st==='b-recall',
+      isCTrial:st==='c-trial', isRate:st==='b-conf'||st==='c-rate', isPaused:st==='paused', isResults:st==='results',
+      roundNum:round+1, roundsDone:done, roundName:ROUNDS[round],
+      progress:[0,1,2].map(i=>({bg:i<done?INK:i===round?G:'rgba(var(--inkrgb),.12)'})),
+      exposure:this.exposure(), comp:this.comp, psych:this.psych, implications:this.implications, method:this.method, refs:this.refs,
+      ri:[{name:'Contrast',body:'Twelve actions. Tap the first one you notice. Then find two specific ones, fast.'},{name:'Layout',body:`A boarding pass appears for ${this.exposure()} seconds. Then we’ll ask what you saw.`},{name:'Motion',body:'Find two messages in an inbox, as fast as you can.'}][round],
+      tiles:[], tilesPrompt:'', cue:{step:'',title:'',body:'',btn:'',go:()=>{}}, bl:LAYOUTS.even, bShow:[], bPick:[], recall:[], msgs:[], tipText:TIPS[0], cueText:'',
+      scale:[], rateQ:'', rateNote:'', rounds:[], summary:'', rv4:S.reveal>=4?1:0,
+      begin:this.begin, startRound:this.startRound, restart:this.restart, recallDone:this.recallDone, widgetClick:this.widgetClick,
+      stageRef:this.stageRef, focusBtnRef:this.focusBtnRef, gridRef:this.gridRef, headRef:this.headRef, countRef:this.countRef, driftRef:this.driftRef, tipRef:this.tipRef
+    };
+    const essayUrl=String(this.props.essayUrl??'').trim();
+    Object.assign(v,{essayUrl,hasEssay:!!essayUrl,noEssay:!essayUrl});
+    if(!R)return v;
+    const tile=(a,sal,wrong,on)=>({label:a.label,d:SH[a.shape],bg:sal?'var(--ink)':TILE,fg:sal?'var(--bg)':wrong?'var(--muted)':'var(--body-2)',border:wrong?TER:'transparent',onPick:on});
+    if(st==='a-glance'){const g=R.glance;v.tilesPrompt='Tap the first one you notice.';v.tiles=g.tiles.map((a,i)=>tile(a,i===g.salient,false,()=>this.glancePick(i)))}
+    const at=R.a[S.aT];
+    if(st==='a-find'){v.tilesPrompt=`Find ${at.tiles[at.target].label}`;v.tiles=at.tiles.map((a,i)=>tile(a,i===at.salient,!!S.wrong[i],()=>this.findPick(i)))}
+    if(st==='a-cue')v.cue={step:`${S.aT+1} of 2`,title:`Find ${at.tiles[at.target].label}.`,body:'The timer starts when the panel appears.',btn:'Show panel',go:this.startFind};
+    const ct=R.c[S.cT];
+    if(st==='c-cue')v.cue={step:`${S.cT+1} of 2`,title:ct.task.cue.replace('Open the message from ','Find ').replace(' about the ',', ').replace('.',''),body:'The timer starts when the inbox appears.',btn:'Show inbox',go:this.startC};
+    const L=LAYOUTS[R.b.layout]; v.bl=L;
+    const vs=id=>L.big.includes(id)?BIG:L.size, pad=id=>L.big.includes(id)?'clamp(18px,2.4vw,26px) clamp(16px,2vw,24px)':'14px 16px';
+    if(st==='b-show')v.bShow=BLOCKS.map(b=>({area:b.id,label:b.label,value:b.value,vsize:vs(b.id),pad:pad(b.id)}));
+    if(st==='b-first')v.bPick=BLOCKS.map((b,i)=>({area:b.id,aria:`Block ${i+1}`,pad:pad(b.id),barH:L.big.includes(b.id)?'34px':L.size==='23px'?'20px':'16px',barW:b.id==='gate'?'40%':b.id==='boarding'?'62%':'84%',onPick:()=>this.bFirst(b.id)}));
+    if(st==='b-recall')v.recall=R.b.recall.map(r=>{const on=!!R.b.selected[r.key];return{text:r.text,pressed:on?'true':'false',onToggle:()=>this.toggleRecall(r.key),bg:on?'var(--ink)':TILE,fg:on?'var(--bg)':INK}});
+    if(st==='c-trial'){v.cueText=ct.task.cue;v.tipText=ct.cond==='moving'?TIPS[S.tip]:TIPS[0];v.msgs=ct.list.map((id,i)=>({from:MSGS[id][0],subj:MSGS[id][1],time:TIMES[i],bg:S.wrong[id]?'rgba(168,84,74,.12)':'transparent',fg:S.wrong[id]?'var(--muted)':INK,onPick:()=>this.cPick(id)}))}
+    if(v.isRate){
+      const conf=st==='b-conf', labels=conf?CONF:DIST;
+      v.rateQ=conf?'How sure are you of what you remembered?':'How distracting was the rest of the screen?';
+      v.rateNote=conf?'Layout':`Found it. ${S.cT+1} of 2`;
+      v.scale=labels.map((l,i)=>{const on=S.pressed===i+1;return{n:i+1,label:l,pressed:on?'true':'false',onPick:()=>this.rate(i+1),bg:on?'var(--ink)':TILE,fg:on?'var(--bg)':INK,hover:on?'var(--ink)':'rgba(var(--inkrgb),.09)'}});
+    }
+    if(st==='results'&&R.c.every(t=>t.rating)&&R.b.conf&&R.a.every(t=>t.ms!=null))Object.assign(v,this.results(R,S.reveal));
+    return v;
+  }
+}
+</script>
+</body>
+</html>

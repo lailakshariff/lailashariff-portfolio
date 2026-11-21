@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Too Many Choices | The Lab | Laila Shariff</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./type.css">
+<link rel="stylesheet" href="./theme.css?v=5">
+<link rel="stylesheet" href="./pill-nav.css">
+<link rel="stylesheet" href="./lab-site.css">
+<script src="./theme.js"></script><script src="./pill-nav.js"></script><script src="./lab-site.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+summary{list-style:none}summary::-webkit-details-marker{display:none}
+details[open] .ae-plus{transform:rotate(45deg)}
+:root{--lab-gutter:64px}@media (max-width:900px){:root{--lab-gutter:24px}}@media (max-width:560px){:root{--lab-gutter:20px}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:var(--font-sans);overflow-x:hidden">
+
+<sc-if value="{{ showSiteHeader }}" hint-placeholder-val="{{ true }}">
+<div class="pnav">
+<a href="index.html" class="pnav-wordmark">Laila Shariff</a>
+<div class="pnav-in">
+<a href="index.html#work">Work</a>
+<span class="pnav-dd is-on"><a href="playground.html" aria-current="true">Playground</a><button type="button" class="pnav-dd-btn" aria-expanded="false" aria-controls="pnav-dd-menu" aria-label="More in Playground"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5"></path></svg></button><span class="pnav-dd-menu" id="pnav-dd-menu"><span class="pnav-dd-panel"><a href="playground.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.8L13 7.6H7Z"></path><circle cx="6" cy="14" r="2.9"></circle><rect x="11.4" y="11.1" width="5.8" height="5.8" rx="1.2"></rect></svg><b>Playground</b></a><a href="The Lab.dc.html" aria-current="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.6 2.8h4.8M8.4 2.8v5.1L4 15.6a1.1 1.1 0 0 0 1 1.6h10a1.1 1.1 0 0 0 1-1.6l-4.4-7.7V2.8"></path><path d="M5.9 12.4h8.2"></path></svg><b>The Lab</b></a></span></span></span>
+<a href="about.html">About</a>
+<span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
+<button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
+</div>
+</div>
+<div class="pnav-space" aria-hidden="true"></div>
+</sc-if>
+
+<sc-if value="{{ showRunBar }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;padding:14px var(--lab-gutter)">
+<span style="font:600 15px/1.2 var(--font-sans);letter-spacing:-.01em">Too Many Choices</span>
+<div role="progressbar" aria-label="Rounds completed" aria-valuemin="0" aria-valuemax="3" aria-valuenow="{{ roundsDone }}" style="display:flex;gap:6px">
+<sc-for list="{{ progress }}" as="p" hint-placeholder-count="3"><span style="display:block;width:clamp(24px,4vw,44px);height:4px;border-radius:2px;background:{{ p.bg }};transition:background .4s ease"></span></sc-for>
+</div>
+<div style="display:flex;justify-content:flex-end;align-items:center;gap:18px">
+<span style="font:500 15px/1.2 var(--font-sans);color:var(--body-2);font-variant-numeric:tabular-nums">{{ roundNum }} of 3</span>
+<a href="The Lab.dc.html" style="display:inline-flex;align-items:center;min-height:44px;font:500 15px/1 var(--font-sans);color:var(--ink);text-decoration:none" style-hover="color:var(--body-2)">Exit</a>
+</div>
+</div>
+</sc-if>
+
+<main ref="{{ stageRef }}" style="flex:1;display:flex;flex-direction:column">
+
+<sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+<div>
+<section aria-labelledby="intro-h" style="padding:88px var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Lab experiment 1</p>
+<h1 id="intro-h" style="margin:22px 0 0;max-width:12ch;font:500 clamp(42px,5.2vw,56px)/1.08 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">Too Many Choices</h1>
+<p style="margin:22px 0 0;max-width:26ch;font:400 clamp(22px,2.2vw,26px)/1.4 var(--font-sans);letter-spacing:-.005em;color:var(--body-2);text-wrap:balance">When does freedom become friction?</p>
+<div style="margin-top:34px;display:flex;align-items:center;gap:14px 22px;flex-wrap:wrap">
+<button type="button" onClick="{{ begin }}" style="display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">Begin experiment</button>
+<span style="font:500 15px/1.4 var(--font-sans);color:var(--body-2)">About 2–3 minutes</span>
+</div>
+<div aria-hidden="true" style="margin-top:clamp(48px,6vw,80px);width:100%;border-radius:16px;background:#3E5277;padding:clamp(40px,7vw,96px) clamp(24px,6vw,80px);display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,1.6vw,20px)">
+<sc-for list="{{ panels }}" as="pn" hint-placeholder-count="3">
+<div style="flex:{{ pn.flex }};max-width:calc({{ pn.flex }} * 64px);display:grid;gap:10px;text-align:left">
+<span style="font:600 14px/1 var(--font-sans);color:#F3ECD2;font-variant-numeric:tabular-nums">{{ pn.label }}</span>
+<div style="display:grid;grid-template-columns:repeat({{ pn.cols }},minmax(0,1fr));gap:clamp(5px,.7vw,9px);padding:clamp(10px,1.2vw,16px);border-radius:16px;background:#324466">
+<sc-for list="{{ pn.syms }}" as="s" hint-placeholder-count="4">
+<div data-spin="{{ s.spin }}" style="aspect-ratio:1/1;color:{{ s.color }}"><svg viewBox="0 0 40 40" width="100%" height="100%" style="display:block;overflow:visible"><path d="{{ s.d }}" fill="{{ s.fill }}" stroke="{{ s.stroke }}" style="stroke-width:2.6;stroke-linejoin:round"></path><circle cx="{{ s.cx }}" cy="{{ s.cy }}" r="{{ s.r }}" fill="currentColor"></circle></svg></div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="padding:clamp(80px,10vw,144px) var(--lab-gutter) clamp(80px,10vw,128px);display:flex;flex-direction:column;align-items:flex-start">
+<h2 style="margin:0;max-width:18ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">Three rounds. One target. An increasing number of distractions.</h2>
+<p style="margin:24px 0 0;max-width:46ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Every day, we’re surrounded by decisions. What to watch. What to buy. Where to go. But what happens when the number of options begins to work against us?</p>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ isReady }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="ready-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:48px var(--lab-gutter) 80px;text-align:center">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Round {{ roundNum }}</p>
+<h2 id="ready-h" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">Find this symbol</h2>
+<div style="width:clamp(132px,16vw,168px);aspect-ratio:1/1;flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:clamp(32px,4vw,42px);border-radius:16px;background:rgba(var(--inkrgb),.045);color:var(--ink)"><svg viewBox="0 0 40 40" width="100%" height="100%" role="img" aria-label="{{ target.label }}" style="display:block;overflow:visible"><path d="{{ target.d }}" fill="{{ target.fill }}" stroke="{{ target.stroke }}" style="stroke-width:2.6;stroke-linejoin:round"></path><circle cx="{{ target.cx }}" cy="{{ target.cy }}" r="{{ target.r }}" fill="currentColor"></circle></svg></div>
+<p style="margin:0;max-width:32ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">It appears exactly once. The timer starts when the grid appears.</p>
+<button type="button" ref="{{ readyBtnRef }}" onClick="{{ startTrial }}" style="margin-top:8px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">I’m ready</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isTrial }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Find the symbol" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:28px var(--lab-gutter) 56px">
+<sc-if value="{{ keepTarget }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;align-items:center;gap:12px;font:600 clamp(20px,1.8vw,24px)/1 var(--font-sans);letter-spacing:-.015em">Find
+<span style="width:30px;height:30px;display:inline-flex;color:var(--ink)"><svg viewBox="0 0 40 40" width="100%" height="100%" role="img" aria-label="{{ target.label }}" style="display:block;overflow:visible"><path d="{{ target.d }}" fill="{{ target.fill }}" stroke="{{ target.stroke }}" style="stroke-width:2.6;stroke-linejoin:round"></path><circle cx="{{ target.cx }}" cy="{{ target.cy }}" r="{{ target.r }}" fill="currentColor"></circle></svg></span>
+</div>
+</sc-if>
+<div ref="{{ gridRef }}" tabindex="-1" style="width:100%;display:grid;justify-content:center;grid-template-columns:repeat({{ cols }},minmax(0,84px));gap:clamp(6px,1vw,12px);outline:none">
+<sc-for list="{{ cells }}" as="c" hint-placeholder-count="12">
+<button type="button" onClick="{{ c.onPick }}" aria-label="{{ c.label }}" style="width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:22%;border:2px solid {{ c.border }};border-radius:12px;background:rgba(var(--inkrgb),.045);color:{{ c.color }};cursor:pointer;transition:transform .15s ease;-webkit-tap-highlight-color:transparent" style-active="transform:scale(.95)"><svg viewBox="0 0 40 40" width="100%" height="100%" aria-hidden="true" style="display:block;overflow:visible;pointer-events:none"><path d="{{ c.d }}" fill="{{ c.fill }}" stroke="{{ c.stroke }}" style="stroke-width:2.6;stroke-linejoin:round"></path><circle cx="{{ c.cx }}" cy="{{ c.cy }}" r="{{ c.r }}" fill="currentColor"></circle></svg></button>
+</sc-for>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{ isInvalid }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="inv-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:48px var(--lab-gutter) 80px;text-align:center">
+<h2 id="inv-h" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">Paused</h2>
+<p style="margin:0;max-width:36ch;font:500 18px/1.5 var(--font-sans);color:var(--body-2);text-wrap:pretty">You left this tab while the timer was running, so that time won’t count. The next try gets a fresh layout.</p>
+<button type="button" ref="{{ invalidBtnRef }}" onClick="{{ restartRound }}" style="margin-top:8px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.82" style-active="transform:scale(.98)">Restart round</button>
+</section>
+</sc-if>
+
+<sc-if value="{{ isRate }}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="rate-h" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(28px,4vw,44px);padding:48px var(--lab-gutter) 80px;text-align:center">
+<div style="display:grid;gap:14px;justify-items:center">
+<p style="margin:0;font:500 17px/1.2 var(--font-sans);color:var(--body-2)">Found it. Round {{ roundNum }} complete.</p>
+<h2 id="rate-h" ref="{{ rateHeadRef }}" tabindex="-1" style="margin:0;max-width:18ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;outline:none;text-wrap:balance">How difficult did that feel?</h2>
+</div>
+<div role="group" aria-labelledby="rate-h" style="width:100%;max-width:860px;display:grid;grid-template-columns:repeat(auto-fit,minmax(124px,1fr));gap:10px">
+<sc-for list="{{ scale }}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{ o.onPick }}" aria-pressed="{{ o.pressed }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:clamp(104px,12vw,128px);padding:16px;border:0;border-radius:14px;background:{{ o.bg }};color:{{ o.fg }};cursor:pointer;transition:background .2s ease,color .2s ease" style-hover="background:{{ o.hover }}" style-active="transform:scale(.97)"><span style="font:500 28px/1 var(--font-sans);letter-spacing:-.012em">{{ o.n }}</span><span style="font:500 15px/1.2 var(--font-sans)">{{ o.label }}</span></button>
+</sc-for>
+</div>
+<span style="font:500 14px/1 var(--font-sans);color:var(--body-2)">Or press 1 to 5</span>
+</section>
+</sc-if>
+
+<sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+<div>
+<section aria-labelledby="res-h" style="padding:88px var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;font:500 11px/1 var(--font-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Your results</p>
+<h1 id="res-h" ref="{{ resultsHeadRef }}" tabindex="-1" style="margin:22px 0 0;max-width:14ch;font:500 clamp(42px,5.2vw,56px)/1.08 var(--font-sans);letter-spacing:-.015em;outline:none;text-wrap:balance">Your brain, three different challenges</h1>
+</section>
+
+<section style="padding:clamp(56px,7vw,96px) var(--lab-gutter) 0;width:100%;display:grid;gap:16px">
+<div style="padding:clamp(24px,3.2vw,44px);border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap"><h2 style="margin:0;font:500 clamp(24px,2.4vw,32px)/1.1 var(--font-sans);letter-spacing:-.015em">Time to find the target</h2><span style="font:500 14px/1.4 var(--font-sans);color:var(--body-2)">From grid appearing to correct tap</span></div>
+<div style="margin-top:clamp(20px,2.4vw,32px);display:grid;gap:clamp(16px,2vw,24px)">
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:clamp(84px,11vw,140px) minmax(0,1fr);gap:clamp(16px,2.4vw,32px);align-items:center;opacity:{{ r.opacity }};transition:opacity .6s ease {{ r.delay }}">
+<div style="display:grid;gap:4px"><span style="font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">{{ r.n }}</span><span style="font:500 14px/1 var(--font-sans);color:var(--body-2)">symbols</span></div>
+<div style="display:grid;gap:10px">
+<div style="display:flex;align-items:center;gap:16px">
+<div style="flex:1;height:clamp(24px,2.8vw,36px);background:rgba(var(--inkrgb),.06);border-radius:999px;overflow:hidden"><div style="height:100%;width:{{ r.width }};background:{{ r.barColor }};border-radius:999px;transition:{{ barTransition }} {{ r.delay }}"></div></div>
+<span style="min-width:4.4ch;text-align:right;font:500 clamp(26px,2.8vw,40px)/1 var(--font-sans);letter-spacing:-.015em;font-variant-numeric:tabular-nums">{{ r.time }}<span style="font-size:.45em;color:var(--body-2)">s</span></span>
+</div>
+<div style="display:flex;gap:6px 18px;flex-wrap:wrap;font:500 14px/1.4 var(--font-sans);color:var(--body-2)"><span>{{ r.roundText }}</span><span>{{ r.errorsText }}</span><span>Felt {{ r.ratingLabel }}</span><span>{{ r.restarted }}</span></div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px;opacity:{{ phase2 }};transition:opacity .8s ease">
+<div style="padding:clamp(24px,3.2vw,44px);border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<h2 style="margin:0 0 24px;font:500 clamp(24px,2.4vw,32px)/1.1 var(--font-sans);letter-spacing:-.015em">How hard it felt</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)">
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
+<div style="display:grid;gap:10px">
+<div style="display:flex;flex-direction:column-reverse;gap:5px">
+<sc-for list="{{ r.steps }}" as="st" hint-placeholder-count="5"><span style="display:block;height:clamp(16px,1.8vw,22px);border-radius:999px;background:{{ st.bg }};border:2px solid {{ st.border }};transition:background .5s ease {{ st.delay }}"></span></sc-for>
+</div>
+<span style="font:500 clamp(22px,2vw,28px)/1 var(--font-sans);letter-spacing:-.015em">{{ r.n }}</span>
+<span style="font:500 13px/1.35 var(--font-sans);color:var(--body-2)">{{ r.ratingLabel }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;padding:clamp(24px,3.2vw,44px);border-radius:16px;background:rgba(var(--inkrgb),.045);opacity:{{ phase3 }};transition:opacity .8s ease">
+<h2 style="margin:0;font:500 clamp(24px,2.4vw,32px)/1.1 var(--font-sans);letter-spacing:-.015em">What we noticed</h2>
+<p style="margin:0;font:500 clamp(18px,1.6vw,21px)/1.455 var(--font-sans);letter-spacing:-.015em;text-wrap:pretty">{{ observation }}</p>
+<p style="margin:auto 0 0;font:500 14px/1.55 var(--font-sans);color:var(--body-2);text-wrap:pretty">One try per grid size. Attention, luck, your screen and where the target landed all play a part.</p>
+</div>
+</div>
+</section>
+
+<section style="margin:clamp(88px,11vw,160px) var(--lab-gutter) 0;padding:clamp(64px,9vw,128px) clamp(24px,6vw,96px);border-radius:16px;background:var(--ink);color:var(--bg);display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0;max-width:20ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">More isn’t always better. But less isn’t always easier.</p>
+<button type="button" onClick="{{ begin }}" style="margin-top:32px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--bg);color:var(--ink);font:500 17px/1 var(--font-sans);cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.85">Try it again</button>
+</section>
+
+<section aria-labelledby="psy-h" style="padding:clamp(96px,12vw,176px) var(--lab-gutter) 0;max-width:1040px">
+<h2 id="psy-h" style="margin:0;max-width:16ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">Why thirty felt harder than four.</h2>
+<div style="margin-top:clamp(40px,5vw,64px);display:grid;gap:clamp(24px,3vw,36px)">
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Visual search. <span style="color:var(--body-2)">Four symbols you take in at a glance. With thirty, your eyes move, settle, compare and move again.</span></p>
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Lookalikes slow you down. <span style="color:var(--body-2)">A target that differs in one simple way pops out of any crowd. One that shares features with its neighbors takes longer as the grid grows (Treisman &amp; Gelade, 1980).</span></p>
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">The Hick–Hyman law. <span style="color:var(--body-2)">Choice time grows with the logarithm of the number of options (Hick, 1952; Hyman, 1953). This task adds a search step, so it speaks to clutter more than to the law.</span></p>
+</div>
+</section>
+
+<section aria-labelledby="ev-h" style="padding:clamp(96px,12vw,176px) var(--lab-gutter) 0;max-width:1040px">
+<h2 id="ev-h" style="margin:0;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em">Where you’ve felt this</h2>
+<div style="margin-top:clamp(32px,4vw,48px);display:grid;gap:clamp(24px,3vw,36px)">
+<sc-for list="{{ everyday }}" as="e" hint-placeholder-count="3">
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">{{ e.title }}. <span style="color:var(--body-2)">{{ e.body }}</span></p>
+</sc-for>
+<p style="margin:0;max-width:40ch;font:500 clamp(21px,2vw,26px)/1.4 var(--font-sans);letter-spacing:-.012em;text-wrap:pretty">Good design organizes choices. <span style="color:var(--body-2)">Group what belongs together, make the likely option easy to spot, and reveal more when someone asks.</span></p>
+</div>
+</section>
+
+<section style="padding:clamp(96px,12vw,160px) var(--lab-gutter) 0;max-width:1040px">
+<details style="border-radius:16px;background:rgba(var(--inkrgb),.045)">
+<summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:clamp(22px,2.6vw,32px) clamp(24px,3.2vw,40px);cursor:pointer;font:500 clamp(21px,2vw,26px)/1.2 var(--font-sans);letter-spacing:-.012em">How this was built<svg class="ae-plus" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="flex:0 0 auto;transition:transform .25s ease"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"></path></svg></summary>
+<div style="padding:0 clamp(24px,3.2vw,40px) clamp(28px,3.4vw,44px)">
+<dl style="margin:0;display:grid;gap:22px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 32px"><dt style="font:600 16px/1.45 var(--font-sans)">What it measures</dt><dd style="margin:0;font:400 16px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Time from the grid appearing to a correct tap, incorrect taps, and how difficult each round felt. Grid size (4, 12 or 30 symbols) is the only thing that changes, and the round order is random.</dd></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 32px"><dt style="font:600 16px/1.45 var(--font-sans)">What it isn’t</dt><dd style="margin:0;font:400 16px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">A test of the Hick–Hyman law, which describes choosing a response from a known set. Most of your time here went to finding the target.</dd></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:6px 32px"><dt style="font:600 16px/1.45 var(--font-sans)">Limitations</dt><dd style="margin:0;font:400 16px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">An informal demonstration, not a validated study. Each grid size runs once, so a lucky glance can change a result. Screen size, input device, target position, shape familiarity and round order all play a part. Randomization reduces these effects without removing them.</dd></div>
+</dl>
+<h3 style="margin:36px 0 12px;font:600 16px/1.4 var(--font-sans)">References</h3>
+<ul style="margin:0;padding:0;list-style:none;display:grid;gap:8px">
+<li style="font:400 14px/1.55 var(--font-sans);color:var(--body-2)">Hick, W. E. (1952). On the rate of gain of information. Quarterly Journal of Experimental Psychology, 4(1), 11–26.</li>
+<li style="font:400 14px/1.55 var(--font-sans);color:var(--body-2)">Hyman, R. (1953). Stimulus information as a determinant of reaction time. Journal of Experimental Psychology, 45(3), 188–196.</li>
+<li style="font:400 14px/1.55 var(--font-sans);color:var(--body-2)">Treisman, A. M., &amp; Gelade, G. (1980). A feature-integration theory of attention. Cognitive Psychology, 12(1), 97–136.</li>
+<li style="font:400 14px/1.55 var(--font-sans);color:var(--body-2)">Wolfe, J. M. (1994). Guided Search 2.0: A revised model of visual search. Psychonomic Bulletin &amp; Review, 1(2), 202–238.</li>
+</ul>
+</div>
+</details>
+</section>
+
+<section aria-labelledby="essay-h" style="padding:clamp(96px,12vw,160px) var(--lab-gutter) 0;display:flex;flex-direction:column;align-items:flex-start">
+<p style="margin:0 0 40px;max-width:22ch;font:500 clamp(26px,2.8vw,34px)/1.12 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">If more choices give us more freedom, when do they begin to take it away?</p>
+<p style="margin:0;font:600 17px/1.2 var(--font-sans);color:var(--body-2)">Further reading</p>
+<h2 id="essay-h" style="margin:12px 0 0;max-width:16ch;font:500 clamp(30px,3.4vw,40px)/1.1 var(--font-sans);letter-spacing:-.015em;text-wrap:balance">The Illusion of Choice</h2>
+<p style="margin:14px 0 0;max-width:40ch;font:400 20px/1.6 var(--font-sans);color:var(--body-2);text-wrap:pretty">Why having more options doesn’t always make us feel more free.</p>
+<sc-if value="{{ hasEssay }}" hint-placeholder-val="{{ false }}">
+<a href="{{ essayUrl }}" target="_blank" rel="noopener" style="margin-top:28px;display:inline-flex;align-items:center;min-height:50px;padding:0 28px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 17px/1 var(--font-sans);text-decoration:none;transition:opacity .2s ease" style-hover="opacity:.82;color:var(--bg)">Read the essay</a>
+</sc-if>
+<sc-if value="{{ noEssay }}" hint-placeholder-val="{{ true }}">
+<p style="margin:20px 0 0;font:500 17px/1.4 var(--font-sans);color:var(--body-2)">Coming soon on The Way We Think</p>
+</sc-if>
+</section>
+
+<div style="margin-top:clamp(80px,10vw,128px);padding:24px var(--lab-gutter) 32px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font:500 15px/1.5 var(--font-sans);color:var(--body-2)">
+<a href="The Lab.dc.html" style="color:var(--ink);text-decoration:none" style-hover="color:var(--body-2)">Back to The Lab</a>
+<span>Your results never leave this browser.</span>
+</div>
+</div>
+</sc-if>
+
+</main>
+<sc-if value="{{ showSiteHeader }}" hint-placeholder-val="{{ true }}">
+<div>
+<div style="height:48px"></div>
+<div class="sitefoot" style="margin-top:48px;padding:64px 64px 0;border-top:1px solid rgba(var(--inkrgb),.1)">
+
+<div style="display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:30px;max-width:560px">
+<svg class="lsfmark" viewBox="0 0 250 150" width="112" role="img" aria-label="Laila Shariff monogram" style="display:block;flex:0 0 auto;overflow:visible;color:var(--ink)"><defs><filter id="gooFootLab" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"></feGaussianBlur><feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"></feColorMatrix></filter></defs><g filter="url(#gooFootLab)" fill="currentColor"><circle cx="34" cy="24" r="20"></circle><circle cx="34" cy="56" r="20"></circle><circle cx="34" cy="88" r="20"></circle><circle cx="34" cy="118" r="20"></circle><circle cx="64" cy="118" r="20"></circle><circle cx="94" cy="118" r="20"></circle><circle cx="196" cy="26" r="20"></circle><circle cx="166" cy="20" r="20"></circle><circle cx="146" cy="40" r="20"></circle><circle cx="154" cy="66" r="20"></circle><circle cx="182" cy="76" r="20"></circle><circle cx="204" cy="96" r="20"></circle><circle cx="180" cy="120" r="20"></circle><circle cx="150" cy="120" r="20"></circle></g><g filter="url(#gooFootLab)" fill="var(--bg,#fff)"><circle cx="34" cy="24" r="14"></circle><circle cx="34" cy="56" r="14"></circle><circle cx="34" cy="88" r="14"></circle><circle cx="34" cy="118" r="14"></circle><circle cx="64" cy="118" r="14"></circle><circle cx="94" cy="118" r="14"></circle><circle cx="196" cy="26" r="14"></circle><circle cx="166" cy="20" r="14"></circle><circle cx="146" cy="40" r="14"></circle><circle cx="154" cy="66" r="14"></circle><circle cx="182" cy="76" r="14"></circle><circle cx="204" cy="96" r="14"></circle><circle cx="180" cy="120" r="14"></circle><circle cx="150" cy="120" r="14"></circle></g></svg>
+<div>
+<h2 style="margin:0;font:400 36px/1.15 var(--font-serif);letter-spacing:-.01em">Thanks for stopping by.</h2>
+<p style="margin:14px 0 0;font:400 17px/1.5 var(--font-sans);color:var(--body-2)">Always happy to talk design, research, or a new idea.</p>
+<p style="margin:18px 0 0;font:400 12.5px/1 var(--font-sans);color:var(--muted)">Currently in New York, <i id="lsf-time" style="font-style:normal;font-variant-numeric:tabular-nums">--:--</i></p>
+</div>
+</div>
+
+<div style="display:flex;gap:64px">
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Contact</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="mailto:hello@lailashariff.co" style="text-decoration:none;color:var(--body-2)">Email</a>
+<a href="https://www.linkedin.com/in/lailakshariff" target="_blank" rel="noopener" style="text-decoration:none;color:var(--body-2)">LinkedIn</a>
+</div>
+</div>
+<div>
+<div style="font:600 11px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:16px">Navigation</div>
+<div data-mono style="display:flex;flex-direction:column;gap:10px;font:500 13px/1 var(--font-sans);letter-spacing:.03em">
+<a href="index.html#work" style="text-decoration:none;color:var(--body-2)">Work</a>
+<a href="playground.html" style="text-decoration:none;color:var(--body-2)">Playground</a>
+<a href="The Lab.dc.html" style="text-decoration:none;color:var(--body-2)">Lab</a>
+<a href="about.html" style="text-decoration:none;color:var(--body-2)">About</a>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:40px 0 30px;margin-top:40px;font:400 11.5px/1 var(--font-sans);letter-spacing:.1em;text-transform:uppercase;color:var(--body)">
+<span>Made with ♥ by Laila · 2026</span>
+<a href="#" style="text-decoration:none;color:var(--ink);border:1px solid rgba(var(--inkrgb),.25);border-radius:999px;padding:9px 18px;display:flex;align-items:center;gap:6px;transition:background .2s" style-hover="background:var(--surf)">↑ Back to top</a>
+</div>
+
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;essayUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Companion essay&quot;},&quot;keepTargetVisible&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Experiment&quot;}}">
+const SH={circle:'M6 20a14 14 0 1 0 28 0a14 14 0 1 0 -28 0Z',square:'M7 7H33V33H7Z',triangle:'M20 5L35 32H5Z',invtri:'M5 8H35L20 35Z',diamond:'M20 3L37 20L20 37L3 20Z',hexagon:'M20 4L34 12V28L20 36L6 28V12Z',pentagon:'M20 4L35.2 15.1L29.4 33H10.6L4.8 15.1Z',cross:'M15 5H25V15H35V25H25V35H15V25H5V15H15Z',semicircle:'M5 28A15 15 0 0 1 35 28Z',star:'M20 3L25 15L37 20L25 25L20 37L15 25L3 20L15 15Z'};
+const NAMES={circle:'circle',square:'square',triangle:'triangle',invtri:'downward triangle',diamond:'diamond',hexagon:'hexagon',pentagon:'pentagon',cross:'cross',semicircle:'half circle',star:'four-point star'};
+const DOT={triangle:[20,23],invtri:[20,17],semicircle:[20,22],pentagon:[20,21]};
+const POOL=[];Object.keys(SH).forEach(s=>['solid','outline','dot'].forEach(f=>POOL.push({id:s+'-'+f,shape:s,fill:f})));
+const byId=id=>POOL.find(p=>p.id===id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const sym=p=>{const solid=p.fill==='solid',c=DOT[p.shape]||[20,20];return{id:p.id,d:SH[p.shape],fill:solid?'currentColor':'none',stroke:solid?'none':'currentColor',cx:c[0],cy:c[1],r:p.fill==='dot'?3.4:0,label:(p.fill==='solid'?'Solid ':p.fill==='outline'?'Outlined ':'Dotted ')+NAMES[p.shape]}};
+const CONDS=[4,12,30], COLS={4:2,12:4,30:6};
+const INK='var(--ink)', COBALT='#3E5277', ORANGE='#A8544A', LINE='rgba(var(--inkrgb),.14)', SURF='var(--surf)', TILE='rgba(var(--inkrgb),.045)';
+const LABELS=['Effortless','Easy','Moderate','Difficult','Very difficult'];
+const KEY='lab:too-many-choices:session';
+const uid=()=>(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s-'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const reduced=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const sec=ms=>(ms/1000).toFixed(2);
+
+class Component extends DCLogic {
+  state = { stage:'intro', round:0, trials:[], cells:[], wrong:{}, pressed:null, reveal:0 };
+  stageRef = React.createRef(); readyBtnRef = React.createRef(); gridRef = React.createRef();
+  rateHeadRef = React.createRef(); resultsHeadRef = React.createRef(); invalidBtnRef = React.createRef();
+  panels = [4,12,30].map(n=>{const list=shuffle(POOL).slice(0,n),t=Math.floor(Math.random()*n);return{label:n+' symbols',cols:COLS[n],flex:COLS[n],syms:list.map((p,i)=>({...sym(p),color:i===t?'#E3A944':'#F3ECD2',spin:i===t?'1':''}))}});
+  everyday = [
+    {title:'Streaming services',body:'Rows of recommendations that keep loading, until choosing takes longer than watching.'},
+    {title:'Product grids',body:'Hundreds of near-identical items that differ by one small detail.'},
+    {title:'Communication boards',body:'On an AAC board, every extra symbol is one more thing to scan before you can say something.'}
+  ];
+
+  componentDidMount(){
+    this.onVis = () => { if (document.hidden) this.invalidate(); };
+    this.onBlur = () => this.invalidate();
+    this.onKey = e => {
+      if (this.state.stage==='rate' && /^[1-5]$/.test(e.key)) this.rate(+e.key);
+    };
+    document.addEventListener('visibilitychange', this.onVis);
+    window.addEventListener('blur', this.onBlur);
+    window.addEventListener('keydown', this.onKey);
+    this._lastStage = this.state.stage;
+    this.spin();
+  }
+  componentWillUnmount(){
+    document.removeEventListener('visibilitychange', this.onVis);
+    window.removeEventListener('blur', this.onBlur);
+    window.removeEventListener('keydown', this.onKey);
+    (this.timers||[]).forEach(clearTimeout);
+  }
+  componentDidUpdate(){ this.afterStage(); }
+  afterStage = () => {
+    const st = this.state.stage;
+    if (this._lastStage === st) return;
+    this._lastStage = st;
+    if (st !== 'trial') window.scrollTo(0,0);
+    if (st !== 'trial' && !reduced() && this.stageRef.current && this.stageRef.current.animate)
+      this.stageRef.current.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});
+    const f = {ready:this.readyBtnRef, trial:this.gridRef, rate:this.rateHeadRef, results:this.resultsHeadRef, invalid:this.invalidBtnRef}[st];
+    if (f && f.current) f.current.focus({preventScroll:true});
+    if (st === 'intro') this.spin();
+    if (st === 'results') this.runReveal();
+    if (st === 'intro' || st === 'results') requestAnimationFrame(() => document.querySelectorAll('.lsfmark').forEach(e => e.classList.add('is-in')));
+  };
+  spin(){
+    if (reduced()) return;
+    requestAnimationFrame(()=>{ document.querySelectorAll('[data-spin="1"]').forEach(el=>{ if(!el._spun && el.animate){ el._spun=1; el.animate([{transform:'rotate(0deg)'},{transform:'rotate(360deg)'}],{duration:16000,iterations:Infinity}); } }); });
+  }
+  save(trials){
+    try { sessionStorage.setItem(KEY, JSON.stringify({sessionId:this.sessionId, conditionOrder:trials.map(t=>t.condition), trials})); } catch(e) {}
+  }
+  begin = () => {
+    (this.timers||[]).forEach(clearTimeout);
+    this.sessionId = uid();
+    const order = shuffle(CONDS), targets = shuffle(POOL).slice(0,3);
+    const trials = order.map((n,i)=>({sessionId:this.sessionId, condition:n, presentationIndex:i, targetId:targets[i].id, targetPosition:null, startTs:null, endTs:null, ms:null, errors:0, rating:null, valid:false, invalidAttempts:0, completed:false}));
+    this.save(trials);
+    this._revealing = null;
+    this.setState({stage:'ready', round:0, trials, cells:[], wrong:{}, pressed:null, reveal:0}, this.afterStage);
+  };
+  startTrial = () => {
+    const {round, trials} = this.state, t = trials[round], n = t.condition, target = byId(t.targetId);
+    const list = shuffle([target, ...shuffle(POOL.filter(p=>p.id!==target.id)).slice(0,n-1)]);
+    const idx = list.findIndex(p=>p.id===target.id), cols = COLS[n];
+    const next = trials.slice(); next[round] = {...t, targetPosition:{index:idx, row:Math.floor(idx/cols), col:idx%cols}, errors:0, startTs:null, endTs:null, ms:null};
+    this.errs = 0; this.running = false;
+    this.setState({stage:'trial', trials:next, cells:list.map(p=>({...sym(p), isTarget:p.id===target.id})), wrong:{}}, () => {
+      this.afterStage();
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{ if (this.state.stage!=='trial') return; this.t0 = performance.now(); this.running = true; }));
+    });
+  };
+  pick(i){
+    if (!this.running) return;
+    const c = this.state.cells[i];
+    if (c.isTarget) {
+      const t1 = performance.now(); this.running = false;
+      const {round, trials} = this.state, next = trials.slice();
+      next[round] = {...next[round], startTs:this.t0, endTs:t1, ms:Math.round(t1-this.t0), errors:this.errs, valid:true};
+      this.save(next);
+      this.setState({stage:'rate', trials:next, pressed:null}, this.afterStage);
+    } else if (!this.state.wrong[i]) {
+      this.errs++;
+      this.setState(s=>({wrong:{...s.wrong,[i]:true}}));
+    } else this.errs++;
+  }
+  invalidate(){
+    if (!this.running || this.state.stage!=='trial') return;
+    this.running = false;
+    const {round, trials} = this.state, next = trials.slice();
+    next[round] = {...next[round], valid:false, invalidAttempts:next[round].invalidAttempts+1};
+    this.save(next);
+    this.setState({stage:'invalid', trials:next}, this.afterStage);
+  }
+  restartRound = () => this.startTrial();
+  rate(v){
+    if (this.state.pressed) return;
+    const {round, trials} = this.state, next = trials.slice();
+    next[round] = {...next[round], rating:v, completed:true};
+    this.save(next);
+    this.setState({trials:next, pressed:v});
+    const go = () => this.setState(round<2 ? {stage:'ready', round:round+1, pressed:null} : {stage:'results', pressed:null, reveal:0}, this.afterStage);
+    reduced() ? go() : (this.timers=[...(this.timers||[]), setTimeout(go, 340)]);
+  }
+  runReveal(){
+    if (this._revealing === this.sessionId) return;
+    this._revealing = this.sessionId;
+    (this.timers||[]).forEach(clearTimeout);
+    if (reduced()) { this.setState({reveal:4}); return; }
+    this.timers = [[1,250],[2,1900],[3,2700],[4,3300]].map(([v,t])=>setTimeout(()=>this.setState({reveal:v}), t));
+  }
+  observe(rows){
+    const by = {}; rows.forEach(r=>by[r.condition]=r);
+    const ms = CONDS.map(n=>by[n].ms), rt = CONDS.map(n=>by[n].rating);
+    const max = Math.max(...ms), min = Math.min(...ms);
+    const fastest = CONDS[ms.indexOf(min)], slowest = CONDS[ms.indexOf(max)];
+    const out = [];
+    if ((max-min)/max < .15) out.push(`Your times were close across all three grids, so grid size didn’t make a clear difference this time.`);
+    else if (ms[0]<ms[1] && ms[1]<ms[2]) out.push(`You took longer to find the target each time the grid grew, from ${sec(ms[0])} seconds with 4 symbols to ${sec(ms[2])} seconds with 30.`);
+    else if (fastest!==4) out.push(`Interestingly, your fastest round wasn’t the one with the fewest options. You found the target quickest among ${fastest} symbols.`);
+    else if (slowest!==30) out.push(`Your slowest round was the ${slowest}-symbol grid, not the largest one.`);
+    const rmax = Math.max(...rt), hard = CONDS.filter((n,i)=>rt[i]===rmax);
+    if (rt[0]===rt[1] && rt[1]===rt[2]) out.push(`You rated all three rounds the same, even though your times ${(max-min)/max<.15?'were similar too':'differed'}.`);
+    else if (rt[0]<=rt[1] && rt[1]<=rt[2]) out.push(`Your sense of effort rose with the grid size too.`);
+    else if (hard.length===1 && hard[0]!==slowest) out.push(`The round that felt hardest, with ${hard[0]} symbols, wasn’t your slowest one.`);
+    else if (hard.length===1) out.push(`The ${hard[0]}-symbol round felt hardest, and it was also your slowest.`);
+    const errs = CONDS.map(n=>by[n].errors), tot = errs.reduce((a,b)=>a+b,0);
+    if (tot===1) out.push(`Your one incorrect selection came in the ${CONDS[errs.indexOf(1)]}-symbol grid.`);
+    else if (tot>1) { const m=Math.max(...errs), w=CONDS[errs.indexOf(m)]; out.push(m>tot/2 ? `You made ${tot} incorrect selections, most of them in the ${w}-symbol grid.` : `You made ${tot} incorrect selections across the three grids.`); }
+    return out.join(' ');
+  }
+  renderVals(){
+    const S = this.state, st = S.stage, t = S.trials[S.round];
+    const target = t ? sym(byId(t.targetId)) : sym(POOL[0]);
+    const done = S.trials.filter(x=>x.completed).length;
+    const progress = [0,1,2].map(i=>({bg: i<done ? INK : (i===S.round && st!=='results') ? COBALT : 'rgba(var(--inkrgb),.14)'}));
+    const cells = S.cells.map((c,i)=>({...c, onPick:()=>this.pick(i), color:S.wrong[i]?'var(--muted)':INK, border:S.wrong[i]?ORANGE:'transparent'}));
+    const scale = LABELS.map((l,i)=>{const on=S.pressed===i+1;return{n:i+1,label:l,pressed:on?'true':'false',onPick:()=>this.rate(i+1),bg:on?INK:TILE,fg:on?'var(--bg)':INK,hover:on?INK:'rgba(var(--inkrgb),.09)'}});
+    let rows = [], observation = '';
+    const rm = reduced();
+    if (st==='results' && S.trials.length===3 && S.trials.every(x=>x.completed)) {
+      const sorted = S.trials.slice().sort((a,b)=>a.condition-b.condition);
+      const max = Math.max(...sorted.map(x=>x.ms));
+      rows = sorted.map((x,i)=>({
+        n:x.condition, time:sec(x.ms), condition:x.condition, ms:x.ms, errors:x.errors, rating:x.rating,
+        width: S.reveal>=1 ? Math.max(2,(x.ms/max)*100).toFixed(1)+'%' : '0%',
+        barColor: x.ms===max ? ORANGE : COBALT,
+        opacity: S.reveal>=1 ? 1 : 0, delay: rm ? '0s' : (i*.35)+'s',
+        roundText:`Round ${x.presentationIndex+1} of 3`,
+        errorsText: x.errors===0?'No misses':x.errors===1?'1 miss':`${x.errors} misses`,
+        ratingLabel: LABELS[x.rating-1], ratingNum: x.rating,
+        restarted: x.invalidAttempts>0 ? `Restarted ${x.invalidAttempts===1?'once':x.invalidAttempts+' times'} after losing focus` : '',
+        steps:[1,2,3,4,5].map(s=>({bg: S.reveal>=2 && s<=x.rating ? ORANGE : 'transparent', border: s<=x.rating ? ORANGE : 'rgba(var(--inkrgb),.2)', delay: rm?'0s':((s-1)*.08+i*.15)+'s'}))
+      }));
+      observation = this.observe(rows);
+    }
+    const essayUrl = String(this.props.essayUrl ?? '').trim();
+    return {
+      showSiteHeader: st==='intro' || st==='results', showRunBar: ['ready','trial','invalid','rate'].includes(st),
+      isIntro: st==='intro', isReady: st==='ready', isTrial: st==='trial', isInvalid: st==='invalid', isRate: st==='rate', isResults: st==='results',
+      roundNum: S.round+1, roundsDone: done, progress, target, cells, cols: t ? COLS[t.condition] : 4, scale,
+      keepTarget: this.props.keepTargetVisible ?? true,
+      panels: this.panels, everyday: this.everyday.map((e,i)=>({...e,num:i+1})), rows, observation,
+      barTransition: rm ? 'none' : 'width 1.2s cubic-bezier(.2,.7,.2,1)',
+      phase2: S.reveal>=2 ? 1 : 0, phase3: S.reveal>=3 ? 1 : 0,
+      essayUrl, hasEssay: !!essayUrl, noEssay: !essayUrl,
+      begin: this.begin, startTrial: this.startTrial, restartRound: this.restartRound,
+      stageRef: this.stageRef, readyBtnRef: this.readyBtnRef, gridRef: this.gridRef, rateHeadRef: this.rateHeadRef, resultsHeadRef: this.resultsHeadRef, invalidBtnRef: this.invalidBtnRef
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+/* Scripted cover demos for the Selected Work cards (index.html). cover-motion.js adds .cm-on and drives everything; without JS or with reduced motion the original CSS loops remain. */
+.cm-pointer{position:absolute;left:0;top:0;z-index:2;pointer-events:none;opacity:0;will-change:transform,opacity}
+.cm-arrow{width:clamp(14px,3.1%,22px);aspect-ratio:22/28}
+.cm-arrow svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 3px 6px rgba(0,0,0,.22))}
+.cm-tap{width:clamp(22px,5.6%,38px);aspect-ratio:1;margin:calc(clamp(22px,5.6%,38px) / -2) 0 0 calc(clamp(22px,5.6%,38px) / -2);border-radius:50%;background:rgba(255,255,255,.62);box-shadow:0 0 0 1.5px rgba(0,0,0,.1),0 8px 20px rgba(0,0,0,.18);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.cm-ripple{position:absolute;left:0;top:0;z-index:2;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid var(--cm-rip,rgba(0,0,0,.35));pointer-events:none}
+.cm-on .pfui-card{animation:none !important;transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease}
+.cm-on .pfui-card.cm-sel{transform:translateY(-.28em);box-shadow:0 0 0 .14em #4e0973,0 .9em 1.6em -.8em rgba(78,9,115,.45)}
+.cm-on .pfui-seg i{transition:background .35s ease,color .35s ease}
+.cm-on .pfui-grid{transition:opacity .35s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cm-on .sqw,.cm-on .sqt,.cm-on .sqr{animation:none !important}
+.cm-on .sqw{opacity:0}
+.cm-on .sqt{transition:opacity .5s ease,filter .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.cm-on .sqt.cm-act{opacity:1;filter:none;transform:scale(1.06)}
+.cm-on .nhrail{animation:none !important}
+.cm-on .nhrail > div{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease}
+.cm-on .nhrail > div.cm-focus{transform:translateY(-2.2cqh) scale(1.06)}
+.cm-on .smrwstrip img{transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .6s ease,box-shadow .6s ease}
+.cm-on .smrwstrip img.cm-dim{opacity:.38}
+.cm-on .smrwstrip img.cm-pick{transform:translateY(-3cqh) scale(1.12);box-shadow:0 0 0 .5cqh #1ED760,0 3cqh 5cqh rgba(0,0,0,.6)}
+@media (prefers-reduced-motion:reduce){.cm-pointer,.cm-ripple{display:none}}

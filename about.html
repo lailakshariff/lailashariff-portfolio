@@ -40,11 +40,11 @@ a{color:var(--ink)}a:hover{color:var(--accent)}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
 /* ---- Before you go: the sky ---- */
-.ls-sky{position:relative;isolation:isolate;margin-top:96px;padding:120px 64px 190px;overflow:hidden;background:linear-gradient(to bottom,var(--bg) 0,#fdfbf7 4%,#f9f2e4 9%,#f0e6cf 15%,#ddd8ce 21%,#b3bccd 27%,#7d8fae 36%,#4b5c7c 54%,#2e3a52 72%,#222b3e 84%,#202839 91%,#3a4459 95.5%,#848d9f 98.3%,var(--bg) 100%)}
+.ls-sky{position:relative;isolation:isolate;margin-top:96px;padding:120px 64px 190px;overflow:hidden;background:linear-gradient(to bottom,var(--bg) 0,#fdfbf7 4%,#f9f2e4 9%,#f2e9d8 15%,#e2dfda 21%,#c6cddb 28%,#a3afc6 38%,#8190af 54%,#6b7c9d 72%,#607296 84%,#65779a 91%,#8d9ab3 95.5%,#c8ced9 98.3%,var(--bg) 100%)}
 html[data-theme="dark"] .ls-sky{background:linear-gradient(to bottom,var(--bg) 0,#191811 4%,#1d1b14 10%,#231f18 17%,#22232a 30%,#1a1e26 50%,#12151b 72%,#090a0d 86%,#0a0b0e 92.5%,#0f1014 96.5%,#14150f 98.6%,var(--bg) 100%)}
 .ls-horizon{position:absolute;left:50%;top:0;width:min(1500px,140%);height:52%;transform:translateX(-50%);z-index:0;pointer-events:none;background:radial-gradient(62% 100% at 50% 14%,rgba(232,203,158,.26) 0,rgba(232,203,158,.1) 48%,rgba(232,203,158,0) 80%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 9%,#000 22%,#000 100%);mask-image:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.5) 9%,#000 22%,#000 100%)}
 html[data-theme="dark"] .ls-horizon{background:radial-gradient(62% 100% at 50% 14%,rgba(196,140,92,.15) 0,rgba(196,140,92,.055) 48%,rgba(196,140,92,0) 80%)}
-.ls-veil{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:linear-gradient(to bottom,rgba(24,30,45,0) 18%,rgba(24,30,45,.28) 52%,rgba(14,19,30,.5) 82%,rgba(14,19,30,0) 100%);transition:opacity .5s linear}
+.ls-veil{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background:linear-gradient(to bottom,rgba(60,75,105,0) 18%,rgba(60,75,105,.08) 52%,rgba(50,62,90,.14) 82%,rgba(50,62,90,0) 100%);transition:opacity .5s linear}
 html[data-theme="dark"] .ls-veil{background:linear-gradient(to bottom,rgba(6,7,9,0) 18%,rgba(6,7,9,.3) 52%,rgba(4,5,6,.5) 82%,rgba(4,5,6,0) 100%)}
 .ls-sky > *:not(.ls-veil):not(.ls-horizon){position:relative;z-index:1}
 .ls-h{margin:0;font:400 clamp(30px,4.6vw,46px)/1.1 var(--font-serif);letter-spacing:-.014em;color:var(--ink)}
@@ -325,7 +325,7 @@ if(!start()){var t=setInterval(function(){if(start())clearInterval(t);},140);
 <a href="index.html" class="pnav-wordmark">Laila Shariff</a>
 <div class="pnav-in">
 <a href="index.html#work">Work</a>
-<a href="playground.html">Playground</a>
+<span class="pnav-dd"><a href="playground.html">Playground</a><button type="button" class="pnav-dd-btn" aria-expanded="false" aria-controls="pnav-dd-menu" aria-label="More in Playground"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5"></path></svg></button><span class="pnav-dd-menu" id="pnav-dd-menu"><span class="pnav-dd-panel"><a href="playground.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.8L13 7.6H7Z"></path><circle cx="6" cy="14" r="2.9"></circle><rect x="11.4" y="11.1" width="5.8" height="5.8" rx="1.2"></rect></svg><b>Playground</b></a><a href="The Lab.dc.html"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.6 2.8h4.8M8.4 2.8v5.1L4 15.6a1.1 1.1 0 0 0 1 1.6h10a1.1 1.1 0 0 0 1-1.6l-4.4-7.7V2.8"></path><path d="M5.9 12.4h8.2"></path></svg><b>The Lab</b></a></span></span></span>
 <a href="about.html" aria-current="page">About</a>
 <span class="pnav-clock" aria-hidden="true"><i id="pnav-time">--:-- --</i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"></circle><path d="M12 7.6V12l3.1 1.9"></path></svg></span>
 <button class="tmode" id="tmode" type="button" aria-label="Switch between light and dark"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"></path></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"></path></svg></button>
