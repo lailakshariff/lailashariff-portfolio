@@ -74,3 +74,4 @@ img, video, svg, canvas { max-width: 100%; }
   }
   [style*="display:flex"][style*="gap:64px"], [style*="display: flex"][style*="gap: 64px"] { gap: 32px !important; }
 }
+
